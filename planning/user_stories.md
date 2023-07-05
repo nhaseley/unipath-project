@@ -9,12 +9,21 @@ High school seniors are often faced with the daunting task of trying to find col
 ## User Roles
 
 Include at least at least 1, but no more than 3, user roles
-1. 
+1. High school senior
+2. Parent of high school senior
+3. Current college student/alum
+4. College admission officer
 
 ## User Personas
+Sarah is an 18-year old American high school senior who is looking to apply to colleges this Fall. She is enthusiastic and motivated to pursue higher education, eager to explore new opportunities and broaden her horizons, seeks a supportive and inclusive campus community, and is interested in a college experience that offers a balance between academics, extracurricular activities, and social life. However, she is overwhelmed by the vast amount of information available and the complexity of the college search process, uncertain about the factors to consider when selecting a college, lacks exposure to different colleges and limited guidance from family members or school counselors, and finding it difficult to assess campus culture without visiting each college.
 
-Include at least 2 personas per User Role
+Chris (40yo) and Lisa(40yo) are Sarah's parents. Support their daughter Sarah in finding the best college that meets her academic and personal needs while considering financial aspects. However, they are overwhelmed by the complex and ever-changing landscape of college admissions, and are concerned about the affordability of college and finding financial aid opportunities.
 
+Olivia (32yo) is a college admissions officer at a reputable university with a Master's degree in Higher Education Administration, seeking to evaluate and select qualified applicants who align with the university's values and academic standards. However, turnout for college admission events have recently been low and unsucessful, so Olivia wants to be able to promote these events to attract and engage prospective students.
+
+Alex (23yo) is a recent college graduate who pursued a Bachelor's degree in Computer Science at a reputable university who now works part-time at a tech company. However, they did not have much information about their Alma Mater before they attended, and would like to share their college experiences, reviews, and ratings to help prospective students.
+
+ 
 ## User Stories
 
 Include at least 10 user stories.

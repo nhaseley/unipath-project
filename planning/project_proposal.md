@@ -33,5 +33,5 @@ We are concerned about the concepts that this project will require, specifically
 - Virtual tour implementation (maybe loading in videos from youtube, but not sure how to connect that with the API)
 - Display ratings/reviews from all past users (stored in a database)
 - Getting an API for a list of scholarships/financial aid opportunities  
-- Displaying visualizations (maybe SQL?) for the statistics gathered from API results for college acceptance rates, GPA requirements, and emographics
+- Displaying visualizations (maybe SQL?) for the statistics gathered from API results for college acceptance rates, GPA requirements, and demographics
 - Getting an API for a list of college events
