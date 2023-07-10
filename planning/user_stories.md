@@ -43,6 +43,9 @@ Include at least 10 user stories.
 
 8. As a college admissions officer, I want to be able to provide information, answer questions, and share updates about admission events or virtual campus tours, so that I can showcase my institution to prospective students.
 
+9. As a person with impaired vision, I want to be able use the app comfortably without worrying about seeing things clearly, so that I can browse for college information comfortably.
+
+10. As a high school teacher, I want to access a feature that allows me to see college majors to help me guide my students for college applications.
 
 
 Testing:
