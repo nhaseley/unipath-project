@@ -4,19 +4,48 @@ Pod Members Nya Haseley-Ayende, Jordan Sarkodie, Ayomide Adetunji
 
 ## Problem Statement and Description
 
-Insert the latest summary of your problem statement and app description.
+High school seniors are often faced with the daunting task of trying to find college that fit their interests to apply to. Our project is a comprehensive online platform designed to assist high school students (specifically seniors) in their college search and application process. It provides a user-friendly interface where students can explore and compare colleges, access valuable information, and make informed decisions about their future education.
+
+Our project offers a robust search engine that allows high school senior looking to apply to colleges to filter and search for colleges based on various criteria, such as location, majors offered, campus culture, school values, tuition fees, and admission requirements. Students can view detailed profiles and personalize their accounts through a login/registration.
+
+TODO: ^edit these
 
 ## User Roles and Personas
+1. High school senior
 
-Include the most up-to-date user roles and personas.
+Sarah is an 18-year old American high school senior who is looking to apply to colleges this Fall. She is enthusiastic and motivated to pursue higher education, eager to explore new opportunities and broaden her horizons, seeks a supportive and inclusive campus community, and is interested in a college experience that offers a balance between academics, extracurricular activities, and social life. However, she is overwhelmed by the vast amount of information available and the complexity of the college search process, uncertain about the factors to consider when selecting a college, lacks exposure to different colleges and limited guidance from family members or school counselors, and finding it difficult to assess campus culture without visiting each college.
+
+2. Parent of high school senior
+
+Chris (40yo) and Lisa(40yo) are Sarah's parents. Support their daughter Sarah in finding the best college that meets her academic and personal needs while considering financial aspects. However, they are overwhelmed by the complex and ever-changing landscape of college admissions, and are concerned about the affordability of college and finding financial aid opportunities.
+
+3. Current college student/alum
+Olivia (32yo) is a college admissions officer at a reputable university with a Master's degree in Higher Education Administration, seeking to evaluate and select qualified applicants who align with the university's values and academic standards. However, turnout for college admission events have recently been low and unsucessful, so Olivia wants to be able to promote these events to attract and engage prospective students.
+
+4. College admission officer
+
+Alex (23yo) is a recent college graduate who pursued a Bachelor's degree in Computer Science at a reputable university who now works part-time at a tech company. However, they did not have much information about their Alma Mater before they attended, and would like to share their college experiences, reviews, and ratings to help prospective students.
 
 ## User Stories
 
-List the current user stories you will implement.
+1. As a high school senior, I want to view a page of colleges personalized for me, so that I can apply to the colleges that fit the most to my interests, background, and future goals.
+
+2. As a parent of a high school senior, I want to be able to log into the platform to view a list of colleges that fit my child, so that I can help them coordinate college tours and information sessions for schools that they are interested in.
+
+3. As a parent of a high school senior, I want to view college tuition of various schools on my personalized college feed, so that I can anticipate the financial factors in my child's college search.
+
+4. As a high schol senior, I want to be able to view review and ratings submitted by current and former college students, so that I can learn firsthand insights into the college experience about the colleges of my interest.
+
+5. As a current college student or alumn, I want to be able to leave reviews on the college I attend(ed) so that I can help current high school seniors learn more about the colleges they are interested in.
+
+6. As a high school senior, I want to view admissions statistics, including acceptance rates, average test scores, and demographic information for colleges I am interested in, so that I can gauge my chances of acceptance based on historical data and evaluate my fit with different colleges.
+
+7. As a college admissions officer, I want to be able to provide information, answer questions, and share updates about admission events or virtual campus tours, so that I can showcase my institution to prospective students.
 
 ## Pages/Screens
 
 List all the pages and screens in the app. Include wireframes for at least 3 of them.
+** see figma **
 
 ## Data Model
 
@@ -34,54 +63,60 @@ Students: This table stores all data for the user with type "student" upon regis
 
 Colleges: This table stores all data for list of colleges personalized for given user
 
-| column name             type            description
-| user_id                 INT             id of the given user
-| info                    OBJECT          {"latest" object extracted from api}
+| column name           | type          | description
+| :-------------------- | :-----------: | --------------------------------------: |
+| user_id               | INT           | id of the given user
+| info                  | OBJECT        | {"latest" object extracted from api}
 
 Parents: This table stores all data for the user with type "parent" upon registration and login
 
-| column name             type            description
-first_name              TEXT            parent/guardian first name
-last_name               TEXT            parent/guardian last name
-phone                   INT             parent/guardian phone number
-email                   TEXT            parent/guardian email
-password                TEXT            parent/guardian password
+| column name           | type          | description
+| :-------------------- | :-----------: | --------------------------------------: |
+| first_name            | TEXT          | parent/guardian first name              | 
+| last_name             | TEXT          | parent/guardian last name               | 
+| phone                 | INT           | parent/guardian phone number            | 
+| email                 | TEXT          | parent/guardian email                   | 
+| password              | TEXT          | parent/guardian password                | 
 
 College Students/Alumni: This table stores all data for the user with type "college student/alumni" upon registration and login
 
-column name             type            description
-first_name              TEXT            college student/alumni first name
-last_name               TEXT            college student/alumni last name
-email                   TEXT            college student/alumni email
-password                TEXT            college student/alumni password
-high_school             TEXT            college student/alumni high school
-high_school_grad_year   INT             college student/alumni high school graduateyear
-college                 TEXT            college student/alumni college
-college_grad_year       INT             college student/alumni college graduation year
+| column name           | type          | description
+| :-------------------- | :-----------: | -------------------------------------------------:  |
+| first_name            | TEXT          | college student/alumni first name                   |
+| last_name             | TEXT          | college student/alumni last name                    |
+| email                 | TEXT          | college student/alumni email                        |
+| password              | TEXT          | college student/alumni password                     |
+| high_school           | TEXT          | college student/alumni high school                  |
+| high_school_grad_year | INT           | college student/alumni high school graduation year  |
+| college               | TEXT          | college student/alumni college                      |
+| college_grad_year     | INT           | college student/alumni college graduation year      |
 
-Admission Officer: This table stores all data for the user with type "admission officer" upon registration and login
+Admission Officer: This table stores all data for the user with type "admission officer" upon |registration and login
 
-column name             type            description
-first_name              TEXT            admission officer first name
-last_name               TEXT            admission officer last name
-work_email              TEXT            admission officer work email
-password                TEXT            admission officer password
+| column name           | type          | description
+| :-------------------- | :-----------: | --------------------------------------: |
+| first_name            | TEXT          | admission officer first name            | 
+| last_name             | TEXT          | admission officer last name             | 
+| work_email            | TEXT          | admission officer work email            | 
+| password              | TEXT          | admission officer password              | 
 
 Events: This table stores all data for the list of events posted by college admissions officers across the country
 
-column name             type            description
-id                      INT             PRIMARY KEY
-name                    TEXT            event name
-description             TEXT            event description
-organizer_email         TEXT            email of event organizer
+| column name           | type          | description
+| :-------------------- | :-----------: | --------------------------------------: |
+| id                    | INT           | PRIMARY KEY                             | 
+| name                  | TEXT          | event name                              | 
+| description           | TEXT          | event description                       | 
+| organizer_email       | TEXT          | email of event organizer                | 
 
 Event Attendees: This table stores all data for all attendees for a given event
 
-column name             type            description
-first_name              TEXT            attendee first name
-last_name               TEXT            attendee last name
-parent email            TEXT            email of attendee's parent/guardian
-num_attendees           INT             number of total attendees for this person
+| column name           | type          | description
+| :-------------------- | :-----------: | ----------------------------------------: |
+| first_name            | TEXT          | attendee first name                       | 
+| last_name             | TEXT          | attendee last name                        | 
+| parent email          | TEXT          | email of attendee's parent/guardian       | 
+| num_attendees         | INT           | number of total attendees for this person | 
 
 ## Endpoints
 
