@@ -2,13 +2,13 @@
 
 # SITE Capstone Project
 
-SITE Course Year: **20__**
+SITE Course Year: 2023
 
-Cohort: **Add Company Sponsor Name**
+Cohort: 2
 
-Team Member Names:**Insert Team Member Names**
+Team Member Names: Ayomide Adentuji, Nya Haseley-Ayende, Jordan Sarkodie
 
-Mentors Names: **Insert Professional Mentor Names**
+Mentors Names: Kristin Foss, Qin He, Pradeep Mantha
 
 Project Code Repository Links
 
