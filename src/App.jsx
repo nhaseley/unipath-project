@@ -13,7 +13,11 @@ useEffect(() => {
     });
   }, []);
 return(
-
+<>
   <h1> This is CollegeNavigator </h1>
+
+
+  <h1> This is Google Classroom </h1>
+  </>
 )
 }
