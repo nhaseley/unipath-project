@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import LoginPage from "./LoginPage";
 
 export default function App(){
 
@@ -12,8 +13,10 @@ useEffect(() => {
       console.log("response: ", response.data.results[0]);
     });
   }, []);
-return(
-
+return (
+<>
   <h1> This is CollegeNavigator </h1>
+  <LoginPage></LoginPage>
+  </>
 )
 }

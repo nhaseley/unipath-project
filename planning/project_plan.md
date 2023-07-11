@@ -2,9 +2,6 @@
 
 Pod Members Nya Haseley-Ayende, Jordan Sarkodie, Ayomide Adetunji
 
-Jordan was here
-
-
 ## Problem Statement and Description
 
 High school seniors are often faced with the daunting task of trying to find college that fit their interests to apply to. Our project is a comprehensive online platform designed to assist high school students (specifically seniors) in their college search and application process. It provides a user-friendly interface where students can explore and compare colleges, access valuable information, and make informed decisions about their future education.
@@ -88,8 +85,6 @@ College Students/Alumni: This table stores all data for the user with type "coll
 | last_name             | TEXT          | college student/alumni last name                    |
 | email                 | TEXT          | college student/alumni email                        |
 | password              | TEXT          | college student/alumni password                     |
-| high_school           | TEXT          | college student/alumni high school                  |
-| high_school_grad_year | INT           | college student/alumni high school graduation year  |
 | college               | TEXT          | college student/alumni college                      |
 | college_grad_year     | INT           | college student/alumni college graduation year      |
 
@@ -126,10 +121,16 @@ Event Attendees: This table stores all data for all attendees for a given event
 | :----- | :---------: | :----------------------------------------:  | ------------: |
 | Create | POST        | create a new student account                | 1             |
 | Read   | POST        | login the student                           | 1             |
+| Create | POST        | create a new parent account                 | 2             |
+| Read   | POST        | login the parent                            | 2             |
 | Get    | GET         | fetch the college list for input user info  | 1             |
 | Update | POST        | add selected college to college list        | 1             | 
+| Create | POST        | create a new college student/alum account   | 4             |
+| Read   | POST        | login the college student/alum              | 4             |
 | Create | POST        | add review to review list for input college | 4             |
 | Get    | GET         | get all reviews for input college           | 3             |
+| Create | POST        | create a new admission officer account      | 6             |
+| Read   | POST        | login the admission officer                 | 6             |
 | Get    | GET         | fetch the events list for input college     | 6             |
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
