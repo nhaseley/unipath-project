@@ -12,7 +12,7 @@ useEffect(() => {
       console.log("response: ", response.data.results[0]);
     });
   }, []);
-return(
+return (
 
   <h1> This is CollegeNavigator </h1>
 )
