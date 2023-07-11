@@ -5,12 +5,12 @@ CREATE TABLE students (
   email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
   zipcode       INTEGER,
   parent_phone  INTEGER,
-  password      TEXT NOT NULL,
+  password      TEXT NOT NULL
 );
 
 CREATE TABLE colleges (
   id         SERIAL PRIMARY KEY,
-  user_id    INTEGER,
+  user_id    INTEGER
 --   college_info    
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE admission_officers (
   id         SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name  TEXT NOT NULL,
-  work_email TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
+  work_email TEXT NOT NULL UNIQUE CHECK (position('@' IN work_email) > 1),
   password   TEXT NOT NULL
 );
 
@@ -44,13 +44,13 @@ CREATE TABLE events (
   id           SERIAL PRIMARY KEY,
   name         TEXT NOT NULL,
   description  TEXT NOT NULL,
-  organizer_email TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
+  organizer_email TEXT NOT NULL UNIQUE CHECK (position('@' IN organizer_email) > 1)
 );
 
 CREATE TABLE event_attendees (
   id            SERIAL PRIMARY KEY,
   first_name    TEXT NOT NULL,
   last_name     TEXT NOT NULL,
-  parent_email  TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
+  parent_email  TEXT NOT NULL UNIQUE CHECK (position('@' IN parent_email) > 1),
   num_attendees INTEGER
 );

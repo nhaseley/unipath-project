@@ -2,9 +2,6 @@
 
 Pod Members Nya Haseley-Ayende, Jordan Sarkodie, Ayomide Adetunji
 
-Jordan was here
-
-
 ## Problem Statement and Description
 
 High school seniors are often faced with the daunting task of trying to find college that fit their interests to apply to. Our project is a comprehensive online platform designed to assist high school students (specifically seniors) in their college search and application process. It provides a user-friendly interface where students can explore and compare colleges, access valuable information, and make informed decisions about their future education.
