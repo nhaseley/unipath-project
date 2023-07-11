@@ -42,8 +42,10 @@ Alex (23yo) is a recent college graduate who pursued a Bachelor's degree in Comp
 
 ## Pages/Screens
 
-List all the pages and screens in the app. Include wireframes for at least 3 of them.
-** see figma **
+<a href="https://www.loom.com/share/99e67ee86fd342fb8c11f66cd9e306e6">
+    <!-- <p>Capstone Wireframes – Figma - 11 July 2023 - Watch Video</p> -->
+    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/99e67ee86fd342fb8c11f66cd9e306e6-with-play.gif">
+  </a>
 
 ## Data Model
 

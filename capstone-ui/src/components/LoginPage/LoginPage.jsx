@@ -5,7 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-export default function LoginPage({}) {
+export default function LoginPage({
+  userLoginInfo,
+  setUserLoginInfo,
+  handleShowPassword,
+  handleHidePassword,
+  passwordDisplayed,
+  error,
+  setError,
+}) {
+  // console.log("login info: ", userLoginInfo)
+
   // const navigate = useNavigate()
 
   //   useEffect(() => {
@@ -23,21 +33,11 @@ export default function LoginPage({}) {
   //     }
   // }; checkLoggedIn()
   // }, [])
-  const [userLoginInfo, setUserLoginInfo] = useState({
-    email: "",
-    password: "",
-  });
-  const [passwordDisplayed, setPasswordDisplayed] = useState({
-    password: false,
-    confirmPassword: false,
-  });
-  const [error, setError] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   async function handleLogin(event) {
     event.preventDefault();
 
-    let result = await axios.post("http://localhost:3001/auth/login", {
+    let result = await axios.post("http://localhost:3002/login", {
       emailInput: userLoginInfo.email,
       passwordInput: userLoginInfo.password,
     });
@@ -56,28 +56,6 @@ export default function LoginPage({}) {
       setUserLoggedIn(true);
       navigate("/generate-colleges");
     }
-  }
-  function handleShowPassword(event) {
-    event.target.name === "password-toggle"
-      ? setPasswordDisplayed({
-          password: true,
-          confirmPassword: passwordDisplayed.confirmPassword,
-        })
-      : setPasswordDisplayed({
-          password: passwordDisplayed.password,
-          confirmPassword: true,
-        });
-  }
-  function handleHidePassword(event) {
-    event.target.name === "password-toggle"
-      ? setPasswordDisplayed({
-          password: false,
-          confirmPassword: passwordDisplayed.confirmPassword,
-        })
-      : setPasswordDisplayed({
-          password: passwordDisplayed.password,
-          confirmPassword: false,
-        });
   }
 
   return (
@@ -99,6 +77,7 @@ export default function LoginPage({}) {
             }
           ></input>
         </div>
+        <div className="password">
         <img
           src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
           className="password-img"
@@ -113,14 +92,24 @@ export default function LoginPage({}) {
           }
         ></input>
         <button
-          className="password-toggle"                    
-          name = "password-toggle"
+          className="password-toggle"
+          name="password-toggle"
           onClick={
             passwordDisplayed.password ? handleHidePassword : handleShowPassword
           }
         >
           {passwordDisplayed.password ? "Hide" : "Show"}
         </button>
+        </div>
+        <div className="error">
+          {error.status
+            ? "Registration Failed: " +
+              error.message +
+              ". " +
+              error.status +
+              " Error."
+            : null}
+        </div>
       </form>
       <button className="login-submit" onClick={handleLogin}>
         Submit

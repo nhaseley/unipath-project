@@ -1,0 +1,29 @@
+.login-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.email-img{
+    margin-right: 6px;
+    width: 20px;
+    height: 20px;
+}
+.email {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    height: 25px;
+}
+.password{
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    height: 25px;
+}
+
+.password-img{
+    margin-right: 6px;
+    height: 20px;
+    width: 20px
+}
