@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import LoginPage from "./LoginPage";
 
 export default function App(){
 
@@ -13,7 +14,9 @@ useEffect(() => {
     });
   }, []);
 return (
-
+<>
   <h1> This is CollegeNavigator </h1>
+  <LoginPage></LoginPage>
+  </>
 )
 }
