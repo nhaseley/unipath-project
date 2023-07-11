@@ -28,19 +28,17 @@ Alex (23yo) is a recent college graduate who pursued a Bachelor's degree in Comp
 
 ## User Stories
 
-1. As a high school senior, I want to view a page of colleges personalized for me, so that I can apply to the colleges that fit the most to my interests, background, and future goals.
+1. As a high school senior, I want to register, login, and view a page of colleges personalized for me, so that I can apply to the colleges that fit the most to my interests, background, and future goals. I also want to view all information and statistics for a given college on a college page if I select one of them in the grid.
 
-2. As a parent of a high school senior, I want to be able to log into the platform to view a list of colleges that fit my child, so that I can help them coordinate college tours and information sessions for schools that they are interested in.
+2. As a parent of a high school senior, I want to view college tuition of various schools on my personalized college feed, so that I can anticipate the financial factors in my child's college search.
 
-3. As a parent of a high school senior, I want to view college tuition of various schools on my personalized college feed, so that I can anticipate the financial factors in my child's college search.
+3. As a high schol senior, I want to be able to view review and ratings submitted by current and former college students, so that I can learn firsthand insights into the college experience about the colleges of my interest.
 
-4. As a high schol senior, I want to be able to view review and ratings submitted by current and former college students, so that I can learn firsthand insights into the college experience about the colleges of my interest.
+4. As a current college student or alumn, I want to be able to leave reviews on the college I attend(ed) so that I can help current high school seniors learn more about the colleges they are interested in.
 
-5. As a current college student or alumn, I want to be able to leave reviews on the college I attend(ed) so that I can help current high school seniors learn more about the colleges they are interested in.
+5. As a high school senior, I want to view admissions statistics, including acceptance rates, average test scores, and demographic information for colleges I am interested in, so that I can gauge my chances of acceptance based on historical data and evaluate my fit with different colleges.
 
-6. As a high school senior, I want to view admissions statistics, including acceptance rates, average test scores, and demographic information for colleges I am interested in, so that I can gauge my chances of acceptance based on historical data and evaluate my fit with different colleges.
-
-7. As a college admissions officer, I want to be able to provide information, answer questions, and share updates about admission events or virtual campus tours, so that I can showcase my institution to prospective students.
+6. As a college admissions officer, I want to be able to share admission events or virtual campus tours, so that I can showcase my institution to prospective students.
 
 ## Pages/Screens
 
@@ -60,13 +58,14 @@ Students: This table stores all data for the user with type "student" upon regis
 | zipcode               | INT           | student zip code                        |
 | parent_phone          | INT           | phone number of user's parent/guardian  |
 | password              | TEXT          | student password                        |
+| list                  | LIST          | list of personalized colleges           |
 
 Colleges: This table stores all data for list of colleges personalized for given user
 
 | column name           | type          | description
 | :-------------------- | :-----------: | --------------------------------------: |
-| user_id               | INT           | id of the given user
-| info                  | OBJECT        | {"latest" object extracted from api}
+| user_id               | INT           | id of the given user                    |
+| info                  | OBJECT        | {"latest" object extracted from api}    |
 
 Parents: This table stores all data for the user with type "parent" upon registration and login
 
@@ -102,7 +101,7 @@ Admission Officer: This table stores all data for the user with type "admission 
 
 Events: This table stores all data for the list of events posted by college admissions officers across the country
 
-| column name           | type          | description
+| column name           | type          | description   
 | :-------------------- | :-----------: | --------------------------------------: |
 | id                    | INT           | PRIMARY KEY                             | 
 | name                  | TEXT          | event name                              | 
@@ -120,6 +119,14 @@ Event Attendees: This table stores all data for all attendees for a given event
 
 ## Endpoints
 
-List the API endpoints you will need to implement.
+| CRUD   | HTTP Verb   | description                                 | User Stories
+| :----- | :---------: | :----------------------------------------:  | ------------: |
+| Create | POST        | create a new student account                | 1             |
+| Read   | POST        | login the student                           | 1             |
+| Get    | GET         | fetch the college list for input user info  | 1             |
+| Update | POST        | add selected college to college list        | 1             | 
+| Create | POST        | add review to review list for input college | 4             |
+| Get    | GET         | get all reviews for input college           | 3             |
+| Get    | GET         | fetch the events list for input college     | 6             |
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
