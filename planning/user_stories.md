@@ -48,6 +48,8 @@ Include at least 10 user stories.
 10. As a high school teacher, I want to access a feature that allows me to see college majors to help me guide my students for college applications.
 
 
+
+
 Testing:
 - Given that the user is not registered with the platform, when they view the homepage, then they should receive a message saying to log in and should not be able to access the detailed pages for personalized colleges (they should display the top _ colleges in the country)
 - Given that a high school senior inputs their interests/factors in the database, when they view the colleges in my feed, then they should be personalized to them.
