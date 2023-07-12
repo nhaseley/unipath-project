@@ -9,7 +9,10 @@ export default function Navbar() {
       <div> navbar</div>
       <button>
         <Link to={"/register"}> Register here </Link>
+        
       </button>
+
+      <button> Hello world</button>
       <button>
         <Link to={"/login"}> Login here </Link>
       </button>
