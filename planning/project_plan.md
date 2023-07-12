@@ -136,3 +136,29 @@ Event Attendees: This table stores all data for all attendees for a given event
 | Get    | GET         | fetch the events list for input college     | 6             |
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
+
+## Sprint Breakdown
+1. 
+  * Connect database to backend, backend to frontend
+  * Frontend layout of browser router and main pages
+  * Implement Registration and Login
+  * College Grid rendering from API
+  * Incorporate 1 filter feature
+
+2. 
+  * Implement 5-6 filter/search features
+  * JWTs
+  * Individual College Page
+
+3. 
+  * Other User Types (start with alumni)
+  * Start building events page (admission officer posts, student views)
+
+4. 
+  * Finish Events Page (admission officer posts, student views)
+  * Parents Page (financials)
+  * Implement any last minute stretch features
+
+5. 
+  * Finish up and polish everything
+  * Presentation prep
