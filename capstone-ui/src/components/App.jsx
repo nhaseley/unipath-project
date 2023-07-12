@@ -13,7 +13,7 @@ export default function App() {
 
   useEffect(() => {
     axios.get(url).then((response) => {
-      // console.log("response: ", response.data.results[0]);
+      console.log("response: ", response.data.results[0]);
     });
   }, []);
 

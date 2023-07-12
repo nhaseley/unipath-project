@@ -16,7 +16,6 @@ export default function LoginPage({
   userLoggedIn,
   setUserLoggedIn
 }) {
-  // console.log("login info: ", userLoginInfo)
 
   const navigate = useNavigate()
 
@@ -66,7 +65,7 @@ export default function LoginPage({
       navigate("/");
     }
   }
-console.log(userLoggedIn)
+
   return (
     <div className="login-page">
       <h2> Welcome Back! </h2>
