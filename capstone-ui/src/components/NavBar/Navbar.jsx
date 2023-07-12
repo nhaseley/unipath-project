@@ -20,13 +20,9 @@ export default function Navbar({ userLoggedIn}) {
       ) : (
 
         <div className="wholeNavbar">
-
           <span>LOGO</span>
-
           <button> <Link to={"/about"}> About us </Link> </button>
-
           <button> <Link to={"/register"}> Register here </Link> </button>
-
           <button> <Link to={"/login"}> Login here </Link> </button>
         </div>
       )}

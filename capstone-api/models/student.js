@@ -74,6 +74,7 @@ class Student {
    **/
 
   static async register(creds) {
+    console.log("backend:", creds)
     const requiredCreds = [
       "email",
       "firstName",
@@ -110,23 +111,29 @@ class Student {
           last_name,
           parent_phone,
           zipcode,
-          password
+          password, 
+          sat_score,
+          act_score
         )
-        VALUES ($1, $2, $3, $4, $5, $6)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING 
                   id,
                   email,       
                   first_name, 
                   last_name,
                   parent_phone,
-                  zipcode`,
+                  zipcode,
+                  sat_score,
+                  act_score`,
       [
         creds.email.toLowerCase(),
         creds.firstName.toLowerCase(),
         creds.lastName.toLowerCase(),
         creds.parentPhone,
         creds.zipcode,
-        hashedPassword
+        hashedPassword,
+        creds.examScores.satScore,
+        creds.examScores.actScore
       ]
     );
     const student = result.rows[0];

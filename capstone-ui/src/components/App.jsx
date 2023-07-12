@@ -6,6 +6,8 @@ import HomePage from "./HomePage/HomePage"
 import Navbar from "./Navbar/Navbar";
 import LoginPage from "./LoginPage/LoginPage";
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
+import RegistrationSurveyPage from "./RegistrationPage/RegistrationSurveyPage";
+import CollegeGrid from "./CollegeGrid/CollegeGrid";
 
 export default function App() {
   const apiKey = "AiIF47OdjlHUb8m7mvs5k265lBQgGG9Hd5KXhBrF";
@@ -26,7 +28,8 @@ export default function App() {
     parentPhone: "",
     zipcode: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    examScores: {}
   });
 
   const [passwordDisplayed, setPasswordDisplayed] = useState({
@@ -102,6 +105,14 @@ export default function App() {
                 ></RegistrationPage>
               }
             />
+          </Route>
+          <Route
+            path="/registration-survey"
+            element={
+              <RegistrationSurveyPage userLoginInfo={userLoginInfo} setError={setError}setUserLoginInfo={setUserLoginInfo}></RegistrationSurveyPage>
+            }
+          ></Route>
+          <Route path="/feed" element={<CollegeGrid userLoginInfo={userLoginInfo}></CollegeGrid>}>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -4,6 +4,7 @@ import "./RegistrationPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import RegistrationSurveyPage from "./RegistrationSurveyPage";
 
 export default function RegistrationPage({
   userLoginInfo,
@@ -12,7 +13,6 @@ export default function RegistrationPage({
   handleHidePassword,
   passwordDisplayed,
   error,
-  setError,
 }) {
   function handleDemo() {
     setUserLoginInfo({
@@ -24,42 +24,6 @@ export default function RegistrationPage({
       password: "2003nyleve",
       confirmPassword: "2003nyleve",
     });
-  }
-
-  async function handleRegistration(event) {
-    event.preventDefault();
-
-    if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
-      setError({ message: "Passwords do not match", status: 422 });
-    } else {
-      let result = await axios.post("http://localhost:3010/auth/register", {
-        email: userLoginInfo.email,
-        firstName: userLoginInfo.firstName,
-        lastName: userLoginInfo.lastName,
-        parentPhone: userLoginInfo.parentPhone,
-        zipcode: userLoginInfo.zipcode,
-        password: userLoginInfo.password
-      });
-      console.log("result on frontend: ", result);
-
-      if (result.data.status) {
-        setError(result.data);
-      } else {
-        //   const token = result.data.token;
-        //   localStorage.setItem("token", token);
-        //   const decodedToken = jwtDecode(token);
-        setError({});
-        setUserLoginInfo({
-          email: "",
-          firstName: "",
-          lastName: "",
-          parentPhone:"",
-          zipcode: "",
-          password: "",
-          confirmPassword: "",
-        });
-      }
-    }
   }
 
   return (
@@ -198,22 +162,22 @@ export default function RegistrationPage({
           </button>
         </div>
         <div className="error">
-            {error.status
-              ? "Registration Failed: " +
-                error.message +
-                ". " +
-                error.status +
-                " Error."
-              : null}
-          </div>
+          {error.status
+            ? "Registration Failed: " +
+              error.message +
+              ". " +
+              error.status +
+              " Error."
+            : null}
+        </div>
       </form>
-      <button className="registration-submit" onClick={handleRegistration}>
-        Submit
-        {/* <Link to={"/login"}> Submit</Link> */}
-      </button>
       <button className="demo-button" onClick={handleDemo}>
         Demo Registration
       </button>
+      <button>
+        <Link to={"/registration-survey"}>Next</Link>
+      </button>
+
       <div>
         Already have an account?
         <button className="login-button">

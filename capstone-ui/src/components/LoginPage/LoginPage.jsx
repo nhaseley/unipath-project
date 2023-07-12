@@ -62,7 +62,7 @@ export default function LoginPage({
       setUserLoginInfo({ email: "", password: "" });
       setError({});
       setUserLoggedIn(true);
-      navigate("/");
+      navigate("/feed");
     }
   }
 
@@ -126,7 +126,6 @@ export default function LoginPage({
       </form>
       <button className="login-submit" onClick={handleLogin}>
         Submit
-        {/* <Link to={"/generate-colleges"}> Submit</Link> */}
       </button>
       <div>
         Don't have an account?

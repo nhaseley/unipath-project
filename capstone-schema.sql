@@ -5,7 +5,9 @@ CREATE TABLE students (
   last_name     TEXT NOT NULL,
   parent_phone  VARCHAR(10),
   zipcode       VARCHAR(5),
-  password      TEXT NOT NULL
+  password      TEXT NOT NULL,
+  sat_score     INTEGER,
+  act_score     INTEGER 
 );
 
 CREATE TABLE colleges (
