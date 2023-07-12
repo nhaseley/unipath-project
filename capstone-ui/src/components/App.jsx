@@ -62,13 +62,7 @@ export default function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path=""
-            element={
-              <Navbar>
-               
-              </Navbar>
-            }
+          <Route path="" element={<Navbar userLoggedIn = {userLoggedIn}  />}
           >
             <Route path="/" element={<HomePage/>}></Route>
             

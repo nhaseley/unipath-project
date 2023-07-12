@@ -1,0 +1,11 @@
+.wholeNavbar{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        padding: 10px;
+        bottom: 435px;
+
+}
+
+
