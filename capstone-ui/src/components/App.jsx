@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./HomePage/HomePage"
@@ -7,17 +6,9 @@ import Navbar from "./Navbar/Navbar";
 import LoginPage from "./LoginPage/LoginPage";
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 import RegistrationSurveyPage from "./RegistrationPage/RegistrationSurveyPage";
-import CollegeGrid from "./CollegeGrid/CollegeGrid";
+import CollegesPage from "./CollegesPage/CollegesPage";
 
 export default function App() {
-  const apiKey = "AiIF47OdjlHUb8m7mvs5k265lBQgGG9Hd5KXhBrF";
-  const url = `https://api.data.gov/ed/collegescorecard/v1/schools?school.name=Brown-University&school.city=Providence&api_key=${apiKey}`;
-
-  useEffect(() => {
-    axios.get(url).then((response) => {
-      console.log("response: ", response.data.results[0]);
-    });
-  }, []);
 
   //------------------ States ---------------------//
 
@@ -112,7 +103,7 @@ export default function App() {
               <RegistrationSurveyPage userLoginInfo={userLoginInfo} setError={setError}setUserLoginInfo={setUserLoginInfo}></RegistrationSurveyPage>
             }
           ></Route>
-          <Route path="/feed" element={<CollegeGrid userLoginInfo={userLoginInfo}></CollegeGrid>}>
+          <Route path="/feed" element={<CollegesPage userLoginInfo={userLoginInfo}></CollegesPage>}>
           </Route>
         </Routes>
       </BrowserRouter>

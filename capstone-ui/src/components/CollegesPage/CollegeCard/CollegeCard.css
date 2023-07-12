@@ -1,0 +1,12 @@
+.college-card{
+    /* height: 350px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    border: solid 3px lightblue; */
+    height: 350px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #e4e4e4;
+}
