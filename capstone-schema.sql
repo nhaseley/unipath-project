@@ -1,10 +1,10 @@
 CREATE TABLE students (
   id            SERIAL PRIMARY KEY,
+  email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
   first_name    TEXT NOT NULL,
   last_name     TEXT NOT NULL,
-  email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
-  zipcode       INTEGER,
   parent_phone  INTEGER,
+  zipcode       INTEGER,
   password      TEXT NOT NULL
 );
 

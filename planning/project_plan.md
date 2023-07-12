@@ -42,8 +42,10 @@ Alex (23yo) is a recent college graduate who pursued a Bachelor's degree in Comp
 
 ## Pages/Screens
 
-List all the pages and screens in the app. Include wireframes for at least 3 of them.
-** see figma **
+<a href="https://www.loom.com/share/99e67ee86fd342fb8c11f66cd9e306e6">
+    <!-- <p>Capstone Wireframes – Figma - 11 July 2023 - Watch Video</p> -->
+    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/99e67ee86fd342fb8c11f66cd9e306e6-with-play.gif">
+  </a>
 
 ## Data Model
 
@@ -134,3 +136,29 @@ Event Attendees: This table stores all data for all attendees for a given event
 | Get    | GET         | fetch the events list for input college     | 6             |
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
+
+## Sprint Breakdown
+1. 
+  * Connect database to backend, backend to frontend
+  * Frontend layout of browser router and main pages
+  * Implement Registration and Login
+  * College Grid rendering from API
+  * Incorporate 1 filter feature
+
+2. 
+  * Implement 5-6 filter/search features
+  * JWTs
+  * Individual College Page
+
+3. 
+  * Other User Types (start with alumni)
+  * Start building events page (admission officer posts, student views)
+
+4. 
+  * Finish Events Page (admission officer posts, student views)
+  * Parents Page (financials)
+  * Implement any last minute stretch features
+
+5. 
+  * Finish up and polish everything
+  * Presentation prep
