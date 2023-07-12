@@ -13,10 +13,12 @@ export default function LoginPage({
   passwordDisplayed,
   error,
   setError,
+  userLoggedIn,
+  setUserLoggedIn
 }) {
   // console.log("login info: ", userLoginInfo)
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   //   useEffect(() => {
   //     const checkLoggedIn = () => {
@@ -33,13 +35,20 @@ export default function LoginPage({
   //     }
   // }; checkLoggedIn()
   // }, [])
+  function handleDemo(event) {
+    event.preventDefault()
+    setUserLoginInfo({
+      email: "nylevenya@hotmail.com",
+      password: "2003nyleve"
+    });
+  }
 
   async function handleLogin(event) {
     event.preventDefault();
 
-    let result = await axios.post("http://localhost:3002/login", {
-      emailInput: userLoginInfo.email,
-      passwordInput: userLoginInfo.password,
+    let result = await axios.post("http://localhost:3010/auth/login", {
+      email: userLoginInfo.email,
+      password: userLoginInfo.password,
     });
 
     if (result.data.status) {
@@ -54,10 +63,10 @@ export default function LoginPage({
       setUserLoginInfo({ email: "", password: "" });
       setError({});
       setUserLoggedIn(true);
-      navigate("/generate-colleges");
+      navigate("/");
     }
   }
-
+console.log(userLoggedIn)
   return (
     <div className="login-page">
       <h2> Welcome Back! </h2>
@@ -101,6 +110,10 @@ export default function LoginPage({
           {passwordDisplayed.password ? "Hide" : "Show"}
         </button>
         </div>
+        <button className="demo-button" onClick={handleDemo}>
+        Demo Login
+      </button>
+
         <div className="error">
           {error.status
             ? "Registration Failed: " +
@@ -110,6 +123,7 @@ export default function LoginPage({
               " Error."
             : null}
         </div>
+        
       </form>
       <button className="login-submit" onClick={handleLogin}>
         Submit
@@ -118,7 +132,7 @@ export default function LoginPage({
       <div>
         Don't have an account?
         <button className="register-button">
-          {/* <Link to={"/register"}> Register </Link> */}
+          <Link to={"/register"}> Register </Link>
         </button>
       </div>
     </div>

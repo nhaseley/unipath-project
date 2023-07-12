@@ -14,21 +14,31 @@ export default function RegistrationPage({
   error,
   setError,
 }) {
-  console.log("registration info: ", userLoginInfo);
+  function handleDemo() {
+    setUserLoginInfo({
+      email: "nylevenya@hotmail.com",
+      firstName: "nya",
+      lastName: "haseley-ayende",
+      parentPhone: "6464080591",
+      zipcode: "10803",
+      password: "2003nyleve",
+      confirmPassword: "2003nyleve",
+    });
+  }
+
   async function handleRegistration(event) {
     event.preventDefault();
 
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
-      console.log("registering...")
-      let result = await axios.post("http://localhost:3002/auth/register", {
-        emailInput: userLoginInfo.email,
-        passwordInput: userLoginInfo.password,
-        firstNameInput: userLoginInfo.firstName,
-        lastNameInput: userLoginInfo.lastName,
-        parentPhoneInput: userLoginInfo.parentPhone,
-        zipcodeInput: userLoginInfo.zipcode,
+      let result = await axios.post("http://localhost:3010/auth/register", {
+        email: userLoginInfo.email,
+        firstName: userLoginInfo.firstName,
+        lastName: userLoginInfo.lastName,
+        parentPhone: userLoginInfo.parentPhone,
+        zipcode: userLoginInfo.zipcode,
+        password: userLoginInfo.password
       });
       console.log("result on frontend: ", result);
 
@@ -41,9 +51,10 @@ export default function RegistrationPage({
         setError({});
         setUserLoginInfo({
           email: "",
-          username: "",
           firstName: "",
           lastName: "",
+          parentPhone:"",
+          zipcode: "",
           password: "",
           confirmPassword: "",
         });
@@ -81,7 +92,7 @@ export default function RegistrationPage({
               onChange={(e) =>
                 setUserLoginInfo((u) => ({
                   ...u,
-                  firstNameInput: e.target.value,
+                  firstName: e.target.value,
                 }))
               }
             ></input>
@@ -96,7 +107,7 @@ export default function RegistrationPage({
               onChange={(e) =>
                 setUserLoginInfo((u) => ({
                   ...u,
-                  lastNameInput: e.target.value,
+                  lastName: e.target.value,
                 }))
               }
             ></input>
@@ -111,7 +122,7 @@ export default function RegistrationPage({
             onChange={(e) =>
               setUserLoginInfo((u) => ({
                 ...u,
-                parentPhoneInput: e.target.value,
+                parentPhone: e.target.value,
               }))
             }
           ></input>
@@ -123,7 +134,7 @@ export default function RegistrationPage({
             placeholder="Zipcode"
             value={userLoginInfo.zipcode}
             onChange={(e) =>
-              setUserLoginInfo((u) => ({ ...u, zipcodeInput: e.target.value }))
+              setUserLoginInfo((u) => ({ ...u, zipcode: e.target.value }))
             }
           ></input>
         </div>
@@ -185,7 +196,8 @@ export default function RegistrationPage({
           >
             {passwordDisplayed.confirmPassword ? "Hide" : "Show"}
           </button>
-          <div className="error">
+        </div>
+        <div className="error">
             {error.status
               ? "Registration Failed: " +
                 error.message +
@@ -194,16 +206,18 @@ export default function RegistrationPage({
                 " Error."
               : null}
           </div>
-        </div>
       </form>
       <button className="registration-submit" onClick={handleRegistration}>
         Submit
         {/* <Link to={"/login"}> Submit</Link> */}
       </button>
+      <button className="demo-button" onClick={handleDemo}>
+        Demo Registration
+      </button>
       <div>
         Already have an account?
         <button className="login-button">
-          {/* <Link to={"/login"}> Login </Link> */}
+          <Link to={"/login"}> Login </Link>
         </button>
       </div>
     </div>

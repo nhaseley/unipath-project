@@ -3,8 +3,8 @@ CREATE TABLE students (
   email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
   first_name    TEXT NOT NULL,
   last_name     TEXT NOT NULL,
-  parent_phone  INTEGER,
-  zipcode       INTEGER,
+  parent_phone  VARCHAR(10),
+  zipcode       VARCHAR(5),
   password      TEXT NOT NULL
 );
 

@@ -13,7 +13,7 @@ export default function App() {
 
   useEffect(() => {
     axios.get(url).then((response) => {
-      console.log("response: ", response.data.results[0]);
+      // console.log("response: ", response.data.results[0]);
     });
   }, []);
 
@@ -21,7 +21,12 @@ export default function App() {
 
   const [userLoginInfo, setUserLoginInfo] = useState({
     email: "",
+    firstName: "",
+    lastName: "",
+    parentPhone: "",
+    zipcode: "",
     password: "",
+    confirmPassword: ""
   });
 
   const [passwordDisplayed, setPasswordDisplayed] = useState({
@@ -83,6 +88,8 @@ export default function App() {
                   passwordDisplayed={passwordDisplayed}
                   error={error}
                   setError={setError}
+                  userLoggedIn={userLoggedIn}
+                  setUserLoggedIn={setUserLoggedIn}
                 ></LoginPage>
               }
             />

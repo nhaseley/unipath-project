@@ -8,13 +8,13 @@ const validateFields = ({ required, obj, location }) => {
     throw new UnprocessableEntityError(`Missing object for validation.`);
   required.forEach((item) => {
     if (obj[item]) {
-      if (item === "emailInput" && !obj[item].includes("@")) {
+      if (item === "email" && !obj[item].includes("@")) {
         throw new UnprocessableEntityError(`Email is not valid`);
       }
-      if (item === "zipcodeInput" && obj[item].length !== 5){
+      if (item === "zipcode" && obj[item].length !== 5){
         throw new UnprocessableEntityError(`Zipcode is not valid`);
       }
-      if (item === "parentPhoneInput" && obj[item].length != 10){
+      if (item === "parentPhone" && obj[item].length != 10){
         throw new UnprocessableEntityError(`Parent phone number is not valid`);
       }
     }

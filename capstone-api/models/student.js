@@ -1,5 +1,5 @@
 
-// const db = require("../db");
+const db = require("../db");
 
 const bcrypt = require("bcrypt");
 const { BadRequestError, UnauthorizedError } = require("../utils/errors");
@@ -40,30 +40,30 @@ class Student {
    * @returns student
    **/
 
-  // static async authenticate(creds) {
-  //   // const { email, password } = creds
-  //   const requiredCreds = ["emailInput", "passwordInput"];
-  //   try {
-  //     validateFields({
-  //       required: requiredCreds,
-  //       obj: creds,
-  //       location: "student authentication",
-  //     });
-  //   } catch (err) {
-  //     throw err;
-  //   }
+  static async authenticate(creds) {
+    // const { email, password } = creds
+    const requiredCreds = ["email", "password"];
+    try {
+      validateFields({
+        required: requiredCreds,
+        obj: creds,
+        location: "student authentication",
+      });
+    } catch (err) {
+      throw err;
+    }
 
-  //   const student = await student.fetchstudentByEmail(creds.emailInput);
-  //   if (student) {
-  //     // compare hashed password to a new hash from password
-  //     const isValid = await bcrypt.compare(creds.passwordInput, student.password);
-  //     if (isValid === true) {
-  //       return student.createPublicstudent(student);
-  //     }
-  //   }
+    const student = await Student.fetchStudentByEmail(creds.email);
+    if (student) {
+      // compare hashed password to a new hash from password
+      const isValid = await bcrypt.compare(creds.password, student.password);
+      if (isValid === true) {
+        return Student.createPublicstudent(student);
+      }
+    }
 
-  //   throw new UnauthorizedError("Invalid studentname/password");
-  // }
+    throw new UnauthorizedError("Invalid email or password");
+  }
 
   /**
    * Register student with data.
@@ -75,12 +75,12 @@ class Student {
 
   static async register(creds) {
     const requiredCreds = [
-      "emailInput",
-      "firstNameInput",
-      "lastNameInput",
-      "parentPhoneInput",
-      "zipcodeInput",
-      "passwordInput"
+      "email",
+      "firstName",
+      "lastName",
+      "parentPhone",
+      "zipcode",
+      "password"
     ];
     try {
       validateFields({
@@ -91,15 +91,15 @@ class Student {
     } catch (err) {
       throw err;
     }
-    if (!creds.emailInput || !creds.passwordInput) {
+    if (!creds.email || !creds.password) {
       throw new BadRequestError(`Fix credentials: ${creds}`);
     }
-    if (await student.fetchstudentByEmail(creds.emailInput)) {
-      throw new BadRequestError(`Duplicate email: ${creds.emailInput}`);
+    if (await Student.fetchStudentByEmail(creds.email)) {
+      throw new BadRequestError(`Duplicate email: ${creds.email}`);
     }
 
     const hashedPassword = await bcrypt.hash(
-      creds.passwordInput,
+      creds.password,
       BCRYPT_WORK_FACTOR
     );
 
@@ -121,17 +121,15 @@ class Student {
                   parent_phone,
                   zipcode`,
       [
-        creds.emailInput.toLowerCase(),
-        creds.firstNameInput.toLowerCase(),
-        creds.lastNameInput.toLowerCase(),
-        creds.parentPhoneInput,
-        creds.zipcodeInput,
+        creds.email.toLowerCase(),
+        creds.firstName.toLowerCase(),
+        creds.lastName.toLowerCase(),
+        creds.parentPhone,
+        creds.zipcode,
         hashedPassword
       ]
     );
-
     const student = result.rows[0];
-
     return student;
   }
 
@@ -141,24 +139,23 @@ class Student {
    * @param {String} email
    * @returns student
    */
-  // static async fetchstudentByEmail(email) {
-  //   const result = await db.query(
-  //     `SELECT id,
-  //             email, 
-  //             studentname,
-  //             password,
-  //             first_name AS "firstName",
-  //             last_name AS "lastName",
-  //             created_at,
-  //             updated_at              
-  //          FROM students
-  //          WHERE email = $1`,
-  //     [email.toLowerCase()]
-  //   );
+  static async fetchStudentByEmail(email) {
+    const result = await db.query(
+      `SELECT id,
+              email, 
+              first_name,
+              last_name,
+              parent_phone,
+              zipcode,
+              password              
+           FROM students
+           WHERE email = $1`,
+      [email.toLowerCase()]
+    );
 
-  //   const student = result.rows[0];
-  //   return student;
-  // }
+    const student = result.rows[0];
+    return student;
+  }
 
   /**
    * Fetch a student in the database by id
