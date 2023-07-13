@@ -7,8 +7,6 @@ export default function Navbar({ userLoggedIn}) {
 
   return (
     <>
-      <div> navbar</div>
-
       {userLoggedIn ? (
          <div className="wholeNavbar">
           <span>LOGO</span>
