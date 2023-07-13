@@ -65,6 +65,9 @@ class Student {
     throw new UnauthorizedError("Invalid email or password");
   }
 
+
+
+
   /**
    * Register student with data.
    *
@@ -160,7 +163,7 @@ class Student {
       [email.toLowerCase()]
     );
 
-    const student = result.rows[0];
+    const student = result.rows[0] || []
     return student;
   }
 

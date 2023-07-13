@@ -15,3 +15,4 @@ CREATE DATABASE capstone_test;
 \connect capstone_test
 
 \i capstone-schema.sql
+\i capstone-test.sql
