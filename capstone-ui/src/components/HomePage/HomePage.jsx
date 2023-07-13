@@ -12,7 +12,7 @@ export default function HomePage() {
         <h2 className="textHeader2">Helping you find the right college for you!</h2>
     </div>
 
-
+<div> hi</div>
 <div className="watchImage">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc-0StNGIFVb1NJpyfRBcffyTnXE4vspht7g&usqp=CAU" alt="diversityImg"  className="pageImg" />
 </div>
