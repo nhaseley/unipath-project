@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import CollegeCard from "../CollegeCard/CollegeCard";
 
-export default function CollegeGrid({userScores}) {
+export default function CollegeGrid({userLoginInfo, userScores, enrollment, schoolType}) {
   const [pageID, setPageID] = useState(1);
   const [collegeList, setCollegeList] = useState([]);
 
@@ -21,46 +21,40 @@ export default function CollegeGrid({userScores}) {
 
   useEffect(() => {
     axios.get(createEndpointUrl(pageID)).then((response) => {
-      setCollegeList(response.data.results);
+      setCollegeList(prevList => [...prevList, ...response?.data.results]);
     });
   }, [pageID]);
 
-  function incrementPage(event) {
-    setPageID(parseInt(event.target.value) + 1);
+  function incrementPage() {
+    setPageID(pageID => pageID + 1);
   }
-
-
-useEffect(() => {
-  // axios.post("http://localhost:3001/student")
-
-})  
-// axios
-//         .post("http://localhost:3001/auth/follow", {
-//           token: existingToken,
-//           followed_id: event.target.value,
-//         })
-//         .then((users) => {
-//           setUserFollowings(users.data);
-//         });
-// }
-
+  console.log("my enrollment, ", enrollment)
+  console.log("my colleges: ", collegeList)
   return (
     <div className="college-grid">
       <div className="content">
-        <h1> Your Personalized College Search!</h1>
+        <h1> Hi, ___, here are your personalized colleges! </h1>
         <div className="colleges">
           {collegeList?.map((college, index) =>
-            ((Math.abs(
+            (
+              (Math.abs(
               Object.values(
                 college.latest.admissions.sat_scores.midpoint
               ).reduce((total, score) => total + score, 0) - userScores.satScore
             ) <= 200 )
+            
             ||
             (college.latest.admissions.act_scores.cumulative
               ? Math.abs(
                   college.latest.admissions.act_scores.cumulative - userScores.actScore
                 ) <= 4
-              : null)) ? (
+              : null)
+            // ||
+            // (college.latest.student.size 
+            //   ? (Math.abs(college.latest.student.size - enrollment) <= 1000)
+            //   : null)
+              
+              ) ? (
               <CollegeCard college={college.latest} key={index} />
             ) : null
           )}

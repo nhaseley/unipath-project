@@ -6,12 +6,13 @@ import axios from "axios";
 import CollegeGrid from "./CollegeGrid/CollegeGrid";
 import FilterSidebar from "./FilterSidebar/FilterSidebar";
 
-export default function CollegesPage({ userLoginInfo,  userScores }) {
+export default function CollegesPage({ userLoginInfo,  userScores, enrollment, schoolType }) {
+  console.log(userLoginInfo)
   return(
     <div className="colleges-page">
       <FilterSidebar></FilterSidebar>
 
-      <CollegeGrid userLoginInfo={userLoginInfo}  userScores={userScores}></CollegeGrid>
+      <CollegeGrid userLoginInfo={userLoginInfo}  userScores={userScores} enrollment={enrollment} schoolType={schoolType}></CollegeGrid>
     </div>
   );
 }

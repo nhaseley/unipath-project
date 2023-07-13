@@ -1,4 +1,4 @@
-\echo 'Delete and recreate users database?'
+\echo 'Delete and recreate students database?'
 \prompt 'Return for yes or control-C to cancel > ' foo
 
 DROP DATABASE capstone;
