@@ -68,8 +68,6 @@ export default function RegistrationSurveyPage({
       setUserLoginInfo({...userLoginInfo, examScores: {satScore:examScores.satScore, actScore: event.value}})
     }
 
-  console.log("login info: ", userLoginInfo);
-
   return (
     <div className="registration-survey-page">
       <div className="sat-input"> 

@@ -25,10 +25,12 @@ class Student {
     return {
       id: student.id,
       email: student.email,
-      firstName: student.firstName,
-      lastName: student.lastName,
-      parentPhone: student.parentPhone,
-      zipcode: student.zipcodeInput,
+      firstName: student.first_name,
+      lastName: student.last_name,
+      parentPhone: student.parent_phone,
+      zipcode: student.zipcode,
+      satScore: student.sat_score,
+      actScore: student.act_score
     };
   }
 
@@ -154,7 +156,9 @@ class Student {
               last_name,
               parent_phone,
               zipcode,
-              password              
+              password,
+              sat_score,
+              act_score          
            FROM students
            WHERE email = $1`,
       [email.toLowerCase()]

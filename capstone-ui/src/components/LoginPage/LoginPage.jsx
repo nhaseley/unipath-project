@@ -13,8 +13,8 @@ export default function LoginPage({
   passwordDisplayed,
   error,
   setError,
-  userLoggedIn,
-  setUserLoggedIn
+  setUserLoggedIn,
+  setUserScores
 }) {
 
   const navigate = useNavigate()
@@ -60,6 +60,7 @@ export default function LoginPage({
       // // used for nutritions page
 
       setUserLoginInfo({ email: "", password: "" });
+      setUserScores({satScore: result.data.satScore, actScore: result.data.actScore})
       setError({});
       setUserLoggedIn(true);
       navigate("/feed");

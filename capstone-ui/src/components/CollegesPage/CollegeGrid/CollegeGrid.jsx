@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import CollegeCard from "../CollegeCard/CollegeCard";
 
-export default function CollegeGrid() {
+export default function CollegeGrid({userScores}) {
   const [pageID, setPageID] = useState(1);
   const [collegeList, setCollegeList] = useState([]);
 
@@ -25,11 +25,24 @@ export default function CollegeGrid() {
     });
   }, [pageID]);
 
-  console.log("colleges: ", collegeList);
-
   function incrementPage(event) {
     setPageID(parseInt(event.target.value) + 1);
   }
+
+
+useEffect(() => {
+  // axios.post("http://localhost:3001/student")
+
+})  
+// axios
+//         .post("http://localhost:3001/auth/follow", {
+//           token: existingToken,
+//           followed_id: event.target.value,
+//         })
+//         .then((users) => {
+//           setUserFollowings(users.data);
+//         });
+// }
 
   return (
     <div className="college-grid">
@@ -37,14 +50,17 @@ export default function CollegeGrid() {
         <h1> Your Personalized College Search!</h1>
         <div className="colleges">
           {collegeList?.map((college, index) =>
-            Object.values(college.latest.admissions.sat_scores.midpoint).reduce(
-              (total, score) => total + score,
-              0
-            ) ||
-            Object.values(college.latest.admissions.act_scores.midpoint).reduce(
-              (total, score) => total + score,
-              0
-            ) ? (
+            ((Math.abs(
+              Object.values(
+                college.latest.admissions.sat_scores.midpoint
+              ).reduce((total, score) => total + score, 0) - userScores.satScore
+            ) <= 200 )
+            ||
+            (college.latest.admissions.act_scores.cumulative
+              ? Math.abs(
+                  college.latest.admissions.act_scores.cumulative - userScores.actScore
+                ) <= 4
+              : null)) ? (
               <CollegeCard college={college.latest} key={index} />
             ) : null
           )}

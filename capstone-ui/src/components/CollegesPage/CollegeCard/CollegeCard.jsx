@@ -8,15 +8,20 @@ export default function CollegeCard({ college }) {
     (total, score) => total + score,
     0
   );
-  let actScore = Object.values(college.admissions.act_scores.midpoint).reduce(
-    (total, score) => total + score,
-    0
-  );
-  console.log(satScore);
+  // let actScore = Object.values(college.admissions.act_scores.midpoint)
+  // .filter((section) => section !== null)
+  // .reduce(
+  //   (total, section, _, array) =>
+  //     total + section / array.length, 0);
+
+
+  // console.log("sat: ", satScore);
+  console.log("???", college.admissions.act_scores.midpoint.cumulative)
+  // console.log("act: ", actScore)
 
   return (
     <div className="college-card">
-      {satScore || actScore? (
+      {satScore || college.admissions.act_scores.midpoint.cumulative? (
         <>
           <div>{college.school.name}</div>
           <div className="scores">
@@ -25,7 +30,7 @@ export default function CollegeCard({ college }) {
             <div>{satScore != 0 ? satScore : "Unavailable"}</div>
             <div className="median-act"></div>
             Median ACT Score:
-            <div>{actScore != 0 ? actScore : "Unavailable"}</div>
+            <div>{college.admissions.act_scores.midpoint.cumulative != 0 ? college.admissions.act_scores.midpoint.cumulative : "Unavailable"}</div>
           </div>
         </>
       ) : null}

@@ -29,6 +29,7 @@ export default function App() {
   });
   const [error, setError] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [userScores, setUserScores] = useState({satScore: 1000, actScore: 20});
 
   //---------------- Functions ---------------------//
 
@@ -78,6 +79,7 @@ export default function App() {
                   setError={setError}
                   userLoggedIn={userLoggedIn}
                   setUserLoggedIn={setUserLoggedIn}
+                  setUserScores={setUserScores}
                 ></LoginPage>
               }
             />
@@ -103,7 +105,7 @@ export default function App() {
               <RegistrationSurveyPage userLoginInfo={userLoginInfo} setError={setError}setUserLoginInfo={setUserLoginInfo}></RegistrationSurveyPage>
             }
           ></Route>
-          <Route path="/feed" element={<CollegesPage userLoginInfo={userLoginInfo}></CollegesPage>}>
+          <Route path="/feed" element={<CollegesPage userLoginInfo={userLoginInfo} userScores={userScores}></CollegesPage>}>
           </Route>
         </Routes>
       </BrowserRouter>
