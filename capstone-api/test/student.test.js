@@ -1,7 +1,9 @@
 const Student = require("../models/student.js")
 const bcrypt = require("bcrypt")
 jest.mock('bcrypt')
-const { UnauthorizedError } = require("../utils/errors.js")
+const { UnauthorizedError,BadRequestError } = require("../utils/errors.js")
+const { validateFields } = require("../utils/validate.js")
+jest.mock('../utils/validate.js')
 
 
 
@@ -13,7 +15,7 @@ const { UnauthorizedError } = require("../utils/errors.js")
 // TEST FOR THE FETCHBYEMAIL FUNCTION
 
 describe("fetch by Email", () => {
-    test('fetch by email should return user if eamil is valid', async  () => {
+    test('fetch by email should return user if email is valid', async  () => {
         const validEmail = 'test-email@test.com'
         const result =  await Student.fetchStudentByEmail(validEmail)
         expect(result).toStrictEqual({
@@ -25,7 +27,9 @@ describe("fetch by Email", () => {
             zipcode: '93117',
             password: 'test-password',
             sat_score: 1440,
-            act_score: 31
+            act_score: 31,
+            enrollment: 350,
+            school_type: 'test-school_type'
             
         })
     })
@@ -67,8 +71,8 @@ describe("the authenticate/ login", () => {
             zipcode: '93117',
             satScore: 1440,
             actScore: 31,
-            enrollment: undefined,
-            schoolType: undefined
+            enrollment: 350,
+            schoolType: 'test-school_type'
         })
     })
     
@@ -92,6 +96,8 @@ describe("the authenticate/ login", () => {
         
     })
 })
+
+
 
 
 
@@ -132,7 +138,7 @@ describe("the register function test",  () =>  {
         }]
     };
     
-    let db
+    
     
     beforeAll(()=>{
         const db = require('../db.js')
@@ -148,13 +154,10 @@ afterAll(()=> {
     
     
     test('test to see if a new student will be able to register', async function () {
-        
-        
-        
               
 
               const result = await Student.register(newStudent);
-              expect(result).toEqual({
+              expect(result).toStrictEqual({
                 id: 1,
                 email: newStudent.email,
                 first_name: newStudent.firstName.toLowerCase(),
@@ -168,18 +171,82 @@ afterAll(()=> {
                 password: newStudent.password
               });
             });
-          
 
 
 
+            test('test to see if the email has already been used to register', async function () {
 
 
-        // const student = await Student.register({...newStudent, password: 'password'})
+                const invalidCreds = {
+                    email: 'alreadyused@test.com',
+                    firstName: 'already-Fname_test',
+                    lastName: 'already-Lname_test',
+                    parentPhone: '4563342112',
+                    zipcode: '67901',
+                    password: 'already-test_password',
+                    examScores: {
+                      satScore: 1240,
+                      actScore: 28
+                    },
+                    enrollment: 680,
+                    schoolType: 'already-school_type'
+                  };
 
-        // expect(newStudent.firstName).toStrictEqual(student.first_name)
-        // expect(newStudent.lastName).toStrictEqual(student.last_name)
-        // expect(newStudent.email).toStrictEqual(student.email)
 
-    // })
+                Student.fetchStudentByEmail = jest.fn().mockReturnValue({
+                    email: 'alreadyused@test.com',
+                    first_name: 'already-Fname_test',
+                    last_name: 'already-Lname_test',
+                    parent_phone: '4563342112',
+                    zipcode: '67901',
+                    password: 'already-test_password',
+                    sat_score: 1240,
+                    act_score: 28,
+                    enrollment: 680,
+                    school_type: 'already-school_type'
+                })
+                
+                bcrypt.hash.mockImplementation(async (password) => password);
+
+                try {
+                    await Student.register(invalidCreds)
+                } catch (error) {
+                    expect(error instanceof BadRequestError).toBeTruthy()
+                }                
+
+            })
+
+
+
+            test('test to throw the BadRequestError if there isnt an email or a password', async function () {
+
+                const emptyEmailCreds = {
+                    email: null,
+                    firstName: 'already-Fname_test',
+                    lastName: 'already-Lname_test',
+                    parentPhone: '4563342112',
+                    zipcode: '67901',
+                    password: 'already-test_password',
+                    examScores: {
+                      satScore: 1240,
+                      actScore: 28
+                    },
+                    enrollment: 680,
+                    schoolType: 'already-school_type'
+                  };
+                
+                
+
+                validateFields.mockImplementation(() => {})
+
+
+
+                try {
+                    await Student.register(emptyEmailCreds)
+                } catch (error) {
+                    expect(error instanceof BadRequestError).toBeTruthy()
+                }
+                
+            })
 
 })
