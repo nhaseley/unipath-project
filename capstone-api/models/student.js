@@ -175,7 +175,7 @@ class Student {
       [email.toLowerCase()]
     );
 
-    const student = result.rows[0] || []
+    const student = result.rows[0]
     return student;
   }
 
