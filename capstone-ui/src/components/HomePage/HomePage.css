@@ -1,2 +1,22 @@
+.watchImage {
+  text-align: center;
+}
+
+.pageImg {
+  border-radius: 0.5rem;
+  width: 50rem;
+}
+
+.textInfo {
+  text-align: center;
+}
+
+.biography {
+  background-color: whitesmoke;
+  width: 40%;
+  text-align: center;
+  border-radius: 0.5rem;
+  margin: 0 auto;
+}
 
 
