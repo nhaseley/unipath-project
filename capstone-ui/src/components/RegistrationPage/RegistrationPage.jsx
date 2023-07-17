@@ -12,7 +12,7 @@ export default function RegistrationPage({
   handleShowPassword,
   handleHidePassword,
   passwordDisplayed,
-  error,
+  error,  
 }) {
   function handleDemo() {
     setUserLoginInfo({

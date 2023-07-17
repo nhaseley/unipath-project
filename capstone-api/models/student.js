@@ -25,10 +25,14 @@ class Student {
     return {
       id: student.id,
       email: student.email,
-      firstName: student.firstName,
-      lastName: student.lastName,
-      parentPhone: student.parentPhone,
-      zipcode: student.zipcodeInput,
+      firstName: student.first_name,
+      lastName: student.last_name,
+      parentPhone: student.parent_phone,
+      zipcode: student.zipcode,
+      satScore: student.sat_score,
+      actScore: student.act_score,
+      enrollment: student.enrollment,
+      schoolType: student.school_type
     };
   }
 
@@ -64,6 +68,9 @@ class Student {
 
     throw new UnauthorizedError("Invalid email or password");
   }
+
+
+
 
   /**
    * Register student with data.
@@ -113,9 +120,11 @@ class Student {
           zipcode,
           password, 
           sat_score,
-          act_score
+          act_score,
+          enrollment,
+          school_type
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         RETURNING 
                   id,
                   email,       
@@ -124,7 +133,9 @@ class Student {
                   parent_phone,
                   zipcode,
                   sat_score,
-                  act_score`,
+                  act_score,
+                  enrollment,
+                  school_type`,
       [
         creds.email.toLowerCase(),
         creds.firstName.toLowerCase(),
@@ -133,7 +144,9 @@ class Student {
         creds.zipcode,
         hashedPassword,
         creds.examScores.satScore,
-        creds.examScores.actScore
+        creds.examScores.actScore,
+        creds.enrollment,
+        creds.schoolType
       ]
     );
     const student = result.rows[0];
@@ -154,13 +167,16 @@ class Student {
               last_name,
               parent_phone,
               zipcode,
-              password              
+              password,
+              sat_score,
+              act_score,
+              enrollment,
+              school_type       
            FROM students
            WHERE email = $1`,
       [email.toLowerCase()]
     );
-
-    const student = result.rows[0];
+    const student = result.rows[0]
     return student;
   }
 

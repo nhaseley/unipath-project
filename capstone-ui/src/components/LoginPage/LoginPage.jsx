@@ -13,11 +13,10 @@ export default function LoginPage({
   passwordDisplayed,
   error,
   setError,
-  userLoggedIn,
-  setUserLoggedIn
+  setUserLoggedIn,
+  setUserScores,
 }) {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //   useEffect(() => {
   //     const checkLoggedIn = () => {
@@ -35,10 +34,10 @@ export default function LoginPage({
   // }; checkLoggedIn()
   // }, [])
   function handleDemo(event) {
-    event.preventDefault()
+    event.preventDefault();
     setUserLoginInfo({
       email: "nylevenya@hotmail.com",
-      password: "2003nyleve"
+      password: "2003nyleve",
     });
   }
 
@@ -52,14 +51,19 @@ export default function LoginPage({
 
     if (result.data.status) {
       setError(result.data);
+
     } else {
       // const token = result.data.token;
       // localStorage.setItem("token", token);
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
       // // used for nutritions page
-
+console.log("res: ", result.data)
       setUserLoginInfo({ email: "", password: "" });
+      setUserScores({
+        satScore: result.data.satScore > 0 ? result.data.satScore : null,
+        actScore: result.data.actScore > 0 ? result.data.actScore : null,
+      });
       setError({});
       setUserLoggedIn(true);
       navigate("/feed");
@@ -86,32 +90,34 @@ export default function LoginPage({
           ></input>
         </div>
         <div className="password">
-        <img
-          src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-          className="password-img"
-        ></img>
-        <input
-          className="password-input"
-          type={passwordDisplayed.password ? "text" : "password"}
-          placeholder="Password"
-          value={userLoginInfo.password}
-          onChange={(e) =>
-            setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
-          }
-        ></input>
-        <button
-          className="password-toggle"
-          name="password-toggle"
-          onClick={
-            passwordDisplayed.password ? handleHidePassword : handleShowPassword
-          }
-        >
-          {passwordDisplayed.password ? "Hide" : "Show"}
-        </button>
+          <img
+            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
+            className="password-img"
+          ></img>
+          <input
+            className="password-input"
+            type={passwordDisplayed.password ? "text" : "password"}
+            placeholder="Password"
+            value={userLoginInfo.password}
+            onChange={(e) =>
+              setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
+            }
+          ></input>
+          <button
+            className="password-toggle"
+            name="password-toggle"
+            onClick={
+              passwordDisplayed.password
+                ? handleHidePassword
+                : handleShowPassword
+            }
+          >
+            {passwordDisplayed.password ? "Hide" : "Show"}
+          </button>
         </div>
         <button className="demo-button" onClick={handleDemo}>
-        Demo Login
-      </button>
+          Demo Login
+        </button>
 
         <div className="error">
           {error.status
@@ -122,7 +128,6 @@ export default function LoginPage({
               " Error."
             : null}
         </div>
-        
       </form>
       <button className="login-submit" onClick={handleLogin}>
         Submit

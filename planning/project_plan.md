@@ -117,6 +117,15 @@ Event Attendees: This table stores all data for all attendees for a given event
 | parent email          | TEXT          | email of attendee's parent/guardian       | 
 | num_attendees         | INT           | number of total attendees for this person | 
 
+Reviews: This table stores all data for the reviews for a given college and user  
+
+| column name           | type          | description
+| :-------------------- | :-----------: | --------------------------------------: |
+| id                    | INT           | PRIMARY KEY                             |
+| college_id            | INT           | id of the given college                 |
+| user_id               | INT           | id of the given user                    |
+| review                | TEXT          | written review from user                |
+
 ## Endpoints
 
 | CRUD   | HTTP Verb   | description                                 | User Stories

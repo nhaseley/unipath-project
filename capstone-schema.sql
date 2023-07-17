@@ -7,7 +7,9 @@ CREATE TABLE students (
   zipcode       VARCHAR(5),
   password      TEXT NOT NULL,
   sat_score     INTEGER,
-  act_score     INTEGER 
+  act_score     INTEGER,
+  enrollment    INTEGER,
+  school_type    TEXT
 );
 
 CREATE TABLE colleges (
