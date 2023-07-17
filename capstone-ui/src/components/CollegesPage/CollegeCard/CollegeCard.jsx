@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 
 export default function CollegeCard({ college }) {
   // const [scoreList, setScoreList] = useState(0)
+  console.log("college: ", college)
   let satScore = Object.values(college.admissions.sat_scores.midpoint).reduce(
     (total, score) => total + score,
     0
   );
-  console.log("size: ", college.student.size)  
+  console.log("sat: ", satScore)
+  // console.log("size: ", college.student.size)  
   // console.log("act: ", college.admissions.act_scores.midpoint.cumulative)
 
   return (

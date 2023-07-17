@@ -2,4 +2,9 @@
     height: 3000px;
     width: 300px;
     background: blue;
+    color: white;
+    align-items: center
+}
+.sat-slider{
+    color: white
 }

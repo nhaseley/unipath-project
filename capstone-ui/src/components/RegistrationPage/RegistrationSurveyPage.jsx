@@ -8,12 +8,10 @@ import Select from "react-select";
 export default function RegistrationSurveyPage({
   userLoginInfo,
   setError,
-  setUserLoginInfo,
-  enrollment,
-  setEnrollment,
-  schoolType,
-  setSchoolType
+  setUserLoginInfo
 }) {
+  const navigate = useNavigate();
+
   const [selectedButton, setSelectedButton] = useState({});
   const [examScores, setExamScores] = useState({ satScore: "", actScore: "" });
 
@@ -33,7 +31,6 @@ export default function RegistrationSurveyPage({
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
-      console.log("enrollment before register: ", userLoginInfo.enrollment)
       let result = await axios.post("http://localhost:3010/auth/register", {
         email: userLoginInfo.email,
         firstName: userLoginInfo.firstName,
@@ -41,11 +38,10 @@ export default function RegistrationSurveyPage({
         parentPhone: userLoginInfo.parentPhone,
         zipcode: userLoginInfo.zipcode,
         password: userLoginInfo.password,
-        examScores: userLoginInfo.examScores,
-        enrollment: userLoginInfo.enrollment,
-        schoolType: userLoginInfo.schoolType
+        examScores: userLoginInfo.examScores
       });
       console.log("result on frontend: ", result);
+      navigate("/login");
 
       if (result.data.status) {
         setError(result.data);
@@ -86,19 +82,17 @@ export default function RegistrationSurveyPage({
   }
 
   function handleEnrollmentSelect(event) {
-    setEnrollment(parseInt(event.target.value));
     setUserLoginInfo({
       ...userLoginInfo,
-      enrollment: enrollment
+      enrollment: parseInt(event.target.value)
     });
   }
 
 
   function handleSchoolTypeSelect(event) {
-    setSchoolType(parseInt(event.target.value));
     setUserLoginInfo({
       ...userLoginInfo,
-      schoolType: schoolType
+      schoolType: event.target.value
     });
   }
 
@@ -155,8 +149,8 @@ export default function RegistrationSurveyPage({
         <select onChange={handleEnrollmentSelect}>
           <option value=""></option>
           <option value="5000" > Less than 5,000</option>
-          <option value="10000"> 5,000 - 10,000</option>
-          <option value="20000"> More than 10,000</option>
+          <option value="7000"> 5,000 - 10,000</option>
+          <option value="10000"> More than 10,000</option>
         </select>
       </div>
       <div className="school-type">
