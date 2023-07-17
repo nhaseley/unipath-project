@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const { NotFoundError } = require("./utils/errors");
 const config = require("./config");
 const authRoutes = require("./routes/auth");
+const likeRoute = require("./routes/student")
 const app = express();
 
 app.use(cors()); 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // routes
 app.use("/auth", authRoutes);
+app.use(likeRoute)
 
 app.get("/", function (req, res) {
   return res.status(200).json({

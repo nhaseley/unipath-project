@@ -1,18 +1,16 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./CollegesPage.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import CollegeGrid from "./CollegeGrid/CollegeGrid";
 import FilterSidebar from "./FilterSidebar/FilterSidebar";
 
-export default function CollegesPage({ userLoginInfo,  userScores }) {
-  console.log(userLoginInfo)
+export default function CollegesPage({ userLoginInfo,  userScores, collegeList, setCollegeList }) {
   return(
     <div className="colleges-page">
-      <FilterSidebar></FilterSidebar>
+      <FilterSidebar userLoginInfo={userLoginInfo} collegeList={collegeList} setCollegeList={setCollegeList} ></FilterSidebar>
 
-      <CollegeGrid userLoginInfo={userLoginInfo}  userScores={userScores} ></CollegeGrid>
+      <CollegeGrid userLoginInfo={userLoginInfo}  userScores={userScores} collegeList={collegeList} setCollegeList={setCollegeList}></CollegeGrid>
     </div>
   );
 }

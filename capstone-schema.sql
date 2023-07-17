@@ -14,7 +14,8 @@ CREATE TABLE students (
 
 CREATE TABLE colleges (
   id         SERIAL PRIMARY KEY,
-  user_id    INTEGER
+  user_id    INTEGER NOT NULL,
+  name       TEXT NOT NULL
 --   college_info    
 );
 
@@ -22,7 +23,7 @@ CREATE TABLE parents (
   id         SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name  TEXT NOT NULL,
-  phone      INTEGER,
+  phone      INTEGER NOT NULL,
   email      TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
   password   TEXT NOT NULL
 );
