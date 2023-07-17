@@ -176,6 +176,7 @@ class Student {
            WHERE email = $1`,
       [email.toLowerCase()]
     );
+
     const student = result.rows[0]
     return student;
   }
