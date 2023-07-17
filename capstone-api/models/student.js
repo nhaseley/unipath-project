@@ -81,7 +81,7 @@ class Student {
    **/
 
   static async register(creds) {
-    console.log("backend:", creds)
+    // console.log("backend:", creds)
     const requiredCreds = [
       "email",
       "firstName",
