@@ -8,7 +8,10 @@ export default function Navbar({ userLoggedIn }) {
     <>
       {userLoggedIn ? (
         <div className="wholeNavbar">
-          <h1 className="logo">College Navigator</h1>
+          {" "}
+          <Link to={"/"}>
+            <h1 className="logo"> College Navigator </h1>
+          </Link>
           <ul className="navItems">
             <li>
               <button>
@@ -26,7 +29,10 @@ export default function Navbar({ userLoggedIn }) {
         </div>
       ) : (
         <div className="wholeNavbar">
-          <h1 className="logo">College Navigator</h1>
+          {" "}
+          <Link to={"/"}>
+            <h1 className="logo"> College Navigator </h1>
+          </Link>
           <ul className="navItems">
             <li>
               <button>

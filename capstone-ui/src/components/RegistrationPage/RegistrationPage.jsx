@@ -12,7 +12,7 @@ export default function RegistrationPage({
   handleShowPassword,
   handleHidePassword,
   passwordDisplayed,
-  error,  
+  error,
 }) {
   function handleDemo() {
     setUserLoginInfo({
@@ -180,9 +180,9 @@ export default function RegistrationPage({
 
       <div>
         Already have an account?
-        <button className="login-button">
-          <Link to={"/login"}> Login </Link>
-        </button>
+        <Link to={"/login"}>
+          <span className="log-in-link"> Login </span>
+        </Link>
       </div>
     </div>
   );
