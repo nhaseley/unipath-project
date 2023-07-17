@@ -10,6 +10,7 @@ import CollegesPage from "./CollegesPage/CollegesPage";
 import About from "./About/About";
 
 export default function App() {
+
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -35,8 +36,8 @@ export default function App() {
     satScore: 0,
     actScore: 0,
   });
-  const [enrollment, setEnrollment] = useState(0);
-  const [schoolType, setSchoolType] = useState("");
+  
+console.log("info: ", userLoginInfo)
 
   //---------------- Functions ---------------------//
 
@@ -112,10 +113,6 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
-                  enrollment={enrollment}
-                  setEnrollment={setEnrollment}
-                  schoolType={schoolType}
-                  setSchoolType={setSchoolType}
                 ></RegistrationSurveyPage>
               }
             ></Route>
@@ -125,8 +122,6 @@ export default function App() {
                 <CollegesPage
                   userLoginInfo={userLoginInfo}
                   userScores={userScores}
-                  enrollment={enrollment}
-                  schoolType={schoolType}
                 ></CollegesPage>
               }
             ></Route>

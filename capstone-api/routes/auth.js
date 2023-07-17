@@ -6,7 +6,6 @@ router.post("/login", async function (req, res, next) {
     try {
       const user = await Student.authenticate(req.body)
       if (user){
-        console.log(user)
         return res.status(200).json( user )
         // const token = await User.generateAuthToken(user)
         // return res.status(200).json({ user, token})

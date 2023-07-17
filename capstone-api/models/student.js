@@ -32,7 +32,7 @@ class Student {
       satScore: student.sat_score,
       actScore: student.act_score,
       enrollment: student.enrollment,
-      schoolType: student.schoolType
+      schoolType: student.school_type
     };
   }
 
@@ -169,7 +169,9 @@ class Student {
               zipcode,
               password,
               sat_score,
-              act_score          
+              act_score,
+              enrollment,
+              school_type       
            FROM students
            WHERE email = $1`,
       [email.toLowerCase()]
