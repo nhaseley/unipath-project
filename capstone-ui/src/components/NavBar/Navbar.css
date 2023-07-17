@@ -1,11 +1,31 @@
-.wholeNavbar{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        position: relative;
-        padding: 10px;
-        bottom: 175px;
-
+.wholeNavbar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* position: relative; */
+  /* padding: 10px; */
+  /* bottom: 175px; */
+  top: 0;
+  background-color: rgb(229, 228, 228);
+  width: 100%;
+  padding: 10px 1rem;
+  height: 7vh;
 }
 
+.logo {
+  padding-right: 80vh;
+  color: black;
+  font-size: 2rem;
+}
 
+.navItems {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  list-style: none;
+  padding-right: 10vh;
+}
+
+.navItems li {
+  padding-left: 35px;
+}
