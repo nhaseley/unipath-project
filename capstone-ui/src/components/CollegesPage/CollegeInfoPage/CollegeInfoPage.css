@@ -1,0 +1,14 @@
+.like-img{
+    height: 80px;
+    width: 80px
+}
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #5F3D66;
+    color: white
+}
+.like-img:hover{
+    background: radial-gradient(pink, transparent);
+}

@@ -38,7 +38,9 @@ export default function RegistrationSurveyPage({
         parentPhone: userLoginInfo.parentPhone,
         zipcode: userLoginInfo.zipcode,
         password: userLoginInfo.password,
-        examScores: userLoginInfo.examScores
+        examScores: userLoginInfo.examScores,
+        enrollment: userLoginInfo.enrollment,
+        schoolType: userLoginInfo.schoolType
       });
       console.log("result on frontend: ", result);
       navigate("/login");
