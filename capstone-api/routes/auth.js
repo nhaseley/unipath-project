@@ -1,3 +1,7 @@
+
+/** Routes for authentication. */
+const authenticateJWT = require("../utils/auth"); //importing the authenticateJWT middleware
+
 const express = require("express")
 const Student = require("../models/student")
 const router = express.Router()

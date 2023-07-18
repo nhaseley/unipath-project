@@ -1,15 +1,16 @@
 
 const db = require("../db");
-
 const bcrypt = require("bcrypt");
 const { BadRequestError, UnauthorizedError } = require("../utils/errors");
 const { validateFields } = require("../utils/validate");
-
+const jwt = require("jsonwebtoken"); // importing the jsonwebtoken library
+const crypto = require("crypto");
+const secretKey = crypto.randomBytes(64).toString("hex");
 const { BCRYPT_WORK_FACTOR } = require("../config");
 
-const crypto = require("crypto");
+
+
 // const jwt = require("jsonwebtoken");
-const secretKey = crypto.randomBytes(64).toString("hex");
 // const secretKey = process.env.SECRET_KEY || "secret-dev"
 
 class Student {
@@ -202,19 +203,19 @@ class Student {
   //   return student;
   // }
 
-  // static async generateAuthToken(student) {
-  //   const payload = {
-  //     id: student.id,
-  //     firstName: student.firstName,
-  //     lastName: student.lastName,
-  //     email: student.email,
-  //     location: student.location,
-  //     date: student.date,
-  //   };
+  static async generateAuthToken(student) {
+    const payload = {
+      id: student.id,
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email,
+      location: student.location,
+      date: student.date,
+    };
 
-  //   const token = jwt.sign(payload, secretKey, { expiresIn: "4h" });
-  //   return token;
-  // }
+    const token = jwt.sign(payload, secretKey, { expiresIn: "4h" });
+    return token;
+  }
 
   // static verifyAuthToken(token) {
   //   try {
@@ -225,5 +226,18 @@ class Student {
   //     return null;
   //   }
   // }
+
+  static async verifyAuthToken(token) {
+        
+    try {
+        const decoded = jwt.verify(token, secretKey); // decoding the token
+        return decoded; // returning the decoded token 
+        
+
+    } catch {
+        return null // return null if the token seems to be unvalid or expired
+    }
+    
+} 
 }
 module.exports = Student
