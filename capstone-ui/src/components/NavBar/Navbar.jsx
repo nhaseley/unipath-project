@@ -6,6 +6,7 @@ import { Outlet, Link } from "react-router-dom";
 export default function Navbar({ userLoggedIn, logoutUser }) {
   return (
     <>
+
       <div className="wholeNavbar">
         <h1 className="logo">
           <Link to={"/"}> College Navigator </Link>{" "}
@@ -28,6 +29,7 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
               </button>
             </li>
           </ul>
+
         ) : (
           <ul className="navItems">
             <li>
