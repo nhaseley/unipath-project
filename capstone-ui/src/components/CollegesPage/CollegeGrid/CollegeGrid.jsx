@@ -19,6 +19,13 @@ export default function CollegeGrid({
   // const brownUrl = `https://api.data.gov/ed/collegescorecard/v1/schools?school.name=Brown-University&school.city=Providence&api_key=${apiKey}`;
   //   const createEndpointUrl = (schoolName, schoolCity) =>
   // `${ORIGINAL_COLLEGE_API_URL}&school.name=${schoolName}&school.city=${schoolCity}&api_key=${apiKey}`;
+  useEffect(() => {
+      axios.get("https://api.data.gov/ed/collegescorecard/v1/schools?school.name=Brown-University&school.city=Providence&api_key=AiIF47OdjlHUb8m7mvs5k265lBQgGG9Hd5KXhBrF")
+      .then((response2) => {
+        // console.log("brown: ", response2.data.results)
+      });
+  }, []);
+
 
   const createEndpointUrl = (pageID) =>
     `${ORIGINAL_COLLEGE_API_URL}page=${pageID}&api_key=${apiKey}`;

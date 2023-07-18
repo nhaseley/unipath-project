@@ -9,7 +9,6 @@ import RegistrationSurveyPage from "./RegistrationPage/RegistrationSurveyPage";
 import CollegesPage from "./CollegesPage/CollegesPage";
 import CollegeInfoPage from "./CollegesPage/CollegeInfoPage/CollegeInfoPage";
 import MyCollegesPage from "./MyCollegesPage/MyCollegesPage";
-
 import About from "./About/About";
 
 export default function App() {

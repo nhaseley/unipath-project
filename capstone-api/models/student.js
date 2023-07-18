@@ -214,7 +214,7 @@ class Student {
           WHERE user_id = $1`,
       [student_id]
     );
-    console.log("likes from database: ", result.rows);
+    // console.log("likes from database: ", result.rows);
     return result.rows;
   }
 
