@@ -198,7 +198,7 @@ class Student {
                   `,
       [student_id, college]
     );
-    // console.log(result.rows[0]);
+    console.log(result.rows[0]);
     return result.rows[0];
   }
 
