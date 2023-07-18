@@ -14,15 +14,87 @@ CREATE TABLE students (
 
 CREATE TABLE colleges (
   id         SERIAL PRIMARY KEY,
-  user_id    INTEGER
+  user_id    INTEGER NOT NULL,
+  name       TEXT NOT NULL
 --   college_info    
+);
+
+CREATE TABLE colleges_from_api (
+  id                              SERIAL PRIMARY KEY,
+  zip                             VARCHAR NOT NULL,
+  city                            TEXT NOT NULL,
+  name                            TEXT NOT NULL,
+  state                           TEXT NOT NULL,
+  men_only                        INTEGER,
+  school_url                      TEXT, 
+  women_only                      INTEGER,
+  price_calculator                TEXT,
+
+  -- minority_serving             {}
+  aanipi                          VARCHAR, 
+  annh                            VARCHAR,
+  hispanic                        VARCHAR,
+  historically_black              VARCHAR,
+  predominantly_black             VARCHAR,
+  tribal                          VARCHAR,
+
+  size                            VARCHAR,   
+  avg_family_income               VARCHAR,
+  dependent                       VARCHAR,
+
+  -- faculty_race_ethnicity          {}
+  aian_faculty                    VARCHAR,
+  asian_faculty                   VARCHAR,
+  black_faculty                   VARCHAR,
+  hispanic_faculty                VARCHAR,
+  nhpi_faculty                    VARCHAR,
+  two_or_more_faculty             VARCHAR,
+  unknown_faculty                 VARCHAR,
+  white_faculty                   VARCHAR,
+  non_resident_faculty            VARCHAR,
+  
+  first_generation                VARCHAR,
+  median_family_income            VARCHAR,
+
+  -- race_ethnicity                  {}
+  aian_students                   VARCHAR,
+  asian_students                  VARCHAR,
+  black_students                  VARCHAR,
+  hispanic_students               VARCHAR,
+  nhpi_students                   VARCHAR,
+  two_or_more_students            VARCHAR,
+  unknown_students                VARCHAR,
+  white_students                  VARCHAR,
+  non_resident_students           VARCHAR,
+
+  student_faculty_ratio           VARCHAR,
+  retention_rate                  VARCHAR,
+  firstgen_parents_hs             VARCHAR,
+  firstgen_parents_ms             VARCHAR,
+  firstgen_parents_college        VARCHAR,
+  avg_net_price_private           VARCHAR,
+  avg_net_price_public            VARCHAR,
+
+  -- net_price_by_income_level       {}
+  net_price_0_30000               VARCHAR,
+  net_price_30001_48000           VARCHAR,   
+  net_price_48001_75000           VARCHAR,
+  net_price_75001_111000          VARCHAR,
+  net_price_111001_plus           VARCHAR,
+
+  room_board_offcampus            VARCHAR ,
+  tuition_in_state                VARCHAR,
+  tuition_out_of_state            VARCHAR,
+  earnings_1yr_after_completion   VARCHAR,
+  earnings_4yr_after_completion   VARCHAR
+  -- programs                        {}
 );
 
 CREATE TABLE parents (
   id         SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name  TEXT NOT NULL,
-  phone      INTEGER,
+  phone      INTEGER NOT NULL,
   email      TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
   password   TEXT NOT NULL
 );

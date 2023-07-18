@@ -1,4 +1,3 @@
-
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const { BadRequestError, UnauthorizedError } = require("../utils/errors");
@@ -33,7 +32,7 @@ class Student {
       satScore: student.sat_score,
       actScore: student.act_score,
       enrollment: student.enrollment,
-      schoolType: student.school_type
+      schoolType: student.school_type,
     };
   }
 
@@ -59,6 +58,7 @@ class Student {
     }
 
     const student = await Student.fetchStudentByEmail(creds.email);
+
     if (student) {
       // compare hashed password to a new hash from password
       const isValid = await bcrypt.compare(creds.password, student.password);
@@ -70,9 +70,6 @@ class Student {
     throw new UnauthorizedError("Invalid email or password");
   }
 
-
-
-
   /**
    * Register student with data.
    *
@@ -82,14 +79,13 @@ class Student {
    **/
 
   static async register(creds) {
-    console.log("backend:", creds)
     const requiredCreds = [
       "email",
       "firstName",
       "lastName",
       "parentPhone",
       "zipcode",
-      "password"
+      "password",
     ];
     try {
       validateFields({
@@ -147,9 +143,10 @@ class Student {
         creds.examScores.satScore,
         creds.examScores.actScore,
         creds.enrollment,
-        creds.schoolType
+        creds.schoolType,
       ]
     );
+
     const student = result.rows[0];
     return student;
   }
@@ -177,9 +174,51 @@ class Student {
            WHERE email = $1`,
       [email.toLowerCase()]
     );
-    const student = result.rows[0]
+
+    const student = result.rows[0];
     return student;
   }
+
+  /**
+   * Add a college to the database for a given user
+   *
+   * @param {*} student_id
+   * @return college added to the database
+   */
+  static async likeCollege(student_id, college) {
+    const result = await db.query(
+      `INSERT INTO colleges (
+          user_id,
+          name
+        )
+        VALUES ($1, $2)
+        RETURNING 
+                  id,
+                  user_id,
+                  name
+                  `,
+      [student_id, college]
+    );
+    console.log(result.rows[0]);
+    return result.rows[0];
+  }
+
+  /**
+   * Get the names of all the colleges a given user has liked in the past
+   *
+   * @param {*} student_id
+   * @return colleges in the database for a given user
+   */
+  static async getLikedColleges(student_id) {
+    const result = await db.query(
+      `SELECT * FROM colleges
+          WHERE user_id = $1`,
+      [student_id]
+    );
+    // console.log("likes from database: ", result.rows);
+    return result.rows;
+  }
+
 
   /**
    * Fetch a student in the database by id
@@ -190,7 +229,7 @@ class Student {
   // static async fetchById(student_id) {
   //   const result = await db.query(
   //     `SELECT id,
-  //             email,    
+  //             email,
   //             studentname,
   //             first_name,
   //             last_name
@@ -240,4 +279,4 @@ class Student {
     
 } 
 }
-module.exports = Student
+module.exports = Student;

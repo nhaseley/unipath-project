@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import "./Navbar.css";
 import { Outlet, Link } from "react-router-dom";
 
-export default function Navbar({ userLoggedIn }) {
+export default function Navbar({ userLoggedIn, logoutUser }) {
   return (
     <>
-      {userLoggedIn ? (
-        <div className="wholeNavbar">
-          {" "}
-          <Link to={"/"}>
-            <h1 className="logo"> College Navigator </h1>
-          </Link>
+
+      <div className="wholeNavbar">
+        <h1 className="logo">
+          <Link to={"/"}> College Navigator </Link>{" "}
+        </h1>
+        {userLoggedIn ? (
           <ul className="navItems">
             <li>
               <button>
@@ -22,17 +22,15 @@ export default function Navbar({ userLoggedIn }) {
             <li>
               <button>
                 {" "}
-                <Link to={"/"}> Sign Out </Link>{" "}
+                <Link to={"/"} onClick={logoutUser}>
+                  {" "}
+                  Sign Out{" "}
+                </Link>{" "}
               </button>
             </li>
           </ul>
-        </div>
-      ) : (
-        <div className="wholeNavbar">
-          {" "}
-          <Link to={"/"}>
-            <h1 className="logo"> College Navigator </h1>
-          </Link>
+
+        ) : (
           <ul className="navItems">
             <li>
               <button>
@@ -53,9 +51,8 @@ export default function Navbar({ userLoggedIn }) {
               </button>
             </li>
           </ul>
-        </div>
-      )}
-
+        )}
+      </div>
       <Outlet />
     </>
   );

@@ -48,6 +48,7 @@ export default function LoginPage({
       email: userLoginInfo.email,
       password: userLoginInfo.password,
     });
+    
 
     if (result.data.status) {
       setError(result.data);
@@ -57,9 +58,11 @@ export default function LoginPage({
       // localStorage.setItem("token", token);
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
-      // // used for nutritions page
-console.log("res: ", result.data)
-      setUserLoginInfo({ email: "", password: "" });
+      // // used for colleges page
+      console.log("res: ", result.data)
+      // setUserLoginInfo({ email: "", password: "" });
+      setUserLoginInfo(result.data)
+
       setUserScores({
         satScore: result.data.satScore > 0 ? result.data.satScore : null,
         actScore: result.data.actScore > 0 ? result.data.actScore : null,
