@@ -1,10 +1,10 @@
 const Student = require("../models/student.js")
 const bcrypt = require("bcrypt")
 jest.mock('bcrypt')
-const { UnauthorizedError,BadRequestError } = require("../utils/errors.js")
+const { UnauthorizedError,BadRequestError, UnprocessableEntityError } = require("../utils/errors.js")
 const { validateFields } = require("../utils/validate.js")
 jest.mock('../utils/validate.js')
-// jest.mock('../db.js'); // Mock the database object
+
 
 
 
@@ -43,25 +43,24 @@ describe("fetch by Email", () => {
 
 
 
-// afterAll(()=> {
-//     jest.clearAllMocks()
-// })    
-
 
 
 
 // TEST FOR THE AUTHENTICATE FUNCTION
 
-const expectedPassword = 'test-password';
-
-// Mock bcrypt.hash
-bcrypt.hash.mockImplementation(async (password) => password);
-
-// Mock bcrypt.compare
-bcrypt.compare.mockImplementation(async (plainTextPassword, hashedPassword) => plainTextPassword === expectedPassword);
 
 
 describe("the authenticate/ login", () => {
+
+    const expectedPassword = 'test-password';
+    
+    // Mock bcrypt.hash
+    bcrypt.hash.mockImplementation(async (password) => password);
+    
+    // Mock bcrypt.compare
+    bcrypt.compare.mockImplementation(async (plainTextPassword, hashedPassword) => plainTextPassword === expectedPassword);
+
+
     
     test('authenticate should return the user if email and password exists and match in the db', async () => {
         const result = await Student.authenticate({email:'test-email@test.com', password: 'test-password' })
@@ -98,6 +97,9 @@ describe("the authenticate/ login", () => {
         }    
         
     })    
+
+      
+
 })    
 
 
@@ -212,17 +214,15 @@ describe("the register function test",  () =>  {
         })    
         
         bcrypt.hash.mockImplementation(async (password) => password);
-        
         try {
             await Student.register(invalidCreds)
         } catch (error) {
             expect(error instanceof BadRequestError).toBeTruthy()
-        }                    
-        
+        }                     
     })    
     
     
-    
+
     test('test to throw the BadRequestError if there isnt an email or a password', async function () {
         
         const emptyEmailCreds = {
@@ -240,22 +240,14 @@ describe("the register function test",  () =>  {
             schoolType: 'already-school_type'
         };    
         
-        
-        
         validateFields.mockImplementation(() => {})
-        
-        
-        
+
         try {
             await Student.register(emptyEmailCreds)
         } catch (error) {
             expect(error instanceof BadRequestError).toBeTruthy()
         }    
-        
-
-        
     })    
-    
 })    
 
 
@@ -268,13 +260,11 @@ describe('LikedFunctions', () => {
     const db = require('../db.js')
 
     beforeEach(() => {
-        
         db.query.mockReset();
       });
+
     
-
     test('test for LikeCollege to return user', async function () {
-
 
         db.query.mockResolvedValue({
             rows: [
@@ -285,9 +275,6 @@ describe('LikedFunctions', () => {
               },
             ],
           });
-      
-
-        
 
         const validId = 0
         const validCollege = 'test-college_name'
@@ -300,4 +287,52 @@ describe('LikedFunctions', () => {
         })
         
     })
+})
+
+
+
+describe('getLikedColleges', () => {
+
+    const db = require('../db.js')
+
+    beforeEach(() => {
+        db.query.mockReset();
+      });
+
+      test('test for getLikedColleges to return', async function (){
+
+        db.query.mockResolvedValue({
+            rows:{
+                id: 2,
+                user_id: 1,
+                name: 'test-collegeLiked_name',
+              }
+          });
+
+          const validId = 1;
+          const result = await Student.getLikedColleges(validId)
+          expect(result).toEqual({
+              id: 2,
+              user_id: 1,
+              name: 'test-collegeLiked_name'
+          })
+      })
+
+
+
+      test('should throw an error if the database query fails', async () => {
+        const student_id = 3; // Replace with the desired student_id for testing
+    
+        // Mock the query function to throw an error
+        db.query.mockRejectedValue(new Error('Database query failed'));
+    
+        try {
+          await Student.getLikedColleges(student_id);
+        } catch (error) {
+          // Expect that an error is thrown
+          expect(error).toBeInstanceOf(Error);
+          expect(error.message).toBe('Database query failed');
+        }
+      });
+    
 })

@@ -1,52 +1,46 @@
-const axios = require('axios');
+const axios = require("axios");
 const db = require("./db");
 
 const apiKey = "AiIF47OdjlHUb8m7mvs5k265lBQgGG9Hd5KXhBrF";
 const ORIGINAL_COLLEGE_API_URL =
   "https://api.data.gov/ed/collegescorecard/v1/schools";
 
-  
-
-for (let pageID = 0; pageID < 40; pageID++) {
-
+async function callStoreResultWithDelay() {
+  for (let pageID = 0; pageID < 6543; pageID++) {
     const createEndpointUrl = (pageID) =>
-  `${ORIGINAL_COLLEGE_API_URL}?page=${pageID}&api_key=${apiKey}`;
+      `${ORIGINAL_COLLEGE_API_URL}?page=${pageID}&api_key=${apiKey}`;
 
-  axios.get(createEndpointUrl(pageID))
-        .then((response) => {
-        // console.log("hi")
-        // console.log("response: " response.data.results)
-        for (let result=0; result < 20; result++) {
-            // console.log("--------------------------------------")
-            // console.log(`-----RESULT ${result}------`)
-            // console.log("--------------------------------------")
-            storeResult(response.data.results[result].latest)
-            // console.log(`Stored Result Page ${pageID}`)
-        }
-        
-    });
-  console.log(`Completed page: ${pageID}`)
-  console.log(`Modulo: ${pageID % 6 == 0}`)
-  if (pageID % 6 == 0){
-    console.log("Wait in here.....")
+    if (pageID % 6 === 0) {
+      console.log(`Wait in here before page: ${pageID}`);
+      await new Promise((resolve) => setTimeout(resolve, 60000)); // Wait for 1 minute
+      console.log("Waiting done. Moving to page:", pageID);
+    }
 
-      setTimeout(() => {
-    console.log("Waiting.....")
-  }, 60000)
+    try {
+      const response = await axios.get(createEndpointUrl(pageID));
+      for (let result = 0; result < 20; result++) {
+        storeResult(response.data.results[result].latest);
+        // console.log(`Stored Result Page ${pageID}`)
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+
+    console.log(`Completed page: ${pageID}`);
   }
 
 }
 
-
+callStoreResultWithDelay();
 /**
-   * Get the names of all the colleges a given user has liked in the past
-   *
-   * @param {*} student_id
-   * @return colleges in the database for a given user
-   */
+ * Get the names of all the colleges a given user has liked in the past
+ *
+ * @param {*} student_id
+ * @return colleges in the database for a given user
+ */
 async function storeResult(collegeInfo) {
-    const result = await db.query(
-      `INSERT INTO colleges_from_api (
+  const result = await db.query(
+    `INSERT INTO colleges_from_api (
         zip,
         city,
         name,
@@ -159,69 +153,67 @@ async function storeResult(collegeInfo) {
       earnings_1yr_after_completion,
       earnings_4yr_after_completion
                 `,
-      [
-        collegeInfo.school.zip, 
-        collegeInfo.school.city, 
-        collegeInfo.school.name,
-        collegeInfo.school.state,
-        collegeInfo.school.men_only,
-        collegeInfo.school.school_url,
-        collegeInfo.school.women_only,
-        collegeInfo.school.price_calculator_url,
-        collegeInfo.school.minority_serving.aanipi,
-        collegeInfo.school.minority_serving.annh,
-        collegeInfo.school.minority_serving.hispanic,
-        collegeInfo.school.minority_serving.historically_black,
-        collegeInfo.school.minority_serving.predominantly_black,
-        collegeInfo.school.minority_serving.tribal,
-        collegeInfo.student.size,
-        collegeInfo.student.demographics.avg_family_income,
-        collegeInfo.student.demographics.dependent,
-        collegeInfo.student.demographics.faculty.race_ethnicity.aian,
-        collegeInfo.student.demographics.faculty.race_ethnicity.asian,
-        collegeInfo.student.demographics.faculty.race_ethnicity.black,
-        collegeInfo.student.demographics.faculty.race_ethnicity.hispanic,
-        collegeInfo.student.demographics.faculty.race_ethnicity.nhpi,
-        collegeInfo.student.demographics.faculty.race_ethnicity.two_or_more,
-        collegeInfo.student.demographics.faculty.race_ethnicity.unknown,
-        collegeInfo.student.demographics.faculty.race_ethnicity.white,
-        collegeInfo.student.demographics.faculty.race_ethnicity.nonresident,
-        collegeInfo.student.demographics.first_generation,
-        collegeInfo.student.demographics.median_family_income,
-        collegeInfo.student.demographics.race_ethnicity.aian,
-        collegeInfo.student.demographics.race_ethnicity.asian,
-        collegeInfo.student.demographics.race_ethnicity.black,
-        collegeInfo.student.demographics.race_ethnicity.hispanic,
-        collegeInfo.student.demographics.race_ethnicity.nhpi,
-        collegeInfo.student.demographics.race_ethnicity.two_or_more,
-        collegeInfo.student.demographics.race_ethnicity.unknown,
-        collegeInfo.student.demographics.race_ethnicity.white,
-        collegeInfo.student.demographics.race_ethnicity.non_resident_alien,
-        collegeInfo.student.demographics.student_faculty_ratio,
-        collegeInfo.student.retention_rate.overall.full_time,
-        collegeInfo.student.share_firstgeneration_parents.highschool,
-        collegeInfo.student.share_firstgeneration_parents.middleschool,
-        collegeInfo.student.share_firstgeneration_parents.somecollege,
-        collegeInfo.cost.avg_net_price.private,
-        collegeInfo.cost.avg_net_price.public,
-        collegeInfo.cost.net_price.consumer.by_income_level["0-30000"],
-        collegeInfo.cost.net_price.consumer.by_income_level["30001-48000"],
-        collegeInfo.cost.net_price.consumer.by_income_level["48001-75000"],
-        collegeInfo.cost.net_price.consumer.by_income_level["750001-111000"],
-        collegeInfo.cost.net_price.consumer.by_income_level["111000-plus"],
-        collegeInfo.cost.roomboard.offcampus,
-        collegeInfo.cost.tuition.in_state,
-        collegeInfo.cost.tuition.out_of_state,
-        collegeInfo.earnings["1_yr_after_completion"].median,
-        collegeInfo.earnings["4_yrs_after_completion"].median    
-        // collegeInfo.programs.cip_4_digit
+    [
+      collegeInfo.school.zip,
+      collegeInfo.school.city,
+      collegeInfo.school.name,
+      collegeInfo.school.state,
+      collegeInfo.school.men_only,
+      collegeInfo.school.school_url,
+      collegeInfo.school.women_only,
+      collegeInfo.school.price_calculator_url,
+      collegeInfo.school.minority_serving.aanipi,
+      collegeInfo.school.minority_serving.annh,
+      collegeInfo.school.minority_serving.hispanic,
+      collegeInfo.school.minority_serving.historically_black,
+      collegeInfo.school.minority_serving.predominantly_black,
+      collegeInfo.school.minority_serving.tribal,
+      collegeInfo.student.size,
+      collegeInfo.student.demographics.avg_family_income,
+      collegeInfo.student.demographics.dependent,
+      collegeInfo.student.demographics.faculty.race_ethnicity.aian,
+      collegeInfo.student.demographics.faculty.race_ethnicity.asian,
+      collegeInfo.student.demographics.faculty.race_ethnicity.black,
+      collegeInfo.student.demographics.faculty.race_ethnicity.hispanic,
+      collegeInfo.student.demographics.faculty.race_ethnicity.nhpi,
+      collegeInfo.student.demographics.faculty.race_ethnicity.two_or_more,
+      collegeInfo.student.demographics.faculty.race_ethnicity.unknown,
+      collegeInfo.student.demographics.faculty.race_ethnicity.white,
+      collegeInfo.student.demographics.faculty.race_ethnicity.nonresident,
+      collegeInfo.student.demographics.first_generation,
+      collegeInfo.student.demographics.median_family_income,
+      collegeInfo.student.demographics.race_ethnicity.aian,
+      collegeInfo.student.demographics.race_ethnicity.asian,
+      collegeInfo.student.demographics.race_ethnicity.black,
+      collegeInfo.student.demographics.race_ethnicity.hispanic,
+      collegeInfo.student.demographics.race_ethnicity.nhpi,
+      collegeInfo.student.demographics.race_ethnicity.two_or_more,
+      collegeInfo.student.demographics.race_ethnicity.unknown,
+      collegeInfo.student.demographics.race_ethnicity.white,
+      collegeInfo.student.demographics.race_ethnicity.non_resident_alien,
+      collegeInfo.student.demographics.student_faculty_ratio,
+      collegeInfo.student.retention_rate.overall.full_time,
+      collegeInfo.student.share_firstgeneration_parents.highschool,
+      collegeInfo.student.share_firstgeneration_parents.middleschool,
+      collegeInfo.student.share_firstgeneration_parents.somecollege,
+      collegeInfo.cost.avg_net_price.private,
+      collegeInfo.cost.avg_net_price.public,
+      collegeInfo.cost.net_price.consumer.by_income_level["0-30000"],
+      collegeInfo.cost.net_price.consumer.by_income_level["30001-48000"],
+      collegeInfo.cost.net_price.consumer.by_income_level["48001-75000"],
+      collegeInfo.cost.net_price.consumer.by_income_level["750001-111000"],
+      collegeInfo.cost.net_price.consumer.by_income_level["111000-plus"],
+      collegeInfo.cost.roomboard.offcampus,
+      collegeInfo.cost.tuition.in_state,
+      collegeInfo.cost.tuition.out_of_state,
+      collegeInfo.earnings["1_yr_after_completion"].median,
+      collegeInfo.earnings["4_yrs_after_completion"].median,
+      // collegeInfo.programs.cip_4_digit
     ]
-    );
-    // console.log("likes from database: ", result.rows);
-    return result.rows;
-  }
-
-
+  );
+  // console.log("likes from database: ", result.rows);
+  return result.rows;
+}
 
 // function storeResult(){
 

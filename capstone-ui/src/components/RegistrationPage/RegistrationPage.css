@@ -34,6 +34,16 @@
   justify-content: center;
   height: 25px;
 }
-.log-in-link {
-  color: rgb(18, 121, 156);
+.user-types {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.next-page{
+    text-decoration: none;
+    color: white
+}
+.login-button{
+    text-decoration: none;
+    color: white
 }

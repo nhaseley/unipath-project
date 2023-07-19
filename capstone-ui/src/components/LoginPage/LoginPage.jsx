@@ -15,6 +15,8 @@ export default function LoginPage({
   setError,
   setUserLoggedIn,
   setUserScores,
+  userType,
+  setUserType,
 }) {
   const navigate = useNavigate();
 
@@ -33,6 +35,11 @@ export default function LoginPage({
   //     }
   // }; checkLoggedIn()
   // }, [])
+
+  function handleChangeUserType(event) {
+    setUserType(event.target.value);
+  }
+
   function handleDemo(event) {
     event.preventDefault();
     setUserLoginInfo({
@@ -43,14 +50,14 @@ export default function LoginPage({
 
   async function handleLogin(event) {
     event.preventDefault();
-    console.log("---------------------");
-    console.log(userLoginInfo.email);
-    console.log(userLoginInfo.password);
-    console.log("---------------------");
-    let result = await axios.post("http://localhost:3010/auth/login", {
-      email: userLoginInfo.email,
-      password: userLoginInfo.password,
-    });
+
+    let result = await axios.post(
+      "http://localhost:3010/auth/login" + `/${userType}`,
+      {
+        email: userLoginInfo.email,
+        password: userLoginInfo.password,
+      }
+    );
 
     if (result.data.status) {
       setError(result.data);
@@ -59,9 +66,12 @@ export default function LoginPage({
       // localStorage.setItem("token", token);
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
-      // // used for nutritions page
+
+      // // used for colleges page
       console.log("res: ", result.data);
-      setUserLoginInfo({ email: "", password: "" });
+      // setUserLoginInfo({ email: "", password: "" });
+      setUserLoginInfo(result.data);
+
       setUserScores({
         satScore: result.data.satScore > 0 ? result.data.satScore : null,
         actScore: result.data.actScore > 0 ? result.data.actScore : null,
@@ -74,72 +84,112 @@ export default function LoginPage({
 
   return (
     <div className="login-page">
-      <h2> Welcome Back! </h2>
-      <form className="login-form">
-        <div className="email">
-          <img
-            src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
-            className="email-img"
-          ></img>
-          <input
-            className="email-input"
-            type="email"
-            placeholder="Email"
-            value={userLoginInfo.email}
-            onChange={(e) =>
-              setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
-            }
-          ></input>
-        </div>
-        <div className="password">
-          <img
-            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-            className="password-img"
-          ></img>
-          <input
-            className="password-input"
-            type={passwordDisplayed.password ? "text" : "password"}
-            placeholder="Password"
-            value={userLoginInfo.password}
-            onChange={(e) =>
-              setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
-            }
-          ></input>
-          <button
-            className="password-toggle"
-            name="password-toggle"
-            onClick={
-              passwordDisplayed.password
-                ? handleHidePassword
-                : handleShowPassword
-            }
-          >
-            {passwordDisplayed.password ? "Hide" : "Show"}
-          </button>
-        </div>
-        <button className="demo-button" onClick={handleDemo}>
-          Demo Login
+      <h1 className="user-type-prompt">
+        Which of the following best identifies you?
+      </h1>
+      <div className="user-types">
+        <button
+          className="student"
+          value="student"
+          onClick={handleChangeUserType}
+        >
+          Student
         </button>
 
-        <div className="error">
-          {error.status
-            ? "Registration Failed: " +
-              error.message +
-              ". " +
-              error.status +
-              " Error."
-            : null}
-        </div>
-      </form>
-      <button className="login-submit" onClick={handleLogin}>
-        Submit
-      </button>
-      <div>
-        Don't have an account?
-        <button className="register-button">
-          <Link to={"/register"}> Register </Link>
+        <button
+          className="parent"
+          value="parent"
+          onClick={handleChangeUserType}
+        >
+          Parent of Student
+        </button>
+
+        <button
+          className="college-admission-officer"
+          value="college-admission-officer"
+          onClick={handleChangeUserType}
+        >
+          College Admission Officer
+        </button>
+        <button
+          className="college-student-faculty-alum"
+          value="college-student-faculty-alumn"
+          onClick={handleChangeUserType}
+        >
+          College student/faculty/alum
         </button>
       </div>
+
+      {userType ? (
+        <>
+          <h2> Welcome Back! </h2>
+          <form className="login-form">
+            <div className="email">
+              <img
+                src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
+                className="email-img"
+              ></img>
+              <input
+                className="email-input"
+                type="email"
+                placeholder="Email"
+                value={userLoginInfo.email}
+                onChange={(e) =>
+                  setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
+                }
+              ></input>
+            </div>
+            <div className="password">
+              <img
+                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
+                className="password-img"
+              ></img>
+              <input
+                className="password-input"
+                type={passwordDisplayed.password ? "text" : "password"}
+                placeholder="Password"
+                value={userLoginInfo.password}
+                onChange={(e) =>
+                  setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
+                }
+              ></input>
+              <button
+                className="password-toggle"
+                name="password-toggle"
+                onClick={
+                  passwordDisplayed.password
+                    ? handleHidePassword
+                    : handleShowPassword
+                }
+              >
+                {passwordDisplayed.password ? "Hide" : "Show"}
+              </button>
+            </div>
+            <button className="demo-button" onClick={handleDemo}>
+              Demo Login
+            </button>
+
+            <div className="error">
+              {error.status
+                ? "Registration Failed: " +
+                  error.message +
+                  ". " +
+                  error.status +
+                  " Error."
+                : null}
+            </div>
+          </form>
+          <button className="login-submit" onClick={handleLogin}>
+            Submit
+          </button>
+          <div>
+            Don't have an account?
+            <button className="register-button">
+              <Link to={"/register"}> Register </Link>
+            </button>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 }

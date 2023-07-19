@@ -91,12 +91,12 @@ CREATE TABLE colleges_from_api (
 );
 
 CREATE TABLE parents (
-  id         SERIAL PRIMARY KEY,
-  first_name TEXT NOT NULL,
-  last_name  TEXT NOT NULL,
-  phone      INTEGER NOT NULL,
-  email      TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
-  password   TEXT NOT NULL
+  id            SERIAL PRIMARY KEY,
+  first_name    TEXT NOT NULL,
+  last_name     TEXT NOT NULL,
+  parent_phone  VARCHAR(10),
+  email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
+  password      TEXT NOT NULL
 );
 CREATE TABLE college_students_and_alumni (
   id         SERIAL PRIMARY KEY,

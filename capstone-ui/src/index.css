@@ -16,8 +16,8 @@ background-color: white;
 
 a {
   font-weight: 500;
-  color: black;
-  text-decoration: inherit;
+  color: white;
+  text-decoration: none;
 }
 a:hover {
   color: grey;
@@ -30,6 +30,7 @@ body {
   /* causin a lot of split  */
   min-width: 320px;
   min-height: 100vh;
+  background: #CAD2C5;
 }
 
 h1 {
@@ -44,12 +45,15 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  /* background-color: #1a1a1a; */
+
+  background-color: #354F52;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: white;
+  border: 2px solid #84A98C;
 }
 button:hover {
-  border-color: grey;
+  border-color: white;
 }
 button:focus,
 button:focus-visible {
@@ -58,13 +62,13 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #354F52;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #84A98C;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #354F52;
   }
 }
