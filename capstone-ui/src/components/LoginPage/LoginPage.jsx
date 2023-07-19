@@ -43,26 +43,25 @@ export default function LoginPage({
 
   async function handleLogin(event) {
     event.preventDefault();
-
+    console.log("---------------------");
+    console.log(userLoginInfo.email);
+    console.log(userLoginInfo.password);
+    console.log("---------------------");
     let result = await axios.post("http://localhost:3010/auth/login", {
       email: userLoginInfo.email,
       password: userLoginInfo.password,
     });
-    
 
     if (result.data.status) {
       setError(result.data);
-
     } else {
       // const token = result.data.token;
       // localStorage.setItem("token", token);
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
-      // // used for colleges page
-      console.log("res: ", result.data)
-      // setUserLoginInfo({ email: "", password: "" });
-      setUserLoginInfo(result.data)
-
+      // // used for nutritions page
+      console.log("res: ", result.data);
+      setUserLoginInfo({ email: "", password: "" });
       setUserScores({
         satScore: result.data.satScore > 0 ? result.data.satScore : null,
         actScore: result.data.actScore > 0 ? result.data.actScore : null,

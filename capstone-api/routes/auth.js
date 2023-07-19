@@ -10,8 +10,10 @@ router.post("/login", async function (req, res, next) {
     try {
       const user = await Student.authenticate(req.body)
       if (user){
+        console.log(req.body)
+        const token = await Student.generateAuthToken(user)
+        console.log("auth token-----",token)
         return res.status(200).json( user )
-        // const token = await User.generateAuthToken(user)
         // return res.status(200).json({ user, token})
       }
   
@@ -24,7 +26,7 @@ router.post("/login", async function (req, res, next) {
 router.post("/register", async function (req, res, next) {  
   try {
     const student = await Student.register(req.body)
-  //   const token = await User.generateAuthToken(user)
+
   return res.status(201).json( student )
   // return res.status(201).json({ user, token})
 } catch (err) {
