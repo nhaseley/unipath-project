@@ -47,15 +47,15 @@ class Student {
   static async authenticate(creds) {
     // const { email, password } = creds
     const requiredCreds = ["email", "password"];
-    try {
+    
+
       validateFields({
         required: requiredCreds,
         obj: creds,
         location: "student authentication",
       });
-    } catch (err) {
-      throw err;
-    }
+    
+    
 
     const student = await Student.fetchStudentByEmail(creds.email);
 
@@ -87,15 +87,14 @@ class Student {
       "zipcode",
       "password",
     ];
-    try {
+    
       validateFields({
         required: requiredCreds,
         obj: creds,
         location: "student registration",
       });
-    } catch (err) {
-      throw err;
-    }
+    
+  
     if (!creds.email || !creds.password) {
       throw new BadRequestError(`Fix credentials: ${creds}`);
     }
@@ -199,7 +198,7 @@ class Student {
                   `,
       [student_id, college]
     );
-    console.log(result.rows[0]);
+    // console.log(result.rows[0]);
     return result.rows[0];
   }
 
@@ -252,7 +251,7 @@ class Student {
       date: student.date,
     };
 
-    const token = jwt.sign(payload, secretKey, { expiresIn: "4h" });
+    const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
     return token;
   }
 
