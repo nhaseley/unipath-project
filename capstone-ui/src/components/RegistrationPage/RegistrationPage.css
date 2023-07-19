@@ -1,38 +1,38 @@
-.registration-page{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.registration-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .first-name {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 25px;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  height: 25px;
 }
 .last-name {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 25px;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  height: 25px;
 }
 .confirm-password {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 25px;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  height: 25px;
 }
 .parent-phone {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 25px;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  height: 25px;
 }
 .zipcode {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 25px;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  height: 25px;
 }
 .user-types {
     display: flex;
