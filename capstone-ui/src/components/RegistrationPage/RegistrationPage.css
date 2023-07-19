@@ -34,3 +34,16 @@
     justify-content: center;
     height: 25px;
 }
+.user-types {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.next-page{
+    text-decoration: none;
+    color: white
+}
+.login-button{
+    text-decoration: none;
+    color: white
+}

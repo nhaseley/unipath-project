@@ -39,6 +39,7 @@ export default function App() {
   });
   const [collegeList, setCollegeList] = useState([]);
   const [selectedCollege, setSelectedCollege] = useState({})
+  const [userType, setUserType] = useState()
 
   //---------------- Functions ---------------------//
 
@@ -81,6 +82,7 @@ export default function App() {
       enrollment: 0,
       schoolType: "",
     });
+    setUserType()
   }
 
   //---------------- Return Object ---------------------//
@@ -92,7 +94,7 @@ export default function App() {
           <Route
             path=""
             element={
-              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
+              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser}/>
             }
           >
             <Route path="/" element={<HomePage />}></Route>
@@ -112,7 +114,9 @@ export default function App() {
                   setUserLoggedIn={setUserLoggedIn}
                   setUserScores={setUserScores}
                   logoutUser={logoutUser}
-                ></LoginPage>
+                  userType={userType}
+                  setUserType={setUserType}
+                  ></LoginPage>
               }
             />
 
@@ -127,6 +131,8 @@ export default function App() {
                   passwordDisplayed={passwordDisplayed}
                   error={error}
                   setError={setError}
+                  userType={userType}
+                  setUserType={setUserType}
                 ></RegistrationPage>
               }
             />
@@ -138,6 +144,7 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
+                  userType={userType}
                 ></RegistrationSurveyPage>
               }
             ></Route>

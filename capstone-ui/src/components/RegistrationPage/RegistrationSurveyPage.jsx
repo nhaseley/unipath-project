@@ -8,7 +8,8 @@ import Select from "react-select";
 export default function RegistrationSurveyPage({
   userLoginInfo,
   setError,
-  setUserLoginInfo
+  setUserLoginInfo,
+  userType
 }) {
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ export default function RegistrationSurveyPage({
         schoolType: userLoginInfo.schoolType
       });
       console.log("result on frontend: ", result);
-      navigate("/login");
+      navigate("/login" + `/${userType}`);
 
       if (result.data.status) {
         setError(result.data);
