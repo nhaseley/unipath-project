@@ -25,11 +25,7 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       });
     }
   }, []);
-  // let sat =
-  //   Object.values(college?.admissions.sat_scores.midpoint).reduce(
-  //     (total, score) => total + score,
-  //     0
-  //   )
+
   function findMinorityServingValue(data) {
     for (const field in data) {
       if (data[field] === 1) {
@@ -71,7 +67,7 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       <div className="undergrad-enrollment">
         Undergraduate Enrollment: {college?.student.size}
       </div>
-      {/* <div className="student-faculty-ratio"> Student/Faculty Ratio: {} </div> */}
+      <div className="student-faculty-ratio"> Student/Faculty Ratio: {college?.student.demographics.student_faculty_ratio} </div>
       <div className="family-income">
         <div className="avg-family-income">
           Avg Family Income: {college?.student.demographics.avg_family_income}

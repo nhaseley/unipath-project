@@ -29,6 +29,11 @@ CREATE TABLE colleges_from_api (
   school_url                      TEXT, 
   women_only                      INTEGER,
   price_calculator                TEXT,
+  sat_score_critical_reading      VARCHAR,
+  sat_score_writing               VARCHAR,
+  sat_score_math                  VARCHAR,
+  act_score                       VARCHAR,
+  admission_rate                  VARCHAR,
 
   -- minority_serving             {}
   aanipi                          VARCHAR, 

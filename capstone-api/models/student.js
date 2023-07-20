@@ -7,8 +7,6 @@ const crypto = require("crypto");
 const secretKey = crypto.randomBytes(64).toString("hex");
 const { BCRYPT_WORK_FACTOR } = require("../config");
 
-
-
 // const jwt = require("jsonwebtoken");
 // const secretKey = process.env.SECRET_KEY || "secret-dev"
 
@@ -47,15 +45,12 @@ class Student {
   static async authenticate(creds) {
     // const { email, password } = creds
     const requiredCreds = ["email", "password"];
-    
 
-      validateFields({
-        required: requiredCreds,
-        obj: creds,
-        location: "student authentication",
-      });
-    
-    
+    validateFields({
+      required: requiredCreds,
+      obj: creds,
+      location: "student authentication",
+    });
 
     const student = await Student.fetchStudentByEmail(creds.email);
 
@@ -87,14 +82,13 @@ class Student {
       "zipcode",
       "password",
     ];
-    
-      validateFields({
-        required: requiredCreds,
-        obj: creds,
-        location: "student registration",
-      });
-    
-  
+
+    validateFields({
+      required: requiredCreds,
+      obj: creds,
+      location: "student registration",
+    });
+
     if (!creds.email || !creds.password) {
       throw new BadRequestError(`Fix credentials: ${creds}`);
     }
@@ -218,7 +212,6 @@ class Student {
     return result.rows;
   }
 
-
   /**
    * Fetch a student in the database by id
    *
@@ -255,27 +248,44 @@ class Student {
     return token;
   }
 
-  // static verifyAuthToken(token) {
-  //   try {
-  //     //TODO: use verify and figure out why we can't verify currently
-  //     const decoded = jwt.decode(token, secretKey);
-  //     return decoded;
-  //   } catch (err) {
-  //     return null;
-  //   }
-  // }
-
   static async verifyAuthToken(token) {
-        
     try {
-        const decoded = jwt.verify(token, secretKey); // decoding the token
-        return decoded; // returning the decoded token 
-        
-
+      const decoded = jwt.verify(token, secretKey); // decoding the token
+      return decoded; // returning the decoded token
     } catch {
-        return null // return null if the token seems to be unvalid or expired
+      return null; // return null if the token seems to be unvalid or expired
     }
-    
-} 
+  }
+
+  /**
+   * Get the personalized college feed for a given user using their exam scores,
+   * enrollment size, and school type
+   *
+   * @param {*} student_id
+   * @return colleges in the database for a given user
+   */
+  static async getCollegeFeed(sat_score, act_score) {
+    // console.log(typeof sat_score);
+    // console.log(typeof act_score)
+
+    if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
+      throw new BadRequestError("No standardized test scores for this user.");
+    }
+    const result = await db.query(
+      `SELECT * FROM colleges_from_api
+        WHERE 
+        ($1 IS NULL OR 
+          ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) + 
+             CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) + 
+             CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 200)
+        AND
+        ($2 IS NULL OR 
+          ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2::NUMERIC) <= 4)
+  `,
+      [sat_score, act_score]
+    );
+    console.log("getCollegeFeed from database: ", result.rows.length);
+    return result.rows;
+  }
 }
 module.exports = Student;

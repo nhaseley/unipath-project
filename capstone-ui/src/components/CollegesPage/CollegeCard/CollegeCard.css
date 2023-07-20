@@ -9,4 +9,8 @@
     display: flex;
     flex-direction: column;
     border: solid 1px #e4e4e4;
+    background: #354F52;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }

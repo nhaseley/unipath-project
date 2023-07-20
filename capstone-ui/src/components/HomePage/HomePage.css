@@ -42,8 +42,8 @@ body {
 /* Hero section styles */
 
 .hero-section {
-  background-color: darkcyan; /* Dark Cyan */
-  color: #fff; /* White text */
+  background-color: #CAD2C5; /* Dark Cyan */
+  color: black; /* White text */
   padding: 100px 0;
   text-align: center;
   border-radius: 10px; /* Rounded corners */
@@ -52,26 +52,27 @@ body {
 
 .hero-heading {
   font-size: 48px;
-  color: #fff;
+  color: #354F52;
   margin-bottom: 20px;
   animation: fadeInRight 1s ease-out;
 }
 
 .hero-subheading {
   font-size: 24px;
-  color: #f0f0f0; /* Light gray text */
+  color: #354F52;
   margin-bottom: 40px;
   animation: fadeInRight 1.5s ease-out;
 }
 
 .get-started-button {
-  background-color: #1f4ca5; /* Darker blue */
-  /* width: 100px; */
-  /* height: 40px; */
-  border-color: #1f4ca5;
+  /* background-color: #1f4ca5; Darker green */
+  width: 140px;
+  height: 80px;
+  /* border-color: #1f4ca5; */
   color: #fff;
   border-radius: 5px; /* Rounded corners */
   animation: fadeInRight 2s ease-out;
+  font-size: 18px;
 }
 
 

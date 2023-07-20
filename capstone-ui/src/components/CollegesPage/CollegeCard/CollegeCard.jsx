@@ -15,7 +15,7 @@ export default function CollegeCard({ college }) {
 
   return (
     <div className="college-card">
-      <Link to={"/info/" + college.school.name}>
+      <Link to={"/info/" + college.school.name} className="college-link">
     
       {satScore || college.admissions.act_scores.midpoint.cumulative? (
         <>
