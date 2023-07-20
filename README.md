@@ -12,15 +12,17 @@ Mentors Names: Kristin Foss, Qin He, Pradeep Mantha
 
 Project Code Repository Links
 
-* [Frontend Repo Link]()
-* [Backend Repo Link]()
+- [Frontend Repo Link]()
+- [Backend Repo Link]()
 
 ## Project Overview
 
-Add a quick summary of what your project theme and objectives are. 
+Add a quick summary of what your project theme and objectives are.
 
 Deployment Website: **Add Link to Deployed Project**
 
 ### Open-source libraries used
 
 - Add any links to open-source libraries used in your project.
+
+run npm install jsonwebtoken as of 7/19/23

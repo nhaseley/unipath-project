@@ -50,6 +50,7 @@ export default function LoginPage({
 
   async function handleLogin(event) {
     event.preventDefault();
+
     let result = await axios.post(
       "http://localhost:3010/auth/login" + `/${userType}`,
       {
@@ -65,6 +66,7 @@ export default function LoginPage({
       // localStorage.setItem("token", token);
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
+
       // // used for colleges page
       console.log("res: ", result.data);
       // setUserLoginInfo({ email: "", password: "" });
