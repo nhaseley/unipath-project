@@ -3,6 +3,7 @@ import "./RegistrationPage.css";
 import jwtDecode from "jwt-decode";
 import StudentRegistrationForm from "./StudentRegistrationForm";
 import ParentRegistrationForm from "./ParentRegistrationForm";
+import AlumnRegistrationPage from "./AlumnRegistrationPage";
 
 export default function RegistrationPage({
   userLoginInfo,
@@ -18,7 +19,7 @@ export default function RegistrationPage({
   function handleChangeUserType(event) {
     setUserType(event.target.value);
   }
-
+console.log("password", passwordDisplayed)
   return (
     <div className="registration-page">
       <h1 className="user-type-prompt">
@@ -49,7 +50,7 @@ export default function RegistrationPage({
           College Admission Officer
         </button>
         <button
-          className="college-student-faculty-alum"
+          className="college-student-faculty-alumn"
           value="college-student-faculty-alumn"
           onClick={handleChangeUserType}
         >
@@ -76,6 +77,16 @@ export default function RegistrationPage({
           error={error}
           setError={setError}
         ></ParentRegistrationForm>
+      ) : userType == "college-student-faculty-alumn" ? (
+        <AlumnRegistrationPage
+        userLoginInfo={userLoginInfo}
+        setUserLoginInfo={setUserLoginInfo}
+        handleShowPassword={handleShowPassword}
+        handleHidePassword={handleHidePassword}
+        passwordDisplayed={passwordDisplayed}
+        error={error}
+        setError={setError}
+        ></AlumnRegistrationPage>
       ) : null}
     </div>
   );
