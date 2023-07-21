@@ -273,7 +273,7 @@ class Student {
         
 
     } catch {
-        return null // return null if the token seems to be unvalid or expired
+        return null // return null if the token seems to be invalid or expired
     }
     
 } 

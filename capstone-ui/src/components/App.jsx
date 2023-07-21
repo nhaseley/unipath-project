@@ -10,6 +10,8 @@ import CollegesPage from "./CollegesPage/CollegesPage";
 import CollegeInfoPage from "./CollegesPage/CollegeInfoPage/CollegeInfoPage";
 import MyCollegesPage from "./MyCollegesPage/MyCollegesPage";
 import About from "./About/About";
+import axios from "axios";
+
 
 export default function App() {
   //------------------ States ---------------------//
@@ -38,8 +40,40 @@ export default function App() {
     actScore: 0,
   });
   const [collegeList, setCollegeList] = useState([]);
-  const [selectedCollege, setSelectedCollege] = useState({})
-  const [userType, setUserType] = useState()
+  const [selectedCollege, setSelectedCollege] = useState({});
+  const [userType, setUserType] = useState();
+
+  const [decodedToken, setDecodedToken] = useState();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!decodedToken) {
+      axios
+        .post("http://localhost:3010/auth/decodedtoken", {
+          token: token,
+        })
+        .then((response) => {
+          console.log(response.data);
+          setDecodedToken(response.data.decodedToken?.exp);
+        })
+        .catch((error) => {
+          console.error("Error retrieving decoded token:", error);
+        });
+    }
+  }, [decodedToken]);
+
+  useEffect(() => {
+    console.log("decodedToken:", decodedToken);
+    if (decodedToken) {
+      setUserLoggedIn(true); // Setting appState to true, making sure the 
+      const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
+      if (decodedToken < currentTime) {
+        localStorage.removeItem("token"); // Removing the token from local storage
+        // Redirecting to the homepage?
+      }
+    }
+  }, [decodedToken, setUserLoggedIn]);
+
 
   //---------------- Functions ---------------------//
 
@@ -82,7 +116,7 @@ export default function App() {
       enrollment: 0,
       schoolType: "",
     });
-    setUserType()
+    setUserType();
   }
 
   //---------------- Return Object ---------------------//
@@ -94,7 +128,7 @@ export default function App() {
           <Route
             path=""
             element={
-              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser}/>
+              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
             }
           >
             <Route path="/" element={<HomePage />}></Route>
@@ -116,7 +150,7 @@ export default function App() {
                   logoutUser={logoutUser}
                   userType={userType}
                   setUserType={setUserType}
-                  ></LoginPage>
+                ></LoginPage>
               }
             />
 
@@ -156,18 +190,30 @@ export default function App() {
                   userScores={userScores}
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
-                
                 ></CollegesPage>
               }
             ></Route>
             <Route
-            path="/info/:id"
-            element={<CollegeInfoPage userLoginInfo={userLoginInfo}
-            setSelectedCollege={setSelectedCollege}> </CollegeInfoPage>}
+              path="/info/:id"
+              element={
+                <CollegeInfoPage
+                  userLoginInfo={userLoginInfo}
+                  setSelectedCollege={setSelectedCollege}
+                >
+                  {" "}
+                </CollegeInfoPage>
+              }
             ></Route>
             <Route
-            path="/like"
-            element={<MyCollegesPage userLoginInfo={userLoginInfo} selectedCollege={selectedCollege}> </MyCollegesPage>}
+              path="/like"
+              element={
+                <MyCollegesPage
+                  userLoginInfo={userLoginInfo}
+                  selectedCollege={selectedCollege}
+                >
+                  {" "}
+                </MyCollegesPage>
+              }
             ></Route>
             <Route path="/about" element={<About></About>}></Route>
           </Route>
