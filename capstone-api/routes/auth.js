@@ -25,12 +25,17 @@ router.post("/login/student", async function (req, res, next) {
     try {
       const student = await Student.authenticate(req.body)
       if (student){
-        const token = await Student.generateAuthToken(student)
-        console.log("auth token-----",token)
-        return res.status(200).json( student )
-        // return res.status(200).json({ user, token})
-      }
-  
+        console.log(req.body)
+        const tokenPromise = Student.generateAuthToken(student)
+        console.log("auth token-----",tokenPromise)
+        tokenPromise?.then(token => {
+          // console.log("this is my token", token); // Log the resolved token
+          res.cookie("token", token); // Set the token in a cookie
+          res.status(200).json({ student, token }); // Send the response to the client
+
+      })
+    }
+
     } catch (err) {
       res.send(err)
       next(err)
@@ -64,5 +69,14 @@ router.post("/login/student", async function (req, res, next) {
       next(err)
     }
   })
+
+  router.post("/decodedtoken", async (req, res, next) => {
+    const token = req.body.token; // Getting the token from the request body
+    const decodedToken = await Student.verifyAuthToken(token); // Decoding the token
+    console.log("decodedToken", decodedToken)
+  
+  
+    return res.status(200).json({ decodedToken }); // Returning the decoded token
+  });
 
   module.exports = router
