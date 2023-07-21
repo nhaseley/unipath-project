@@ -17,12 +17,13 @@ router.post("/like", async function (req, res, next){
   
   router.post("/colleges", async function (req, res, next){
     try {
+    
       const collegesToDisplay = await Student.getCollegeFeed(req.body.satScore, req.body.actScore)
       return res.status(201).json(collegesToDisplay)
 
     } catch (err){
-      res.send(err)
-      next(err)
+      // res.send(err)
+      // next(err)
     }
   })
 

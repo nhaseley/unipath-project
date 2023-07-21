@@ -2,11 +2,21 @@ import * as React from "react";
 import "./FilterSidebar.css";
 import { useEffect, useState } from "react";
 
-export default function FilterSidebar({userLoginInfo, collegeList, setCollegeList}) {
+export default function FilterSidebar({ userLoginInfo }) {
+  const [price, setPrice] = useState(30000);
   const [sat, setSAT] = useState(userLoginInfo.satScore);
   const [act, setACT] = useState(userLoginInfo.actScore);
-  const [price, setPrice] = useState(30000);  
   const [enrollment, setEnrollment] = useState(userLoginInfo.enrollment);
+  
+  useEffect(() => {
+    setSAT(userLoginInfo.satScore);
+    setACT(userLoginInfo.actScore);
+    setEnrollment(userLoginInfo.enrollment);
+  }, [userLoginInfo]);
+
+  function changePriceFilter(event) {
+    setPrice(event.target.value);
+  }
   function changeSATFilter(event) {
     setSAT(event.target.value);
   }
@@ -14,58 +24,57 @@ export default function FilterSidebar({userLoginInfo, collegeList, setCollegeLis
   function changeACTFilter(event) {
     setACT(event.target.value);
   }
-  function changePriceFilter(event) {
-    setPrice(event.target.value);
-  }
-
   function changeEnrollmentFilter(event) {
     setEnrollment(event.target.value);
   }
+
   return (
     <div className="filter-sidebar">
       <div className="filters">
-      <div className="price-filter">Price: ${price.toLocaleString()}</div>
-      <input
-        className="price-slider"
-        type="range"
-        min={0}
-        max={100000}
-        step={1}
-        value={price.toLocaleString()}
-        // TODO: fix - not appearing as toLocaleString on slide
-        onChange={changePriceFilter}
-      ></input>
-      <div className="act-score">ACT: {act}</div>
-      <input
-        className="act-slider"
-        type="range"
-        min={0}
-        max={36}
-        step={1}
-        value={act}
-        onChange={changeACTFilter}
-      ></input>
-      <div className="sat-score">SAT: {sat}</div>
-      <input
-        className="sat-slider"
-        type="range"
-        min={0}
-        max={2400}
-        step={10}
-        value={sat}
-        onChange={changeSATFilter}
-      ></input>
-      <div className="enrollment">Enrollment Size: {enrollment.toLocaleString()}</div>
-      <input
-        className="enrollment-slider"
-        type="range"
-        min={0}
-        max={100000}
-        step={1000}
-        value={enrollment}
-        onChange={changeEnrollmentFilter}
-      ></input>
-    </div>
+        <div className="price-filter">Price: ${price.toLocaleString()}</div>
+        <input
+          className="price-slider"
+          type="range"
+          min={0}
+          max={100000}
+          step={1}
+          value={price.toLocaleString()}
+          // TODO: fix - not appearing as toLocaleString on slide
+          onChange={changePriceFilter}
+        ></input>
+        <div className="act-score">ACT: {act}</div>
+        <input
+          className="act-slider"
+          type="range"
+          min={0}
+          max={36}
+          step={1}
+          value={act}
+          onChange={changeACTFilter}
+        ></input>
+        <div className="sat-score">SAT: {sat}</div>
+        <input
+          className="sat-slider"
+          type="range"
+          min={0}
+          max={2400}
+          step={10}
+          value={sat}
+          onChange={changeSATFilter}
+        ></input>
+        <div className="enrollment">
+          Enrollment Size: {enrollment.toLocaleString()}
+        </div>
+        <input
+          className="enrollment-slider"
+          type="range"
+          min={0}
+          max={100000}
+          step={1000}
+          value={enrollment}
+          onChange={changeEnrollmentFilter}
+        ></input>
+      </div>
     </div>
   );
 }

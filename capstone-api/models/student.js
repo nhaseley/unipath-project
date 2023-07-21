@@ -251,6 +251,7 @@ class Student {
   static async verifyAuthToken(token) {
     try {
       const decoded = jwt.verify(token, secretKey); // decoding the token
+
       return decoded; // returning the decoded token
     } catch {
         return null // return null if the token seems to be invalid or expired
@@ -290,7 +291,7 @@ class Student {
   // }
   static async getCollegeFeed(sat_score, act_score) {
     if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
-      throw new BadRequestError("No standardized test scores for this user.");
+      // throw new BadRequestError("No standardized test scores for this user.");
     }
     const result = await db.query(
       `SELECT * FROM colleges_from_api

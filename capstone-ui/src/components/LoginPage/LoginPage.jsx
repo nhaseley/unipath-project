@@ -59,16 +59,11 @@ export default function LoginPage({
     );
 
     if (result?.data) {
-      console.log("Sign in Successful!");
-
       localStorage.setItem("token", result.data.token);
-      localStorage.setItem("firstName", result.data.student.firstName);
-
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
 
-      console.log("user data on login: ", result.data);
-      setUserLoginInfo(result.data);
+      setUserLoginInfo(result.data.student);
 
   
       setError({});
@@ -130,7 +125,7 @@ export default function LoginPage({
                 className="email-input"
                 type="email"
                 placeholder="Email"
-                value={userLoginInfo.email}
+                value={userLoginInfo?.email}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
                 }
@@ -145,7 +140,7 @@ export default function LoginPage({
                 className="password-input"
                 type={passwordDisplayed.password ? "text" : "password"}
                 placeholder="Password"
-                value={userLoginInfo.password}
+                value={userLoginInfo?.password}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
                 }

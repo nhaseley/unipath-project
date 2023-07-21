@@ -12,7 +12,7 @@ export default function CollegeCard({ college }) {
     
       {satScore || college.act_score? (
         <>
-          <div>{college.name}</div>
+          <h3>{college.name}</h3>
           <div className="scores">
             <div className="median-sat"></div>
             Median SAT Score:

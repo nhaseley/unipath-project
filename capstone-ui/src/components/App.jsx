@@ -14,7 +14,6 @@ import axios from "axios";
 import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 
 export default function App() {
-  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -42,6 +41,7 @@ export default function App() {
   const [userType, setUserType] = useState();
 
   const [decodedToken, setDecodedToken] = useState();
+  console.log("user info: ", userLoginInfo);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -51,8 +51,21 @@ export default function App() {
           token: token,
         })
         .then((response) => {
-          console.log(response.data);
-          setDecodedToken(response.data.decodedToken?.exp);
+          console.log("user in front: ", response.data.user);
+            setUserLoginInfo({
+              email: response.data.user.email,
+              firstName: response.data.user.first_name,
+              lastName: response.data.user.last_name,
+              parentPhone: response.data.user.parent_phone,
+              zipcode: response.data.user.zipcode,
+              password: response.data.user.password,
+              satScore: response.data.user.sat_score,
+              actScore: response.data.user.act_score,
+              enrollment: response.data.user.enrollment,
+              schoolType: response.data.user.school_type,
+            });
+
+          setDecodedToken(response.data.decodedToken);
         })
         .catch((error) => {
           console.error("Error retrieving decoded token:", error);
@@ -61,17 +74,15 @@ export default function App() {
   }, [decodedToken]);
 
   useEffect(() => {
-    console.log("decodedToken:", decodedToken);
     if (decodedToken) {
-      setUserLoggedIn(true); // Setting appState to true, making sure the 
+      setUserLoggedIn(true); // Setting appState to true, making sure the user is logged in
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
-      if (decodedToken < currentTime) {
+      if (decodedToken.exp < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
         // Redirecting to the homepage?
       }
     }
   }, [decodedToken, setUserLoggedIn]);
-
 
   //---------------- Functions ---------------------//
 
@@ -99,7 +110,7 @@ export default function App() {
   }
 
   function logoutUser() {
-    // localStorage.removeItem("token");
+    localStorage.removeItem("token");
     setUserLoggedIn(false);
     // setUserData({});
     setUserLoginInfo({
@@ -179,7 +190,7 @@ export default function App() {
                 ></RegistrationSurveyPage>
               }
             ></Route>
-            
+
             <Route
               path="/registration-survey/alumn"
               element={
@@ -192,7 +203,6 @@ export default function App() {
               }
             ></Route>
 
-
             <Route
               path="/feed"
               element={
@@ -200,6 +210,7 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
+                  userLoggedIn={userLoggedIn}
                 ></CollegesPage>
               }
             ></Route>
