@@ -49,6 +49,11 @@ async function storeResult(collegeInfo) {
         school_url,
         women_only,
         price_calculator,
+        sat_score_critical_reading,
+        sat_score_writing,
+        sat_score_math,
+        act_score,
+        admission_rate,
         aanipi,
         annh,
         hispanic,
@@ -96,7 +101,7 @@ async function storeResult(collegeInfo) {
         earnings_1yr_after_completion,
         earnings_4yr_after_completion
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59)
       RETURNING 
       zip,
       city,
@@ -106,6 +111,11 @@ async function storeResult(collegeInfo) {
       school_url,
       women_only,
       price_calculator,
+      sat_score_critical_reading,
+      sat_score_writing,
+      sat_score_math,
+      act_score,
+      admission_rate,
       aanipi,
       annh,
       hispanic,
@@ -162,6 +172,11 @@ async function storeResult(collegeInfo) {
       collegeInfo.school.school_url,
       collegeInfo.school.women_only,
       collegeInfo.school.price_calculator_url,
+      collegeInfo.admissions.sat_scores.midpoint.critical_reading,
+      collegeInfo.admissions.sat_scores.midpoint.writing,
+      collegeInfo.admissions.sat_scores.midpoint.math,
+      collegeInfo.admissions.act_scores.midpoint.cumulative,
+      collegeInfo.admissions.admission_rate.overall,
       collegeInfo.school.minority_serving.aanipi,
       collegeInfo.school.minority_serving.annh,
       collegeInfo.school.minority_serving.hispanic,
@@ -211,10 +226,5 @@ async function storeResult(collegeInfo) {
       // collegeInfo.programs.cip_4_digit
     ]
   );
-  // console.log("likes from database: ", result.rows);
   return result.rows;
 }
-
-// function storeResult(){
-
-// }

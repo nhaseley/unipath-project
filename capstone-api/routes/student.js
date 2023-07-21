@@ -4,7 +4,6 @@ const router = express.Router()
 
 router.post("/like", async function (req, res, next){
     try {
-      console.log("req body", req.body)
       const college = await Student.likeCollege(req.body.student_id, req.body.college)
       const colleges = await Student.getLikedColleges(req.body.student_id)
       // console.log("colleges liked: ", colleges)
@@ -15,15 +14,27 @@ router.post("/like", async function (req, res, next){
       next(err)
     }
   })
+  
+  router.post("/colleges", async function (req, res, next){
+    try {
+      const collegesToDisplay = await Student.getCollegeFeed(req.body.satScore, req.body.actScore)
+      return res.status(201).json(collegesToDisplay)
 
-  // router.post("/likes", async function (req, res, next){
-  //   try {
-  //     const colleges = await Student.getLikedColleges(req.body.student_id)
-  //     console.log("colleges: ", colleges)
-  //     return res.status(201).json(colleges)
-  //   } catch (err){
-  //     res.send(err)
-  //     next(err)
-  //   }
-  // })
+    } catch (err){
+      res.send(err)
+      next(err)
+    }
+  })
+
+  router.post("/info/:id", async function (req, res, next){
+    try {
+      const collegeToDisplay = await Student.getCollege(req.body.id)
+      console.log(collegeToDisplay)
+      return res.status(201).json(collegeToDisplay)
+
+    } catch (err){
+      res.send(err)
+      next(err)
+    }
+  })
   module.exports = router

@@ -12,3 +12,7 @@
 .like-img:hover{
     background: radial-gradient(pink, transparent);
 }
+
+.cost-breakdown{
+    padding: 10px
+}

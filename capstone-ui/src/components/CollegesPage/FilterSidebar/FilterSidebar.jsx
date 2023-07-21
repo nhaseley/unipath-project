@@ -23,14 +23,16 @@ export default function FilterSidebar({userLoginInfo, collegeList, setCollegeLis
   }
   return (
     <div className="filter-sidebar">
-      <div className="price-filter">Price: {price}</div>
+      <div className="filters">
+      <div className="price-filter">Price: ${price.toLocaleString()}</div>
       <input
         className="price-slider"
         type="range"
         min={0}
-        max={36}
+        max={100000}
         step={1}
-        value={price}
+        value={price.toLocaleString()}
+        // TODO: fix - not appearing as toLocaleString on slide
         onChange={changePriceFilter}
       ></input>
       <div className="act-score">ACT: {act}</div>
@@ -53,7 +55,7 @@ export default function FilterSidebar({userLoginInfo, collegeList, setCollegeLis
         value={sat}
         onChange={changeSATFilter}
       ></input>
-      <div className="enrollment">Enrollment Size: {enrollment}</div>
+      <div className="enrollment">Enrollment Size: {enrollment.toLocaleString()}</div>
       <input
         className="enrollment-slider"
         type="range"
@@ -63,6 +65,7 @@ export default function FilterSidebar({userLoginInfo, collegeList, setCollegeLis
         value={enrollment}
         onChange={changeEnrollmentFilter}
       ></input>
+    </div>
     </div>
   );
 }
