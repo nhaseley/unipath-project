@@ -253,7 +253,8 @@ class Student {
       const decoded = jwt.verify(token, secretKey); // decoding the token
       return decoded; // returning the decoded token
     } catch {
-      return null; // return null if the token seems to be unvalid or expired
+        return null // return null if the token seems to be invalid or expired
+
     }
   }
 

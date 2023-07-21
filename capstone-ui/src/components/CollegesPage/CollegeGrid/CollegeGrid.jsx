@@ -60,8 +60,13 @@ export default function CollegeGrid({
   return (
     <div className="college-grid">
       <div className="content">
-        <h1> Hi, ___, here are your personalized colleges! </h1>
+        <h1>
+          {" "}
+          Hi {localStorage.getItem("firstName")}, here are your personalized
+          colleges!{" "}
+        </h1>
         <div className="colleges">
+
           {collegeList?.map((college, index) =>
 
             // (college.latest.admissions.act_scores.cumulative
@@ -110,10 +115,12 @@ export default function CollegeGrid({
               //       ? college.latest.school.minority_serving.aanipi == 1
               //       : null)
               //   : null)
+
               // <CollegeCard college={college.latest} key={index} />
               <CollegeCard college={college} key={index} />
           //   ) : null
           // )}
+
           )}
         </div>
         <button onClick={incrementPage} value={pageID}>

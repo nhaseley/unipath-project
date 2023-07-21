@@ -59,11 +59,12 @@ export default function LoginPage({
       }
     );
 
-    if (result.data.status) {
-      setError(result.data);
-    } else {
-      // const token = result.data.token;
-      // localStorage.setItem("token", token);
+    if (result?.data) {
+      console.log("Sign in Successful!");
+
+      localStorage.setItem("token", result.data.token);
+      localStorage.setItem("firstName", result.data.student.firstName);
+
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
 
@@ -79,6 +80,8 @@ export default function LoginPage({
       setError({});
       setUserLoggedIn(true);
       navigate("/feed");
+    } else {
+      setError(result?.data);
     }
   }
 
