@@ -25,4 +25,16 @@ router.post("/like", async function (req, res, next){
       next(err)
     }
   })
+
+  router.post("/info/:id", async function (req, res, next){
+    try {
+      const collegeToDisplay = await Student.getCollege(req.body.id)
+      console.log(collegeToDisplay)
+      return res.status(201).json(collegeToDisplay)
+
+    } catch (err){
+      res.send(err)
+      next(err)
+    }
+  })
   module.exports = router

@@ -7,23 +7,21 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
   const { id } = useParams();
   const [college, setCollege] = useState();
 
-  const apiKey = "AiIF47OdjlHUb8m7mvs5k265lBQgGG9Hd5KXhBrF";
-  const ORIGINAL_COLLEGE_API_URL =
-    "https://api.data.gov/ed/collegescorecard/v1/schools?school.name=" +
-    `${id}`;
-
-  const createEndpointUrl = () =>
-    `${ORIGINAL_COLLEGE_API_URL}&api_key=${apiKey}`;
-
-  useEffect(() => {
+  async function getCollege(){
     if (
       // unnecessary once we require login for this page
       userLoginInfo.firstName != ""
     ) {
-      axios.get(createEndpointUrl()).then((response) => {
-        setCollege(response?.data.results[0].latest);
-      });
+      axios.post("http://localhost:3010/info/" + `${id}`, {
+          id: id
+        })
+        .then((response) => {
+          setCollege(response.data)
+        });
     }
+  }
+  useEffect(() => {
+    getCollege()
   }, []);
 
   function findMinorityServingValue(data) {
@@ -35,17 +33,13 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
     return null;
   }
 
-  console.log("college: ", college);
-  
-  
-
+  console.log("college: ", college)
 
   return (
     <div className="college-info-page">
       <div className="title">
-        <h1> Welcome to {college?.school.name} </h1>
-        <Link to={"/like"} onClick={setSelectedCollege(college?.school.name)}>
-                          {/* state to be used in MyCollegesPage^ */}
+        <h1> Welcome to {college?.name} </h1>
+        <Link to={"/like"} onClick={setSelectedCollege(college?.name)}>
           <img
             src="https://www.transparentpng.com/download/instagram-heart/bULeEp-heart-instagram-vector.png"
             className="like-img"
@@ -54,46 +48,48 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       </div>
       <h2>
         {" "}
-        {college?.school.name} is a 4-year{" "}
-        {findMinorityServingValue(college?.school.minority_serving)} institution
-        located in {college?.school.city}, {college?.school.state}.
+        {college?.name} is a 4-year{" "}
+        {findMinorityServingValue(college?.minority_serving)} institution
+        located in {college?.city}, {college?.state}.
       </h2>
-      <a href={"https://" + college?.school.school_url}> See University Site</a>
-      <div>Admission Rate: {college?.admissions.admission_rate.overall.toFixed(2)}</div>
-      <div className="median SAT">{/* Average SAT: {sat} */}</div>
+      <div className="college-statistics"> 
+      <a href={"https://" + college?.school_url} className="college-site-link"> See University Site</a>
+      <div>Admission Rate: {(parseFloat(college?.admission_rate) * 100).toFixed(2) + "%"}</div>
+      <div className="median SAT"> Average SAT: {parseInt(college?.sat_score_critical_reading) + parseInt(college?.sat_score_writing) + parseInt(college?.sat_score_math)} </div>
       <div className="avg-ACT">
-        Average ACT: {college?.admissions.act_scores.midpoint.cumulative}
+        Average ACT: {parseInt(college?.act_score)}
       </div>
       <div className="undergrad-enrollment">
-        Undergraduate Enrollment: {college?.student.size}
+        Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
       </div>
-      <div className="student-faculty-ratio"> Student/Faculty Ratio: {college?.student.demographics.student_faculty_ratio} </div>
+      <div className="student-faculty-ratio"> Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)} </div>
       <div className="family-income">
         <div className="avg-family-income">
-          Avg Family Income: {college?.student.demographics.avg_family_income}
+          Avg Family Income: ${parseInt(college?.avg_family_income).toLocaleString()}
         </div>
         <div className="median-family-income">
           Median Family Income:{" "}
-          {college?.student.demographics.median_family_income}{" "}
+          ${parseFloat(college?.median_family_income).toLocaleString()}
         </div>
       </div>
       <div className="first-gen-share">
         First-generation Students:{" "}
-        {college?.student.demographics.first_generation.toFixed(2)}{" "}
+        {(parseFloat(college?.first_generation) * 100).toFixed(2) + "%"}
       </div>
       <div className="retention-rate">
         Retention/Graduation rate:{" "}
-        {college?.student.retention_rate.overall.full_time.toFixed(2)}
+        {parseFloat(college?.retention_rate).toFixed(2)}
       </div>
       <div className="cost-breakdown">
         Cost Breakdown:
         <div className="in-state-tuition">
-          In state Tuition: {college?.cost.tuition.in_state}
+          In-State Tuition: ${parseInt(college?.tuition_in_state).toLocaleString()}
         </div>
         <div className="out-of-state-tuiition">
-          Out of state Tuition: {college?.cost.tuition.out_of_state}
+          Out of State Tuition: ${parseInt(college?.tuition_out_of_state).toLocaleString()}
         </div>
       </div>
+    </div>
     </div>
   );
 }

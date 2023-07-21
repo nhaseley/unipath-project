@@ -264,28 +264,61 @@ class Student {
    * @param {*} student_id
    * @return colleges in the database for a given user
    */
-  static async getCollegeFeed(sat_score, act_score) {
-    // console.log(typeof sat_score);
-    // console.log(typeof act_score)
+  // static async getCollegeFeed(sat_score, act_score) {
+  //   // console.log(typeof sat_score);
+  //   // console.log(typeof act_score)
 
-    if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
+  //   if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
+  //     throw new BadRequestError("No standardized test scores for this user.");
+  //   }
+  //   const result = await db.query(
+  //     `SELECT * FROM colleges_from_api
+  //       WHERE 
+  //       ($1 IS NULL OR 
+  //         ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) + 
+  //            CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) + 
+  //            CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 200)
+  //       AND
+  //       ($2 IS NULL OR 
+  //         ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2::NUMERIC) <= 4)
+  // `,
+  //     [sat_score, act_score]
+  //   );
+  //   console.log("getCollegeFeed from database: ", result.rows.length);
+  //   return result.rows;
+  // }
+  static async getCollegeFeed(sat_score) {
+    if (typeof sat_score == "undefined") {
       throw new BadRequestError("No standardized test scores for this user.");
     }
     const result = await db.query(
       `SELECT * FROM colleges_from_api
         WHERE 
-        ($1 IS NULL OR 
           ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) + 
              CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) + 
-             CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 200)
-        AND
-        ($2 IS NULL OR 
-          ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2::NUMERIC) <= 4)
-  `,
-      [sat_score, act_score]
+             CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1) <= 200
+      `,
+      [sat_score]
     );
     console.log("getCollegeFeed from database: ", result.rows.length);
     return result.rows;
+  }
+
+
+   /**
+   * Get the names of all the colleges a given user has liked in the past
+   *
+   * @param {*} student_id
+   * @return colleges in the database for a given user
+   */
+   static async getCollege(collegeName) {
+    const result = await db.query(
+      `SELECT * FROM colleges_from_api
+          WHERE name = $1`,
+      [collegeName]
+    );
+    console.log(result.rows)
+    return result.rows[0];
   }
 }
 module.exports = Student;

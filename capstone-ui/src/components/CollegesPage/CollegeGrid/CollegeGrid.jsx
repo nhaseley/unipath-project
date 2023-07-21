@@ -25,14 +25,14 @@ export default function CollegeGrid({
       // unnecessary once we require login for this page
       userLoginInfo.firstName != ""
     ) {
-      axios
-        .get(createEndpointUrl(pageID))
-        .then((response) => {
-          setCollegeList((prevList) => [
-            ...prevList,
-            ...response?.data.results,
-          ]);
-        });
+      // axios
+      //   .get(createEndpointUrl(pageID))
+      //   .then((response) => {
+      //     setCollegeList((prevList) => [
+      //       ...prevList,
+      //       ...response?.data.results,
+      //     ]);
+      //   });
       axios
         .post("http://localhost:3010/colleges", {
           satScore: userLoginInfo.satScore,
@@ -42,7 +42,7 @@ export default function CollegeGrid({
         })
         .then((response) => {
           console.log("colleges in front: ", response.data);
-          // setCollegeList((prevList) => [...prevList, ...response?.data.results]);
+          setCollegeList((prevList) => [...prevList, ...response?.data]);
         });
     }
   }
@@ -63,17 +63,13 @@ export default function CollegeGrid({
         <h1> Hi, ___, here are your personalized colleges! </h1>
         <div className="colleges">
           {collegeList?.map((college, index) =>
-            Math.abs(
-              Object.values(
-                college.latest.admissions.sat_scores.midpoint
-              ).reduce((total, score) => total + score, 0) - userScores.satScore
-            ) <= 200 ||
-            (college.latest.admissions.act_scores.cumulative
-              ? Math.abs(
-                  college.latest.admissions.act_scores.cumulative -
-                    userScores.actScore
-                ) <= 4
-              : null) ? (
+
+            // (college.latest.admissions.act_scores.cumulative
+            //   ? Math.abs(
+            //       college.latest.admissions.act_scores.cumulative -
+            //         userScores.actScore
+            //     ) <= 4
+            //   : null) ? (
               //   ||
               // (college.latest.student.size && userLoginInfo.enrollment != 0
               //   ? userLoginInfo.enrollment == 5000
@@ -114,8 +110,10 @@ export default function CollegeGrid({
               //       ? college.latest.school.minority_serving.aanipi == 1
               //       : null)
               //   : null)
-              <CollegeCard college={college.latest} key={index} />
-            ) : null
+              // <CollegeCard college={college.latest} key={index} />
+              <CollegeCard college={college} key={index} />
+          //   ) : null
+          // )}
           )}
         </div>
         <button onClick={incrementPage} value={pageID}>
