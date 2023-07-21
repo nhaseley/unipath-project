@@ -74,7 +74,6 @@ export default function App() {
     }
   }, [decodedToken, setUserLoggedIn]);
 
-
   //---------------- Functions ---------------------//
 
   function handleShowPassword(event) {
