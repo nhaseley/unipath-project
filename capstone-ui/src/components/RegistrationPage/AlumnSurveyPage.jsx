@@ -2,6 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { Link ,useNavigate } from "react-router-dom";
 import Select from "react-select";
+import axios from "axios";
 
 
 
@@ -11,6 +12,41 @@ export default function AlumnSurveyPage ({userLoginInfo, setError, setUserLoginI
        
     const navigate = useNavigate();  
     const [selectedButton, setSelectedButton] = useState({});
+    const [graduationYear, setGraduationYear] = useState({ collegeYr: "" })
+    const [selectedCollege, setSelectedCollege] = useState()
+    const [collegeOptions, setCollegeOptions] = useState([])
+
+    const collegeYearOptions = Array.from({ length: 44}, (_, i) => ({
+        value: 2023-i,
+        label: 2023-i.toLocaleString(),
+    }));
+
+
+useEffect( () => {
+    {
+        console.log("about to get colleges")
+        axios
+          .post("http://localhost:3010/collegeList")
+          .then((response) => {
+            console.log("thecoleegess", response.data)
+            setCollegeOptions(response.data)
+          });
+      }
+},[])
+
+
+
+    
+
+
+    function  handleCollegeYearSelect (event) {
+        event.preventDefault;
+        setGraduationYear({...graduationYear, collegeYr: event.value})
+
+    }
+
+
+
 
 
 
@@ -67,19 +103,61 @@ console.log("button: ", selectedButton.highsch)
 
                 { selectedButton.highsch == "Yes" ? (
                     <div className="yearOfGrad">
-                        What year did you graduate ?
-                        <Select>
-                            <option value="">
+                        
+                        <div className="AreYouCollegeGrad">
+                            Are you a college graduate ?
+                        <button onClick={() => setSelectedButton({ ...selectedButton, collegeUni: "Yes" })}>
+                            Yes
+                        </button>
 
-                            </option>
-                        </Select>
+                        <button onClick={() => setSelectedButton({ ...selectedButton, collegeUni: "No" })}>
+                            No
+                        </button>
 
-                        <div className="whatHighSchool">
-                            
+                        { selectedButton.collegeUni == "Yes" ? (
+
+                            <div className="yearOfCollegeGrad">
+                                What year did you graduate college ?
+                                <Select 
+                                options={collegeYearOptions}
+                                onChange={handleCollegeYearSelect}
+                                value={collegeYearOptions.find(
+                                (option) => option.value === graduationYear)}>    
+                                </Select>
+                                    
+                            { graduationYear ? (
+                                <div className="whatCollege">
+                                    What College did you graduate from ?
+
+                                    <Select
+                                    options={collegeOptions}
+                                    value={collegeOptions.find(
+                                        (option) => option.value === selectedCollege)}>
+                                    </Select>
+                                </div>
+                            ) : (
+                                <div>
+                                </div>
+                            )
+
+                            }
+                
+                            </div>
+                                    
+
+                        ) : (
+                             selectedButton.collegeUni == "No" ?
+
+                            <div>
+                                <button>Submit Here</button>
+                            </div>
+                            : null
+                        )}
                         </div>
                     </div>
+
                 ) : (
-                    selectedButton.highsch ? 
+                    selectedButton.highsch == "No" ? 
                     
                     <div className="redirectToRegister">
                         Please register as a student 
@@ -87,15 +165,6 @@ console.log("button: ", selectedButton.highsch)
                     </div>
                     : null
                 )}
-            </div>
-
-            <div className="second-question-input">
-
-            </div>
-
-
-            <div>
-
             </div>
 
         </div>
