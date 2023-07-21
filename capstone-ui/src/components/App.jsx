@@ -13,6 +13,7 @@ import About from "./About/About";
 import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 
 export default function App() {
+  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -34,10 +35,7 @@ export default function App() {
   });
   const [error, setError] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(false);
-  const [userScores, setUserScores] = useState({
-    satScore: 0,
-    actScore: 0,
-  });
+
   const [collegeList, setCollegeList] = useState([]);
   const [selectedCollege, setSelectedCollege] = useState({})
   const [userType, setUserType] = useState()
@@ -113,7 +111,6 @@ export default function App() {
                   setError={setError}
                   userLoggedIn={userLoggedIn}
                   setUserLoggedIn={setUserLoggedIn}
-                  setUserScores={setUserScores}
                   logoutUser={logoutUser}
                   userType={userType}
                   setUserType={setUserType}
@@ -168,10 +165,8 @@ export default function App() {
               element={
                 <CollegesPage
                   userLoginInfo={userLoginInfo}
-                  userScores={userScores}
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
-                
                 ></CollegesPage>
               }
             ></Route>

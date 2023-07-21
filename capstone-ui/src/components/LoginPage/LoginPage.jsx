@@ -14,7 +14,6 @@ export default function LoginPage({
   error,
   setError,
   setUserLoggedIn,
-  setUserScores,
   userType,
   setUserType,
 }) {
@@ -67,15 +66,10 @@ export default function LoginPage({
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
 
-      // // used for colleges page
-      console.log("res: ", result.data);
-      // setUserLoginInfo({ email: "", password: "" });
+      console.log("user data on login: ", result.data);
       setUserLoginInfo(result.data);
 
-      setUserScores({
-        satScore: result.data.satScore > 0 ? result.data.satScore : null,
-        actScore: result.data.actScore > 0 ? result.data.actScore : null,
-      });
+  
       setError({});
       setUserLoggedIn(true);
       navigate("/feed");

@@ -19,7 +19,6 @@ export default function RegistrationPage({
   function handleChangeUserType(event) {
     setUserType(event.target.value);
   }
-console.log("password", passwordDisplayed)
   return (
     <div className="registration-page">
       <h1 className="user-type-prompt">

@@ -5,12 +5,12 @@ import axios from "axios";
 import CollegeGrid from "./CollegeGrid/CollegeGrid";
 import FilterSidebar from "./FilterSidebar/FilterSidebar";
 
-export default function CollegesPage({ userLoginInfo,  userScores, collegeList, setCollegeList }) {
+export default function CollegesPage({ userLoginInfo,  collegeList, setCollegeList }) {
   return(
     <div className="colleges-page">
       <FilterSidebar userLoginInfo={userLoginInfo} collegeList={collegeList} setCollegeList={setCollegeList} ></FilterSidebar>
 
-      <CollegeGrid userLoginInfo={userLoginInfo}  userScores={userScores} collegeList={collegeList} setCollegeList={setCollegeList}></CollegeGrid>
+      <CollegeGrid userLoginInfo={userLoginInfo} collegeList={collegeList} setCollegeList={setCollegeList}></CollegeGrid>
     </div>
   );
 }

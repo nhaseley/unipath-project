@@ -287,8 +287,8 @@ class Student {
   //   console.log("getCollegeFeed from database: ", result.rows.length);
   //   return result.rows;
   // }
-  static async getCollegeFeed(sat_score) {
-    if (typeof sat_score == "undefined") {
+  static async getCollegeFeed(sat_score, act_score) {
+    if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
       throw new BadRequestError("No standardized test scores for this user.");
     }
     const result = await db.query(
@@ -297,8 +297,10 @@ class Student {
           ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) + 
              CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) + 
              CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1) <= 200
+          OR
+          ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2) <= 4
       `,
-      [sat_score]
+      [sat_score, act_score]
     );
     console.log("getCollegeFeed from database: ", result.rows.length);
     return result.rows;

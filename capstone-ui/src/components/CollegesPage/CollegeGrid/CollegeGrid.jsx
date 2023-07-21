@@ -7,7 +7,6 @@ import CollegeCard from "../CollegeCard/CollegeCard";
 
 export default function CollegeGrid({
   userLoginInfo,
-  userScores,
   collegeList,
   setCollegeList,
 }) {
@@ -25,14 +24,6 @@ export default function CollegeGrid({
       // unnecessary once we require login for this page
       userLoginInfo.firstName != ""
     ) {
-      // axios
-      //   .get(createEndpointUrl(pageID))
-      //   .then((response) => {
-      //     setCollegeList((prevList) => [
-      //       ...prevList,
-      //       ...response?.data.results,
-      //     ]);
-      //   });
       axios
         .post("http://localhost:3010/colleges", {
           satScore: userLoginInfo.satScore,
@@ -55,7 +46,6 @@ export default function CollegeGrid({
     event.preventDefault();
   }
 
-  console.log("my colleges: ", collegeList);
 
   return (
     <div className="college-grid">
