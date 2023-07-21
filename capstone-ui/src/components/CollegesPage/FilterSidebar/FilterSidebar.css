@@ -1,10 +1,16 @@
 .filter-sidebar{
     height: 3000px;
     width: 300px;
-    background: blue;
+    background: #4c2f02;
     color: white;
     align-items: center
 }
 .sat-slider{
     color: white
+}
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

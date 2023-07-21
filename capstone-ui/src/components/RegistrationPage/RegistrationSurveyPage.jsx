@@ -172,9 +172,10 @@ export default function RegistrationSurveyPage({
         <Link to={"/register"}> Submit</Link>
       </button>
 
-      {/* <button className="back-to-register-button">
-      error check for if registration failed?
-      </button> */}
+      {/* <button className="back-to-register-button" */}
+    {/* onClick={navigate("/register")}> Back */}
+      {/* error check for if registration failed? */}
+      {/* </button> */}
     </div>
   );
 }

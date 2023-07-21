@@ -11,7 +11,7 @@ import CollegeInfoPage from "./CollegesPage/CollegeInfoPage/CollegeInfoPage";
 import MyCollegesPage from "./MyCollegesPage/MyCollegesPage";
 import About from "./About/About";
 import axios from "axios";
-
+import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 
 export default function App() {
   //------------------ States ---------------------//
@@ -182,6 +182,20 @@ export default function App() {
                 ></RegistrationSurveyPage>
               }
             ></Route>
+            
+            <Route
+              path="/registration-survey/alumn"
+              element={
+                <AlumnSurveyPage
+                  userLoginInfo={userLoginInfo}
+                  setError={setError}
+                  setUserLoginInfo={setUserLoginInfo}
+                  userType={userType}
+                ></AlumnSurveyPage>
+              }
+            ></Route>
+
+
             <Route
               path="/feed"
               element={

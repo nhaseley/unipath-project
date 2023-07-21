@@ -23,6 +23,7 @@ export default function FilterSidebar({userLoginInfo, collegeList, setCollegeLis
   }
   return (
     <div className="filter-sidebar">
+      <div className="filters">
       <div className="price-filter">Price: {price}</div>
       <input
         className="price-slider"
@@ -63,6 +64,7 @@ export default function FilterSidebar({userLoginInfo, collegeList, setCollegeLis
         value={enrollment}
         onChange={changeEnrollmentFilter}
       ></input>
+    </div>
     </div>
   );
 }
