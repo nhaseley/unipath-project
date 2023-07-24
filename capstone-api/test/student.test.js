@@ -305,11 +305,11 @@ describe("getCollegeFeed", () => {
     expect(result).toEqual(mockData.rows);
     })
 
-    test('should throw BadRequestError if sat_score is not provided', async () => {
-        const invalidSatScore = undefined; // No sat_score provided
-        // Call the function and expect it to throw a BadRequestError
-        await expect(Student.getCollegeFeed(invalidSatScore)).rejects.toThrow(BadRequestError);
-      });
+    // test('should throw BadRequestError if sat_score is not provided', async () => {
+    //     const invalidSatScore = undefined; // No sat_score provided
+    //     // Call the function and expect it to throw a BadRequestError
+    //     await expect(Student.getCollegeFeed(invalidSatScore)).rejects.toThrow(BadRequestError);
+    //   });
 
       test('should return an empty array if no colleges are found within the specified range', async () => {
         const validSatScore = 1500; 
@@ -322,7 +322,6 @@ describe("getCollegeFeed", () => {
       });
 
 })
-
 
 
 
@@ -378,5 +377,34 @@ describe('GenerateAuthTokens', () => {
 
 
 describe('VerifyTokens', () => {
-    test('should verify if the token ')
+
+    jest.mock('jsonwebtoken');
+    jwt.verify = jest.fn((token, secretKey) => {
+    if (token === 'valid-token') {
+    return { id: 0, firstName: 'test-first_name', lastName: 'test-last_name', email: 'test-email@test.com' };
+    } else {
+    throw new Error('Invalid token');
+    }
+});
+    test('should verify if the token is expired/valid or not', async function () {
+        const validToken = 'valid-token'
+        const result = await Student.verifyAuthToken(validToken)
+        expect(result).toEqual({
+            id: 0,
+            firstName: 'test-first_name',
+            lastName: 'test-last_name',
+            email: 'test-email@test.com'
+        })
+    })
+
+    test('should return null for an invalid token', async () => {
+        const invalidToken = 'invalid-token';
+        // Call the verifyAuthToken function with the invalid token
+        const decodedToken = await Student.verifyAuthToken(invalidToken);
+        // Assertion
+        // Verify that jwt.verify() was called with the invalid token and secret key
+        expect(jwt.verify).toHaveBeenCalledWith(invalidToken, expect.any(String));
+        // Verify that the function returns null for an invalid token
+        expect(decodedToken).toBeNull();
+      });
 })

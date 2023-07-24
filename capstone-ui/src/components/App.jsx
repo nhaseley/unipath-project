@@ -32,6 +32,15 @@ export default function App() {
     schoolType: "",
   });
 
+  const [admissionLoginInfo, setAdmissionLoginInfo] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    confirmPassword: "",
+    college: "",
+  });
+
   const [passwordDisplayed, setPasswordDisplayed] = useState({
     password: false,
     confirmPassword: false,
@@ -80,6 +89,7 @@ export default function App() {
   useEffect(() => {
     if (decodedToken) {
       setUserLoggedIn(true); // Setting appState to true, making sure the user is logged in
+
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
       if (decodedToken.exp < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
@@ -172,6 +182,8 @@ export default function App() {
                 <RegistrationPage
                   userLoginInfo={userLoginInfo}
                   setUserLoginInfo={setUserLoginInfo}
+                  admissionLoginInfo={admissionLoginInfo}
+                  setAdmissionLoginInfo={setAdmissionLoginInfo}
                   handleShowPassword={handleShowPassword}
                   handleHidePassword={handleHidePassword}
                   passwordDisplayed={passwordDisplayed}
