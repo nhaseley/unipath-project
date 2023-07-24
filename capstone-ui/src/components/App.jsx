@@ -226,6 +226,7 @@ export default function App() {
                 <ParentsPage
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
+                  
                 ></ParentsPage>
               }
             ></Route>

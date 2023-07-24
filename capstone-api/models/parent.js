@@ -198,5 +198,23 @@ class Parent {
   //     return null;
   //   }
   // }
+
+
+   /**
+   * Get the student of all the colleges a given parent
+   *
+   * @param {*} student_id
+   * @return student in the database for a given parent phone
+   */
+   static async fetchChildByPhoneNumber(parentPhone) {
+    console.log("phone: ", parentPhone)
+    const result = await db.query(
+      `SELECT * FROM students
+          WHERE parent_phone = $1`,
+      [parentPhone]
+    );
+    console.log(result.rows)
+    return result.rows[0];
+  }
 }
 module.exports = Parent;

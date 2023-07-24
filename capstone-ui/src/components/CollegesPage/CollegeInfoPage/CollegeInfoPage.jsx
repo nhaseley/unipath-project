@@ -43,11 +43,11 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       }
       if (data.predominantly_black == 1) {
         console.log("predominantly black")
-        return "predominantly black"
+        return "predominantly-black"
       }
       if (data.historically_black == 1) {
         console.log("historically black")
-        return "historically black"
+        return "historically-black"
       }
       if (data.tribal == 1) {
         console.log("tribal")
@@ -55,15 +55,14 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       }
       if (data.women_only == 1) {
         console.log("women only")
-        return "women only"
+        return "women-only"
       }
       if (data.men_only == 1) {
         console.log("men only")
-        return "men only"
+        return "men-only"
       }
     }
   }
-  console.log("college:", college);
 
   return (
     <div className="college-info-page">

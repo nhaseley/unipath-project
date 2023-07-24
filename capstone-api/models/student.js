@@ -311,10 +311,10 @@ class Student {
 
 
    /**
-   * Get the names of all the colleges a given user has liked in the past
+   * Get all the college info from the database given the name of the college
    *
    * @param {*} student_id
-   * @return colleges in the database for a given user
+   * @return college information in the database for a given name
    */
    static async getCollege(collegeName) {
     const result = await db.query(
@@ -322,7 +322,7 @@ class Student {
           WHERE name = $1`,
       [collegeName]
     );
-    console.log(result.rows)
+    // console.log(result.rows)
     return result.rows[0];
   }
 }
