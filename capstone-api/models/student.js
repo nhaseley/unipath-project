@@ -240,13 +240,15 @@ class Student {
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
-      location: student.location,
-      date: student.date,
+      // location: student.location,
+      // date: student.date,
     };
 
     const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
     return token;
   }
+
+
 
   static async verifyAuthToken(token) {
     try {
