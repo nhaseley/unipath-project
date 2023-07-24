@@ -70,7 +70,6 @@ export default function LoginPage({
       console.log("user data on login: ", result.data);
       setUserLoginInfo(result.data);
 
-  
       setError({});
       setUserLoggedIn(true);
       navigate("/feed");
@@ -82,7 +81,7 @@ export default function LoginPage({
   return (
     <div className="login-page">
       <h1 className="user-type-prompt">
-        Which of the following best identifies you?
+        Which of the following best describes you?
       </h1>
       <div className="user-types">
         <button
