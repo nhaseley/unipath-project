@@ -254,7 +254,6 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   setSelectedCollege={setSelectedCollege}
                 >
-                  {" "}
                 </CollegeInfoPage>
               }
             ></Route>

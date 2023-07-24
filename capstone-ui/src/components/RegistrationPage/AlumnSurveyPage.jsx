@@ -65,7 +65,7 @@ export default function AlumnSurveyPage({
         }
       );
 
-      navigate("/login" + `/${userType}`);
+      navigate("/login");
 
       if (result.data.status) {
         setError(result.data);

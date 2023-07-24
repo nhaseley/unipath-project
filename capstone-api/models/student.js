@@ -74,6 +74,7 @@ class Student {
    **/
 
   static async register(creds) {
+    console.log(creds)
     const requiredCreds = [
       "email",
       "firstName",
@@ -133,10 +134,10 @@ class Student {
         creds.parentPhone,
         creds.zipcode,
         hashedPassword,
-        creds.examScores.satScore,
-        creds.examScores.actScore,
-        creds.enrollment,
-        creds.schoolType,
+        creds.examScores ? creds.examScores.satScore : undefined,
+        creds.examScores ? creds.examScores.actScore : undefined,
+        creds.enrollment ? creds.enrollment: undefined,
+        creds.schoolType ? creds.schoolType: undefined,
       ]
     );
 

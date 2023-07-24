@@ -57,7 +57,7 @@ export default function LoginPage({
         password: userLoginInfo.password,
       }
     );
-
+      console.log("result from login: ", result.data)
     if (result?.data) {
       localStorage.setItem("token", result.data.token);
       // const decodedToken = jwtDecode(token);
@@ -126,7 +126,7 @@ export default function LoginPage({
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-          College student/alum
+          College Student/Alum
         </button>
       </div>
 

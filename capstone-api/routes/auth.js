@@ -10,6 +10,8 @@ const router = express.Router();
 router.post("/register", async function (req, res, next) {
   try {
     const student = await Student.register(req.body);
+    console.log(student)
+
     //   const token = await User.generateAuthToken(user)
     return res.status(201).json(student);
     // return res.status(201).json({ user, token})
@@ -21,6 +23,7 @@ router.post("/register", async function (req, res, next) {
 
 router.post("/login/student", async function (req, res, next) {
   try {
+    console.log(req.body)
     const student = await Student.authenticate(req.body);
     if (student) {
       const tokenPromise = Student.generateAuthToken(student);
