@@ -1,21 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminRegistrationPage({
-  userLoginInfo,
-  setUserLoginInfo,
+  admissionLoginInfo,
+  setAdmissionLoginInfo,
   handleShowPassword,
   handleHidePassword,
   passwordDisplayed,
   error,
 }) {
   function handleDemo() {
-    setUserLoginInfo({
+    setAdmissionLoginInfo({
       // work mail accounted for...edu
       email: "nylevenya@brown.edu",
       firstName: "nya",
       lastName: "haseley-ayende",
       password: "2003nyleve",
       confirmPassword: "2003nyleve",
+      college: "Brown University",
     });
   }
 
@@ -29,9 +30,9 @@ export default function AdminRegistrationPage({
               className="first-name-input"
               type="text"
               placeholder="First Name"
-              value={userLoginInfo.firstName}
+              value={admissionLoginInfo.firstName}
               onChange={(e) =>
-                setUserLoginInfo((u) => ({
+                setAdmissionLoginInfo((u) => ({
                   ...u,
                   firstName: e.target.value,
                 }))
@@ -44,9 +45,9 @@ export default function AdminRegistrationPage({
               className="last-name-input"
               type="text"
               placeholder="Last Name"
-              value={userLoginInfo.lastName}
+              value={admissionLoginInfo.lastName}
               onChange={(e) =>
-                setUserLoginInfo((u) => ({
+                setAdmissionLoginInfo((u) => ({
                   ...u,
                   lastName: e.target.value,
                 }))
@@ -64,9 +65,9 @@ export default function AdminRegistrationPage({
             className="email-input"
             type="email"
             placeholder="Work/Institution Email"
-            value={userLoginInfo.email}
+            value={admissionLoginInfo.email}
             onChange={(e) =>
-              setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
+              setAdmissionLoginInfo((u) => ({ ...u, email: e.target.value }))
             }
           ></input>
         </div>
@@ -80,9 +81,9 @@ export default function AdminRegistrationPage({
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
             placeholder="Password"
-            value={userLoginInfo.password}
+            value={admissionLoginInfo.password}
             onChange={(e) =>
-              setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
+              setAdmissionLoginInfo((u) => ({ ...u, password: e.target.value }))
             }
           ></input>
           <button
@@ -110,9 +111,9 @@ export default function AdminRegistrationPage({
             type={passwordDisplayed.confirmPassword ? "text" : "password"}
             placeholder="Confirm Password"
             className="confirm-password-input"
-            value={userLoginInfo.confirmPassword}
+            value={admissionLoginInfo.confirmPassword}
             onChange={(e) =>
-              setUserLoginInfo((u) => ({
+              setAdmissionLoginInfo((u) => ({
                 ...u,
                 confirmPassword: e.target.value,
               }))
@@ -140,13 +141,13 @@ export default function AdminRegistrationPage({
               " Error."
             : null}
         </div>
+        {/* include college dropdown goes here */}
+
+        <div>* select college here *</div>
       </form>
 
       <button className="demo-button" onClick={handleDemo}>
         Demo Registration
-      </button>
-      <button className="next-page">
-        <Link to={"/registration-survey/alumn"}>Next</Link>
       </button>
     </div>
   );

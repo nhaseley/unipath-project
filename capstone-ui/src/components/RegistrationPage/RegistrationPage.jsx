@@ -9,6 +9,8 @@ import AdminRegistrationPage from "./AdminRegistrationPage";
 export default function RegistrationPage({
   userLoginInfo,
   setUserLoginInfo,
+  setAdmissionLoginInfo,
+  admissionLoginInfo,
   handleShowPassword,
   handleHidePassword,
   passwordDisplayed,
@@ -89,8 +91,8 @@ export default function RegistrationPage({
         ></AlumnRegistrationPage>
       ) : userType == "college-admission-officer" ? (
         <AdminRegistrationPage
-          userLoginInfo={userLoginInfo}
-          setUserLoginInfo={setUserLoginInfo}
+          admissionLoginInfo={admissionLoginInfo}
+          setAdmissionLoginInfo={setAdmissionLoginInfo}
           handleShowPassword={handleShowPassword}
           handleHidePassword={handleHidePassword}
           passwordDisplayed={passwordDisplayed}

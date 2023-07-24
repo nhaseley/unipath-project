@@ -14,7 +14,6 @@ import axios from "axios";
 import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 
 export default function App() {
-  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -28,6 +27,15 @@ export default function App() {
     examScores: {},
     enrollment: 0,
     schoolType: "",
+  });
+
+  const [admissionLoginInfo, setAdmissionLoginInfo] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    confirmPassword: "",
+    college: "",
   });
 
   const [passwordDisplayed, setPasswordDisplayed] = useState({
@@ -63,7 +71,7 @@ export default function App() {
   useEffect(() => {
     console.log("decodedToken:", decodedToken);
     if (decodedToken) {
-      setUserLoggedIn(true); // Setting appState to true, making sure the 
+      setUserLoggedIn(true); // Setting appState to true, making sure the
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
       if (decodedToken < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
@@ -156,6 +164,8 @@ export default function App() {
                 <RegistrationPage
                   userLoginInfo={userLoginInfo}
                   setUserLoginInfo={setUserLoginInfo}
+                  admissionLoginInfo={admissionLoginInfo}
+                  setAdmissionLoginInfo={setAdmissionLoginInfo}
                   handleShowPassword={handleShowPassword}
                   handleHidePassword={handleHidePassword}
                   passwordDisplayed={passwordDisplayed}
@@ -178,7 +188,7 @@ export default function App() {
                 ></RegistrationSurveyPage>
               }
             ></Route>
-            
+
             <Route
               path="/registration-survey/alumn"
               element={
@@ -190,7 +200,6 @@ export default function App() {
                 ></AlumnSurveyPage>
               }
             ></Route>
-
 
             <Route
               path="/feed"
