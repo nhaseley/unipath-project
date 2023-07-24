@@ -63,12 +63,30 @@ export default function LoginPage({
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
 
-      setUserLoginInfo(result.data.student);
+      {
+        userType == "student"
+          ? setUserLoginInfo(result.data.student)
+          : userType == "parent"
+          ? setUserLoginInfo(result.data)
+          : // userType == "college-admission-officer" ? setUserLoginInfo(result.data.admissionOfficer) :
+          userType == "college-students-and-alumni"
+          ? setUserLoginInfo(result.data)
+          : null;
+      }
 
-  
       setError({});
       setUserLoggedIn(true);
-      navigate("/feed");
+      {
+        userType == "student"
+          ? navigate("/feed")
+          : userType == "parent"
+          ? navigate("/child-feed")
+          : userType == "college-admission-officer"
+          ? navigate("/events")
+          : userType == "college-students-and-alumni"
+          ? navigate("/mycollege")
+          : null;
+      }
     } else {
       setError(result?.data);
     }
@@ -104,11 +122,11 @@ export default function LoginPage({
           College Admission Officer
         </button>
         <button
-          className="college-student-faculty-alum"
-          value="college-student-faculty-alumn"
+          className="college-students-and-alumni"
+          value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-          College student/faculty/alum
+          College student/alum
         </button>
       </div>
 

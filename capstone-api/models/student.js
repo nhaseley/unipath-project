@@ -192,7 +192,6 @@ class Student {
                   `,
       [student_id, college]
     );
-    // console.log(result.rows[0]);
     return result.rows[0];
   }
 
@@ -208,7 +207,6 @@ class Student {
           WHERE user_id = $1`,
       [student_id]
     );
-    // console.log("likes from database: ", result.rows);
     return result.rows;
   }
 

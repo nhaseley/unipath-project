@@ -1,17 +1,20 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import HomePage from "./HomePage/HomePage";
 import Navbar from "./Navbar/Navbar";
 import LoginPage from "./LoginPage/LoginPage";
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 import RegistrationSurveyPage from "./RegistrationPage/RegistrationSurveyPage";
+import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 import CollegesPage from "./CollegesPage/CollegesPage";
 import CollegeInfoPage from "./CollegesPage/CollegeInfoPage/CollegeInfoPage";
 import MyCollegesPage from "./MyCollegesPage/MyCollegesPage";
+import AlumniHomePage from "./AlumniHome/AlumniHomePage"
+import EventsPage from "./EventsPage/EventsPage"
+import ParentsPage from "./ParentsPage/ParentsPage"
 import About from "./About/About";
-import axios from "axios";
-import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 
 export default function App() {
   //------------------ States ---------------------//
@@ -215,6 +218,33 @@ export default function App() {
                   collegeArrayPointer={collegeArrayPointer}
                   setCollegeArrayPointer={setCollegeArrayPointer}
                 ></CollegesPage>
+              }
+            ></Route>
+            <Route
+              path="/child-feed"
+              element={
+                <ParentsPage
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                ></ParentsPage>
+              }
+            ></Route>
+            <Route
+              path="/events"
+              element={
+                <EventsPage
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                ></EventsPage>
+              }
+            ></Route>
+            <Route
+              path="/mycollege"
+              element={
+                <AlumniHomePage
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                ></AlumniHomePage>
               }
             ></Route>
             <Route

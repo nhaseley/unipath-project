@@ -7,6 +7,7 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
   const { id } = useParams();
   const [college, setCollege] = useState();
 
+  // get info for particular college for this user
   async function getCollege(){
     if (
       // unnecessary once we require login for this page
@@ -32,8 +33,6 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
     }
     return null;
   }
-
-  console.log("college: ", college)
 
   return (
     <div className="college-info-page">

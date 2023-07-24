@@ -62,11 +62,11 @@ router.post("/login/parent", async function (req, res, next) {
   }
 });
 
-router.post("/register/alum", async function (req, res, next) {
+router.post("/register/college-students-and-alumni", async function (req, res, next) {
   try {
     const alum = await Alum.register(req.body);
     //   const token = await User.generateAuthToken(user)
-    return res.status(201).json(alum);
+    return res.status(201).json({alum});
     // return res.status(201).json({ user, token})
   } catch (err) {
     res.send(err);
@@ -74,10 +74,11 @@ router.post("/register/alum", async function (req, res, next) {
   }
 });
 
-router.post("/login/alum", async function (req, res, next) {
+router.post("/login/college-students-and-alumni", async function (req, res, next) {
   try {
     const alum = await Alum.authenticate(req.body);
     if (alum) {
+      console.log("logged in: ", alum)
       return res.status(200).json(alum);
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})

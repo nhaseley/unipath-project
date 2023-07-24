@@ -12,9 +12,10 @@ export default function AlumnSurveyPage({
 }) {
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState({});
-  const [graduationYear, setGraduationYear] = useState({ collegeYr: "" });
+  const [graduationYear, setGraduationYear] = useState();
   const [selectedCollege, setSelectedCollege] = useState();
   const [collegeOptions, setCollegeOptions] = useState([]);
+  console.log("college", selectedCollege);
 
   const collegeYearOptions = Array.from({ length: 44 }, (_, i) => ({
     value: 2023 - i,
@@ -23,31 +24,28 @@ export default function AlumnSurveyPage({
 
   useEffect(() => {
     {
-      console.log("about to get colleges");
       axios.post("http://localhost:3010/collegeList").then((response) => {
-        console.log("thecoleegess", response.data);
         setCollegeOptions(response.data);
       });
     }
   }, []);
 
   function handleCollegeYearSelect(event) {
-    // TODO: fix this line 
-    setGraduationYear({ ...graduationYear, collegeYr: event.value });
+    setGraduationYear(event.value);
     setUserLoginInfo({
-        ...userLoginInfo,
-        collegeGradYear: event.value
-      });
+      ...userLoginInfo,
+      collegeGradYear: event.value,
+    });
   }
 
-  function handleCollegeSelect(event) {
-    // TODO: fix this func
-    // console.log("event: ", event)
-    setUserLoginInfo({
+    function handleCollegeSelect(event) {
+      // TODO: fix this func
+      setSelectedCollege(event.target.value);
+      setUserLoginInfo({
         ...userLoginInfo,
-        college: event.value
+        college: event.target.value,
       });
-  }
+    }
 
   async function handleAlumniRegistration(event) {
     event.preventDefault();
@@ -55,15 +53,18 @@ export default function AlumnSurveyPage({
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
-      let result = await axios.post("http://localhost:3010/auth/register/alum", {
-        email: userLoginInfo.email,
-        firstName: userLoginInfo.firstName,
-        lastName: userLoginInfo.lastName,
-        college: userLoginInfo.college,
-        collegeGradYear: userLoginInfo.collegeGradYear
-      });
+      let result = await axios.post(
+        "http://localhost:3010/auth/register/college-students-and-alumni",
+        {
+          email: userLoginInfo.email,
+          firstName: userLoginInfo.firstName,
+          lastName: userLoginInfo.lastName,
+          password: userLoginInfo.password,
+          college: userLoginInfo.college,
+          collegeGradYear: userLoginInfo.collegeGradYear,
+        }
+      );
 
-      console.log("result on frontend: ", result);
       navigate("/login" + `/${userType}`);
 
       if (result.data.status) {
@@ -85,12 +86,11 @@ export default function AlumnSurveyPage({
           enrollment: 0,
           schoolType: "",
           college: "",
-          collegeGradYear: ""
+          collegeGradYear: "",
         });
       }
     }
   }
-  console.log("button: ", selectedButton.highsch);
 
   return (
     <div className="alumn-survery-page">
@@ -111,9 +111,32 @@ export default function AlumnSurveyPage({
           No
         </button>
         {selectedButton.highsch == "Yes" ? (
-          <div className="yearOfGrad">
+          <div className="studentsAndAlumniInfo">
+            <div className="whatCollege">
+              What college are you affiliated with?
+              {/* <Select
+                        options={collegeOptions.slice(0, 5)}
+                        onChange={handleCollegeSelect}
+                        // value={selectedCollege}
+                        value={collegeOptions.find(
+                          (option) => option.name === selectedCollege
+                        )?.name}
+                      ></Select> */}
+              {/* {selectedCollege} */}
+              <select onChange={handleCollegeSelect}>
+                {/* Sorting dropdown options in alphabetical order */}
+                {collegeOptions
+                  .slice()
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((college) => (
+                    <option key={college.id} value={college.name}>
+                      {college.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
             <div className="AreYouCollegeGrad">
-              Are you a college graduate ?
+              Are you a college graduate?
               <button
                 onClick={() =>
                   setSelectedButton({ ...selectedButton, collegeUni: "Yes" })
@@ -128,47 +151,39 @@ export default function AlumnSurveyPage({
               >
                 No
               </button>
-              {selectedButton.collegeUni == "Yes" ? (
-                <div className="yearOfCollegeGrad">
-                  What year did you graduate college ?
-                  <Select
-                    options={collegeYearOptions}
-                    onChange={handleCollegeYearSelect}
-                    value={collegeYearOptions.find(
-                      (option) => option.value === graduationYear
-                    )}
-                  ></Select>
-                  {graduationYear ? (
-                    <div className="whatCollege">
-                      What College did you graduate from ?
-                      <Select
-                        options={collegeOptions}
-                        onChange={handleCollegeSelect}
-                        value={collegeOptions.find(
-                          (option) => option.value === selectedCollege
-                        )}
-                      ></Select>
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-              ) : selectedButton.collegeUni == "No" ? (
-                <div>
-                  <button>Submit Here</button>
-                </div>
-              ) : null}
             </div>
+            {selectedButton.collegeUni == "Yes" ? (
+              <div className="yearOfCollegeGrad">
+                What year did you graduate college ?
+                <Select
+                  options={collegeYearOptions}
+                  onChange={handleCollegeYearSelect}
+                  value={collegeYearOptions.find(
+                    (option) => option.value === graduationYear
+                  )}
+                ></Select>
+              </div>
+            ) : selectedButton.collegeUni == "No" ? (
+              <button
+                className="registration-submit"
+                onClick={handleAlumniRegistration}
+              >
+                <Link to={"/register/college-students-and-alumni"}> Submit</Link>
+              </button>
+            ) : null}
           </div>
         ) : selectedButton.highsch == "No" ? (
           <div className="redirectToRegister">
             Please register as a student
-            <Link to={"/register"}> Register Here </Link>
+            <Link to={"/register"}> here </Link>
           </div>
         ) : null}
       </div>
-      <button className="registration-submit" onClick={handleAlumniRegistration}>
-        <Link to={"/register"}> Submit</Link>
+      <button
+        className="registration-submit"
+        onClick={handleAlumniRegistration}
+      >
+        <Link to={"/register/college-students-and-alumni"}> Submit</Link>
       </button>
     </div>
   );

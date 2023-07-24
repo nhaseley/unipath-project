@@ -16,22 +16,20 @@ export default function MyCollegesPage({ userLoginInfo, selectedCollege }) {
           college: selectedCollege,
         })
         .then((response) => {
-          setLikedColleges(response.data)
+          setLikedColleges(response.data);
         });
     }
   }, []);
 
-  console.log("liked colleges:", likedColleges)
+  console.log("liked colleges:", likedColleges);
   return (
-  <div className="my-colleges-page">
-    <h1> Your Liked Colleges:</h1>
-    <div>
-    {likedColleges?.map((college, index) =>         
-        <div className="college-name">
-            {college.name}
-        </div>
-    )}
+    <div className="my-colleges-page">
+      <h1> Your Liked Colleges:</h1>
+      <div>
+        {likedColleges?.map((college, index) => (
+          <div className="college-name">{college.name}</div>
+        ))}
+      </div>
     </div>
-  </div>
-  )
+  );
 }

@@ -49,11 +49,11 @@ export default function RegistrationPage({
           College Admission Officer
         </button>
         <button
-          className="college-student-faculty-alumn"
-          value="college-student-faculty-alumn"
+          className="college-students-and-alumni"
+          value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-          College student/faculty/alum
+          College student/alum
         </button>
       </div>
 
@@ -76,7 +76,7 @@ export default function RegistrationPage({
           error={error}
           setError={setError}
         ></ParentRegistrationForm>
-      ) : userType == "college-student-faculty-alumn" ? (
+      ) : userType == "college-students-and-alumni" ? (
         <AlumnRegistrationPage
         userLoginInfo={userLoginInfo}
         setUserLoginInfo={setUserLoginInfo}

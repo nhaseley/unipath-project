@@ -37,7 +37,6 @@ export default function ParentRegistrationForm({
         parentPhone: userLoginInfo.parentPhone,
         password: userLoginInfo.password
       });
-    //   console.log("result on frontend: ", result);
       navigate("/login");
 
       if (result.data.status) {
