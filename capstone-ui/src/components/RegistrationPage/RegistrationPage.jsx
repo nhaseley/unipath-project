@@ -9,8 +9,6 @@ import AdminRegistrationPage from "./AdminRegistrationPage";
 export default function RegistrationPage({
   userLoginInfo,
   setUserLoginInfo,
-  setAdmissionLoginInfo,
-  admissionLoginInfo,
   handleShowPassword,
   handleHidePassword,
   passwordDisplayed,
@@ -22,6 +20,7 @@ export default function RegistrationPage({
   function handleChangeUserType(event) {
     setUserType(event.target.value);
   }
+
   return (
     <div className="registration-page">
       <h1 className="user-type-prompt">
@@ -56,7 +55,7 @@ export default function RegistrationPage({
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-          College student/alum
+          College Student/Alum
         </button>
       </div>
 
@@ -91,8 +90,8 @@ export default function RegistrationPage({
         ></AlumnRegistrationPage>
       ) : userType == "college-admission-officer" ? (
         <AdminRegistrationPage
-          admissionLoginInfo={admissionLoginInfo}
-          setAdmissionLoginInfo={setAdmissionLoginInfo}
+          userLoginInfo={userLoginInfo}
+          setUserLoginInfo={setUserLoginInfo}
           handleShowPassword={handleShowPassword}
           handleHidePassword={handleHidePassword}
           passwordDisplayed={passwordDisplayed}

@@ -1,15 +1,38 @@
+import * as React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 export default function AdminRegistrationPage({
-  admissionLoginInfo,
-  setAdmissionLoginInfo,
+  userLoginInfo,
+  setUserLoginInfo,
   handleShowPassword,
   handleHidePassword,
   passwordDisplayed,
   error,
+  setError
 }) {
+  const navigate = useNavigate();
+  const [collegeOptions, setCollegeOptions] = useState([]);
+
+  useEffect(() => {
+    {
+      axios.post("http://localhost:3010/collegeList").then((response) => {
+        setCollegeOptions(response.data);
+      });
+    }
+  }, []);
+  function handleCollegeSelect(event) {
+    // setSelectedCollege(event.target.value);
+    setUserLoginInfo({
+      ...userLoginInfo,
+      college: event.target.value,
+    });
+  }
+
   function handleDemo() {
-    setAdmissionLoginInfo({
+    setUserLoginInfo({
       // work mail accounted for...edu
       email: "nylevenya@brown.edu",
       firstName: "nya",
@@ -19,7 +42,45 @@ export default function AdminRegistrationPage({
       college: "Brown University",
     });
   }
+  async function handleAdminRegistration(event) {
+    event.preventDefault();
 
+    if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
+      setError({ message: "Passwords do not match", status: 422 });
+    } else {
+      let result = await axios.post(
+        "http://localhost:3010/auth/register/college-admission-officer",
+        {
+          email: userLoginInfo.email,
+          firstName: userLoginInfo.firstName,
+          lastName: userLoginInfo.lastName,
+          college: userLoginInfo.college,
+          password: userLoginInfo.password,
+        }
+      );
+      navigate("/login");
+
+      if (result.data.status) {
+        setError(result.data);
+      } else {
+        setError({});
+        setUserLoginInfo({
+          email: "",
+          firstName: "",
+          lastName: "",
+          parentPhone: "",
+          zipcode: "",
+          password: "",
+          confirmPassword: "",
+          examScores: {},
+          enrollment: 0,
+          schoolType: "",
+          college: "",
+          collegeGradYear: "",
+        });
+      }
+    }
+  }
   return (
     <div className="admin-registration">
       <h2>Create a College Admission Officer account</h2>
@@ -30,9 +91,9 @@ export default function AdminRegistrationPage({
               className="first-name-input"
               type="text"
               placeholder="First Name"
-              value={admissionLoginInfo.firstName}
+              value={userLoginInfo.firstName}
               onChange={(e) =>
-                setAdmissionLoginInfo((u) => ({
+                setUserLoginInfo((u) => ({
                   ...u,
                   firstName: e.target.value,
                 }))
@@ -45,9 +106,9 @@ export default function AdminRegistrationPage({
               className="last-name-input"
               type="text"
               placeholder="Last Name"
-              value={admissionLoginInfo.lastName}
+              value={userLoginInfo.lastName}
               onChange={(e) =>
-                setAdmissionLoginInfo((u) => ({
+                setUserLoginInfo((u) => ({
                   ...u,
                   lastName: e.target.value,
                 }))
@@ -65,9 +126,9 @@ export default function AdminRegistrationPage({
             className="email-input"
             type="email"
             placeholder="Work/Institution Email"
-            value={admissionLoginInfo.email}
+            value={userLoginInfo.email}
             onChange={(e) =>
-              setAdmissionLoginInfo((u) => ({ ...u, email: e.target.value }))
+              setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
             }
           ></input>
         </div>
@@ -81,9 +142,9 @@ export default function AdminRegistrationPage({
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
             placeholder="Password"
-            value={admissionLoginInfo.password}
+            value={userLoginInfo.password}
             onChange={(e) =>
-              setAdmissionLoginInfo((u) => ({ ...u, password: e.target.value }))
+              setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
             }
           ></input>
           <button
@@ -111,9 +172,9 @@ export default function AdminRegistrationPage({
             type={passwordDisplayed.confirmPassword ? "text" : "password"}
             placeholder="Confirm Password"
             className="confirm-password-input"
-            value={admissionLoginInfo.confirmPassword}
+            value={userLoginInfo.confirmPassword}
             onChange={(e) =>
-              setAdmissionLoginInfo((u) => ({
+              setUserLoginInfo((u) => ({
                 ...u,
                 confirmPassword: e.target.value,
               }))
@@ -141,13 +202,24 @@ export default function AdminRegistrationPage({
               " Error."
             : null}
         </div>
-        {/* include college dropdown goes here */}
-
-        <div>* select college here *</div>
+        <select onChange={handleCollegeSelect}>
+          {/* Sorting dropdown options in alphabetical order */}
+          {collegeOptions
+            .slice()
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((college) => (
+              <option key={college.id} value={college.name}>
+                {college.name}
+              </option>
+            ))}
+        </select>
       </form>
 
       <button className="demo-button" onClick={handleDemo}>
         Demo Registration
+      </button>
+      <button className="registration-submit" onClick={handleAdminRegistration}>
+        <Link to={"/register/"}> Submit</Link>
       </button>
     </div>
   );

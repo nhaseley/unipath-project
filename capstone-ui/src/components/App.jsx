@@ -30,15 +30,8 @@ export default function App() {
     examScores: {},
     enrollment: 0,
     schoolType: "",
-  });
-
-  const [admissionLoginInfo, setAdmissionLoginInfo] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    confirmPassword: "",
     college: "",
+    collegeGradYear: ""
   });
 
   const [passwordDisplayed, setPasswordDisplayed] = useState({
@@ -182,8 +175,6 @@ export default function App() {
                 <RegistrationPage
                   userLoginInfo={userLoginInfo}
                   setUserLoginInfo={setUserLoginInfo}
-                  admissionLoginInfo={admissionLoginInfo}
-                  setAdmissionLoginInfo={setAdmissionLoginInfo}
                   handleShowPassword={handleShowPassword}
                   handleHidePassword={handleHidePassword}
                   passwordDisplayed={passwordDisplayed}
@@ -191,6 +182,7 @@ export default function App() {
                   setError={setError}
                   userType={userType}
                   setUserType={setUserType}
+                  
                 ></RegistrationPage>
               }
             />

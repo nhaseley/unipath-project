@@ -142,5 +142,5 @@ CREATE TABLE reviews (
   id              SERIAL PRIMARY KEY,
   college_id      INT,
   user_id         INT,
-  review          TEXT,  
+  review          TEXT
 )
