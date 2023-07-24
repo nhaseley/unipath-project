@@ -4,10 +4,13 @@ import jwtDecode from "jwt-decode";
 import StudentRegistrationForm from "./StudentRegistrationForm";
 import ParentRegistrationForm from "./ParentRegistrationForm";
 import AlumnRegistrationPage from "./AlumnRegistrationPage";
+import AdminRegistrationPage from "./AdminRegistrationPage";
 
 export default function RegistrationPage({
   userLoginInfo,
   setUserLoginInfo,
+  setAdmissionLoginInfo,
+  admissionLoginInfo,
   handleShowPassword,
   handleHidePassword,
   passwordDisplayed,
@@ -22,7 +25,7 @@ export default function RegistrationPage({
   return (
     <div className="registration-page">
       <h1 className="user-type-prompt">
-        Which of the following best identifies you?
+        Which of the following best describes you?
       </h1>
       <div className="user-types">
         <button
@@ -78,14 +81,24 @@ export default function RegistrationPage({
         ></ParentRegistrationForm>
       ) : userType == "college-students-and-alumni" ? (
         <AlumnRegistrationPage
-        userLoginInfo={userLoginInfo}
-        setUserLoginInfo={setUserLoginInfo}
-        handleShowPassword={handleShowPassword}
-        handleHidePassword={handleHidePassword}
-        passwordDisplayed={passwordDisplayed}
-        error={error}
-        setError={setError}
+          userLoginInfo={userLoginInfo}
+          setUserLoginInfo={setUserLoginInfo}
+          handleShowPassword={handleShowPassword}
+          handleHidePassword={handleHidePassword}
+          passwordDisplayed={passwordDisplayed}
+          error={error}
+          setError={setError}
         ></AlumnRegistrationPage>
+      ) : userType == "college-admission-officer" ? (
+        <AdminRegistrationPage
+          admissionLoginInfo={admissionLoginInfo}
+          setAdmissionLoginInfo={setAdmissionLoginInfo}
+          handleShowPassword={handleShowPassword}
+          handleHidePassword={handleHidePassword}
+          passwordDisplayed={passwordDisplayed}
+          error={error}
+          setError={setError}
+        ></AdminRegistrationPage>
       ) : null}
     </div>
   );

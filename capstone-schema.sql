@@ -118,6 +118,7 @@ CREATE TABLE admission_officers (
   first_name TEXT NOT NULL,
   last_name  TEXT NOT NULL,
   work_email TEXT NOT NULL UNIQUE CHECK (position('@' IN work_email) > 1),
+  college    TEXT NOT NULL,
   password   TEXT NOT NULL
 );
 
