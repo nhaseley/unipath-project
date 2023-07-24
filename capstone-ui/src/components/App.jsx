@@ -39,8 +39,9 @@ export default function App() {
   const [collegeList, setCollegeList] = useState([]);
   const [selectedCollege, setSelectedCollege] = useState({});
   const [userType, setUserType] = useState();
-
   const [decodedToken, setDecodedToken] = useState();
+  const [collegeArrayPointer, setCollegeArrayPointer] = useState(0);
+
   console.log("user info: ", userLoginInfo);
 
   useEffect(() => {
@@ -51,7 +52,6 @@ export default function App() {
           token: token,
         })
         .then((response) => {
-          console.log("user in front: ", response.data.user);
             setUserLoginInfo({
               email: response.data.user.email,
               firstName: response.data.user.first_name,
@@ -64,6 +64,7 @@ export default function App() {
               enrollment: response.data.user.enrollment,
               schoolType: response.data.user.school_type,
             });
+            // TODO: FIX JWT FOR OTHER USER ROLES
 
           setDecodedToken(response.data.decodedToken);
         })
@@ -211,6 +212,8 @@ export default function App() {
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
                   userLoggedIn={userLoggedIn}
+                  collegeArrayPointer={collegeArrayPointer}
+                  setCollegeArrayPointer={setCollegeArrayPointer}
                 ></CollegesPage>
               }
             ></Route>

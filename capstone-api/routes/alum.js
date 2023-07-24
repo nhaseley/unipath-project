@@ -6,7 +6,6 @@ const router = express.Router()
 
 
 router.post("/collegeList", async function (req, res, next) {
-    console.log("getting colleges")
     try {
         const collegesToDisplay = await Alum.getColleges()
         

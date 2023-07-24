@@ -9,9 +9,11 @@ export default function CollegeGrid({
   userLoginInfo,
   collegeList,
   setCollegeList,
+  collegeArrayPointer,
+  setCollegeArrayPointer,
 }) {
-  const [pageID, setPageID] = useState(1);
 
+  // Function to display colleges on the grid
   async function getCollegeGrid() {
     {
       axios
@@ -27,32 +29,32 @@ export default function CollegeGrid({
         });
     }
   }
+
+  // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
-  }, [userLoginInfo]);
+  }, [userLoginInfo, collegeArrayPointer]);
 
-  function incrementPage(event) {
-    setPageID((pageID) => pageID + 1);
-    event.preventDefault();
+  function incrementPage() {
+    setCollegeArrayPointer(collegeArrayPointer + 20);
   }
- 
+
+  let first20Colleges = collegeList.slice(collegeArrayPointer, collegeArrayPointer+20)
+
   return (
     <div className="college-grid">
-      
       <div className="content">
         <h1>
           Hi {userLoginInfo.firstName != "" ? userLoginInfo.firstName : null},
           here are your personalized colleges!
         </h1>
         <div className="colleges">
-          {collegeList?.map((college, index) => (
-                <CollegeCard college={college} key={index} />
-              ))
-          }
+          {first20Colleges?.map((college, index) => (
+            <CollegeCard college={college} key={index} />
+          ))}
+          {/* change functionality to be able to back to previous colleges */}
         </div>
-        <button onClick={incrementPage} value={pageID}>
-          See More Colleges
-        </button>
+        <button onClick={incrementPage}>See More Colleges</button>
       </div>
     </div>
   );

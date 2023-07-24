@@ -4,6 +4,7 @@ const authenticateJWT = require("../utils/auth"); //importing the authenticateJW
 const express = require("express");
 const Student = require("../models/student");
 const Parent = require("../models/parent");
+const Alum = require("../models/alum");
 const router = express.Router();
 
 router.post("/register", async function (req, res, next) {
@@ -52,6 +53,32 @@ router.post("/login/parent", async function (req, res, next) {
     const parent = await Parent.authenticate(req.body);
     if (parent) {
       return res.status(200).json(parent);
+      // const token = await User.generateAuthToken(user)
+      // return res.status(200).json({ user, token})
+    }
+  } catch (err) {
+    res.send(err);
+    next(err);
+  }
+});
+
+router.post("/register/alum", async function (req, res, next) {
+  try {
+    const alum = await Alum.register(req.body);
+    //   const token = await User.generateAuthToken(user)
+    return res.status(201).json(alum);
+    // return res.status(201).json({ user, token})
+  } catch (err) {
+    res.send(err);
+    next(err);
+  }
+});
+
+router.post("/login/alum", async function (req, res, next) {
+  try {
+    const alum = await Alum.authenticate(req.body);
+    if (alum) {
+      return res.status(200).json(alum);
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})
     }

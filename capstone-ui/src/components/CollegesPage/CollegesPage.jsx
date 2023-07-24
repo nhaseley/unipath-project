@@ -10,19 +10,23 @@ export default function CollegesPage({
   collegeList,
   setCollegeList,
   userLoggedIn,
+  collegeArrayPointer,
+  setCollegeArrayPointer
 }) {
   return (
     <div className="colleges-page">
       {!userLoggedIn ? (
-        <div>Please log in. </div>
+        <h1>Please log in. </h1>
       ) : (
         <>
-          <FilterSidebar userLoginInfo={userLoginInfo}></FilterSidebar>
+          <FilterSidebar userLoginInfo={userLoginInfo} collegeList={collegeList} setCollegeList={setCollegeList}></FilterSidebar>
 
           <CollegeGrid
             userLoginInfo={userLoginInfo}
             collegeList={collegeList}
             setCollegeList={setCollegeList}
+            collegeArrayPointer={collegeArrayPointer}
+            setCollegeArrayPointer={setCollegeArrayPointer}
           ></CollegeGrid>
         </>
       )}
