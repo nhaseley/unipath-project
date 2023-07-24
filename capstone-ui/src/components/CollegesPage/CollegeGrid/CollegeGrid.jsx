@@ -9,21 +9,13 @@ export default function CollegeGrid({
   userLoginInfo,
   collegeList,
   setCollegeList,
+  collegeArrayPointer,
+  setCollegeArrayPointer,
 }) {
-  const [pageID, setPageID] = useState(1);
 
-  const apiKey = "AiIF47OdjlHUb8m7mvs5k265lBQgGG9Hd5KXhBrF";
-  const ORIGINAL_COLLEGE_API_URL =
-    "https://api.data.gov/ed/collegescorecard/v1/schools?";
-
-  const createEndpointUrl = (pageID) =>
-    `${ORIGINAL_COLLEGE_API_URL}page=${pageID}&api_key=${apiKey}`;
-
+  // Function to display colleges on the grid
   async function getCollegeGrid() {
-    if (
-      // unnecessary once we require login for this page
-      userLoginInfo.firstName != ""
-    ) {
+    {
       axios
         .post("http://localhost:3010/colleges", {
           satScore: userLoginInfo.satScore,
@@ -37,85 +29,32 @@ export default function CollegeGrid({
         });
     }
   }
+
+  // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
-  }, []);
+  }, [userLoginInfo, collegeArrayPointer]);
 
-  function incrementPage(event) {
-    setPageID((pageID) => pageID + 1);
-    event.preventDefault();
+  function incrementPage() {
+    setCollegeArrayPointer(collegeArrayPointer + 20);
   }
 
+  let first20Colleges = collegeList.slice(collegeArrayPointer, collegeArrayPointer+20)
 
   return (
     <div className="college-grid">
       <div className="content">
         <h1>
-          {" "}
-          Hi {localStorage.getItem("firstName")}, here are your personalized
-          colleges!{" "}
+          Hi {userLoginInfo.firstName != "" ? userLoginInfo.firstName : null},
+          here are your personalized colleges!
         </h1>
         <div className="colleges">
-
-          {collegeList?.map((college, index) =>
-
-            // (college.latest.admissions.act_scores.cumulative
-            //   ? Math.abs(
-            //       college.latest.admissions.act_scores.cumulative -
-            //         userScores.actScore
-            //     ) <= 4
-            //   : null) ? (
-              //   ||
-              // (college.latest.student.size && userLoginInfo.enrollment != 0
-              //   ? userLoginInfo.enrollment == 5000
-              //     ? college.latest.student.size < 5000
-              //     : userLoginInfo.enrollment == 7000
-              //     ? 5000 <= college.latest.student.size <= 10000
-              //     : userLoginInfo.enrollment == 10000
-              //     ? college.latest.student.size > 10000
-              //     : null
-              //   : null)
-              //   ||
-              // (userLoginInfo.schoolType != ""
-              //   ? (userLoginInfo.schoolType == "men_only"
-              //       ? college.latest.school.men_only == 1
-              //       : null)
-              //       ||
-              //     (userLoginInfo.schoolType == "women_only"
-              //       ? college.latest.school.women_only == 1
-              //       : null)
-              //       ||
-              //     (userLoginInfo.schoolType == "historically_black"
-              //       ? college.latest.school.minority_serving.historically_black ==
-              //           1
-              //           ||
-              //         college.latest.school.minority_serving
-              //           .predominantly_black == 1
-              //       : null)
-              //       ||
-              //     (userLoginInfo.schoolType == "tribal"
-              //       ? college.latest.school.minority_serving.tribal == 1
-              //       : null)
-              //       ||
-              //     (userLoginInfo.schoolType == "annh"
-              //       ? college.latest.school.minority_serving.annh == 1
-              //       : null)
-              //       ||
-              //     (userLoginInfo.schoolType == "aanipi"
-              //       ? college.latest.school.minority_serving.aanipi == 1
-              //       : null)
-              //   : null)
-
-              // <CollegeCard college={college.latest} key={index} />
-              <CollegeCard college={college} key={index} />
-          //   ) : null
-          // )}
-
-          )}
+          {first20Colleges?.map((college, index) => (
+            <CollegeCard college={college} key={index} />
+          ))}
+          {/* change functionality to be able to back to previous colleges */}
         </div>
-        <button onClick={incrementPage} value={pageID}>
-          See More Colleges
-        </button>
+        <button onClick={incrementPage}>See More Colleges</button>
       </div>
     </div>
   );

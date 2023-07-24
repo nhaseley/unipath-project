@@ -1,17 +1,20 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import HomePage from "./HomePage/HomePage";
 import Navbar from "./Navbar/Navbar";
 import LoginPage from "./LoginPage/LoginPage";
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 import RegistrationSurveyPage from "./RegistrationPage/RegistrationSurveyPage";
+import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 import CollegesPage from "./CollegesPage/CollegesPage";
 import CollegeInfoPage from "./CollegesPage/CollegeInfoPage/CollegeInfoPage";
 import MyCollegesPage from "./MyCollegesPage/MyCollegesPage";
+import AlumniHomePage from "./AlumniHome/AlumniHomePage"
+import EventsPage from "./EventsPage/EventsPage"
+import ParentsPage from "./ParentsPage/ParentsPage"
 import About from "./About/About";
-import axios from "axios";
-import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 
 export default function App() {
   //------------------ States ---------------------//
@@ -48,8 +51,10 @@ export default function App() {
   const [collegeList, setCollegeList] = useState([]);
   const [selectedCollege, setSelectedCollege] = useState({});
   const [userType, setUserType] = useState();
-
   const [decodedToken, setDecodedToken] = useState();
+  const [collegeArrayPointer, setCollegeArrayPointer] = useState(0);
+
+  console.log("user info: ", userLoginInfo);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -59,8 +64,21 @@ export default function App() {
           token: token,
         })
         .then((response) => {
-          console.log(response.data);
-          setDecodedToken(response.data.decodedToken?.exp);
+            setUserLoginInfo({
+              email: response.data.user.email,
+              firstName: response.data.user.first_name,
+              lastName: response.data.user.last_name,
+              parentPhone: response.data.user.parent_phone,
+              zipcode: response.data.user.zipcode,
+              password: response.data.user.password,
+              satScore: response.data.user.sat_score,
+              actScore: response.data.user.act_score,
+              enrollment: response.data.user.enrollment,
+              schoolType: response.data.user.school_type,
+            });
+            // TODO: FIX JWT FOR OTHER USER ROLES
+
+          setDecodedToken(response.data.decodedToken);
         })
         .catch((error) => {
           console.error("Error retrieving decoded token:", error);
@@ -69,11 +87,11 @@ export default function App() {
   }, [decodedToken]);
 
   useEffect(() => {
-    console.log("decodedToken:", decodedToken);
     if (decodedToken) {
-      setUserLoggedIn(true); // Setting appState to true, making sure the
+      setUserLoggedIn(true); // Setting appState to true, making sure the user is logged in
+
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
-      if (decodedToken < currentTime) {
+      if (decodedToken.exp < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
         // Redirecting to the homepage?
       }
@@ -106,7 +124,7 @@ export default function App() {
   }
 
   function logoutUser() {
-    // localStorage.removeItem("token");
+    localStorage.removeItem("token");
     setUserLoggedIn(false);
     // setUserData({});
     setUserLoginInfo({
@@ -208,7 +226,37 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
+                  userLoggedIn={userLoggedIn}
+                  collegeArrayPointer={collegeArrayPointer}
+                  setCollegeArrayPointer={setCollegeArrayPointer}
                 ></CollegesPage>
+              }
+            ></Route>
+            <Route
+              path="/child-feed"
+              element={
+                <ParentsPage
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                ></ParentsPage>
+              }
+            ></Route>
+            <Route
+              path="/events"
+              element={
+                <EventsPage
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                ></EventsPage>
+              }
+            ></Route>
+            <Route
+              path="/mycollege"
+              element={
+                <AlumniHomePage
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                ></AlumniHomePage>
               }
             ></Route>
             <Route
@@ -218,7 +266,6 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   setSelectedCollege={setSelectedCollege}
                 >
-                  {" "}
                 </CollegeInfoPage>
               }
             ></Route>

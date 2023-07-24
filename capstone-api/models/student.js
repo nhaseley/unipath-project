@@ -74,6 +74,7 @@ class Student {
    **/
 
   static async register(creds) {
+    console.log(creds)
     const requiredCreds = [
       "email",
       "firstName",
@@ -133,10 +134,10 @@ class Student {
         creds.parentPhone,
         creds.zipcode,
         hashedPassword,
-        creds.examScores.satScore,
-        creds.examScores.actScore,
-        creds.enrollment,
-        creds.schoolType,
+        creds.examScores ? creds.examScores.satScore : undefined,
+        creds.examScores ? creds.examScores.actScore : undefined,
+        creds.enrollment ? creds.enrollment: undefined,
+        creds.schoolType ? creds.schoolType: undefined,
       ]
     );
 
@@ -192,7 +193,6 @@ class Student {
                   `,
       [student_id, college]
     );
-    // console.log(result.rows[0]);
     return result.rows[0];
   }
 
@@ -208,7 +208,6 @@ class Student {
           WHERE user_id = $1`,
       [student_id]
     );
-    // console.log("likes from database: ", result.rows);
     return result.rows;
   }
 
@@ -240,17 +239,20 @@ class Student {
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
-      location: student.location,
-      date: student.date,
+      // location: student.location,
+      // date: student.date,
     };
 
     const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
     return token;
   }
 
+
+
   static async verifyAuthToken(token) {
     try {
       const decoded = jwt.verify(token, secretKey); // decoding the token
+
       return decoded; // returning the decoded token
     } catch {
         return null // return null if the token seems to be invalid or expired
@@ -290,7 +292,7 @@ class Student {
   // }
   static async getCollegeFeed(sat_score, act_score) {
     if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
-      throw new BadRequestError("No standardized test scores for this user.");
+      // throw new BadRequestError("No standardized test scores for this user.");
     }
     const result = await db.query(
       `SELECT * FROM colleges_from_api

@@ -57,22 +57,36 @@ export default function LoginPage({
         password: userLoginInfo.password,
       }
     );
-
+      console.log("result from login: ", result.data)
     if (result?.data) {
-      console.log("Sign in Successful!");
-
       localStorage.setItem("token", result.data.token);
-      localStorage.setItem("firstName", result.data.student.firstName);
-
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
 
-      console.log("user data on login: ", result.data);
-      setUserLoginInfo(result.data);
+      {
+        userType == "student"
+          ? setUserLoginInfo(result.data.student)
+          : userType == "parent"
+          ? setUserLoginInfo(result.data)
+          : // userType == "college-admission-officer" ? setUserLoginInfo(result.data.admissionOfficer) :
+          userType == "college-students-and-alumni"
+          ? setUserLoginInfo(result.data)
+          : null;
+      }
 
       setError({});
       setUserLoggedIn(true);
-      navigate("/feed");
+      {
+        userType == "student"
+          ? navigate("/feed")
+          : userType == "parent"
+          ? navigate("/child-feed")
+          : userType == "college-admission-officer"
+          ? navigate("/events")
+          : userType == "college-students-and-alumni"
+          ? navigate("/mycollege")
+          : null;
+      }
     } else {
       setError(result?.data);
     }
@@ -108,11 +122,11 @@ export default function LoginPage({
           College Admission Officer
         </button>
         <button
-          className="college-student-faculty-alum"
-          value="college-student-faculty-alumn"
+          className="college-students-and-alumni"
+          value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-          College student/faculty/alum
+          College Student/Alum
         </button>
       </div>
 
@@ -129,7 +143,7 @@ export default function LoginPage({
                 className="email-input"
                 type="email"
                 placeholder="Email"
-                value={userLoginInfo.email}
+                value={userLoginInfo?.email}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
                 }
@@ -144,7 +158,7 @@ export default function LoginPage({
                 className="password-input"
                 type={passwordDisplayed.password ? "text" : "password"}
                 placeholder="Password"
-                value={userLoginInfo.password}
+                value={userLoginInfo?.password}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
                 }

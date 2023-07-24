@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 
 export default function CollegeCard({ college }) {
-  let satScore = (parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math))
+  let satScore = parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math)
 
   return (
     <div className="college-card">
@@ -12,7 +12,7 @@ export default function CollegeCard({ college }) {
     
       {satScore || college.act_score? (
         <>
-          <div>{college.name}</div>
+          <h3>{college.name}</h3>
           <div className="scores">
             <div className="median-sat"></div>
             Median SAT Score:

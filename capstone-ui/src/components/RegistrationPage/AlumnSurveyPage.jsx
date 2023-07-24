@@ -1,103 +1,190 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
+import axios from "axios";
 
+export default function AlumnSurveyPage({
+  userLoginInfo,
+  setError,
+  setUserLoginInfo,
+  userType,
+}) {
+  const navigate = useNavigate();
+  const [selectedButton, setSelectedButton] = useState({});
+  const [graduationYear, setGraduationYear] = useState();
+  const [selectedCollege, setSelectedCollege] = useState();
+  const [collegeOptions, setCollegeOptions] = useState([]);
+  console.log("college", selectedCollege);
 
+  const collegeYearOptions = Array.from({ length: 44 }, (_, i) => ({
+    value: 2023 - i,
+    label: 2023 - i.toLocaleString(),
+  }));
 
+  useEffect(() => {
+    {
+      axios.post("http://localhost:3010/collegeList").then((response) => {
+        setCollegeOptions(response.data);
+      });
+    }
+  }, []);
 
+  function handleCollegeYearSelect(event) {
+    setGraduationYear(event.value);
+    setUserLoginInfo({
+      ...userLoginInfo,
+      collegeGradYear: event.value,
+    });
+  }
 
-export default function AlumnSurveyPage ({userLoginInfo, setError, setUserLoginInfo, userType}) { 
-       
-    const navigate = useNavigate();  
-    const [selectedButton, setSelectedButton] = useState({});
+    function handleCollegeSelect(event) {
+      // TODO: fix this func
+      setSelectedCollege(event.target.value);
+      setUserLoginInfo({
+        ...userLoginInfo,
+        college: event.target.value,
+      });
+    }
 
+  async function handleAlumniRegistration(event) {
+    event.preventDefault();
 
-
-    async function handleRegistration(event) {
-        event.preventDefault();
-    
-        if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
-          setError({ message: "Passwords do not match", status: 422 });
-        } else {
-          let result = await axios.post("http://localhost:3010/auth/register", {
-            email: userLoginInfo.email,
-            firstName: userLoginInfo.firstName,
-            lastName: userLoginInfo.lastName,
-            password: userLoginInfo.password,
-          });
-
-          console.log("result on frontend: ", result);
-          navigate("/login" + `/${userType}`);
-    
-          if (result.data.status) {
-            setError(result.data);
-          } else {
-            //   const token = result.data.token;
-            //   localStorage.setItem("token", token);
-            //   const decodedToken = jwtDecode(token);
-            setError({});
-            setUserLoginInfo({
-                email: "",
-                firstName: "",
-                lastName: "",
-                parentPhone: "",
-                zipcode: "",
-                password: "",
-                confirmPassword: "",
-                examScores: {},
-                enrollment: 0,
-                schoolType: ""
-            });
-          }
+    if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
+      setError({ message: "Passwords do not match", status: 422 });
+    } else {
+      let result = await axios.post(
+        "http://localhost:3010/auth/register/college-students-and-alumni",
+        {
+          email: userLoginInfo.email,
+          firstName: userLoginInfo.firstName,
+          lastName: userLoginInfo.lastName,
+          password: userLoginInfo.password,
+          college: userLoginInfo.college,
+          collegeGradYear: userLoginInfo.collegeGradYear,
         }
+      );
+
+      navigate("/login");
+
+      if (result.data.status) {
+        setError(result.data);
+      } else {
+        //   const token = result.data.token;
+        //   localStorage.setItem("token", token);
+        //   const decodedToken = jwtDecode(token);
+        setError({});
+        setUserLoginInfo({
+          email: "",
+          firstName: "",
+          lastName: "",
+          parentPhone: "",
+          zipcode: "",
+          password: "",
+          confirmPassword: "",
+          examScores: {},
+          enrollment: 0,
+          schoolType: "",
+          college: "",
+          collegeGradYear: "",
+        });
       }
-console.log("button: ", selectedButton.highsch)
+    }
+  }
 
-    return (
-        <div className="alumn-survery-page">
-            <div className="first-question-input">
-                Are you a high school graduate? 
-                <button onClick={() => setSelectedButton({ ...selectedButton, highsch: "Yes" })}>
-                    Yes
-                </button>
-                <button onClick={() => setSelectedButton({ ...selectedButton, highsch: "No" })}>
-                    No
-                </button>
-
-                { selectedButton.highsch == "Yes" ? (
-                    <div className="yearOfGrad">
-                        What year did you graduate ?
-                        <Select>
-                            <option value="">
-
-                            </option>
-                        </Select>
-
-                        <div className="whatHighSchool">
-                            
-                        </div>
-                    </div>
-                ) : (
-                    selectedButton.highsch ? 
-                    
-                    <div className="redirectToRegister">
-                        Please register as a student 
-                        <Link to={"/register"}> Register Here </Link>
-                    </div>
-                    : null
-                )}
+  return (
+    <div className="alumn-survery-page">
+      <div className="first-question-input">
+        Are you a high school graduate?
+        <button
+          onClick={() =>
+            setSelectedButton({ ...selectedButton, highsch: "Yes" })
+          }
+        >
+          Yes
+        </button>
+        <button
+          onClick={() =>
+            setSelectedButton({ ...selectedButton, highsch: "No" })
+          }
+        >
+          No
+        </button>
+        {selectedButton.highsch == "Yes" ? (
+          <div className="studentsAndAlumniInfo">
+            <div className="whatCollege">
+              What college are you affiliated with?
+              {/* <Select
+                        options={collegeOptions.slice(0, 5)}
+                        onChange={handleCollegeSelect}
+                        // value={selectedCollege}
+                        value={collegeOptions.find(
+                          (option) => option.name === selectedCollege
+                        )?.name}
+                      ></Select> */}
+              {/* {selectedCollege} */}
+              <select onChange={handleCollegeSelect}>
+                {/* Sorting dropdown options in alphabetical order */}
+                {collegeOptions
+                  .slice()
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((college) => (
+                    <option key={college.id} value={college.name}>
+                      {college.name}
+                    </option>
+                  ))}
+              </select>
             </div>
-
-            <div className="second-question-input">
-
+            <div className="AreYouCollegeGrad">
+              Are you a college graduate?
+              <button
+                onClick={() =>
+                  setSelectedButton({ ...selectedButton, collegeUni: "Yes" })
+                }
+              >
+                Yes
+              </button>
+              <button
+                onClick={() =>
+                  setSelectedButton({ ...selectedButton, collegeUni: "No" })
+                }
+              >
+                No
+              </button>
             </div>
-
-
-            <div>
-
-            </div>
-
-        </div>
-    )
+            {selectedButton.collegeUni == "Yes" ? (
+              <div className="yearOfCollegeGrad">
+                What year did you graduate college ?
+                <Select
+                  options={collegeYearOptions}
+                  onChange={handleCollegeYearSelect}
+                  value={collegeYearOptions.find(
+                    (option) => option.value === graduationYear
+                  )}
+                ></Select>
+              </div>
+            ) : selectedButton.collegeUni == "No" ? (
+              <button
+                className="registration-submit"
+                onClick={handleAlumniRegistration}
+              >
+                <Link to={"/register/college-students-and-alumni"}> Submit</Link>
+              </button>
+            ) : null}
+          </div>
+        ) : selectedButton.highsch == "No" ? (
+          <div className="redirectToRegister">
+            Please register as a student
+            <Link to={"/register"}> here </Link>
+          </div>
+        ) : null}
+      </div>
+      <button
+        className="registration-submit"
+        onClick={handleAlumniRegistration}
+      >
+        <Link to={"/register/college-students-and-alumni"}> Submit</Link>
+      </button>
+    </div>
+  );
 }
