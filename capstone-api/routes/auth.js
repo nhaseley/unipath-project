@@ -5,7 +5,10 @@ const express = require("express");
 const Student = require("../models/student");
 const Parent = require("../models/parent");
 const Alum = require("../models/alum");
+<<<<<<< Updated upstream
 const AdmissionOfficer = require("../models/admissionOfficer");
+=======
+>>>>>>> Stashed changes
 const router = express.Router();
 
 router.post("/register", async function (req, res, next) {
@@ -82,6 +85,10 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
   try {
     const alum = await Alum.authenticate(req.body);
     if (alum) {
+<<<<<<< Updated upstream
+=======
+      console.log("logged in: ", alum)
+>>>>>>> Stashed changes
       return res.status(200).json(alum);
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})
@@ -91,6 +98,7 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
     next(err);
   }
 });
+<<<<<<< Updated upstream
 router.post("/register/college-admission-officer", async function (req, res, next) {
   try {
     const admissionOfficer = await AdmissionOfficer.register(req.body);
@@ -115,6 +123,9 @@ router.post("/login/college-admission-officer", async function (req, res, next) 
     next(err);
   }
 });
+=======
+
+>>>>>>> Stashed changes
 router.post("/decodedtoken", async (req, res, next) => {
   const token = req.body.token; // Getting the token from the request body
   const decodedToken = await Student.verifyAuthToken(token); // Decoding the token

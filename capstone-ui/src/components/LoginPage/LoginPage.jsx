@@ -68,7 +68,11 @@ export default function LoginPage({
           ? setUserLoginInfo(result.data.student)
           : userType == "parent"
           ? setUserLoginInfo(result.data)
+<<<<<<< Updated upstream
           : userType == "college-admission-officer" ? setUserLoginInfo(result.data.admissionOfficer) :
+=======
+          : // userType == "college-admission-officer" ? setUserLoginInfo(result.data.admissionOfficer) :
+>>>>>>> Stashed changes
           userType == "college-students-and-alumni"
           ? setUserLoginInfo(result.data)
           : null;
