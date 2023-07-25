@@ -242,6 +242,8 @@ export default function App() {
               path="/mycollege"
               element={
                 <AlumniHomePage
+                  setError={setError}
+                  setUserLoginInfo={setUserLoginInfo}
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
                 ></AlumniHomePage>

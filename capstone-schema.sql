@@ -139,7 +139,8 @@ CREATE TABLE event_attendees (
 
 CREATE TABLE reviews (
   id              SERIAL PRIMARY KEY,
-  college_id      INT,
   user_id         INT,
-  review          TEXT,  
+  college_name    TEXT,
+  rating          INT,
+  review          TEXT  
 )
