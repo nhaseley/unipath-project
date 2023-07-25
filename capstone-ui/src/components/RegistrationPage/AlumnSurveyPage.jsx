@@ -15,7 +15,6 @@ export default function AlumnSurveyPage({
   const [graduationYear, setGraduationYear] = useState();
   const [selectedCollege, setSelectedCollege] = useState();
   const [collegeOptions, setCollegeOptions] = useState([]);
-  console.log("college", selectedCollege);
 
   const collegeYearOptions = Array.from({ length: 44 }, (_, i) => ({
     value: 2023 - i,

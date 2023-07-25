@@ -20,7 +20,7 @@ const navigate = useNavigate()
     return (
         <>
         <h1>
-        Welcome, {userLoginInfo.firstName} to the events page!
+        Welcome, {userLoginInfo?.firstName} to the events page!
         </h1>
 
         {userType == "college-admission-officer" ? 

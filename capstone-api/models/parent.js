@@ -212,7 +212,10 @@ class Parent {
           WHERE parent_phone = $1`,
       [parentPhone]
     );
-    return result.rows[0];
+    if (typeof result.rows[0] == "undefined"){
+      throw new BadRequestError("There is no child registered with this parent phone number.")
+    }
+    return result.rows[0]
   }
 }
 module.exports = Parent;
