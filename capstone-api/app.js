@@ -8,6 +8,8 @@ const config = require("./config");
 const authRoutes = require("./routes/auth");
 const likeRoute = require("./routes/student")
 const alumRoutes = require("./routes/alum")
+const parentRoutes = require("./routes/parent")
+const admissionOfficerRoutes = require("./routes/admissionOfficer")
 const app = express();
 
 app.use(cors()); 
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use(likeRoute)
 app.use(alumRoutes)
+app.use(parentRoutes)
+app.use(admissionOfficerRoutes)
 
 app.get("/", function (req, res) {
   return res.status(200).json({

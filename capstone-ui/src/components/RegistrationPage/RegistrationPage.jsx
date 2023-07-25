@@ -40,7 +40,7 @@ export default function RegistrationPage({
           value="parent"
           onClick={handleChangeUserType}
         >
-          Parent of Student
+          Parent/Guardian of Student
         </button>
 
         <button
@@ -55,7 +55,7 @@ export default function RegistrationPage({
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-          College student/alum
+          College Student/Alum
         </button>
       </div>
 
