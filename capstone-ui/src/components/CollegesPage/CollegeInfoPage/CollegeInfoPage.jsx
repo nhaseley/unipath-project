@@ -6,6 +6,7 @@ import "./CollegeInfoPage.css";
 export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
   const { id } = useParams();
   const [college, setCollege] = useState();
+  const [reviews, setReviews] = useState()
 
   // get info for particular college for this user
   async function getCollege() {
@@ -22,8 +23,28 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
         });
     }
   }
+
+  async function getReviews() {
+    if (
+      // unnecessary once we require login for this page
+      userLoginInfo.firstName != ""
+    ) {
+      axios
+        .post("http://localhost:3010/getCollegeReview", {
+          alum_id: userLoginInfo.id
+        })
+        .then((response) => {
+          // console.log("resp: ",response.data)
+          setReviews(response.data);
+        });
+      }
+  }
+
+
+
   useEffect(() => {
     getCollege();
+    getReviews();
   }, [userLoginInfo]);
 
   function findMinorityServingValue(data) {
@@ -64,6 +85,7 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
     }
   }
   console.log("college:", college);
+  console.log("review", reviews)
 
   return (
     <div className="college-info-page">
@@ -138,6 +160,28 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
           </div>
         </div>
       </div>
+
+
+
+      <div className="alumReviews">
+        {reviews?.map((review) => (
+          <div>
+            <div>
+            review: {review.review}
+            </div>
+            <div>
+            rating: {review.rating}
+            </div>
+            </div>
+        ))}
+             {/* review:{review?.review}
+             rating: {review?.rating} */}
+      </div>
+
+
+
+
+
     </div>
   );
 }
