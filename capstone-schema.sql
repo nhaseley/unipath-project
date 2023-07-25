@@ -144,4 +144,5 @@ CREATE TABLE reviews (
   college_name    TEXT,
   rating          INT,
   review          TEXT  
-)
+);
+

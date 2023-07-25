@@ -25,6 +25,7 @@ router.post("/register", async function (req, res, next) {
 
 router.post("/login/student", async function (req, res, next) {
   try {
+    console.log("yuhhhhhhhhhhhhhhh")
     console.log(req.body)
     const student = await Student.authenticate(req.body);
     if (student) {
