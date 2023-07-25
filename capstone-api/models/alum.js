@@ -170,6 +170,52 @@ static async fetchAlumByEmail(email) {
 
 
 
+
+  /**
+   * Add alum reviews to the Review table
+   *
+   * @param {*} 
+   * @return review added to the database
+   */
+  static async addCollegeReview(alum_id, college_name, rating, review) {
+    const result = await db.query(
+      `INSERT INTO reviews (
+        user_id,
+        college_name,
+        rating,
+        review
+      ) VALUES ($1, $2, $3, $4)
+      RETURNING 
+              id,
+              user_id,
+              college_name,
+              rating,
+              review`,
+              [alum_id,college_name, rating, review]
+    );
+    console.log('inputing da reviews', result.rows)
+    return result.rows;
+  }
+
+
+
+
+    /**
+   * get alum reviews from the Review table
+   *
+   * @param {*} 
+   * @return review from the database
+   */
+
+    static async getCollegeReview(alum_id) {
+      const result = await db.query(
+        `SELECT * FROM reviews
+        WHERE user_id = $1`,
+        [alum_id]
+      )
+      console.log("da result",result.rows)
+      return result.rows;
+    }
 }
 
 

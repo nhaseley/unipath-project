@@ -180,6 +180,7 @@ class Student {
    * @return college added to the database
    */
   static async likeCollege(student_id, college) {
+    console.log("college", college)
     const result = await db.query(
       `INSERT INTO colleges (
           user_id,
