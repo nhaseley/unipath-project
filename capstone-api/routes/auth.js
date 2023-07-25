@@ -25,8 +25,6 @@ router.post("/register", async function (req, res, next) {
 
 router.post("/login/student", async function (req, res, next) {
   try {
-    console.log("yuhhhhhhhhhhhhhhh")
-    console.log(req.body)
     const student = await Student.authenticate(req.body);
     if (student) {
       const tokenPromise = Student.generateAuthToken(student);
@@ -108,7 +106,9 @@ router.post("/register/college-admission-officer", async function (req, res, nex
 });
 router.post("/login/college-admission-officer", async function (req, res, next) {
   try {
+    console.log(req.body)
     const admissionOfficer = await AdmissionOfficer.authenticate(req.body);
+    console.log("officer", admissionOfficer)
     if (admissionOfficer) {
       return res.status(200).json({admissionOfficer});
       // const token = await User.generateAuthToken(user)
