@@ -11,6 +11,7 @@ export default function () {
     const navigate = useNavigate()
 
     function handleEventSubmit (event) {
+        // axios call to store events info in database
         event.preventDefault()
         navigate('/events')
     }
@@ -38,52 +39,52 @@ export default function () {
     <div className="eventOuter">
         <form className="event-form">
             <div className="event-name">
-                <label htmlFor="event-name-label" className="event-name-label" value={eventInfo.name} onChange={(e) =>
+                <label htmlFor="event-name-label" className="event-name-label" onChange={(e) =>
               setEventInfo((u) => ({ ...u, name: e.target.value }))
             }>Event Name: </label>
-                <input type="text" className="event-name-input" />
+                <input type="text" className="event-name-input"value={eventInfo.name}  />
             </div>
 
             <div className="event-desc">
-                <label htmlFor="event-desc-label" className="event-desc-label" value={eventInfo.desc} onChange={(e) =>
+                <label htmlFor="event-desc-label" className="event-desc-label" onChange={(e) =>
               setEventInfo((u) => ({ ...u, desc: e.target.value }))
             } >Event Description:</label>
-                <input type="text" className="event-desc-input" />
+                <input type="text" className="event-desc-input"value={eventInfo.desc} />
             </div>
 
             <div className="event-email">
-                <label htmlFor="email-label" className="email-label" value={eventInfo.email} onChange={(e) =>
+                <label htmlFor="email-label" className="email-label" onChange={(e) =>
               setEventInfo((u) => ({ ...u, email: e.target.value }))
             }>Email:</label>
-                <input type="email" className="email-input"/>
+                <input type="email" className="email-input" value={eventInfo.email} />
             </div>
 
             <div className="event-date/time">
-                <label htmlFor="event-date/time-label" className="event-date/time-label"value={eventInfo.dateTime} onChange={(e) =>
+                <label htmlFor="event-date/time-label" className="event-date/time-label" onChange={(e) =>
               setEventInfo((u) => ({ ...u, dateTime: e.target.value }))
             }>Date/Time:</label>
-                <input type="datetime-local" className="event-date/time-input"/>
+                <input type="datetime-local" className="event-date/time-input" value={eventInfo.dateTime}/>
             </div>
 
             <div className="event-speaker">
-                <label htmlFor="event-speaker-label" className="event-speaker-label" value={eventInfo.speaker} onChange={(e) =>
+                <label htmlFor="event-speaker-label" className="event-speaker-label"  onChange={(e) =>
               setEventInfo((u) => ({ ...u, speaker: e.target.value }))
             }> Speaker(s):</label>
-                <input type="text" className="event-speaker-input"/>
+                <input type="text" className="event-speaker-input" value={eventInfo.speaker}/>
             </div>
 
             <div className="event-dept">
-                <label htmlFor="event-dept-label" className="event-dept-label" value={eventInfo.dept} onChange={(e) =>
+                <label htmlFor="event-dept-label" className="event-dept-label" onChange={(e) =>
               setEventInfo((u) => ({ ...u, dept: e.target.value }))
             }>Dept:</label>
-                <input type="text" className="event-dept-input"/>
+                <input type="text" className="event-dept-input" value={eventInfo.dept} />
             </div>
 
             <div className="event-max-registrants">
-                <label htmlFor="event-max-registrants-label" className="event-max-registrants-label" value={eventInfo.maxRegistrants} onChange={(e) =>
+                <label htmlFor="event-max-registrants-label" className="event-max-registrants-label"  onChange={(e) =>
               setEventInfo((u) => ({ ...u, maxRegistrants: e.target.value }))
             }> Max Registrants: </label>
-                <input type="number" className="event-max-registrants-input" />
+                <input type="number" className="event-max-registrants-input" value={eventInfo.maxRegistrants} />
             </div>
 
             <button className="event-registration" onClick={handleEventSubmit}>  Submit </button>

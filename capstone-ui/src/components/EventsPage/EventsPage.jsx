@@ -11,7 +11,8 @@ const navigate = useNavigate()
         event.preventDefault();
 
         navigate('/eventDetails') 
-    }  
+    }
+    // useeffect to call all events with this college name
 
     return (
         <>
