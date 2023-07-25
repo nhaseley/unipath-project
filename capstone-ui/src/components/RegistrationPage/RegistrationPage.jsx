@@ -55,7 +55,7 @@ export default function RegistrationPage({
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-          College Student/Alum
+          College student/alum
         </button>
       </div>
 

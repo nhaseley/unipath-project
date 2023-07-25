@@ -5,7 +5,6 @@ const express = require("express");
 const Student = require("../models/student");
 const Parent = require("../models/parent");
 const Alum = require("../models/alum");
-const AdmissionOfficer = require("../models/admissionOfficer");
 const router = express.Router();
 
 router.post("/register", async function (req, res, next) {
@@ -82,6 +81,7 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
   try {
     const alum = await Alum.authenticate(req.body);
     if (alum) {
+      console.log("logged in: ", alum)
       return res.status(200).json(alum);
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})
@@ -91,30 +91,7 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
     next(err);
   }
 });
-router.post("/register/college-admission-officer", async function (req, res, next) {
-  try {
-    const admissionOfficer = await AdmissionOfficer.register(req.body);
-    //   const token = await User.generateAuthToken(user)
-    return res.status(201).json({admissionOfficer});
-    // return res.status(201).json({ user, token})
-  } catch (err) {
-    res.send(err);
-    next(err);
-  }
-});
-router.post("/login/college-admission-officer", async function (req, res, next) {
-  try {
-    const admissionOfficer = await AdmissionOfficer.authenticate(req.body);
-    if (admissionOfficer) {
-      return res.status(200).json({admissionOfficer});
-      // const token = await User.generateAuthToken(user)
-      // return res.status(200).json({ user, token})
-    }
-  } catch (err) {
-    res.send(err);
-    next(err);
-  }
-});
+
 router.post("/decodedtoken", async (req, res, next) => {
   const token = req.body.token; // Getting the token from the request body
   const decodedToken = await Student.verifyAuthToken(token); // Decoding the token
