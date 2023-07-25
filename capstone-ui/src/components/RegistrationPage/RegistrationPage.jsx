@@ -56,7 +56,11 @@ export default function RegistrationPage({
           onClick={handleChangeUserType}
         >
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           College Student/Alum
+=======
+          College student/alum
+>>>>>>> Stashed changes
 =======
           College student/alum
 >>>>>>> Stashed changes

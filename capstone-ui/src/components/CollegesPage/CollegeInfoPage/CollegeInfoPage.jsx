@@ -44,17 +44,23 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       if (data.predominantly_black == 1) {
         console.log("predominantly black")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         return "predominantly-black"
       }
       if (data.historically_black == 1) {
         console.log("historically black")
         return "historically-black"
 =======
+=======
+>>>>>>> Stashed changes
         return "predominantly black"
       }
       if (data.historically_black == 1) {
         console.log("historically black")
         return "historically black"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       }
       if (data.tribal == 1) {
@@ -64,6 +70,7 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       if (data.women_only == 1) {
         console.log("women only")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         return "women-only"
       }
       if (data.men_only == 1) {
@@ -72,6 +79,17 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       }
     }
   }
+=======
+        return "women only"
+      }
+      if (data.men_only == 1) {
+        console.log("men only")
+        return "men only"
+      }
+    }
+  }
+  console.log("college:", college);
+>>>>>>> Stashed changes
 =======
         return "women only"
       }

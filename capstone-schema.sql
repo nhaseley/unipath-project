@@ -143,7 +143,11 @@ CREATE TABLE reviews (
   college_id      INT,
   user_id         INT,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   review          TEXT
+=======
+  review          TEXT,  
+>>>>>>> Stashed changes
 =======
   review          TEXT,  
 >>>>>>> Stashed changes

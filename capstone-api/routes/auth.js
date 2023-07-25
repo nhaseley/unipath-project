@@ -6,7 +6,10 @@ const Student = require("../models/student");
 const Parent = require("../models/parent");
 const Alum = require("../models/alum");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const AdmissionOfficer = require("../models/admissionOfficer");
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 const router = express.Router();
@@ -86,6 +89,10 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
     const alum = await Alum.authenticate(req.body);
     if (alum) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+      console.log("logged in: ", alum)
+>>>>>>> Stashed changes
 =======
       console.log("logged in: ", alum)
 >>>>>>> Stashed changes
@@ -98,6 +105,7 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
     next(err);
   }
 });
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 router.post("/register/college-admission-officer", async function (req, res, next) {
   try {
@@ -123,6 +131,9 @@ router.post("/login/college-admission-officer", async function (req, res, next) 
     next(err);
   }
 });
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes

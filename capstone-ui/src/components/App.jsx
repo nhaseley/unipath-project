@@ -83,7 +83,10 @@ export default function App() {
     if (decodedToken) {
       setUserLoggedIn(true); // Setting appState to true, making sure the user is logged in
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
@@ -234,7 +237,10 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                   
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
                 ></ParentsPage>
