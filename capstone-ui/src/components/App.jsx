@@ -82,7 +82,6 @@ export default function App() {
   useEffect(() => {
     if (decodedToken) {
       setUserLoggedIn(true); // Setting appState to true, making sure the user is logged in
-
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
       if (decodedToken.exp < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
@@ -230,7 +229,6 @@ export default function App() {
                 <ParentsPage
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
-                  
                 ></ParentsPage>
               }
             ></Route>
