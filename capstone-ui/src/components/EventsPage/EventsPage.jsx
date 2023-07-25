@@ -7,7 +7,7 @@ import axios from "axios";
 export default function EventsPage({userLoginInfo, userLoggedIn}){
     return (
         <h1>
-        Welcome, {userLoginInfo.firstName} to the events page!
+        Welcome, {userLoginInfo?.firstName} to the events page!
         </h1>
     )
 }

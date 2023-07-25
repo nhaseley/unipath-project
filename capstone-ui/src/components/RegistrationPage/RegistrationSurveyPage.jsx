@@ -43,8 +43,7 @@ export default function RegistrationSurveyPage({
         enrollment: userLoginInfo.enrollment,
         schoolType: userLoginInfo.schoolType
       });
-      console.log("result on frontend: ", result);
-      navigate("/login" + `/${userType}`);
+      console.log("student registration result on frontend: ", result);
 
       if (result.data.status) {
         setError(result.data);
@@ -52,6 +51,7 @@ export default function RegistrationSurveyPage({
         //   const token = result.data.token;
         //   localStorage.setItem("token", token);
         //   const decodedToken = jwtDecode(token);
+        navigate("/login" + `/${userType}`);
         setError({});
         setUserLoginInfo({
           email: "",

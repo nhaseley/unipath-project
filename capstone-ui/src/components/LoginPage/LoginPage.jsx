@@ -58,11 +58,16 @@ export default function LoginPage({
       }
     );
       console.log("result from login: ", result.data)
-    if (result?.data) {
-      localStorage.setItem("token", result.data.token);
+    if (result.data.message){
+      navigate("/login")
+      setError(result?.data);
+    }
+
+    else {
+      // else if (result?.data) {
+        localStorage.setItem("token", result.data.token);
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)
-
       {
         userType == "student"
           ? setUserLoginInfo(result.data.student)
@@ -87,9 +92,10 @@ export default function LoginPage({
           ? navigate("/mycollege")
           : null;
       }
-    } else {
-      setError(result?.data);
-    }
+    } 
+    // else {
+    //   setError(result?.data);
+    // }
   }
 
   return (

@@ -305,7 +305,6 @@ class Student {
       `,
       [sat_score, act_score]
     );
-    console.log("getCollegeFeed from database: ", result.rows.length);
     return result.rows;
   }
 

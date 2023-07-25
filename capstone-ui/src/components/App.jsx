@@ -220,6 +220,7 @@ export default function App() {
                   userLoggedIn={userLoggedIn}
                   collegeArrayPointer={collegeArrayPointer}
                   setCollegeArrayPointer={setCollegeArrayPointer}
+                  userType={userType}
                 ></CollegesPage>
               }
             ></Route>

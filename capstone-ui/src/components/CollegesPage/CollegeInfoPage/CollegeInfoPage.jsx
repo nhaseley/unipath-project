@@ -27,38 +27,29 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
   }, [userLoginInfo]);
 
   function findMinorityServingValue(data) {
-    console.log(data);
     if (data) {
       if (data.aanipi == 1) {
-        console.log("aanipi")
         return "aanipi-serving"
       }
       if (data.annh == 1) {
-        console.log("annh")
         return "annh-serving"
       }
       if (data.hispanic == 1) {
-        console.log("hispanic")
         return "hispanic-serving"
       }
       if (data.predominantly_black == 1) {
-        console.log("predominantly black")
         return "predominantly black"
       }
       if (data.historically_black == 1) {
-        console.log("historically black")
         return "historically black"
       }
       if (data.tribal == 1) {
-        console.log("tribal")
         return "tribal-serving"
       }
       if (data.women_only == 1) {
-        console.log("women only")
         return "women only"
       }
       if (data.men_only == 1) {
-        console.log("men only")
         return "men only"
       }
     }
