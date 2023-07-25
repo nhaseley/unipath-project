@@ -58,6 +58,7 @@ export default function App() {
         })
         .then((response) => {
             setUserLoginInfo({
+              id: response.data.user.id,
               email: response.data.user.email,
               firstName: response.data.user.first_name,
               lastName: response.data.user.last_name,

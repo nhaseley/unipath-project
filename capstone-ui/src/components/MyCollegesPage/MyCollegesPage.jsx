@@ -5,6 +5,7 @@ import "./MyCollegesPage.css";
 
 export default function MyCollegesPage({ userLoginInfo, selectedCollege }) {
   const [likedColleges, setLikedColleges] = useState([]);
+  console.log("college in mycolleges: ", selectedCollege)
   useEffect(() => {
     if (
       // unnecessary once we require login for this page
@@ -19,7 +20,7 @@ export default function MyCollegesPage({ userLoginInfo, selectedCollege }) {
           setLikedColleges(response.data);
         });
     }
-  }, []);
+  }, [userLoginInfo]);
 
   console.log("liked colleges:", likedColleges);
   return (
