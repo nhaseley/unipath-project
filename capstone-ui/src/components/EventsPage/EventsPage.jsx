@@ -10,12 +10,8 @@ const navigate = useNavigate()
     function handleAddNewEvent(event) {
         event.preventDefault();
 
-        navigate('/eventDetails')
-        
-    }
-
-
-
+        navigate('/eventDetails') 
+    }  
 
     return (
         <>
@@ -25,7 +21,7 @@ const navigate = useNavigate()
 
         {userType == "college-admission-officer" ? 
         (<button onClick={handleAddNewEvent}> Add a new Event</button>)
-        :( <div>You not an officer gang</div>)}
+        :( <h1> Sorry, this page is for admission officers only. Please log in <Link to={"/login"}> here. </Link></h1>)}
         
         </>
     )

@@ -52,16 +52,18 @@ class Parent {
     }
 
     const parent = await Parent.fetchParentByEmail(creds.email);
-
+    console.log(parent)
     if (parent) {
       // compare hashed password to a new hash from password
       const isValid = await bcrypt.compare(creds.password, parent.password);
       if (isValid === true) {
         return Parent.createPublicparent(parent);
+      } else {
+        throw new UnauthorizedError("Invalid password.");
       }
-    }
+    } 
 
-    throw new UnauthorizedError("Invalid email or password");
+    throw new UnauthorizedError("There is no parent registered with this email.");
   }
 
   /**
@@ -152,53 +154,6 @@ class Parent {
     return parent;
   }
 
-  
-  /**
-   * Fetch a parent in the database by id
-   *
-   * @param {String} parent_id
-   * @returns parent
-   */
-  // static async fetchById(parent_id) {
-  //   const result = await db.query(
-  //     `SELECT id,
-  //             email,
-  //             parentname,
-  //             first_name,
-  //             last_name
-  //          FROM parents
-  //          WHERE id = $1`,
-  //     [parent_id]
-  //   );
-
-  //   const parent = result.rows[0];
-  //   return parent;
-  // }
-
-  // static async generateAuthToken(parent) {
-  //   const payload = {
-  //     id: parent.id,
-  //     firstName: parent.firstName,
-  //     lastName: parent.lastName,
-  //     email: parent.email,
-  //     location: parent.location,
-  //     date: parent.date,
-  //   };
-
-  //   const token = jwt.sign(payload, secretKey, { expiresIn: "4h" });
-  //   return token;
-  // }
-
-  // static verifyAuthToken(token) {
-  //   try {
-  //     //TODO: use verify and figure out why we can't verify currently
-  //     const decoded = jwt.decode(token, secretKey);
-  //     return decoded;
-  //   } catch (err) {
-  //     return null;
-  //   }
-  // }
-
 
    /**
    * Get the student of all the colleges a given parent
@@ -213,7 +168,7 @@ class Parent {
       [parentPhone]
     );
     if (typeof result.rows[0] == "undefined"){
-      throw new BadRequestError("There is no child registered with this parent phone number.")
+      throw new UnauthorizedError("There is no child registered with your phone number.")
     }
     return result.rows[0]
   }

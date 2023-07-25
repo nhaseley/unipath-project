@@ -53,10 +53,12 @@ class Alum {
     const isValid = await bcrypt.compare(creds.password, alum.password);
     if (isValid === true) {
       return Alum.createPublicalum(alum);
+    } else {
+      throw new UnauthorizedError("Invalid password.");
     }
   }
 
-  throw new UnauthorizedError("Invalid email or password");
+  throw new UnauthorizedError("There is no alum registered with this email.");
 }
 
 /**

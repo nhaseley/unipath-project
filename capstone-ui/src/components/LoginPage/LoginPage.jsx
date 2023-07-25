@@ -38,7 +38,7 @@ export default function LoginPage({
   function handleChangeUserType(event) {
     setUserType(event.target.value);
   }
-console.log(userType)
+
   function handleDemo(event) {
     event.preventDefault();
     userType == "college-admission-officer"

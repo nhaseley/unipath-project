@@ -59,10 +59,13 @@ class Student {
       const isValid = await bcrypt.compare(creds.password, student.password);
       if (isValid === true) {
         return Student.createPublicstudent(student);
+      } else {
+        throw new UnauthorizedError("Invalid password.");
       }
     }
+    throw new UnauthorizedError("There is no student registered with this email.");
 
-    throw new UnauthorizedError("Invalid email or password");
+    
   }
 
   /**

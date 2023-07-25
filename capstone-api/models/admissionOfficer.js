@@ -58,10 +58,12 @@ class AdmissionOfficer {
       const isValid = await bcrypt.compare(creds.password, admissionOfficer.password);
       if (isValid === true) {
         return AdmissionOfficer.createPublicadmissionOfficer(admissionOfficer);
+      } else {
+        throw new UnauthorizedError("Invalid password.");
       }
     }
-
-    throw new UnauthorizedError("Invalid email or password");
+    throw new UnauthorizedError("There is no admission officer registered with this email.");
+   
   }
 
   /**
