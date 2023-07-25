@@ -15,7 +15,6 @@ export default function ParentsPage({ userLoginInfo, userLoggedIn }) {
           parentPhone: userLoginInfo.parentPhone,
         })
         .then((response) => {
-          console.log("response: ", response.data);
           setChildsColleges(response.data);
         });
     }
