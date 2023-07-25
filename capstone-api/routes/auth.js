@@ -82,7 +82,6 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
   try {
     const alum = await Alum.authenticate(req.body);
     if (alum) {
-      console.log("logged in: ", alum)
       return res.status(200).json(alum);
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})
@@ -107,7 +106,6 @@ router.post("/login/college-admission-officer", async function (req, res, next) 
   try {
     const admissionOfficer = await AdmissionOfficer.authenticate(req.body);
     if (admissionOfficer) {
-      console.log(admissionOfficer)
       return res.status(200).json({admissionOfficer});
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})

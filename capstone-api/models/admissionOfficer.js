@@ -142,7 +142,6 @@ class AdmissionOfficer {
     );
 
     const admissionOfficer = result.rows[0];
-    console.log("fetched: ", admissionOfficer)
     return admissionOfficer;
   }
 

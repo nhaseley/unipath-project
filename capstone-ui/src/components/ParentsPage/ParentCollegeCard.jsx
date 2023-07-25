@@ -2,6 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import * as d3 from 'd3';
 
 export default function ParentCollegeCard({ childCollege }) {
   console.log("childCollege: ", childCollege);
