@@ -142,9 +142,5 @@ CREATE TABLE reviews (
   id              SERIAL PRIMARY KEY,
   college_id      INT,
   user_id         INT,
-<<<<<<< Updated upstream
-  review          TEXT
-=======
   review          TEXT,  
->>>>>>> Stashed changes
 )

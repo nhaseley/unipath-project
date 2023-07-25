@@ -5,10 +5,6 @@ const express = require("express");
 const Student = require("../models/student");
 const Parent = require("../models/parent");
 const Alum = require("../models/alum");
-<<<<<<< Updated upstream
-const AdmissionOfficer = require("../models/admissionOfficer");
-=======
->>>>>>> Stashed changes
 const router = express.Router();
 
 router.post("/register", async function (req, res, next) {
@@ -22,23 +18,8 @@ router.post("/register", async function (req, res, next) {
   } catch (err) {
     res.send(err);
     next(err);
-<<<<<<< Updated upstream
-    const student = await Student.register(req.body);
-    console.log(student)
-
-    //   const token = await User.generateAuthToken(user)
-    return res.status(201).json(student);
-    // return res.status(201).json({ user, token})
-  } catch (err) {
-    res.send(err);
-    next(err);
   }
 });
-});
-=======
-  }
-});
->>>>>>> Stashed changes
 
 router.post("/login/student", async function (req, res, next) {
   try {
@@ -110,34 +91,6 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
     next(err);
   }
 });
-<<<<<<< Updated upstream
-router.post("/register/college-admission-officer", async function (req, res, next) {
-  try {
-    const admissionOfficer = await AdmissionOfficer.register(req.body);
-    //   const token = await User.generateAuthToken(user)
-    return res.status(201).json({admissionOfficer});
-    // return res.status(201).json({ user, token})
-  } catch (err) {
-    res.send(err);
-    next(err);
-  }
-});
-router.post("/login/college-admission-officer", async function (req, res, next) {
-  try {
-    const admissionOfficer = await AdmissionOfficer.authenticate(req.body);
-    if (admissionOfficer) {
-      return res.status(200).json({admissionOfficer});
-      // const token = await User.generateAuthToken(user)
-      // return res.status(200).json({ user, token})
-  } catch (err) {
-    res.send(err);
-    next(err);
-  }
-});
-
-  
-=======
->>>>>>> Stashed changes
 
 router.post("/decodedtoken", async (req, res, next) => {
   const token = req.body.token; // Getting the token from the request body
@@ -156,8 +109,4 @@ router.post("/decodedtoken", async (req, res, next) => {
   }
 });
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 module.exports = router;
