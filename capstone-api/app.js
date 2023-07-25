@@ -8,13 +8,7 @@ const config = require("./config");
 const authRoutes = require("./routes/auth");
 const likeRoute = require("./routes/student")
 const alumRoutes = require("./routes/alum")
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 const parentRoutes = require("./routes/parent")
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 const app = express();
 
 app.use(cors()); 
@@ -25,13 +19,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use(likeRoute)
 app.use(alumRoutes)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 app.use(parentRoutes)
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 app.get("/", function (req, res) {
   return res.status(200).json({

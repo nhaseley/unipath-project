@@ -55,15 +55,7 @@ export default function RegistrationPage({
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
         >
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-          College Student/Alum
-=======
           College student/alum
->>>>>>> Stashed changes
-=======
-          College student/alum
->>>>>>> Stashed changes
         </button>
       </div>
 

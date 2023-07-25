@@ -5,13 +5,7 @@ const express = require("express");
 const Student = require("../models/student");
 const Parent = require("../models/parent");
 const Alum = require("../models/alum");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 const AdmissionOfficer = require("../models/admissionOfficer");
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 const router = express.Router();
 
 router.post("/register", async function (req, res, next) {
@@ -25,7 +19,17 @@ router.post("/register", async function (req, res, next) {
   } catch (err) {
     res.send(err);
     next(err);
+    const student = await Student.register(req.body);
+    console.log(student)
+
+    //   const token = await User.generateAuthToken(user)
+    return res.status(201).json(student);
+    // return res.status(201).json({ user, token})
+  } catch (err) {
+    res.send(err);
+    next(err);
   }
+});
 });
 
 router.post("/login/student", async function (req, res, next) {
@@ -88,14 +92,7 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
   try {
     const alum = await Alum.authenticate(req.body);
     if (alum) {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
       console.log("logged in: ", alum)
->>>>>>> Stashed changes
-=======
-      console.log("logged in: ", alum)
->>>>>>> Stashed changes
       return res.status(200).json(alum);
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})
@@ -105,8 +102,6 @@ router.post("/login/college-students-and-alumni", async function (req, res, next
     next(err);
   }
 });
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 router.post("/register/college-admission-officer", async function (req, res, next) {
   try {
     const admissionOfficer = await AdmissionOfficer.register(req.body);
@@ -125,18 +120,14 @@ router.post("/login/college-admission-officer", async function (req, res, next) 
       return res.status(200).json({admissionOfficer});
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})
-    }
   } catch (err) {
     res.send(err);
     next(err);
   }
 });
-=======
 
->>>>>>> Stashed changes
-=======
+  
 
->>>>>>> Stashed changes
 router.post("/decodedtoken", async (req, res, next) => {
   const token = req.body.token; // Getting the token from the request body
   const decodedToken = await Student.verifyAuthToken(token); // Decoding the token
@@ -153,5 +144,6 @@ router.post("/decodedtoken", async (req, res, next) => {
     // throw new UnauthorizedError("No token for this user");
   }
 });
+
 
 module.exports = router;
