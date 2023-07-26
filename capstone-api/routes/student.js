@@ -23,8 +23,8 @@ router.post("/like", async function (req, res, next){
       return res.status(201).json(collegesToDisplay)
 
     } catch (err){
-      // res.send(err)
-      // next(err)
+      res.send(err)
+      next(err)
     }
   })
 

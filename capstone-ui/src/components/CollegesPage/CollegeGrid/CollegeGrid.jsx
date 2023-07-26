@@ -26,6 +26,7 @@ export default function CollegeGrid({
           schoolType: userLoginInfo.schoolType,
         })
         .then((response) => {
+
           console.log("colleges for this user: ", response.data);
           setCollegeList((prevList) => [...prevList, ...response?.data]);
           setCollegesToDisplay((prevList) => [...prevList, ...response?.data])

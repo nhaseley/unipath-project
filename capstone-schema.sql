@@ -6,8 +6,8 @@ CREATE TABLE students (
   parent_phone  VARCHAR(10),
   zipcode       VARCHAR(5),
   password      TEXT NOT NULL,
-  sat_score     INTEGER,
-  act_score     INTEGER,
+  sat_score     VARCHAR,
+  act_score     VARCHAR,
   enrollment    INTEGER,
   school_type   TEXT
 );
@@ -125,7 +125,7 @@ CREATE TABLE events (
   id           SERIAL PRIMARY KEY,
   name         TEXT NOT NULL,
   description  TEXT NOT NULL,
-  organizer_email         TEXT NOT NULL UNIQUE CHECK (position('@' IN organizer_email) > 1 AND RIGHT(organizer_email, 4) = '.com')
+  organizer_email         TEXT NOT NULL UNIQUE CHECK (position('@' IN organizer_email) > 1 AND RIGHT(organizer_email, 4) = '.com'),
   speaker      TEXT,
   date_time    TIMESTAMP DEFAULT NOW(),
   dept         TEXT,
