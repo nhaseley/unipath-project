@@ -59,10 +59,13 @@ class Student {
       const isValid = await bcrypt.compare(creds.password, student.password);
       if (isValid === true) {
         return Student.createPublicstudent(student);
+      } else {
+        throw new UnauthorizedError("Invalid password.");
       }
     }
+    throw new UnauthorizedError("There is no student registered with this email.");
 
-    throw new UnauthorizedError("Invalid email or password");
+    
   }
 
   /**
@@ -182,7 +185,7 @@ class Student {
   static async likeCollege(student_id, college) {
     console.log("college", college)
     const result = await db.query(
-      `INSERT INTO colleges (
+      `INSERT INTO liked_colleges (
           user_id,
           name
         )
@@ -194,6 +197,7 @@ class Student {
                   `,
       [student_id, college]
     );
+    console.log("like: ", result.rows[0])
     return result.rows[0];
   }
 
@@ -205,10 +209,11 @@ class Student {
    */
   static async getLikedColleges(student_id) {
     const result = await db.query(
-      `SELECT * FROM colleges
+      `SELECT * FROM liked_colleges
           WHERE user_id = $1`,
       [student_id]
     );
+    console.log("get likes: ", result.rows)
     return result.rows;
   }
 
@@ -306,7 +311,6 @@ class Student {
       `,
       [sat_score, act_score]
     );
-    console.log("getCollegeFeed from database: ", result.rows.length);
     return result.rows;
   }
 

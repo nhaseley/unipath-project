@@ -6,14 +6,13 @@ const Student = require("../models/student");
 const Parent = require("../models/parent");
 const Alum = require("../models/alum");
 const AdmissionOfficer = require("../models/admissionOfficer");
+const { BadRequestError } = require("../utils/errors");
 
 const router = express.Router();
 
 router.post("/register", async function (req, res, next) {
   try {
     const student = await Student.register(req.body);
-    console.log(student)
-
     //   const token = await User.generateAuthToken(user)
     return res.status(201).json(student);
     // return res.status(201).json({ user, token})
@@ -25,8 +24,6 @@ router.post("/register", async function (req, res, next) {
 
 router.post("/login/student", async function (req, res, next) {
   try {
-    console.log("yuhhhhhhhhhhhhhhh")
-    console.log(req.body)
     const student = await Student.authenticate(req.body);
     if (student) {
       const tokenPromise = Student.generateAuthToken(student);
@@ -44,9 +41,13 @@ router.post("/login/student", async function (req, res, next) {
 
 router.post("/register/parent", async function (req, res, next) {
   try {
-    const parent = await Parent.register(req.body);
+    // Making sure we can get a child with the phone number they registered with
+    const child = await Parent.fetchChildByPhoneNumber(req.body.parentPhone);
     //   const token = await User.generateAuthToken(user)
-    return res.status(201).json(parent);
+    if (child) {
+      const parent = await Parent.register(req.body);
+      return res.status(201).json(parent);
+    }
     // return res.status(201).json({ user, token})
   } catch (err) {
     res.send(err);
@@ -68,57 +69,68 @@ router.post("/login/parent", async function (req, res, next) {
   }
 });
 
-router.post("/register/college-students-and-alumni", async function (req, res, next) {
-  try {
-    const alum = await Alum.register(req.body);
-    //   const token = await User.generateAuthToken(user)
-    return res.status(201).json({alum});
-    // return res.status(201).json({ user, token})
-  } catch (err) {
-    res.send(err);
-    next(err);
-  }
-});
-
-router.post("/login/college-students-and-alumni", async function (req, res, next) {
-  try {
-    const alum = await Alum.authenticate(req.body);
-    if (alum) {
-      return res.status(200).json(alum);
-      // const token = await User.generateAuthToken(user)
-      // return res.status(200).json({ user, token})
+router.post(
+  "/register/college-students-and-alumni",
+  async function (req, res, next) {
+    try {
+      const alum = await Alum.register(req.body);
+      //   const token = await User.generateAuthToken(user)
+      return res.status(201).json({ alum });
+      // return res.status(201).json({ user, token})
+    } catch (err) {
+      res.send(err);
+      next(err);
     }
-  } catch (err) {
-    res.send(err);
-    next(err);
   }
-});
+);
 
-
-router.post("/register/college-admission-officer", async function (req, res, next) {
-  try {
-    const admissionOfficer = await AdmissionOfficer.register(req.body);
-    //   const token = await User.generateAuthToken(user)
-    return res.status(201).json({admissionOfficer});
-    // return res.status(201).json({ user, token})
-  } catch (err) {
-    res.send(err);
-    next(err);
-  }
-});
-router.post("/login/college-admission-officer", async function (req, res, next) {
-  try {
-    const admissionOfficer = await AdmissionOfficer.authenticate(req.body);
-    if (admissionOfficer) {
-      return res.status(200).json({admissionOfficer});
-      // const token = await User.generateAuthToken(user)
-      // return res.status(200).json({ user, token})
+router.post(
+  "/login/college-students-and-alumni",
+  async function (req, res, next) {
+    try {
+      const alum = await Alum.authenticate(req.body);
+      if (alum) {
+        return res.status(200).json(alum);
+        // const token = await User.generateAuthToken(user)
+        // return res.status(200).json({ user, token})
+      }
+    } catch (err) {
+      res.send(err);
+      next(err);
     }
-  } catch (err) {
-    res.send(err);
-    next(err);
   }
-});
+);
+
+router.post(
+  "/register/college-admission-officer",
+  async function (req, res, next) {
+    try {
+      const admissionOfficer = await AdmissionOfficer.register(req.body);
+      //   const token = await User.generateAuthToken(user)
+      return res.status(201).json({ admissionOfficer });
+      // return res.status(201).json({ user, token})
+    } catch (err) {
+      res.send(err);
+      next(err);
+    }
+  }
+);
+router.post(
+  "/login/college-admission-officer",
+  async function (req, res, next) {
+    try {
+      const admissionOfficer = await AdmissionOfficer.authenticate(req.body);
+      if (admissionOfficer) {
+        return res.status(200).json({ admissionOfficer });
+        // const token = await User.generateAuthToken(user)
+        // return res.status(200).json({ user, token})
+      }
+    } catch (err) {
+      res.send(err);
+      next(err);
+    }
+  }
+);
 
 router.post("/decodedtoken", async (req, res, next) => {
   const token = req.body.token; // Getting the token from the request body
@@ -130,9 +142,9 @@ router.post("/decodedtoken", async (req, res, next) => {
       // Returning the decoded token and the user logged in
       return res.status(200).json({ decodedToken, user }); // Returning the decoded token
     }
-  } catch (err){
-    res.send(err)
-    next(err)
+  } catch (err) {
+    res.send(err);
+    next(err);
     // throw new UnauthorizedError("No token for this user");
   }
 });

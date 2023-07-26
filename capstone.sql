@@ -1,8 +1,10 @@
-\echo 'Delete and recreate students database?'
+\echo 'Delete and recreate capstone database?'
 \prompt 'Return for yes or control-C to cancel > ' foo
 
+-- No longer dropping entire database b/c want to keep colleges_from_api table
 DROP DATABASE capstone;
 CREATE DATABASE capstone;
+
 \connect capstone
 
 \i capstone-schema.sql

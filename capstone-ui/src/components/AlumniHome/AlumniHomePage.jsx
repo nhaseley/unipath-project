@@ -10,6 +10,16 @@ export default function AlumniHomePage({ userLoginInfo, setUserLoginInfo, setErr
   const navigate = useNavigate()
   const [ratingNumber, setRatingNumber] = useState({})
   const [additionalReview, setAdditionalReview] = useState('')
+  
+  function handleDemo() {
+    setUserLoginInfo({...userLoginInfo, 
+      email: "nylevenya@brown.edu",
+      firstName: "nya",
+      lastName: "haseley-ayende",
+      ratingNumber: 5,
+      additionalReview: "this is a cooooool review!"
+    });
+  }
 
   const ratings = [
     { value: 0, label: '0'},
@@ -36,7 +46,6 @@ export default function AlumniHomePage({ userLoginInfo, setUserLoginInfo, setErr
     })
   }
 
-  // function handleReviewSubmit()
 
   async function handleReviewSubmit(event) {
     event.preventDefault();
@@ -151,14 +160,18 @@ export default function AlumniHomePage({ userLoginInfo, setUserLoginInfo, setErr
         <div className="rate-your-school">
           Rate your school out of 5 stars where 0 is terrible and 5 is amazing!
           <Select options={ratings} 
-          onChange={handleRatingSelect}>
+          onChange={handleRatingSelect}
+          value={ratings.find(
+            (option) => option.value === userLoginInfo.ratingNumber
+          )}
+          placeholder="Your rating here">
           </Select>
         </div>
 
 
         <div className="additional-reviews">
           {/* <input type="text-area" placeholder="Write you additional comments here"/> */}
-          <textarea  className="additional-text" placeholder="Write your additional comments here"
+          <textarea  className="additional-text" value={userLoginInfo.additionalReview} placeholder="Write your additional comments here"
           onChange={handleAdditionalInfo}/>
         </div>
 
@@ -169,6 +182,9 @@ export default function AlumniHomePage({ userLoginInfo, setUserLoginInfo, setErr
         <Link to={"/register/college-students-and-alumni"}> Submit</Link>
       </button>
             </form>
+            <button className="demo-button" onClick={handleDemo}>
+            Demo Post Review
+        </button>
 
 
     </div>

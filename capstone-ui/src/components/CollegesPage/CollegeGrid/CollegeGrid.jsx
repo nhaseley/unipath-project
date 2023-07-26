@@ -11,7 +11,9 @@ export default function CollegeGrid({
   setCollegeList,
   collegeArrayPointer,
   setCollegeArrayPointer,
-}) {
+  collegesToDisplay,
+  setCollegesToDisplay
+}) {  
 
   // Function to display colleges on the grid
   async function getCollegeGrid() {
@@ -24,12 +26,13 @@ export default function CollegeGrid({
           schoolType: userLoginInfo.schoolType,
         })
         .then((response) => {
-          console.log("colleges in front: ", response.data);
+          console.log("colleges for this user: ", response.data);
           setCollegeList((prevList) => [...prevList, ...response?.data]);
+          setCollegesToDisplay((prevList) => [...prevList, ...response?.data])
         });
     }
   }
-
+console.log(userLoginInfo)
   // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
@@ -39,8 +42,11 @@ export default function CollegeGrid({
     setCollegeArrayPointer(collegeArrayPointer + 20);
   }
 
-  let first20Colleges = collegeList.slice(collegeArrayPointer, collegeArrayPointer+20)
-
+  let first20Colleges = collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer+20)
+  first20Colleges?.map((college) => (
+  //   // console.log("sat: ", parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math))
+    console.log("size: ", parseInt(college.size)))
+  )
   return (
     <div className="college-grid">
       <div className="content">

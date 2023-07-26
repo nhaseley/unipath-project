@@ -58,10 +58,12 @@ class AdmissionOfficer {
       const isValid = await bcrypt.compare(creds.password, admissionOfficer.password);
       if (isValid === true) {
         return AdmissionOfficer.createPublicadmissionOfficer(admissionOfficer);
+      } else {
+        throw new UnauthorizedError("Invalid password.");
       }
     }
-
-    throw new UnauthorizedError("Invalid email or password");
+    throw new UnauthorizedError("There is no admission officer registered with this email.");
+   
   }
 
   /**
@@ -143,6 +145,34 @@ class AdmissionOfficer {
 
     const admissionOfficer = result.rows[0];
     return admissionOfficer;
+  }
+
+
+
+
+  static async postEvent(name, desc, email, dateTime, speaker, dept, maxRegistrants){
+    const result = await db.query (
+      `INSERT INTO events (
+        name,
+        description,
+        organizer_email,
+        date_time,
+        speaker,
+        dept,
+        max_registrants
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING 
+                id,
+                name,
+                description,
+                organizer_email,
+                date_time,
+                speaker,
+                dept,
+                max_registrants`, 
+                [name, desc, email, dateTime, speaker, dept, maxRegistrants]
+    )
+    return result.rows;
   }
 
 }

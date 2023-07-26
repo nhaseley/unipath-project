@@ -1,0 +1,24 @@
+.parent-college-card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.average-earnings-pie-chart{
+    margin-left: 40px;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    max-width: 380px;
+}
+.college-name{
+    font-size: 35px;
+}
+
+.parents-parent{
+    display: flex;
+    flex-direction: column;
+}

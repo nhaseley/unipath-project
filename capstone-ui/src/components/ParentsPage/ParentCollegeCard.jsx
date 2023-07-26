@@ -2,12 +2,25 @@ import * as React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NetPricePieChart from "./NetPricePieChart"
+import NetPricePieChart from "./NetPriceBarChart";
+import AverageEarningsPieChart from "./AverageEarningsBarChart";
 
 export default function ParentCollegeCard({ childCollege }) {
-  const [college, setCollege] = useState();
+  const customColors = [
+    "#F2DDA4",
+    "#9DCBBA",
+    "#1f77b4",
+    "#A8763E",
+    "#734B5E",
+    "#44633F",
+    "#3F4B3B",
+    "#2ca02c",
+    "#8c564b",
+  ];
 
-  console.log("college", college);
+  const [college, setCollege] = useState();
+  console.log(college);
+
   useEffect(() => {
     axios
       .post("http://localhost:3010/info/" + `${childCollege?.name}`, {
@@ -18,29 +31,52 @@ export default function ParentCollegeCard({ childCollege }) {
       });
   }, []);
 
-  const data = {
+  const netPriceData = {
     net_price_0_30000: college?.net_price_0_30000,
     net_price_30001_48000: college?.net_price_30001_48000,
     net_price_48001_75000: college?.net_price_48001_75000,
     net_price_75001_111000: college?.net_price_75001_111000,
   };
+  const averageEarningsData = {
+    earnings_1yr_after_completion: college?.earnings_1yr_after_completion,
+    earnings_4yr_after_completion: college?.earnings_4yr_after_completion,
+  };
 
   return (
     <div className="parent-college-card">
-      <h2>{childCollege?.name}</h2>
-      <h3 className="tuition-information">
-        Out of state tuition: ${parseInt(college?.tuition_out_of_state).toLocaleString()}
-      </h3>
-      <h3> In state tuition: ${parseInt(college?.tuition_in_state).toLocaleString()}</h3>
-      <div>
-        Net Price Breakdown:
-        <h3>$0 - $30,000: ${parseInt(college?.net_price_0_30000).toLocaleString()}</h3>
-        <h3>$30,001 - $48,000: ${parseInt(college?.net_price_30001_48000).toLocaleString()}</h3>
-        <h3>$48,001 - $75,000: ${parseInt(college?.net_price_48001_75000).toLocaleString()}</h3>
-        <h3>$75,001 - $111,000: ${parseInt(college?.net_price_75001_111000).toLocaleString()}</h3>
-        <NetPricePieChart data={data} ></NetPricePieChart>
+      <div className="info">
+        <h2 className="college-name">{childCollege?.name}</h2>
+        <h3 className="out-of-state-tuition">
+          Out of state tuition:{" "}
+          {college?.tuition_out_of_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}
+        </h3>
+        <h3 className="in-state-tuition">
+          In state tuition: {" "}
+          {college?.tuition_in_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}
+        </h3>
+        <h3 className="room-and-board">
+          Room and board: {" "}
+          {college?.room_board_offcampus ? "$" + parseInt(college?.room_board_offcampus).toLocaleString(): "Unavailable"}
+        </h3>
+        <h3>
+          
+        </h3>
       </div>
-      Average earnings{college?.earnings_1yr_after_completion}
+      {college?.tuition_out_of_state ? (
+        <div className="net-price-pie-chart">
+          <NetPricePieChart
+            netPriceData={netPriceData}
+            customColors={customColors}
+          ></NetPricePieChart>
+        </div>
+      ) : <h2 className="no-tuition-info">Tuition information not available</h2>}
+
+      <div className="average-earnings-pie-chart">
+        <AverageEarningsPieChart
+          averageEarningsData={averageEarningsData}
+          customColors={customColors}
+        ></AverageEarningsPieChart>
+      </div>
     </div>
   );
 }

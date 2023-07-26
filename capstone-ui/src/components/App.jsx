@@ -15,6 +15,7 @@ import AlumniHomePage from "./AlumniHome/AlumniHomePage"
 import EventsPage from "./EventsPage/EventsPage"
 import ParentsPage from "./ParentsPage/ParentsPage"
 import About from "./About/About";
+import EventDetailsPage from "./EventsPage/EventDetailsPage";
 
 export default function App() {
   //------------------ States ---------------------//
@@ -221,6 +222,7 @@ export default function App() {
                   userLoggedIn={userLoggedIn}
                   collegeArrayPointer={collegeArrayPointer}
                   setCollegeArrayPointer={setCollegeArrayPointer}
+                  userType={userType}
                 ></CollegesPage>
               }
             ></Route>
@@ -237,11 +239,26 @@ export default function App() {
               path="/events"
               element={
                 <EventsPage
+                  userType={userType}
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
                 ></EventsPage>
               }
             ></Route>
+
+            <Route
+              path="/eventDetails"
+              element={
+                <EventDetailsPage
+                  setError={setError}
+                  userType={userType}
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                ></EventDetailsPage>
+              }
+            ></Route>
+
+
             <Route
               path="/mycollege"
               element={

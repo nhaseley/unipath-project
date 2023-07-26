@@ -37,14 +37,15 @@ export default function ParentRegistrationForm({
         parentPhone: userLoginInfo.parentPhone,
         password: userLoginInfo.password
       });
-      navigate("/login");
-
+      
       if (result.data.status) {
+        navigate("/register");
         setError(result.data);
       } else {
         //   const token = result.data.token;
         //   localStorage.setItem("token", token);
         //   const decodedToken = jwtDecode(token);
+        navigate("/login");
         setError({});
         setUserLoginInfo({
           email: "",
@@ -209,7 +210,7 @@ export default function ParentRegistrationForm({
       <div>
         Already have an account?
         <button className="login-button">
-          <Link to={"/login/parent"}> Login </Link>
+          <Link to={"/login"}> Login </Link>
         </button>
       </div>
     </div>
