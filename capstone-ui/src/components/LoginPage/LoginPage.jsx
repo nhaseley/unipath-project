@@ -41,12 +41,18 @@ export default function LoginPage({
 
   function handleDemo(event) {
     event.preventDefault();
-    setUserLoginInfo({
-      email: "nylevenya@hotmail.com",
-      password: "2003nyleve",
-    });
+    if (userType == "college-admission-officer") {
+      setUserLoginInfo({
+        email: "nylevenya@brown.edu",
+        password: "2003nyleve",
+      });
+    } else {
+      setUserLoginInfo({
+        email: "nylevenya@hotmail.com",
+        password: "2003nyleve",
+      });
+    }
   }
-
   async function handleLogin(event) {
     event.preventDefault();
 
@@ -57,7 +63,7 @@ export default function LoginPage({
         password: userLoginInfo.password,
       }
     );
-      console.log("result from login: ", result.data)
+    console.log("result from login: ", result.data);
     if (result?.data) {
       localStorage.setItem("token", result.data.token);
       // const decodedToken = jwtDecode(token);
@@ -68,8 +74,9 @@ export default function LoginPage({
           ? setUserLoginInfo(result.data.student)
           : userType == "parent"
           ? setUserLoginInfo(result.data)
-          : userType == "college-admission-officer" ? setUserLoginInfo(result.data.admissionOfficer) :
-          userType == "college-students-and-alumni"
+          : userType == "college-admission-officer"
+          ? setUserLoginInfo(result.data.admissionOfficer)
+          : userType == "college-students-and-alumni"
           ? setUserLoginInfo(result.data)
           : null;
       }

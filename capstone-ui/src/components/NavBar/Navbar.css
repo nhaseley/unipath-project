@@ -6,16 +6,19 @@
   /* padding: 10px; */
   /* bottom: 175px; */
   top: 0;
-  background-color: #354F52;
+  /* #354F52; */
+  background-color: whitesmoke;
   width: 100%;
-  padding: 10px 1rem;
+  padding: 10px 0rem;
   height: 7vh;
+  flex-direction: row;
 }
 
 .logo {
-  padding-right: 80vh;
+  padding-right: 70vh;
   color: #213547;
   font-size: 2rem;
+  font-weight: normal;
 }
 
 .navItems {
@@ -23,9 +26,20 @@
   flex-direction: row;
   text-decoration: none;
   list-style: none;
-  padding-right: 10vh;
+  padding-right: 5vh;
 }
 
 .navItems li {
   padding-left: 35px;
+}
+
+.navButton {
+  background-color: transparent;
+  font-size: 20px;
+  border: none;
+
+}
+
+.navButton:hover{
+  background-color: rgb(209, 209, 209);
 }
