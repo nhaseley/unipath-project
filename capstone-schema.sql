@@ -126,6 +126,10 @@ CREATE TABLE events (
   name         TEXT NOT NULL,
   description  TEXT NOT NULL,
   organizer_email         TEXT NOT NULL UNIQUE CHECK (position('@' IN organizer_email) > 1 AND RIGHT(organizer_email, 4) = '.com')
+  speaker      TEXT,
+  date_time    TIMESTAMP DEFAULT NOW(),
+  dept         TEXT,
+  max_registrants   INT
 );
 
 CREATE TABLE event_attendees (
