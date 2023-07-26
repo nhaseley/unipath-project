@@ -3,6 +3,7 @@ import "./EventsPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 export default function EventsPage({userLoginInfo, userLoggedIn, userType}){
 const navigate = useNavigate()
 
@@ -26,3 +27,4 @@ const navigate = useNavigate()
         </>
     )
 }
+

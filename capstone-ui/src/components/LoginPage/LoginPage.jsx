@@ -41,6 +41,7 @@ export default function LoginPage({
 
   function handleDemo(event) {
     event.preventDefault();
+
     userType == "college-admission-officer" || userType == "college-students-and-alumni"
       ? setUserLoginInfo({
           email: "nylevenya@brown.edu",
@@ -50,8 +51,8 @@ export default function LoginPage({
           email: "nylevenya@hotmail.com",
           password: "2003nyleve",
         });
-  }
 
+  }
   async function handleLogin(event) {
     event.preventDefault();
 
@@ -63,11 +64,13 @@ export default function LoginPage({
       }
     );
     console.log("result from login: ", result.data);
+
     if (result.data.message) {
       navigate("/login");
       setError(result?.data);
     } else {
       // else if (result?.data) {
+
       localStorage.setItem("token", result.data.token);
       // const decodedToken = jwtDecode(token);
       // setUserData(decodedToken)

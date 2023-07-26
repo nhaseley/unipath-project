@@ -11,7 +11,7 @@ export default function AdminRegistrationPage({
   handleHidePassword,
   passwordDisplayed,
   error,
-  setError
+  setError,
 }) {
   const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
@@ -23,8 +23,10 @@ console.log(collegeOptions)
       });
     }
   }, []);
+
   function handleCollegeSelect(event) {
     // setSelectedCollege(event.target.value);
+    
     setUserLoginInfo({
       ...userLoginInfo,
       college: event.target.value,
@@ -204,6 +206,7 @@ console.log(collegeOptions)
         </div>
         <select onChange={handleCollegeSelect}>
           {/* Sorting dropdown options in alphabetical order */}
+          {/* wb the onclick to make the decision */}
           {collegeOptions
             .slice()
             .sort((a, b) => a.name.localeCompare(b.name))

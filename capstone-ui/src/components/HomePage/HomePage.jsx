@@ -6,6 +6,11 @@ import "./HomePage.css";
 export default function HomePage() {
   const collegeNames = [
     {
+      name: "Massachusetts Institute of Technology",
+      imageSrc:
+        "https://spectrum.mit.edu/wp-content/uploads/in-support-of-mits-campus-02-1260x840.png",
+    },
+    {
       name: "Harvard University",
       imageSrc:
         "https://extension.harvard.edu/wp-content/uploads/sites/8/2020/12/aerial-harvard.jpg",
@@ -14,11 +19,6 @@ export default function HomePage() {
       name: "Stanford University",
       imageSrc:
         "https://collegevine.imgix.net/2251e372-7844-417d-8f2a-91b2cf00813a.jpg",
-    },
-    {
-      name: "Massachusetts Institute of Technology",
-      imageSrc:
-        "https://spectrum.mit.edu/wp-content/uploads/in-support-of-mits-campus-02-1260x840.png",
     },
     {
       name: "Andrews University",
@@ -52,35 +52,66 @@ export default function HomePage() {
     },
   ];
 
-  const [loopArray, setLoopArray] = useState([]);
+  // const [loopArray, setLoopArray] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Function to handle the image transition
+  const handleImageTransition = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % collegeNames.length);
+  };
+
+  // useEffect to set the image transition interval
   useEffect(() => {
-    setLoopArray([...loopArray, ...collegeNames]);
-  }, [loopArray]);
+    const imageTransitionInterval = setInterval(handleImageTransition, 3000); // 3000ms (3 seconds) interval
+    return () => clearInterval(imageTransitionInterval); // Clean up on component unmount
+  }, []);
+
+  // useEffect(() => {
+  //   setLoopArray([...loopArray, ...collegeNames]);
+  // }, [loopArray]);
 
   return (
     <>
-      <section className="hero-section">
-        <div className="container">
-          <h1 className="hero-heading">Welcome to College Search!</h1>
-          <h2 className="hero-subheading">Find your perfect college today.</h2>
-          <button className="get-started-button"> <Link to={"/feed"}> Get Started </Link> </button>
-        </div>
-      </section>
+      <div className="hellotxt">
+        {" "}
+        <h1 className="hero-heading">Your Search Starts Here.</h1>
+        <h2 className="hero-subheading">
+          Sayme es Tion Wayne wif Central Sea as well es skepta init accusantium
+          doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+          inventore veritatis et quasi architecto beatae vitae dicta sunt
+          explicabo. Nemo enim. En Headie One is de Best.
+        </h2>{" "}
+        <Link to={"/feed"}>
+          {" "}
+          <button className="get-started-button">Get Started</button>{" "}
+        </Link>{" "}
+      </div>
       <section className="additional-section">
         <div className="container">
           <div className="college-list">
-            {loopArray.map((college, index) => (
+            {/* {loopArray.map((college, index) => (
               <div key={index} className="college-item">
                 <div className="college-content">
                   <span className="college-name">{college.name}</span>
                   <img
+                    style={{ opacity: "0.5" }}
                     className="college-image"
                     src={college.imageSrc}
                     alt={college.name}
                   />
                 </div>
               </div>
-            ))}
+            ))} */}
+            <div className="college-content">
+              <span className="college-name">
+                {collegeNames[currentImageIndex].name}
+              </span>
+              <img
+                className="college-image"
+                src={collegeNames[currentImageIndex].imageSrc}
+                alt={collegeNames[currentImageIndex].name}
+              />
+            </div>
           </div>
         </div>
       </section>
