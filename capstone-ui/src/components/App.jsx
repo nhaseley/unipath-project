@@ -250,6 +250,7 @@ export default function App() {
               path="/eventDetails"
               element={
                 <EventDetailsPage
+                  setError={setError}
                   userType={userType}
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
