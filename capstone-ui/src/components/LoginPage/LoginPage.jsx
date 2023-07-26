@@ -41,10 +41,10 @@ export default function LoginPage({
 
   function handleDemo(event) {
     event.preventDefault();
-    userType == "college-admission-officer"
+    userType == "college-admission-officer" || userType == "college-students-and-alumni"
       ? setUserLoginInfo({
           email: "nylevenya@brown.edu",
-          password: "2003nyleve",
+          password: "2003nyleve"
         })
       : setUserLoginInfo({
           email: "nylevenya@hotmail.com",

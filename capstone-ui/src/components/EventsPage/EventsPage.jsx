@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 import "./EventsPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";

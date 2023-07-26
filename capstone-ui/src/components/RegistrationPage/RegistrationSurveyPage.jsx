@@ -51,7 +51,7 @@ export default function RegistrationSurveyPage({
         //   const token = result.data.token;
         //   localStorage.setItem("token", token);
         //   const decodedToken = jwtDecode(token);
-        navigate("/login" + `/${userType}`);
+        navigate("/login");
         setError({});
         setUserLoginInfo({
           email: "",

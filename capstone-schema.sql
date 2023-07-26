@@ -9,14 +9,13 @@ CREATE TABLE students (
   sat_score     INTEGER,
   act_score     INTEGER,
   enrollment    INTEGER,
-  school_type    TEXT
+  school_type   TEXT
 );
 
-CREATE TABLE colleges (
+CREATE TABLE liked_colleges (
   id         SERIAL PRIMARY KEY,
   user_id    INTEGER NOT NULL,
   name       TEXT NOT NULL
---   college_info    
 );
 
 CREATE TABLE colleges_from_api (
@@ -107,7 +106,7 @@ CREATE TABLE college_students_and_alumni (
   id                SERIAL PRIMARY KEY,
   first_name        TEXT NOT NULL,
   last_name         TEXT NOT NULL,
-  email             TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1 AND RIGHT(email, 4) = '.com'),
+  email             TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1 AND RIGHT(email, 4) = '.edu'),
   password          TEXT NOT NULL,
   college           TEXT NOT NULL,
   college_grad_year INTEGER
@@ -117,7 +116,7 @@ CREATE TABLE admission_officers (
   id         SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name  TEXT NOT NULL,
-  work_email TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1 AND RIGHT(email, 4) = '.edu'),
+  work_email TEXT NOT NULL UNIQUE CHECK (position('@' IN work_email) > 1 AND RIGHT(work_email, 4) = '.edu'),
   college    TEXT NOT NULL,
   password   TEXT NOT NULL
 );
@@ -126,14 +125,14 @@ CREATE TABLE events (
   id           SERIAL PRIMARY KEY,
   name         TEXT NOT NULL,
   description  TEXT NOT NULL,
-  organizer_email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1 AND RIGHT(email, 4) = '.com'),
+  organizer_email         TEXT NOT NULL UNIQUE CHECK (position('@' IN organizer_email) > 1 AND RIGHT(organizer_email, 4) = '.com')
 );
 
 CREATE TABLE event_attendees (
   id            SERIAL PRIMARY KEY,
   first_name    TEXT NOT NULL,
   last_name     TEXT NOT NULL,
-  parent_email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1 AND RIGHT(email, 4) = '.com'),
+  parent_email  TEXT NOT NULL UNIQUE CHECK (position('@' IN parent_email) > 1 AND RIGHT(parent_email, 4) = '.com'),
   num_attendees INTEGER
 );
 

@@ -15,7 +15,7 @@ export default function AlumnRegistrationPage(
 
     function handleDemo() {
         setUserLoginInfo({
-            email: "nylevenya@hotmail.com",
+            email: "nylevenya@brown.edu",
             firstName: "nya",
             lastName: "haseley-ayende",
             password: "2003nyleve",

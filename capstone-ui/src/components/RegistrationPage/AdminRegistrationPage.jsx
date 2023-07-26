@@ -15,7 +15,7 @@ export default function AdminRegistrationPage({
 }) {
   const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
-
+console.log(collegeOptions)
   useEffect(() => {
     {
       axios.post("http://localhost:3010/collegeList").then((response) => {

@@ -208,7 +208,7 @@ class Student {
    */
   static async getLikedColleges(student_id) {
     const result = await db.query(
-      `SELECT * FROM colleges
+      `SELECT * FROM liked_colleges
           WHERE user_id = $1`,
       [student_id]
     );

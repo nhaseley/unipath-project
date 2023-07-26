@@ -171,8 +171,6 @@ static async fetchAlumByEmail(email) {
   }
 
 
-
-
   /**
    * Add alum reviews to the Review table
    *
