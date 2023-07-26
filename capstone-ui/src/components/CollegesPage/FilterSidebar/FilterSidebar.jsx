@@ -17,6 +17,7 @@ export default function FilterSidebar({
   const [filteredBySAT, setFilteredBySAT] = useState([]);
   const [filteredByACT, setFilteredByACT] = useState([]);
   const [filteredByEnrollment, setFilteredByEnrollment] = useState([]);
+  const [filteredByPrice, setFilteredByPrice] = useState([]);
 
   useEffect(() => {
     setSAT(userLoginInfo.satScore);
@@ -24,30 +25,43 @@ export default function FilterSidebar({
     setEnrollment(userLoginInfo.enrollment);
   }, [userLoginInfo]);
 
-  // function changePriceFilter(event) {
-  //   setPrice(event.target.value);
-  //   let filteredByPrice = collegeList.filter(
-  //     (college) => parseFloat(college.tuition_out_of_state
-  //       ) < event.target.value + 10000
-  //   )
-  //   filteredByPrice.length < collegeList.length ? setCollegeList(filteredByPrice) : null
-  //   console.log("after changing price: ", filteredByPrice.length < collegeList.length ? filteredByPrice: collegeList)
-  //       // need to change to only filter if less
-  // }
+  function changePriceFilter(event) {
+    console.log("val: ", event.target.value)
+    setPrice(event.target.value);
+    let priceFiltered = collegeList.filter(
+      (college) =>
+        Math.abs(parseFloat(college.tuition_out_of_state) - event.target.value) <= 5000
+    ).sort((a, b) => parseFloat(b.tuition_out_of_state) - parseFloat(a.tuition_out_of_state));
+    setFilteredByPrice(priceFiltered);
 
-  // useEffect(() => {
-  //   // performFilter();
-  //   // changeACTFilter()
-  //   // changeSATFilter()
-  // }, [sat, act]);
+    if (
+      filteredBySAT.length != 0 &&
+      filteredByACT.length != 0 &&
+      filteredByEnrollment.length != 0
+    ) {
+      const commonItems = filteredBySAT
+        .filter((item) => priceFiltered.includes(item))
+        .filter((item) => filteredByACT.includes(item))
+        .filter((item) => filteredByEnrollment.includes(item))
+        .sort((a, b) => parseInt(b.size) - parseInt(a.size));
 
+      setCollegesToDisplay(commonItems);
+    } else {
+      setCollegesToDisplay(priceFiltered);
+    }
+  }
 
   function changeSATFilter(event) {
     setSAT(event.target.value);
     let satFiltered = collegeList.filter(
       (college) =>
-        Math.abs(parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math) - sat) <= 100
-    )
+        Math.abs(
+          parseInt(college.sat_score_critical_reading) +
+            parseInt(college.sat_score_writing) +
+            parseInt(college.sat_score_math) -
+            sat
+        ) <= 100
+    );
     // .sort((a, b) => parseInt((parseInt(b.sat_score_critical_reading) + parseInt(b.sat_score_writing) + parseInt(b.sat_score_math)) - parseInt(parseInt(a.sat_score_critical_reading) + parseInt(a.sat_score_writing) + parseInt(a.sat_score_math))))
     setFilteredBySAT(satFiltered);
 
@@ -68,12 +82,14 @@ export default function FilterSidebar({
         ? Math.abs(parseInt(college.act_score - event.target.value)) <= 4
         : null
     );
-    setFilteredByACT(actFiltered.sort((a, b) => parseInt(b.act_score) - parseInt(a.act_score)));
+    setFilteredByACT(
+      actFiltered.sort((a, b) => parseInt(b.act_score) - parseInt(a.act_score))
+    );
 
     if (filteredBySAT.length != 0) {
-      const commonItems = filteredBySAT.filter((item) =>
-      actFiltered.includes(item).sort((a, b) => parseInt(b.act_score) - parseInt(a.act_score))
-      );
+      const commonItems = filteredBySAT
+        .filter((item) => actFiltered.includes(item))
+        .sort((a, b) => parseInt(b.act_score) - parseInt(a.act_score));
       setCollegesToDisplay(commonItems);
     } else {
       setCollegesToDisplay(actFiltered);
@@ -82,18 +98,19 @@ export default function FilterSidebar({
 
   function changeEnrollmentFilter(event) {
     setEnrollment(event.target.value);
-    let enrollmentFiltered = collegeList.filter((college) => 
-    parseInt(college.size) < event.target.value).sort((a, b) => parseInt(b.size) - parseInt(a.size))
-    
+    let enrollmentFiltered = collegeList
+      .filter((college) => parseInt(college.size) < event.target.value)
+      .sort((a, b) => parseInt(b.size) - parseInt(a.size));
+
     setFilteredByEnrollment(enrollmentFiltered);
 
     if (filteredBySAT.length != 0 && filteredByACT.length != 0) {
       const commonItems = filteredBySAT
-  .filter((item) => enrollmentFiltered.includes(item))
-  .filter((item) => filteredByACT.includes(item))
-  .sort((a, b) => parseInt(b.size) - parseInt(a.size))
+        .filter((item) => enrollmentFiltered.includes(item))
+        .filter((item) => filteredByACT.includes(item))
+        .sort((a, b) => parseInt(b.size) - parseInt(a.size));
 
-  setCollegesToDisplay(commonItems);
+      setCollegesToDisplay(commonItems);
     } else {
       setCollegesToDisplay(enrollmentFiltered);
     }
@@ -101,16 +118,11 @@ export default function FilterSidebar({
 
   return (
     <div className="filter-sidebar">
-      
       <div className="filters">
-      <div className="user-info">
-        <div>
-        Your SAT Score: {userLoginInfo.satScore}
+        <div className="user-info">
+          <div>Your SAT Score: {userLoginInfo.satScore}</div>
+          <div>Your ACT Score: {userLoginInfo.actScore}</div>
         </div>
-        <div>
-        Your ACT Score: {userLoginInfo.actScore}
-        </div>
-      </div>
 
         <div className="price-filter">Price: ${price.toLocaleString()}</div>
         <input
@@ -121,7 +133,7 @@ export default function FilterSidebar({
           step={1}
           value={price.toLocaleString()}
           // TODO: fix - not appearing as toLocaleString on slide
-          // onChange={changePriceFilter}
+          onChange={changePriceFilter}
         ></input>
         <div className="act-score">ACT: {act ? act : null}</div>
         <input

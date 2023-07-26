@@ -183,7 +183,6 @@ class Student {
    * @return college added to the database
    */
   static async likeCollege(student_id, college) {
-    console.log("college", college)
     const result = await db.query(
       `INSERT INTO liked_colleges (
           user_id,
@@ -197,7 +196,6 @@ class Student {
                   `,
       [student_id, college]
     );
-    console.log("like: ", result.rows[0])
     return result.rows[0];
   }
 
@@ -213,7 +211,6 @@ class Student {
           WHERE user_id = $1`,
       [student_id]
     );
-    console.log("get likes: ", result.rows)
     return result.rows;
   }
 

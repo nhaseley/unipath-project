@@ -32,7 +32,7 @@ export default function CollegeGrid({
         });
     }
   }
-console.log(userLoginInfo)
+
   // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
@@ -45,7 +45,7 @@ console.log(userLoginInfo)
   let first20Colleges = collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer+20)
   first20Colleges?.map((college) => (
   //   // console.log("sat: ", parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math))
-    console.log("size: ", parseInt(college.size)))
+    console.log("size: ", parseInt(college.tuition_out_of_state)))
   )
   return (
     <div className="college-grid">
