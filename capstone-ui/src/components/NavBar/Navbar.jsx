@@ -6,7 +6,6 @@ import { Outlet, Link } from "react-router-dom";
 export default function Navbar({ userLoggedIn, logoutUser }) {
   return (
     <>
-
       <div className="wholeNavbar">
         <h1 className="logo">
           <Link to={"/"}> Uniforce </Link>{" "}
@@ -14,41 +13,32 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
         {userLoggedIn ? (
           <ul className="navItems">
             <li>
-              <button>
-                {" "}
-                <Link to={"/about"}> About us </Link>{" "}
-              </button>
+              <Link to={"/about"}>
+                <button className="navButton"> About us </button>
+              </Link>
             </li>
             <li>
-              <button>
-                {" "}
-                <Link to={"/"} onClick={logoutUser}>
-                  {" "}
-                  Sign Out{" "}
-                </Link>{" "}
-              </button>
+              <Link to={"/"} onClick={logoutUser}>
+                <button className="navButton">Sign Out</button>
+              </Link>
             </li>
           </ul>
-
         ) : (
           <ul className="navItems">
             <li>
-              <button>
-                {" "}
-                <Link to={"/about"}> About us </Link>{" "}
-              </button>
+              <Link to={"/about"}>
+                <button className="navButton">About Us </button>
+              </Link>
             </li>
             <li>
-              <button>
-                {" "}
-                <Link to={"/register"}> Register here </Link>{" "}
-              </button>
+              <Link to={"/register"}>
+                <button className="navButton"> Register </button>
+              </Link>
             </li>
             <li>
-              <button>
-                {" "}
-                <Link to={"/login"}> Login here </Link>{" "}
-              </button>
+              <Link to={"/login"}>
+                <button className="navButton">Login </button>
+              </Link>
             </li>
           </ul>
         )}

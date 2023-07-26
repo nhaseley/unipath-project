@@ -17,3 +17,8 @@
 .college-name{
     font-size: 35px;
 }
+
+.parents-parent{
+    display: flex;
+    flex-direction: column;
+}

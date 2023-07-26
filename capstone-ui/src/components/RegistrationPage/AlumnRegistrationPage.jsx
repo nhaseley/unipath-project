@@ -1,7 +1,4 @@
-
-
 import { Link, useNavigate } from "react-router-dom";
-
 
 export default function AlumnRegistrationPage(  
     {userLoginInfo,
@@ -62,6 +59,7 @@ export default function AlumnRegistrationPage(
               </div>
 
               <div className="email">
+
           <img
             src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
             className="email-img"
@@ -76,8 +74,6 @@ export default function AlumnRegistrationPage(
             }
           ></input>
         </div>
-
-
 
         <div className="password">
           <img
@@ -106,7 +102,6 @@ export default function AlumnRegistrationPage(
             {passwordDisplayed.password ? "Hide" : "Show"}
           </button>
         </div>
-
 
         <div className="confirm-password">
           <img
@@ -149,18 +144,14 @@ export default function AlumnRegistrationPage(
               " Error."
             : null}
         </div>
-            </form>
+      </form>
 
-
-            <button className="demo-button" onClick={handleDemo}>
+      <button className="demo-button" onClick={handleDemo}>
         Demo Registration
       </button>
       <button className="next-page">
         <Link to={"/registration-survey/alumn"}>Next</Link>
       </button>
-
-
-        </div>
-    )
-  
+    </div>
+  );
 }

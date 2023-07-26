@@ -27,15 +27,9 @@ export default function CollegeGrid({
         })
         .then((response) => {
 
-          if (response.data.status){
-            console.log("error check here")
-          } else {
-            console.log("colleges for this user: ", response.data);
-            // setCollegeList([response?.data])
-            // setCollegeList((prevList) => [...prevList, ...response?.data]);
-            setCollegesToDisplay((prevList) => [...prevList, ...response?.data]);
-          }
-         
+          console.log("colleges for this user: ", response.data);
+          setCollegeList((prevList) => [...prevList, ...response?.data]);
+          setCollegesToDisplay((prevList) => [...prevList, ...response?.data])
         });
     }
   }
@@ -50,10 +44,10 @@ export default function CollegeGrid({
   }
 
   let first20Colleges = collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer+20)
-  first20Colleges?.map((college) => (
-    // console.log("sat: ", parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math))
-    console.log("act: ", college.act_score? parseInt(college.act_score):null))
-  )
+  // first20Colleges?.map((college) => (
+  //   // console.log("sat: ", parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math))
+    // console.log("size: ", parseInt(college.tuition_out_of_state)))
+  // )
   return (
     <div className="college-grid">
       <div className="content">

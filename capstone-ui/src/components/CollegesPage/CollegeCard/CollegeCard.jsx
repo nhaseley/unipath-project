@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 export default function CollegeCard({ college }) {
   let satScore = parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math)
   // console.log("SCORE FOR COLLEGE DISPLAYED: ", satScore)
-
   return (
     <div className="college-card">
       <Link to={"/info/" + college.name} className="college-link">
@@ -22,7 +21,10 @@ export default function CollegeCard({ college }) {
             Median ACT Score:
             <div>{college.act_score ? college.act_score : "Unavailable"}</div>
             <div>
-              Enrollment Size: {college.size}
+              Enrollment Size: {parseInt(college.size).toLocaleString()}
+            </div>
+            <div>
+            Tuition: ${parseFloat(college.tuition_out_of_state).toLocaleString()}
             </div>
           </div>
         </>
