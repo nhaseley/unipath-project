@@ -5,14 +5,45 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-export default function () {
+export default function EventDetailsPage ({setError}) {
     const [eventInfo, setEventInfo] = useState({})
 
     const navigate = useNavigate()
 
-    function handleEventSubmit (event) {
+    async function handleEventSubmit (event) {
         // axios call to store events info in database
         event.preventDefault()
+
+        let result = await axios.post(
+            "http://localhost:3010/postEvent",
+            {
+              name: eventInfo.name,
+              desc: eventInfo.desc,
+              email: eventInfo.email,
+              speaker: eventInfo.speaker,
+              dateTime: eventInfo.dateTime,
+              dept: eventInfo.dept,
+              maxRegistrants: eventInfo.maxRegistrants
+            }
+          )
+
+          if (result.data.status) {
+            setError(result.data);
+          } else {
+            setError({});
+            setEventInfo({
+                name: "",
+                desc: "",
+                email: "",
+                speaker: "",
+                dateTime:0 ,
+                dept: "",
+                maxRegistrants: 0
+            });
+          }
+
+
+
         navigate('/events')
     }
     console.log(eventInfo)
@@ -23,12 +54,13 @@ export default function () {
           desc: "This is a really cool event!!",
           email: "nylevenya@brown.edu",
           speaker: "nya",
-          dateTime: Date.now(),
+        //   dateTime: (userLoginInfo.dateTime.toISOString().slice(0, 16)), 1000,
           dept: "6464080591",
           maxRegistrants: 100
         });
       }
     
+      console.log(eventInfo.dateTime)
 
 
     return (
@@ -60,10 +92,10 @@ export default function () {
             </div>
 
             <div className="event-date/time">
-                <label htmlFor="event-date/time-label" className="event-date/time-label" onChange={(e) =>
+                <label htmlFor="event-date/time-label" className="event-date/time-label">Date/Time:</label>
+                <input type="datetime-local" className="event-date/time-input" value={eventInfo.dateTime}  onChange={(e) =>
               setEventInfo((u) => ({ ...u, dateTime: e.target.value }))
-            }>Date/Time:</label>
-                <input type="datetime-local" className="event-date/time-input" value={eventInfo.dateTime}/>
+            }/>
             </div>
 
             <div className="event-speaker">

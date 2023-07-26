@@ -147,5 +147,33 @@ class AdmissionOfficer {
     return admissionOfficer;
   }
 
+
+
+
+  static async postEvent(name, desc, email, dateTime, speaker, dept, maxRegistrants){
+    const result = await db.query (
+      `INSERT INTO events (
+        name,
+        description,
+        organizer_email,
+        date_time,
+        speaker,
+        dept,
+        max_registrants
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING 
+                id,
+                name,
+                description,
+                organizer_email,
+                date_time,
+                speaker,
+                dept,
+                max_registrants`, 
+                [name, desc, email, dateTime, speaker, dept, maxRegistrants]
+    )
+    return result.rows;
+  }
+
 }
 module.exports = AdmissionOfficer;
