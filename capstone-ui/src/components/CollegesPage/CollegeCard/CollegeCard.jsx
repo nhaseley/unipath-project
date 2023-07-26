@@ -21,7 +21,7 @@ export default function CollegeCard({ college }) {
             Median ACT Score:
             <div>{college.act_score ? college.act_score : "Unavailable"}</div>
             <div>
-              Enrollment Size: {college.size}
+              Enrollment Size: {parseInt(college.size).toLocaleString()}
             </div>
             <div>
             Tuition: ${parseFloat(college.tuition_out_of_state).toLocaleString()}

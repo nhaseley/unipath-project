@@ -26,7 +26,6 @@ export default function FilterSidebar({
   }, [userLoginInfo]);
 
   function changePriceFilter(event) {
-    console.log("val: ", event.target.value)
     setPrice(event.target.value);
     let priceFiltered = collegeList.filter(
       (college) =>
@@ -65,10 +64,11 @@ export default function FilterSidebar({
     // .sort((a, b) => parseInt((parseInt(b.sat_score_critical_reading) + parseInt(b.sat_score_writing) + parseInt(b.sat_score_math)) - parseInt(parseInt(a.sat_score_critical_reading) + parseInt(a.sat_score_writing) + parseInt(a.sat_score_math))))
     setFilteredBySAT(satFiltered);
 
-    if (filteredByACT.length != 0) {
+    if (filteredByACT.length != 0 && filteredByPrice.length != 0 &&
+      filteredByEnrollment.length != 0) {
       const commonItems = satFiltered.filter((item) =>
-        filteredByACT.includes(item)
-      );
+        filteredByACT.includes(item)).filter((item) => filteredByPrice.includes(item))
+        .filter((item) => filteredByEnrollment.includes(item));
       setCollegesToDisplay(commonItems);
     } else {
       setCollegesToDisplay(satFiltered);
@@ -86,10 +86,14 @@ export default function FilterSidebar({
       actFiltered.sort((a, b) => parseInt(b.act_score) - parseInt(a.act_score))
     );
 
-    if (filteredBySAT.length != 0) {
+    if (filteredBySAT.length != 0 && filteredByPrice.length != 0 &&
+      filteredByEnrollment.length != 0) {
       const commonItems = filteredBySAT
         .filter((item) => actFiltered.includes(item))
+        .filter((item) => filteredByPrice.includes(item))
+        .filter((item) => filteredByEnrollment.includes(item))
         .sort((a, b) => parseInt(b.act_score) - parseInt(a.act_score));
+
       setCollegesToDisplay(commonItems);
     } else {
       setCollegesToDisplay(actFiltered);
@@ -104,10 +108,11 @@ export default function FilterSidebar({
 
     setFilteredByEnrollment(enrollmentFiltered);
 
-    if (filteredBySAT.length != 0 && filteredByACT.length != 0) {
+    if (filteredBySAT.length != 0 && filteredByACT.length != 0 && filteredByPrice.length != 0 ) {
       const commonItems = filteredBySAT
         .filter((item) => enrollmentFiltered.includes(item))
         .filter((item) => filteredByACT.includes(item))
+        .filter((item) => filteredByPrice.includes(item))
         .sort((a, b) => parseInt(b.size) - parseInt(a.size));
 
       setCollegesToDisplay(commonItems);

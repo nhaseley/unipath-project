@@ -1,59 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 
-export default function AlumnRegistrationPage({
-  userLoginInfo,
-  setUserLoginInfo,
-  handleShowPassword,
-  handleHidePassword,
-  passwordDisplayed,
-  error,
-}) {
-  function handleDemo() {
-    setUserLoginInfo({
-      email: "nylevenya@brown.edu",
-      firstName: "nya",
-      lastName: "haseley-ayende",
-      password: "2003nyleve",
-      confirmPassword: "2003nyleve",
-    });
-  }
-
-  return (
-    <div className="alumn-registration">
-      <h2>Create an alumn/college student account</h2>
-      <form className="alumn-form">
-        <div className="names">
-          <div className="first-name">
-            <input
-              className="first-name-input"
-              type="text"
-              placeholder="First Name"
-              value={userLoginInfo.firstName}
-              onChange={(e) =>
-                setUserLoginInfo((u) => ({
-                  ...u,
-                  firstName: e.target.value,
-                }))
-              }
-            />
-          </div>
-
-          <div className="last-name">
-            <input
-              className="last-name-input"
-              type="text"
-              placeholder="Last Name"
-              value={userLoginInfo.lastName}
-              onChange={(e) =>
-                setUserLoginInfo((u) => ({
-                  ...u,
-                  lastName: e.target.value,
-                }))
-              }
-            />
-          </div>
-        </div>
-
 export default function AlumnRegistrationPage(  
     {userLoginInfo,
     setUserLoginInfo,
