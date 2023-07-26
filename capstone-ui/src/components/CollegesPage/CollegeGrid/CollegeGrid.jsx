@@ -11,7 +11,8 @@ export default function CollegeGrid({
   setCollegeList,
   collegeArrayPointer,
   setCollegeArrayPointer,
-  collegesToDisplay
+  collegesToDisplay,
+  setCollegesToDisplay
 }) {  
 
   // Function to display colleges on the grid
@@ -25,8 +26,16 @@ export default function CollegeGrid({
           schoolType: userLoginInfo.schoolType,
         })
         .then((response) => {
-          console.log("colleges for this user: ", response.data);
-          setCollegeList((prevList) => [...prevList, ...response?.data]);
+
+          if (response.data.status){
+            console.log("error check here")
+          } else {
+            console.log("colleges for this user: ", response.data);
+            // setCollegeList([response?.data])
+            // setCollegeList((prevList) => [...prevList, ...response?.data]);
+            setCollegesToDisplay((prevList) => [...prevList, ...response?.data]);
+          }
+         
         });
     }
   }

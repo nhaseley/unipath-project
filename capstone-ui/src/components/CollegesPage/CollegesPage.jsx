@@ -40,6 +40,7 @@ export default function CollegesPage({
             collegeArrayPointer={collegeArrayPointer}
             setCollegeArrayPointer={setCollegeArrayPointer}
             collegesToDisplay={collegesToDisplay}
+            setCollegesToDisplay={setCollegesToDisplay}
           ></CollegeGrid>
         </>
       )}
