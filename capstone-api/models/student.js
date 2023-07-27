@@ -258,7 +258,6 @@ class Student {
       return decoded; // returning the decoded token
     } catch {
         return null // return null if the token seems to be invalid or expired
-
     }
   }
 

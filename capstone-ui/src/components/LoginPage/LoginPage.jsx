@@ -48,7 +48,7 @@ export default function LoginPage({
           password: "2003nyleve"
         })
       : setUserLoginInfo({
-          email: "nylevenya2@hotmail.com",
+          email: "nylevenya@hotmail.com",
           password: "2003nyleve",
         });
 

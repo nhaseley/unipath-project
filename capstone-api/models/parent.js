@@ -172,5 +172,34 @@ class Parent {
     }
     return result.rows[0]
   }
+
+
+
+  static async generateAuthToken(parent, type) {
+    const payload = {
+      id: parent.id,
+      firstName: parent.firstName,
+      lastName: parent.lastName,
+      email: parent.email,
+      type: type
+    };
+
+    const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
+    return token;
+  }
+
+
+
+  static async verifyAuthToken(token) {
+    try {
+      const decoded = jwt.verify(token, secretKey); // decoding the token
+      return decoded; // returning the decoded token
+    } catch {
+        return null // return null if the token seems to be invalid or expired
+    }
+  }
+
+
 }
+
 module.exports = Parent;
