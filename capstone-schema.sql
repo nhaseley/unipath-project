@@ -6,8 +6,8 @@ CREATE TABLE students (
   parent_phone  VARCHAR(10),
   zipcode       VARCHAR(5),
   password      TEXT NOT NULL,
-  sat_score     INTEGER,
-  act_score     INTEGER,
+  sat_score     VARCHAR,
+  act_score     VARCHAR,
   enrollment    INTEGER,
   school_type   TEXT
 );

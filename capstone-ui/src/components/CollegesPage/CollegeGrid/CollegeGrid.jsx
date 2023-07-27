@@ -35,7 +35,6 @@ export default function CollegeGrid({
           setCollegeList(response?.data.collegesToDisplay);
           setCollegesToDisplay(response?.data.collegesToDisplay);
           setAllColleges(response?.data.allColleges);
-          // setCollegesToDisplay((prevList) => [...prevList, ...response?.data])
         });
     }
   }

@@ -18,6 +18,9 @@ export default function StudentRegistrationForm({
       zipcode: "10803",
       password: "2003nyleve",
       confirmPassword: "2003nyleve",
+      enrollment:userLoginInfo.enrollment,
+      examScores: userLoginInfo.examScores,
+      schoolType: ""
     });
   }
   return (
