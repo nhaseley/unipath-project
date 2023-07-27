@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom'
 
 export default function CollegeCard({ college }) {
   let satScore = parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math)
-  // console.log("SCORE FOR COLLEGE DISPLAYED: ", satScore)
+
   return (
     <div className="college-card">
       <Link to={"/info/" + college.name} className="college-link">
     
-      {satScore || college.act_score? (
+      {/* {satScore || college.act_score? ( */}
         <>
           <h3>{college.name}</h3>
           <div className="scores">
@@ -28,7 +28,7 @@ export default function CollegeCard({ college }) {
             </div>
           </div>
         </>
-      ) : null}
+      {/* ) : null} */}
         </Link>
     </div>
   );

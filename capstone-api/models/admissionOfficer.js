@@ -147,30 +147,49 @@ class AdmissionOfficer {
     return admissionOfficer;
   }
 
-
-
-
-  static async postEvent(name, desc, email, dateTime, speaker, dept, maxRegistrants){
+  /**
+   * Add an event to the database
+   *
+   * @param {String} email
+   * @returns event added
+   */
+  static async postEvent(name, desc, email, speaker, dateTime, dept, maxRegistrants, college){
     const result = await db.query (
       `INSERT INTO events (
         name,
         description,
         organizer_email,
-        date_time,
         speaker,
+        date_time,
         dept,
-        max_registrants
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+        max_registrants,
+        college
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING 
                 id,
                 name,
                 description,
                 organizer_email,
-                date_time,
                 speaker,
+                date_time,
                 dept,
-                max_registrants`, 
-                [name, desc, email, dateTime, speaker, dept, maxRegistrants]
+                max_registrants,
+                college`, 
+                [name, desc, email, speaker, dateTime, dept, maxRegistrants, college]
+    )
+    return result.rows;
+  }
+
+  /**
+   * Get list of all events in the database
+   *
+   * @returns events
+   */
+  static async getAllEvents(school){
+    const result = await db.query (
+      `SELECT * FROM events
+      WHERE college = $1`,
+      [school]
     )
     return result.rows;
   }

@@ -77,7 +77,6 @@ class Student {
    **/
 
   static async register(creds) {
-    console.log(creds)
     const requiredCreds = [
       "email",
       "firstName",
@@ -236,12 +235,13 @@ class Student {
   //   return student;
   // }
 
-  static async generateAuthToken(student) {
+  static async generateAuthToken(student, type) {
     const payload = {
       id: student.id,
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
+      type: type      
       // location: student.location,
       // date: student.date,
     };
@@ -255,7 +255,6 @@ class Student {
   static async verifyAuthToken(token) {
     try {
       const decoded = jwt.verify(token, secretKey); // decoding the token
-
       return decoded; // returning the decoded token
     } catch {
         return null // return null if the token seems to be invalid or expired
@@ -308,6 +307,7 @@ class Student {
       `,
       [sat_score, act_score]
     );
+    console.log("all colleges for this user: ", result.rows.length)
     return result.rows;
   }
 
@@ -324,7 +324,6 @@ class Student {
           WHERE name = $1`,
       [collegeName]
     );
-    // console.log(result.rows)
     return result.rows[0];
   }
 }

@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ParentCollegeCard from "./ParentCollegeCard";
 
-export default function ParentsPage({ userLoginInfo, userLoggedIn }) {
+export default function ParentsPage({ userLoginInfo, userLoggedIn, userType, setUserLoginInfo}) {
   const [childsColleges, setChildsColleges] = useState([]);
-  console.log("childs colleges: ", childsColleges)
+
   useEffect(() => {
     {
       axios
@@ -22,11 +22,24 @@ export default function ParentsPage({ userLoginInfo, userLoggedIn }) {
 
   return (
     <div className="parents-page">
-      <h1>Welcome, {userLoginInfo.firstName} to the parents page!</h1>
-      <h1> Your child's liked colleges: </h1>
-      {childsColleges?.map((childCollege, index) => (
-        <ParentCollegeCard childCollege={childCollege} key={index}></ParentCollegeCard>
-      ))}
+      {!userLoggedIn || userType != "parent" ? (
+        <h1>
+          Sorry, this page is for parents only. Please log
+          in <Link to={"/login"}> here. </Link>
+        </h1>
+      ) : (
+        <div className="parent-logged-in-page">
+          <h1>Welcome, {userLoginInfo.firstName} to the parents page!</h1>
+          <h1> Your child's liked colleges: </h1>
+          {childsColleges?.map((childCollege, index) => (
+            <ParentCollegeCard
+              childCollege={childCollege}
+              key={index}
+              setUserLoginInfo={setUserLoginInfo}
+            ></ParentCollegeCard>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

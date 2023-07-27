@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import NetPricePieChart from "./NetPriceBarChart";
 import AverageEarningsPieChart from "./AverageEarningsBarChart";
 
-export default function ParentCollegeCard({ childCollege }) {
+export default function ParentCollegeCard({ childCollege, setUserLoginInfo }) {
   const customColors = [
     "#F2DDA4",
     "#9DCBBA",
@@ -19,7 +19,6 @@ export default function ParentCollegeCard({ childCollege }) {
   ];
 
   const [college, setCollege] = useState();
-  console.log(college);
 
   useEffect(() => {
     axios
@@ -42,10 +41,14 @@ export default function ParentCollegeCard({ childCollege }) {
     earnings_4yr_after_completion: college?.earnings_4yr_after_completion,
   };
 
+  function changeCollege(){
+    setUserLoginInfo((u) => ({ ...u, college: childCollege?.name }));
+  }
+  
   return (
     <div className="parent-college-card">
       <div className="info">
-        <h2 className="college-name">{childCollege?.name}</h2>
+        <h2 className="student-college-name" onClick={changeCollege}><Link to={"/info/" + childCollege?.name} > {childCollege?.name} </Link></h2>
         <h3 className="out-of-state-tuition">
           Out of state tuition:{" "}
           {college?.tuition_out_of_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}

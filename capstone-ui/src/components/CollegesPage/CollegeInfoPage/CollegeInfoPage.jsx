@@ -3,10 +3,16 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./CollegeInfoPage.css";
 
-export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
+export default function CollegeInfoPage({
+  userLoginInfo,
+  setUserLoginInfo,
+  selectedCollege,
+  setSelectedCollege,
+  userType,
+}) {
   const { id } = useParams();
   const [college, setCollege] = useState();
-  const [reviews, setReviews] = useState()
+  const [reviews, setReviews] = useState();
 
   // get info for particular college for this user
   async function getCollege() {
@@ -30,18 +36,16 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
       userLoginInfo.firstName != ""
     ) {
       axios
-        .post("http://localhost:3010/getCollegeReview", {
-          alum_id: userLoginInfo.id
-        })
+        .post(
+          "http://localhost:3010/getCollegeReviews",
+          { college: userType == "student" ? selectedCollege : userLoginInfo.college }
+        )
         .then((response) => {
-          // console.log("resp: ",response.data)
           setReviews(response.data);
         });
-      }
+    }
   }
-
-
-
+// TODO: fix bug with getting college reviews => selectedCollege is async 
   useEffect(() => {
     getCollege();
     getReviews();
@@ -50,47 +54,56 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
   function findMinorityServingValue(data) {
     if (data) {
       if (data.aanipi == 1) {
-        return "aanipi-serving"
+        return "aanipi-serving";
       }
       if (data.annh == 1) {
-        return "annh-serving"
+        return "annh-serving";
       }
       if (data.hispanic == 1) {
-        return "hispanic-serving"
+        return "hispanic-serving";
       }
       if (data.predominantly_black == 1) {
-        return "predominantly black"
+        return "predominantly black";
       }
       if (data.historically_black == 1) {
-        return "historically black"
+        return "historically black";
       }
       if (data.tribal == 1) {
-        return "tribal-serving"
+        return "tribal-serving";
       }
       if (data.women_only == 1) {
-        return "women only"
+        return "women only";
       }
       if (data.men_only == 1) {
-        return "men only"
+        return "men only";
       }
     }
   }
-  console.log("college:", college);
-  console.log("review", reviews)
 
+  function changeCollege() {
+    if (userType=="student" || userType == "parent"){
+      setUserLoginInfo((u) => ({ ...u, college: selectedCollege }))
+    }
+  }
   return (
     <div className="college-info-page">
       <div className="title">
         <h1> Welcome to {college?.name} </h1>
-        <Link to={"/like"} onClick={setSelectedCollege(college?.name)}>
-          <img
-            src="https://www.transparentpng.com/download/instagram-heart/bULeEp-heart-instagram-vector.png"
-            className="like-img"
-          ></img>
-        </Link>
+        {userType == "student" ? (
+          <Link to={"/like"} onClick={setSelectedCollege(college?.name)}>
+            <img
+              src="https://www.transparentpng.com/download/instagram-heart/bULeEp-heart-instagram-vector.png"
+              className="like-img"
+            ></img>
+          </Link>
+        ) : null}
+      </div>
+      <div className="see-events">
+        <button onClick={changeCollege}>
+          <Link to={"/events"}>See Upcoming Events</Link>
+        </button>
       </div>
       <h2>
-        {" "}
         {college?.name} is a 4-year {findMinorityServingValue(college)}{" "}
         institution located in {college?.city}, {college?.state}.
       </h2>
@@ -152,27 +165,25 @@ export default function CollegeInfoPage({ userLoginInfo, setSelectedCollege }) {
         </div>
       </div>
 
-
+      {userType == "college-students-and-alumni" ? (
+        <button className="add-more-reviews-button">
+          <Link to="/mycollege">Add more reviews!</Link>
+        </button>
+      ) : null}
 
       <div className="alumReviews">
         {reviews?.map((review) => (
           <div>
             <div>
-            review: {review.review}
+              {" "}
+              {review.first_name} {review.last_name}, Class of{" "}
+              {review.college_grad_year}{" "}
             </div>
-            <div>
-            rating: {review.rating}
-            </div>
-            </div>
+            <div>review: {review.review}</div>
+            <div>rating: {review.rating}</div>
+          </div>
         ))}
-             {/* review:{review?.review}
-             rating: {review?.rating} */}
       </div>
-
-
-
-
-
     </div>
   );
 }

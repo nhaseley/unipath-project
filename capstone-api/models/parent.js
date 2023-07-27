@@ -52,7 +52,7 @@ class Parent {
     }
 
     const parent = await Parent.fetchParentByEmail(creds.email);
-    console.log(parent)
+
     if (parent) {
       // compare hashed password to a new hash from password
       const isValid = await bcrypt.compare(creds.password, parent.password);

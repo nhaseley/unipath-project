@@ -18,7 +18,8 @@ export default function CollegesPage({
 
   return (
     <div className="colleges-page">
-      {!userLoggedIn && userType != "student" ? (
+    
+      {!userLoggedIn || userType != "student" ? (
         <h1>
           Unfortunately, this page is only available for students. Please log in{" "}
           <Link to={"/login"}>here.</Link>{" "}
@@ -35,7 +36,6 @@ export default function CollegesPage({
 
           <CollegeGrid
             userLoginInfo={userLoginInfo}
-            collegeList={collegeList}
             setCollegeList={setCollegeList}
             collegeArrayPointer={collegeArrayPointer}
             setCollegeArrayPointer={setCollegeArrayPointer}

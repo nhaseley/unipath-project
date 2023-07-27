@@ -1,5 +1,6 @@
 const express = require("express")
 const Student = require("../models/student")
+const Alum = require("../models/alum")
 const router = express.Router()
 
 router.post("/like", async function (req, res, next){
@@ -20,7 +21,8 @@ router.post("/like", async function (req, res, next){
     try {
     
       const collegesToDisplay = await Student.getCollegeFeed(req.body.satScore, req.body.actScore)
-      return res.status(201).json(collegesToDisplay)
+      const allColleges = await Alum.getColleges();
+      return res.status(201).json({collegesToDisplay, allColleges});
 
     } catch (err){
       // res.send(err)

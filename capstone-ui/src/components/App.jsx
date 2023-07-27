@@ -47,17 +47,17 @@ export default function App() {
   const [userType, setUserType] = useState();
   const [decodedToken, setDecodedToken] = useState();
   const [collegeArrayPointer, setCollegeArrayPointer] = useState(0);
-
-  console.log("user info: ", userLoginInfo);
+  console.log(userLoginInfo)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!decodedToken) {
       axios
         .post("http://localhost:3010/auth/decodedtoken", {
-          token: token,
+          token: token
         })
         .then((response) => {
+          
             setUserLoginInfo({
               id: response.data.user.id,
               email: response.data.user.email,
@@ -72,7 +72,8 @@ export default function App() {
               schoolType: response.data.user.school_type,
             });
             // TODO: FIX JWT FOR OTHER USER ROLES
-
+            // fix refresh for events page
+          setUserType(response.data.userType)
           setDecodedToken(response.data.decodedToken);
         })
         .catch((error) => {
@@ -134,6 +135,7 @@ export default function App() {
       schoolType: "",
     });
     setUserType();
+    setSelectedCollege({})
   }
 
   //---------------- Return Object ---------------------//
@@ -232,6 +234,8 @@ export default function App() {
                 <ParentsPage
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
+                  userType={userType}
+                  setUserLoginInfo={setUserLoginInfo}
                 ></ParentsPage>
               }
             ></Route>
@@ -267,6 +271,7 @@ export default function App() {
                   setUserLoginInfo={setUserLoginInfo}
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
+                  userType={userType}
                 ></AlumniHomePage>
               }
             ></Route>
@@ -275,7 +280,10 @@ export default function App() {
               element={
                 <CollegeInfoPage
                   userLoginInfo={userLoginInfo}
+                  setUserLoginInfo={setUserLoginInfo}
+                  selectedCollege={selectedCollege}
                   setSelectedCollege={setSelectedCollege}
+                  userType={userType}
                 >
                 </CollegeInfoPage>
               }
