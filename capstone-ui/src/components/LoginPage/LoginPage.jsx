@@ -63,7 +63,6 @@ export default function LoginPage({
         password: userLoginInfo.password,
       }
     );
-    console.log("result from login: ", result.data);
 
     if (result.data.message) {
       navigate("/login");
@@ -78,11 +77,11 @@ export default function LoginPage({
         userType == "student"
           ? setUserLoginInfo(result.data.student)
           : userType == "parent"
-          ? setUserLoginInfo(result.data)
+          ? setUserLoginInfo(result.data.parent)
           : userType == "college-admission-officer"
           ? setUserLoginInfo(result.data.admissionOfficer)
           : userType == "college-students-and-alumni"
-          ? setUserLoginInfo(result.data)
+          ? setUserLoginInfo(result.data.alum)
           : null;
       }
 

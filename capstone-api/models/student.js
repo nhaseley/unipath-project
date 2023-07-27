@@ -77,7 +77,6 @@ class Student {
    **/
 
   static async register(creds) {
-    console.log(creds)
     const requiredCreds = [
       "email",
       "firstName",
@@ -183,7 +182,6 @@ class Student {
    * @return college added to the database
    */
   static async likeCollege(student_id, college) {
-    console.log("college", college)
     const result = await db.query(
       `INSERT INTO liked_colleges (
           user_id,
@@ -197,7 +195,6 @@ class Student {
                   `,
       [student_id, college]
     );
-    console.log("like: ", result.rows[0])
     return result.rows[0];
   }
 
@@ -213,7 +210,6 @@ class Student {
           WHERE user_id = $1`,
       [student_id]
     );
-    console.log("get likes: ", result.rows)
     return result.rows;
   }
 
@@ -239,12 +235,13 @@ class Student {
   //   return student;
   // }
 
-  static async generateAuthToken(student) {
+  static async generateAuthToken(student, type) {
     const payload = {
       id: student.id,
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
+      type: type      
       // location: student.location,
       // date: student.date,
     };
@@ -258,11 +255,9 @@ class Student {
   static async verifyAuthToken(token) {
     try {
       const decoded = jwt.verify(token, secretKey); // decoding the token
-
       return decoded; // returning the decoded token
     } catch {
         return null // return null if the token seems to be invalid or expired
-
     }
   }
 
@@ -273,46 +268,56 @@ class Student {
    * @param {*} student_id
    * @return colleges in the database for a given user
    */
-  // static async getCollegeFeed(sat_score, act_score) {
-  //   // console.log(typeof sat_score);
-  //   // console.log(typeof act_score)
 
+  static async getCollegeFeed(sat_score, act_score) {
+  const safeSatScore = sat_score !== '' && Number.isFinite(Number(sat_score)) ? Number(sat_score) : null;
+  const safeActScore = act_score !== '' && Number.isFinite(Number(act_score)) ? Number(act_score) : null;
+
+  const condition = safeSatScore !== null
+    ? `ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) +
+           CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) +
+           CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 200`
+    : 'TRUE'; // Return all colleges if safeSatScore is null
+
+    const result = await db.query(
+      `SELECT * FROM colleges_from_api
+       WHERE ${condition}
+         AND ($2::VARCHAR IS NULL OR ABS(COALESCE(act_score::NUMERIC, 0) - $2::NUMERIC) <= 4)
+      `,
+      [safeSatScore, safeActScore]
+    );
+    console.log("all colleges for this user: ", result.rows.length)
+    // console.log("getCollegeFeed from database: ", result.rows);
+    return result.rows;
+
+  }
+  
+
+
+
+
+
+
+
+
+  // static async getCollegeFeed(sat_score, act_score) {
   //   if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
-  //     throw new BadRequestError("No standardized test scores for this user.");
+  //     // throw new BadRequestError("No standardized test scores for this user.");
   //   }
   //   const result = await db.query(
   //     `SELECT * FROM colleges_from_api
   //       WHERE 
-  //       ($1 IS NULL OR 
   //         ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) + 
   //            CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) + 
-  //            CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 200)
-  //       AND
-  //       ($2 IS NULL OR 
-  //         ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2::NUMERIC) <= 4)
-  // `,
+  //            CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1) <= 200
+  //         OR
+  //         ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2) <= 4
+  //     `,
   //     [sat_score, act_score]
   //   );
-  //   console.log("getCollegeFeed from database: ", result.rows.length);
+  //   console.log("all colleges for this user: ", result.rows.length)
   //   return result.rows;
   // }
-  static async getCollegeFeed(sat_score, act_score) {
-    if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
-      // throw new BadRequestError("No standardized test scores for this user.");
-    }
-    const result = await db.query(
-      `SELECT * FROM colleges_from_api
-        WHERE 
-          ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) + 
-             CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) + 
-             CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1) <= 200
-          OR
-          ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2) <= 4
-      `,
-      [sat_score, act_score]
-    );
-    return result.rows;
-  }
 
 
    /**
@@ -327,7 +332,6 @@ class Student {
           WHERE name = $1`,
       [collegeName]
     );
-    // console.log(result.rows)
     return result.rows[0];
   }
 }

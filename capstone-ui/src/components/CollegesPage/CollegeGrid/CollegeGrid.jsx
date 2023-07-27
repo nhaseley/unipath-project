@@ -7,13 +7,16 @@ import CollegeCard from "../CollegeCard/CollegeCard";
 
 export default function CollegeGrid({
   userLoginInfo,
-  collegeList,
   setCollegeList,
   collegeArrayPointer,
   setCollegeArrayPointer,
   collegesToDisplay,
-  setCollegesToDisplay
-}) {  
+  setCollegesToDisplay,
+  setUserLoginInfo
+}) {
+  const [searchInput, setSearchInput] = useState("");
+  const [allColleges, setAllColleges] = useState([]);
+  const [searchedColleges, setSearchedColleges] = useState([]);
 
   // Function to display colleges on the grid
   async function getCollegeGrid() {
@@ -26,13 +29,18 @@ export default function CollegeGrid({
           schoolType: userLoginInfo.schoolType,
         })
         .then((response) => {
-          console.log("colleges for this user: ", response.data);
-          setCollegeList((prevList) => [...prevList, ...response?.data]);
-          setCollegesToDisplay((prevList) => [...prevList, ...response?.data])
+          console.log(
+            "colleges for this user: ",
+            response.data.collegesToDisplay
+          );
+          // setCollegeList((prevList) => [...prevList, ...response?.data]);
+          setCollegeList(response?.data.collegesToDisplay);
+          setCollegesToDisplay(response?.data.collegesToDisplay);
+          setAllColleges(response?.data.allColleges);
         });
     }
   }
-console.log(userLoginInfo)
+
   // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
@@ -41,12 +49,30 @@ console.log(userLoginInfo)
   function incrementPage() {
     setCollegeArrayPointer(collegeArrayPointer + 20);
   }
+  // function decrementPage() {
+  //   setCollegeArrayPointer(collegeArrayPointer - 20);
+  // }
 
-  let first20Colleges = collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer+20)
-  first20Colleges?.map((college) => (
-  //   // console.log("sat: ", parseInt(college.sat_score_critical_reading) + parseInt(college.sat_score_writing) + parseInt(college.sat_score_math))
-    console.log("size: ", parseInt(college.size)))
-  )
+  //  Render each keystroke and filter collegeList with it
+  function handleSearch(event) {
+    setSearchInput(event.target.value);
+
+    let filteredItems = allColleges?.filter((college) =>
+      college.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    console.log("filtered: ", filteredItems);
+    setSearchedColleges(filteredItems);
+  }
+
+  let first20Colleges =
+    searchInput != ""
+      ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
+      : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20);
+
+      console.log(first20Colleges)
+
+
+   
   return (
     <div className="college-grid">
       <div className="content">
@@ -54,13 +80,17 @@ console.log(userLoginInfo)
           Hi {userLoginInfo.firstName != "" ? userLoginInfo.firstName : null},
           here are your personalized colleges!
         </h1>
+        <div className="college-search" > </div>
+        <input onChange={handleSearch} placeholder="Search for a college here"></input>
+
         <div className="colleges">
           {first20Colleges?.map((college, index) => (
-            <CollegeCard college={college} key={index} />
+            <CollegeCard college={college} key={index} setUserLoginInfo={setUserLoginInfo} />
           ))}
           {/* change functionality to be able to back to previous colleges */}
         </div>
         <button onClick={incrementPage}>See More Colleges</button>
+        {/* <button onClick={decrementPage}>Previous Colleges</button> */}
       </div>
     </div>
   );

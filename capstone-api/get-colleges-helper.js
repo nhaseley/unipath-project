@@ -20,7 +20,6 @@ async function callStoreResultWithDelay() {
       const response = await axios.get(createEndpointUrl(pageID));
       for (let result = 0; result < 20; result++) {
         storeResult(response.data.results[result].latest);
-        // console.log(`Stored Result Page ${pageID}`)
       }
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -6,8 +6,8 @@ CREATE TABLE students (
   parent_phone  VARCHAR(10),
   zipcode       VARCHAR(5),
   password      TEXT NOT NULL,
-  sat_score     INTEGER,
-  act_score     INTEGER,
+  sat_score     VARCHAR,
+  act_score     VARCHAR,
   enrollment    INTEGER,
   school_type   TEXT
 );
@@ -122,14 +122,15 @@ CREATE TABLE admission_officers (
 );
 
 CREATE TABLE events (
-  id           SERIAL PRIMARY KEY,
-  name         TEXT NOT NULL,
-  description  TEXT NOT NULL,
-  organizer_email         TEXT NOT NULL UNIQUE CHECK (position('@' IN organizer_email) > 1 AND RIGHT(organizer_email, 4) = '.com')
-  speaker      TEXT,
-  date_time    TIMESTAMP DEFAULT NOW(),
-  dept         TEXT,
-  max_registrants   INT
+  id                SERIAL PRIMARY KEY,
+  name              TEXT NOT NULL,
+  description       TEXT NOT NULL,
+  organizer_email   TEXT NOT NULL CHECK (position('@' IN organizer_email) > 1 AND RIGHT(organizer_email, 4) = '.edu'),
+  speaker           TEXT,
+  date_time         TIMESTAMP DEFAULT NOW(),
+  dept              TEXT,
+  max_registrants   INT,
+  college           TEXT NOT NULL
 );
 
 CREATE TABLE event_attendees (
@@ -142,10 +143,13 @@ CREATE TABLE event_attendees (
 
 
 CREATE TABLE reviews (
-  id              SERIAL PRIMARY KEY,
-  user_id         INT,
-  college_name    TEXT,
-  rating          INT,
-  review          TEXT  
+  id                SERIAL PRIMARY KEY,
+  user_id           INT,
+  first_name        TEXT NOT NULL,
+  last_name         TEXT NOT NULL,
+  college_name      TEXT,
+  college_grad_year INTEGER,
+  rating            INT,
+  review            TEXT
 );
 

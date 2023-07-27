@@ -1,30 +1,56 @@
 import * as React from "react";
 import "./EventsPage.css";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import EventCard from "./EventCard";
 
+export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
+  const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
 
-export default function EventsPage({userLoginInfo, userLoggedIn, userType}){
-const navigate = useNavigate()
+  function handleAddNewEvent(event) {
+    event.preventDefault();
 
-    function handleAddNewEvent(event) {
-        event.preventDefault();
+    navigate("/eventDetails");
+  }
+  async function getAllEvents() {
+    userType == "student"
+      ? await axios
+          .post("http://localhost:3010/getAllEvents", {
+            college: userLoginInfo.college,
+          })
+          .then((response) => setEvents(response.data))
+      : await axios
+          .post("http://localhost:3010/getAllEvents", { 
+            college: userLoginInfo.college,
+          })
+          .then((response) => setEvents(response.data));
+  }
+  useEffect(() => {
+    getAllEvents();
+  }, [userLoginInfo]);
 
-        navigate('/eventDetails') 
-    }
-    // useeffect to call all events with this college name
+  return (
+    <div className="events-page">
+      <h1>Welcome, {userLoginInfo?.firstName} to the events page!</h1>
 
-    return (
-        <>
-        <h1>
-        Welcome, {userLoginInfo?.firstName} to the events page!
-        </h1>
+      {userType == "college-admission-officer" ? (
+        <button onClick={handleAddNewEvent}> Add a new Event</button>
+      ) : null}
 
-        {userType == "college-admission-officer" ? 
-        (<button onClick={handleAddNewEvent}> Add a new Event</button>)
-        :( <h1> Sorry, this page is for admission officers only. Please log in <Link to={"/login"}> here. </Link></h1>)}
-        
-        </>
-    )
+      {/* {userType == "student" || "parent" ? ( */}
+      <div>
+        {events.length == 0 ? (
+          <h2>No events for this college have been posted yet.</h2>
+        ) : (
+          <div className="events-list">
+            {events?.map((event) => (
+              <EventCard event={event}></EventCard>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
-

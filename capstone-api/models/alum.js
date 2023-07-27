@@ -177,23 +177,28 @@ static async fetchAlumByEmail(email) {
    * @param {*} 
    * @return review added to the database
    */
-  static async addCollegeReview(alum_id, college_name, rating, review) {
+  static async addCollegeReview(alum_id, alum_first_name, alum_last_name, college_name, alum_grad_year, rating, review) {
     const result = await db.query(
       `INSERT INTO reviews (
         user_id,
+        first_name,
+        last_name,
         college_name,
+        college_grad_year,
         rating,
         review
-      ) VALUES ($1, $2, $3, $4)
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING 
               id,
               user_id,
+              first_name,
+              last_name,
               college_name,
+              college_grad_year,
               rating,
               review`,
-              [alum_id,college_name, rating, review]
+              [alum_id, alum_first_name, alum_last_name, college_name, alum_grad_year, rating, review]
     );
-    console.log('inputing da reviews', result.rows)
     return result.rows;
   }
 
@@ -207,13 +212,12 @@ static async fetchAlumByEmail(email) {
    * @return review from the database
    */
 
-    static async getCollegeReview(alum_id) {
+    static async getCollegeReviews(college) {
       const result = await db.query(
         `SELECT * FROM reviews
-        WHERE user_id = $1`,
-        [alum_id]
+        WHERE college_name = $1`,
+        [college]
       )
-      console.log("da result",result.rows)
       return result.rows;
     }
 }

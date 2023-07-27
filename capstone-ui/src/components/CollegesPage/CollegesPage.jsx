@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function CollegesPage({
   userLoginInfo,
+  setUserLoginInfo,
   collegeList,
   setCollegeList,
   userLoggedIn,
@@ -18,8 +19,10 @@ export default function CollegesPage({
 
   return (
     <div className="colleges-page">
-      {!userLoggedIn && userType != "student" ? (
-        <h1 className="collegepage-header">
+
+  
+      {!userLoggedIn || userType != "student" ? (
+        <h1>
           Unfortunately, this page is only available for students. Please log in{" "}
           <Link to={"/login"}>here.</Link>{" "}
         </h1>
@@ -35,7 +38,7 @@ export default function CollegesPage({
 
           <CollegeGrid
             userLoginInfo={userLoginInfo}
-            collegeList={collegeList}
+            setUserLoginInfo={setUserLoginInfo}
             setCollegeList={setCollegeList}
             collegeArrayPointer={collegeArrayPointer}
             setCollegeArrayPointer={setCollegeArrayPointer}

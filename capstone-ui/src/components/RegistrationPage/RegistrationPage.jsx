@@ -97,6 +97,7 @@ export default function RegistrationPage({
           passwordDisplayed={passwordDisplayed}
           error={error}
           setError={setError}
+          userType={userType}
         ></AdminRegistrationPage>
       ) : null}
     </div>

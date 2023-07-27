@@ -26,9 +26,8 @@ router.post("/login/student", async function (req, res, next) {
   try {
     const student = await Student.authenticate(req.body);
     if (student) {
-      const tokenPromise = Student.generateAuthToken(student);
+      const tokenPromise = Student.generateAuthToken(student, "student");
       tokenPromise?.then((token) => {
-        // console.log("this is my token", token); // Log the resolved token
         res.cookie("token", token); // Set the token in a cookie
         res.status(200).json({ student, token }); // Send the response to the client
       });
@@ -59,7 +58,7 @@ router.post("/login/parent", async function (req, res, next) {
   try {
     const parent = await Parent.authenticate(req.body);
     if (parent) {
-      return res.status(200).json(parent);
+      return res.status(200).json({parent});
       // const token = await User.generateAuthToken(user)
       // return res.status(200).json({ user, token})
     }
@@ -90,7 +89,7 @@ router.post(
     try {
       const alum = await Alum.authenticate(req.body);
       if (alum) {
-        return res.status(200).json(alum);
+        return res.status(200).json({alum});
         // const token = await User.generateAuthToken(user)
         // return res.status(200).json({ user, token})
       }
@@ -138,9 +137,10 @@ router.post("/decodedtoken", async (req, res, next) => {
 
   try {
     if (decodedToken) {
+      const userType = decodedToken.type
       const user = await Student.fetchStudentByEmail(decodedToken.email);
       // Returning the decoded token and the user logged in
-      return res.status(200).json({ decodedToken, user }); // Returning the decoded token
+      return res.status(200).json({ decodedToken, user, userType}); // Returning the decoded token
     }
   } catch (err) {
     res.send(err);

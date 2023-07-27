@@ -1,16 +1,14 @@
 const express = require("express")
 const Student = require("../models/student")
+const Alum = require("../models/alum")
 const router = express.Router()
 
 router.post("/like", async function (req, res, next){
     try {
-      console.log("COLLEGE: ", req.body.college)
       if (typeof(req.body.college) == "string"){ // only add to liked colleges if we pass one in (handles refresh)
-        console.log("adding")
         const college = await Student.likeCollege(req.body.student_id, req.body.college)
       }
       const colleges = await Student.getLikedColleges(req.body.student_id)
-      console.log("colleges liked: ", colleges)
       return res.status(201).json(colleges)
 
     } catch (err){
@@ -23,11 +21,12 @@ router.post("/like", async function (req, res, next){
     try {
     
       const collegesToDisplay = await Student.getCollegeFeed(req.body.satScore, req.body.actScore)
-      return res.status(201).json(collegesToDisplay)
+      const allColleges = await Alum.getColleges();
+      return res.status(201).json({collegesToDisplay, allColleges});
 
     } catch (err){
-      // res.send(err)
-      // next(err)
+      res.send(err)
+      next(err)
     }
   })
 
