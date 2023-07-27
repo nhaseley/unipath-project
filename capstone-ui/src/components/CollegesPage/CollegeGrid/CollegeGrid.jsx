@@ -12,10 +12,12 @@ export default function CollegeGrid({
   setCollegeArrayPointer,
   collegesToDisplay,
   setCollegesToDisplay,
+  setUserLoginInfo
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [allColleges, setAllColleges] = useState([]);
   const [searchedColleges, setSearchedColleges] = useState([]);
+
   // Function to display colleges on the grid
   async function getCollegeGrid() {
     {
@@ -46,7 +48,6 @@ export default function CollegeGrid({
 
   function incrementPage() {
     setCollegeArrayPointer(collegeArrayPointer + 20);
-
   }
   // function decrementPage() {
   //   setCollegeArrayPointer(collegeArrayPointer - 20);
@@ -68,6 +69,10 @@ export default function CollegeGrid({
       ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
       : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20);
 
+      console.log(first20Colleges)
+
+
+   
   return (
     <div className="college-grid">
       <div className="content">
@@ -80,7 +85,7 @@ export default function CollegeGrid({
 
         <div className="colleges">
           {first20Colleges?.map((college, index) => (
-            <CollegeCard college={college} key={index} />
+            <CollegeCard college={college} key={index} setUserLoginInfo={setUserLoginInfo} />
           ))}
           {/* change functionality to be able to back to previous colleges */}
         </div>

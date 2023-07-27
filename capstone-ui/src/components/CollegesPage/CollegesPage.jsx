@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function CollegesPage({
   userLoginInfo,
+  setUserLoginInfo,
   collegeList,
   setCollegeList,
   userLoggedIn,
@@ -36,6 +37,7 @@ export default function CollegesPage({
 
           <CollegeGrid
             userLoginInfo={userLoginInfo}
+            setUserLoginInfo={setUserLoginInfo}
             setCollegeList={setCollegeList}
             collegeArrayPointer={collegeArrayPointer}
             setCollegeArrayPointer={setCollegeArrayPointer}

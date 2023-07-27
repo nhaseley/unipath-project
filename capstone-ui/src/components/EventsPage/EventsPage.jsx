@@ -22,7 +22,7 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
           })
           .then((response) => setEvents(response.data))
       : await axios
-          .post("http://localhost:3010/getAllEvents", {
+          .post("http://localhost:3010/getAllEvents", { 
             college: userLoginInfo.college,
           })
           .then((response) => setEvents(response.data));
@@ -51,12 +51,6 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
           </div>
         )}
       </div>
-      {userType == "parent" ? (
-        <h1>
-          Sorry, this page is for students and admission officers only. Please
-          log in <Link to={"/login"}> here. </Link>
-        </h1>
-      ) : null}
     </div>
   );
 }

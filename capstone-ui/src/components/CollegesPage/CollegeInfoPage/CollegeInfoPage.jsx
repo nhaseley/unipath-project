@@ -38,7 +38,7 @@ export default function CollegeInfoPage({
       axios
         .post(
           "http://localhost:3010/getCollegeReviews",
-          { college: userType == "student" ? selectedCollege : userLoginInfo.college }
+          { college: userLoginInfo.college }
         )
         .then((response) => {
           setReviews(response.data);
@@ -79,12 +79,10 @@ export default function CollegeInfoPage({
       }
     }
   }
+  let averageSAT = parseInt(college?.sat_score_critical_reading) +
+  parseInt(college?.sat_score_writing) +
+  parseInt(college?.sat_score_math)
 
-  function changeCollege() {
-    if (userType=="student" || userType == "parent"){
-      setUserLoginInfo((u) => ({ ...u, college: selectedCollege }))
-    }
-  }
   return (
     <div className="college-info-page">
       <div className="title">
@@ -99,7 +97,7 @@ export default function CollegeInfoPage({
         ) : null}
       </div>
       <div className="see-events">
-        <button onClick={changeCollege}>
+        <button>
           <Link to={"/events"}>See Upcoming Events</Link>
         </button>
       </div>
@@ -120,18 +118,15 @@ export default function CollegeInfoPage({
         </div>
         <div className="median SAT">
           Average SAT:{" "}
-          {parseInt(college?.sat_score_critical_reading) +
-            parseInt(college?.sat_score_writing) +
-            parseInt(college?.sat_score_math)}{" "}
+          {!isNaN(averageSAT)?averageSAT:"Unavavilable"}
         </div>
         <div className="avg-ACT">
-          Average ACT: {parseInt(college?.act_score)}
+          Average ACT: {!isNaN(parseInt(college?.act_score))?parseInt(college?.act_score): "Unavailable"}
         </div>
         <div className="undergrad-enrollment">
           Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
         </div>
         <div className="student-faculty-ratio">
-          {" "}
           Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}{" "}
         </div>
         <div className="family-income">

@@ -12,7 +12,8 @@ export default function AdminRegistrationPage({
   passwordDisplayed,
   error,
   setError,
-  userType
+  userType,
+  userLoggedIn
 }) {
   const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
@@ -87,12 +88,6 @@ export default function AdminRegistrationPage({
 
   return (
     <div className="admin-registration">
-      {!userLoggedIn || userType != "college-admission-officer" ? (
-        <h1>
-          Sorry, this page is for college admission officers only. Please log
-          in <Link to={"/login"}> here. </Link>
-        </h1>
-      ) : (
         <div className="admin-logged-in-page">
           <h2>Create a College Admission Officer account</h2>
           <form className="admin-form">
@@ -237,7 +232,7 @@ export default function AdminRegistrationPage({
             <Link to={"/register/"}> Submit</Link>
           </button>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }

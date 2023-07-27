@@ -219,6 +219,7 @@ export default function App() {
               element={
                 <CollegesPage
                   userLoginInfo={userLoginInfo}
+                  setUserLoginInfo={setUserLoginInfo}
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
                   userLoggedIn={userLoggedIn}
@@ -294,9 +295,7 @@ export default function App() {
                 <MyCollegesPage
                   userLoginInfo={userLoginInfo}
                   selectedCollege={selectedCollege}
-                >
-                  {" "}
-                </MyCollegesPage>
+                ></MyCollegesPage>
               }
             ></Route>
             <Route path="/about" element={<About></About>}></Route>
