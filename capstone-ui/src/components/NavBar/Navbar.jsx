@@ -12,9 +12,34 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
         </h1>
         {userLoggedIn ? (
           <ul className="navItems">
+
             <li>
-              <Link to={"/about"}>
-                <button className="navButton"> About us </button>
+              <Link to={"/feed"}>
+                <button className="navButton"> Search Colleges </button>
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/like"}>
+                <button className="navButton"> Liked Colleges</button>
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/child-feed"}>
+                <button className="navButton"> Parents</button>
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/events"}>
+                <button className="navButton"> View Events </button>
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/mycollege"}>
+                <button className="navButton"> Alum and Students </button>
               </Link>
             </li>
             <li>
