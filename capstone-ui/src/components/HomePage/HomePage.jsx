@@ -27,8 +27,7 @@ export default function HomePage() {
     },
     {
       name: "University of Maryland",
-      imageSrc:
-        "https://storage.googleapis.com/collegetuitioncompare/images/webp/colleges/163286-university-of-maryland-college-park.webp",
+      imageSrc: "https://oneclassblog.com/wp-content/uploads/2017/09/1-5.jpg",
     },
     {
       name: "Yale University",
@@ -62,7 +61,7 @@ export default function HomePage() {
 
   // useEffect to set the image transition interval
   useEffect(() => {
-    const imageTransitionInterval = setInterval(handleImageTransition, 3000); // 3000ms (3 seconds) interval
+    const imageTransitionInterval = setInterval(handleImageTransition, 5000); // 10000ms (3 seconds) interval
     return () => clearInterval(imageTransitionInterval); // Clean up on component unmount
   }, []);
 
@@ -76,10 +75,10 @@ export default function HomePage() {
         {" "}
         <h1 className="hero-heading">Your Search Starts Here.</h1>
         <h2 className="hero-subheading">
-          Sayme es Tion Wayne wif Central Sea as well es skepta init accusantium
+          Sayme es tion wayne wif Central Sea as well es skepta init accusantium
           doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
           inventore veritatis et quasi architecto beatae vitae dicta sunt
-          explicabo. Nemo enim. En Headie One is de Best.
+          explicabo. Nemo enim. En headie one is de Best.
         </h2>{" "}
         <Link to={"/feed"}>
           {" "}
@@ -89,7 +88,8 @@ export default function HomePage() {
       <section className="additional-section">
         <div className="container">
           <div className="college-list">
-            {/* {loopArray.map((college, index) => (
+            <div className="college-item">
+              {/* {loopArray.map((college, index) => (
               <div key={index} className="college-item">
                 <div className="college-content">
                   <span className="college-name">{college.name}</span>
@@ -102,35 +102,40 @@ export default function HomePage() {
                 </div>
               </div>
             ))} */}
-            <div className="college-content">
-              <span className="college-name">
-                {collegeNames[currentImageIndex].name}
-              </span>
-              <img
-                className="college-image"
-                src={collegeNames[currentImageIndex].imageSrc}
-                alt={collegeNames[currentImageIndex].name}
-              />
+              <div className="college-content">
+                <span className="college-name">
+                  {collegeNames[currentImageIndex].name}
+                </span>
+                <img
+                  style={{ opacity: "0.55" }}
+                  className="college-image"
+                  src={collegeNames[currentImageIndex].imageSrc}
+                  alt={collegeNames[currentImageIndex].name}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
-
+      {/* turn the rest of this to into a component */}
       <div className="biography">
-        <h1> This is CollegeNavigator </h1>
-        <p>
-          {" "}
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo. Nemo enim. Headie One is the Best. Ipsam voluptatem
-          quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-          magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-          quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-          adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-          labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-          veniam,
-        </p>
+        <h1 className="bio_header">
+          Simplifying College Search For Pre-College Scholars.
+        </h1>
+        <div className="bio_spliter">
+          <div className="leftside">
+            <img
+              className="left_image"
+              src="https://images.pexels.com/photos/3184396/pexels-photo-3184396.jpeg?cs=srgb&dl=pexels-fauxels-3184396.jpg&fm=jpg"
+            ></img>
+          </div>
+          <div className="rightside">
+            Sayme es tion wayne wif central sea ez wail es skepta init
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim. En headie one is de Best.
+          </div>
+        </div>
       </div>
     </>
   );

@@ -19,7 +19,7 @@ export default function CollegesPage({
   return (
     <div className="colleges-page">
       {!userLoggedIn && userType != "student" ? (
-        <h1>
+        <h1 className="collegepage-header">
           Unfortunately, this page is only available for students. Please log in{" "}
           <Link to={"/login"}>here.</Link>{" "}
         </h1>
