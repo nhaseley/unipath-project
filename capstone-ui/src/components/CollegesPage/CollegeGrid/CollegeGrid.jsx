@@ -46,7 +46,6 @@ export default function CollegeGrid({
 
   function incrementPage() {
     setCollegeArrayPointer(collegeArrayPointer + 20);
-    setNed
   }
   // function decrementPage() {
   //   setCollegeArrayPointer(collegeArrayPointer - 20);
