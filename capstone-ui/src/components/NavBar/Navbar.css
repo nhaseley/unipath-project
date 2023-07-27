@@ -12,13 +12,15 @@
   padding: 10px 0rem;
   height: 7vh;
   flex-direction: row;
+  color: #213547;
 }
 
 .logo {
-  padding-right: 70vh;
+  padding-right: 60vh;
   color: #213547;
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: normal;
+  font-family: 'GFS Didot', serif;
 }
 
 .navItems {
@@ -27,6 +29,8 @@
   text-decoration: none;
   list-style: none;
   padding-right: 5vh;
+  color: #213547;
+ 
 }
 
 .navItems li {
@@ -37,9 +41,13 @@
   background-color: transparent;
   font-size: 20px;
   border: none;
+  color: #213547;
 
 }
 
 .navButton:hover{
   background-color: rgb(209, 209, 209);
+  transition: all .4s ease;
 }
+
+
