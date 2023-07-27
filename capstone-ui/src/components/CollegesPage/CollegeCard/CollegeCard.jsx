@@ -16,7 +16,7 @@ export default function CollegeCard({ college }) {
           <div className="scores">
             <div className="median-sat"></div>
             Median SAT Score:
-            <div>{satScore != 0 ? satScore : "Unavailable"}</div>
+            <div>{!isNaN(satScore) ? satScore : "Unavailable"}</div>
             <div className="median-act"></div>
             Median ACT Score:
             <div>{college.act_score ? college.act_score : "Unavailable"}</div>
