@@ -26,8 +26,8 @@ describe("fetch by Email", () => {
             parent_phone: '3476640645',
             zipcode: '93117',
             password: 'test-password',
-            sat_score: 1440,
-            act_score: 31,
+            sat_score: '1440',
+            act_score: "31",
             enrollment: 350,
             school_type: 'test-school_type'
             
@@ -63,8 +63,8 @@ describe("the authenticate/ login", () => {
             lastName: 'test-last_name',
             parentPhone: '3476640645',
             zipcode: '93117',
-            satScore: 1440,
-            actScore: 31,
+            satScore: '1440',
+            actScore: '31',
             enrollment: 350,
             schoolType: 'test-school_type'
         })    
