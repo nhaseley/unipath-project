@@ -52,35 +52,35 @@ export default function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!decodedToken) {
+      console.log("decodedToken on front: ", decodedToken)
       axios
         .post("http://localhost:3010/auth/decodedtoken", {
           token: token
         })
         .then((response) => {
-          
             setUserLoginInfo({
-              id: response.data.user.id,
-              email: response.data.user.email,
-              firstName: response.data.user.first_name,
-              lastName: response.data.user.last_name,
-              parentPhone: response.data.user.parent_phone,
-              zipcode: response.data.user.zipcode,
-              password: response.data.user.password,
-              satScore: response.data.user.sat_score,
-              actScore: response.data.user.act_score,
-              enrollment: response.data.user.enrollment,
-              schoolType: response.data.user.school_type,
-            });
+              id: response.data.id,
+              email: response.data.email,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              parentPhone: response.data.parentPhone,
+              zipcode: response.data.zipcode,
+              satScore: response.data.satScore,
+              actScore: response.data.actScore,
+              enrollment: response.data.enrollment,
+              schoolType: response.data.schoolType,
+            })
             // TODO: FIX JWT FOR OTHER USER ROLES
-            // fix refresh for events page
-          setUserType(response.data.userType)
-          setDecodedToken(response.data.decodedToken);
+            // fix refresh for events, reviews pages
+            console.log("refresh response: ", response.data)
+            setUserType(response.data.userType)
+            setDecodedToken(response.data);
         })
         .catch((error) => {
           console.error("Error retrieving decoded token:", error);
         });
     }
-  }, [decodedToken]);
+  }, [userLoginInfo]);
 
   useEffect(() => {
     if (decodedToken) {
@@ -88,10 +88,10 @@ export default function App() {
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
       if (decodedToken.exp < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
-        // Redirecting to the homepage?
+        // TODO: Redirect to homepage
       }
     }
-  }, [decodedToken, setUserLoggedIn]);
+  }, [decodedToken]);
 
   //---------------- Functions ---------------------//
 

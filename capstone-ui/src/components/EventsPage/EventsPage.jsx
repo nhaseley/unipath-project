@@ -15,17 +15,18 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
     navigate("/eventDetails");
   }
   async function getAllEvents() {
-    userType == "student"
-      ? await axios
+    // userType == "student"
+      // ? 
+      await axios
           .post("http://localhost:3010/getAllEvents", {
             college: userLoginInfo.college,
           })
           .then((response) => setEvents(response.data))
-      : await axios
-          .post("http://localhost:3010/getAllEvents", { 
-            college: userLoginInfo.college,
-          })
-          .then((response) => setEvents(response.data));
+      // : await axios
+      //     .post("http://localhost:3010/getAllEvents", { 
+      //       college: userLoginInfo.college,
+      //     })
+          // .then((response) => setEvents(response.data));
   }
   useEffect(() => {
     getAllEvents();

@@ -235,18 +235,25 @@ class Student {
   //   return student;
   // }
 
-  static async generateAuthToken(student, type) {
+  static async generateAuthToken(user, userType) {
     const payload = {
-      id: student.id,
-      firstName: student.firstName,
-      lastName: student.lastName,
-      email: student.email,
-      type: type      
-      // location: student.location,
-      // date: student.date,
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      parentPhone: user.parentPhone,
+      zipcode: user.zipcode,
+      satScore: user.satScore,
+      actScore: user.actScore,
+      enrollment: user.enrollment,
+      schoolType: user.schoolType,
+      college: user.college,
+      collegeGradYear: user.collegeGradYear,
+      userType: userType     
     };
 
     const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
+    console.log("payload: ", payload)
     return token;
   }
 

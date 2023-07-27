@@ -13,9 +13,7 @@ const router = express.Router();
 router.post("/register", async function (req, res, next) {
   try {
     const student = await Student.register(req.body);
-    //   const token = await User.generateAuthToken(user)
     return res.status(201).json(student);
-    // return res.status(201).json({ user, token})
   } catch (err) {
     res.send(err);
     next(err);
@@ -26,6 +24,7 @@ router.post("/login/student", async function (req, res, next) {
   try {
     const student = await Student.authenticate(req.body);
     if (student) {
+      console.log("student on login: ", student)
       const tokenPromise = Student.generateAuthToken(student, "student");
       tokenPromise?.then((token) => {
         res.cookie("token", token); // Set the token in a cookie
@@ -58,9 +57,13 @@ router.post("/login/parent", async function (req, res, next) {
   try {
     const parent = await Parent.authenticate(req.body);
     if (parent) {
-      return res.status(200).json({parent});
-      // const token = await User.generateAuthToken(user)
-      // return res.status(200).json({ user, token})
+      console.log("parent on login: ", parent)
+      const tokenPromise = Student.generateAuthToken(parent, "parent");
+      tokenPromise?.then((token) => {
+        res.cookie("token", token); // Set the token in a cookie
+        res.status(200).json({ parent, token }); // Send the response to the client
+      });
+      // return res.status(200).json({parent});
     }
   } catch (err) {
     res.send(err);
@@ -137,10 +140,9 @@ router.post("/decodedtoken", async (req, res, next) => {
 
   try {
     if (decodedToken) {
-      const userType = decodedToken.type
-      const user = await Student.fetchStudentByEmail(decodedToken.email);
-      // Returning the decoded token and the user logged in
-      return res.status(200).json({ decodedToken, user, userType}); // Returning the decoded token
+      console.log("user with token: ", decodedToken)
+      // Returning the decoded token with the user logged in
+      return res.status(200).json( decodedToken );
     }
   } catch (err) {
     res.send(err);

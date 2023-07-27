@@ -170,34 +170,13 @@ class Parent {
     if (typeof result.rows[0] == "undefined"){
       throw new UnauthorizedError("There is no child registered with your phone number.")
     }
+    // if (result.rows.length > 1){
+    //   throw new BadRequestError("You can only have 1 registered child.")
+    // }
     return result.rows[0]
   }
 
 
-
-  static async generateAuthToken(parent, type) {
-    const payload = {
-      id: parent.id,
-      firstName: parent.firstName,
-      lastName: parent.lastName,
-      email: parent.email,
-      type: type
-    };
-
-    const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
-    return token;
-  }
-
-
-
-  static async verifyAuthToken(token) {
-    try {
-      const decoded = jwt.verify(token, secretKey); // decoding the token
-      return decoded; // returning the decoded token
-    } catch {
-        return null // return null if the token seems to be invalid or expired
-    }
-  }
 
 
 }

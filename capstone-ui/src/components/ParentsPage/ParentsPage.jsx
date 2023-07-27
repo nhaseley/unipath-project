@@ -5,11 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ParentCollegeCard from "./ParentCollegeCard";
 
-export default function ParentsPage({ userLoginInfo, userLoggedIn, userType, setUserLoginInfo}) {
+export default function ParentsPage({
+  userLoginInfo,
+  userLoggedIn,
+  userType,
+  setUserLoginInfo,
+}) {
   const [childsColleges, setChildsColleges] = useState([]);
 
   useEffect(() => {
-    {
+    if (userLoginInfo.parentPhone != "") {
       axios
         .post("http://localhost:3010/getChildList", {
           parentPhone: userLoginInfo.parentPhone,
@@ -24,8 +29,8 @@ export default function ParentsPage({ userLoginInfo, userLoggedIn, userType, set
     <div className="parents-page">
       {!userLoggedIn || userType != "parent" ? (
         <h1>
-          Sorry, this page is for parents only. Please log
-          in <Link to={"/login"}> here. </Link>
+          Sorry, this page is for parents only. Please log in{" "}
+          <Link to={"/login"}> here. </Link>
         </h1>
       ) : (
         <div className="parent-logged-in-page">

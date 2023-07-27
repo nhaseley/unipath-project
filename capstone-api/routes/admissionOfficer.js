@@ -25,9 +25,7 @@ router.post("/postEvent", async function (req, res, next) {
 
 router.post("/getAllEvents", async function (req, res, next) {
   try {
-    console.log(req.body)
     const events = await AdmissionOfficer.getAllEvents(req.body.college);
-    console.log("events: ", events)
     return res.status(201).json(events);
   } catch (err) {
     res.send(err);
