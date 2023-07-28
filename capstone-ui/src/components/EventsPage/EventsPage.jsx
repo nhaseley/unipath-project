@@ -33,8 +33,6 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
           console.log("empty");
           getAllEvents();
         } else {
-          console.log("setting");
-          console.log("events: ", response.data);
           setEvents(response.data);
         }
       });
@@ -55,7 +53,7 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
 
   return (
     <>
-      {userType != "college-admission-officer" || userType != "student" ? (
+      {userType != "college-admission-officer" && userType != "student" ? (
         <h1>
           Sorry, this page is for students and college admission officers only. Please log
           in <Link to={"/login"}> here. </Link>
