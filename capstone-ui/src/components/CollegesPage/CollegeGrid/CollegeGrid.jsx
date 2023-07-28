@@ -96,7 +96,7 @@ export default function CollegeGrid({
           ))}
           {/* change functionality to be able to back to previous colleges */}
         </div>
-        <button onClick={incrementPage}>See More Colleges</button>
+        <button className="seeMore" onClick={incrementPage}>See More Colleges</button>
         {/* <button onClick={decrementPage}>Previous Colleges</button> */}
     </div>
   );
