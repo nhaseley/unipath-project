@@ -2,7 +2,7 @@ const Parent = require('../models/parent')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 const { validateFields } = require("../utils/validate.js")
-const { UnauthorizedError,BadRequestError, UnprocessableEntityError } = require("../utils/errors.js")
+const { UnauthorizedError,BadRequestError } = require("../utils/errors.js")
 jest.mock('bcrypt')
 jest.mock('../utils/validate.js')
 jest.mock('jsonwebtoken')
@@ -192,9 +192,7 @@ describe("Parent register", () => {
           password: '',
         });
       } catch (err) {
-        // Assertion
         expect(err instanceof BadRequestError).toBeTruthy();
-        // expect(err.message).toBe('Missing required fields');
       }
     });
   
@@ -222,9 +220,7 @@ describe("Parent register", () => {
           password: 'test-password',
         });
       } catch (err) {
-        // Assertion
         expect(err instanceof BadRequestError).toBeTruthy();
-        // expect(err.message).toBe('Duplicate email: test-email@test.com');
       }
     });
   });
