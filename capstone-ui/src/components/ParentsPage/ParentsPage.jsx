@@ -29,7 +29,7 @@ export default function ParentsPage({
     <div className="parents-page">
       {!userLoggedIn || userType != "parent" ? (
         <h1>
-          Sorry, this page is for parents only. Please log in{" "}
+          Unfortunately, this page is for parents only. Please log in{" "}
           <Link to={"/login"}> here. </Link>
         </h1>
       ) : (

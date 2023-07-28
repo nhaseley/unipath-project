@@ -135,6 +135,7 @@ CREATE TABLE events (
 
 CREATE TABLE event_attendees (
   id            SERIAL PRIMARY KEY,
+  student_id    INTEGER,
   first_name    TEXT NOT NULL,
   last_name     TEXT NOT NULL,
   event_id      INTEGER,

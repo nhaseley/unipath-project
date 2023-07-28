@@ -85,7 +85,7 @@ export default function AlumniHomePage({
     <div className="alumni-home-page">
       {!userLoggedIn || userType != "college-students-and-alumni" ? (
         <h1>
-          Sorry, this page is for college students and alumni only. Please log
+          Unfortunately, this page is for college students and alumni only. Please log
           in <Link to={"/login"}> here. </Link>
         </h1>
       ) : (

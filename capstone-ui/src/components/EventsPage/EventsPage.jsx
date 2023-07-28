@@ -55,7 +55,7 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
     <>
       {userType != "college-admission-officer" && userType != "student" ? (
         <h1>
-          Sorry, this page is for students and college admission officers only. Please log
+          Unfortunately, this page is for students and college admission officers only. Please log
           in <Link to={"/login"}> here. </Link>
         </h1>
       ) : (

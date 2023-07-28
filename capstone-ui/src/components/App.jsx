@@ -55,7 +55,6 @@ export default function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!decodedToken) {
-      console.log("decodedToken on front: ", decodedToken)
       axios
         .post("http://localhost:3010/auth/decodedtoken", {
           token: token
@@ -300,6 +299,9 @@ export default function App() {
               element={
                 <EventAttendeesPage
                   userLoginInfo={userLoginInfo}
+                  userType={userType}
+                  error={error}
+                  setError={setError}
                 >
                 </EventAttendeesPage>
               }
