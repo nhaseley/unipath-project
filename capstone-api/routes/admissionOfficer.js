@@ -33,4 +33,16 @@ router.post("/getCollegeEvents", async function (req, res, next) {
   }
 });
 
+
+
+
+router.post("/getEventAttendees", async function (req, res, next) {
+  try {
+    const attendees = await AdmissionOfficer.getEventAttendees(req.body.eventId);
+    return res.status(201).json(attendees);
+  } catch (err) {
+    res.send(err);
+    next(err);
+  }
+});
 module.exports = router;

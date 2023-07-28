@@ -16,6 +16,7 @@ import EventsPage from "./EventsPage/EventsPage"
 import ParentsPage from "./ParentsPage/ParentsPage"
 import About from "./About/About";
 import EventDetailsPage from "./EventsPage/EventDetailsPage";
+import EventAttendeesPage from "./EventsPage/EventAttendeesPage";
 
 export default function App() {
   
@@ -291,6 +292,16 @@ export default function App() {
                   userType={userType}
                 >
                 </CollegeInfoPage>
+              }
+            ></Route>
+
+<Route
+              path="/event-info/:id"
+              element={
+                <EventAttendeesPage
+                  userLoginInfo={userLoginInfo}
+                >
+                </EventAttendeesPage>
               }
             ></Route>
             <Route

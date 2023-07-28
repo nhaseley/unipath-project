@@ -137,7 +137,7 @@ CREATE TABLE event_attendees (
   id            SERIAL PRIMARY KEY,
   first_name    TEXT NOT NULL,
   last_name     TEXT NOT NULL,
-  parent_email  TEXT NOT NULL UNIQUE CHECK (position('@' IN parent_email) > 1 AND RIGHT(parent_email, 4) = '.com'),
+  event_id      INTEGER,
   num_attendees INTEGER
 );
 

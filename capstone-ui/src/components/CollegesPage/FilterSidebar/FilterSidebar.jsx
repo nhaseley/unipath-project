@@ -134,7 +134,7 @@ export default function FilterSidebar({
           type="range"
           min={0}
           max={100000}
-          step={1}
+          step={1000}
           value={price.toLocaleString()}
           // TODO: fix - not appearing as toLocaleString on slide
           onChange={changePriceFilter}

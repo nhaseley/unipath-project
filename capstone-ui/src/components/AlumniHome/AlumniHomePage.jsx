@@ -71,8 +71,6 @@ export default function AlumniHomePage({
     if (result.data.status) {
       setError(result.data);
     } else {
-      // const token = result.data.token;
-      // localStorage.setItem("token", token);
       setUserLoginInfo({
         ...userLoginInfo,
         ratingNumber: "",

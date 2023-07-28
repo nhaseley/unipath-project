@@ -6,3 +6,10 @@
 .collegepage-header{
     text-align: center;
 }
+.college-grid{
+    width:80%
+}
+.college-search{
+    width: 500px;
+    height:30px
+}

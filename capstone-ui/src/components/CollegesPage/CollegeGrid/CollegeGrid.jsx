@@ -77,9 +77,10 @@ export default function CollegeGrid({
           Hi {userLoginInfo.firstName != "" ? userLoginInfo.firstName : null},
           here are your personalized colleges!
         </h1>
-        
+        <label>Search College   </label>
           <input
             className="college-search"
+            label="Search"
             onChange={handleSearch}
             placeholder="Search for a college here"
           ></input>

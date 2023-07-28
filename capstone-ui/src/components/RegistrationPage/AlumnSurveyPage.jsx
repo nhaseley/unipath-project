@@ -69,9 +69,6 @@ export default function AlumnSurveyPage({
       if (result.data.status) {
         setError(result.data);
       } else {
-        //   const token = result.data.token;
-        //   localStorage.setItem("token", token);
-        //   const decodedToken = jwtDecode(token);
         setError({});
         setUserLoginInfo({
           email: "",
