@@ -48,9 +48,6 @@ export default function RegistrationSurveyPage({
       if (result.data.status) {
         setError(result.data);
       } else {
-        //   const token = result.data.token;
-        //   localStorage.setItem("token", token);
-        //   const decodedToken = jwtDecode(token);
         navigate("/login");
         setError({});
         setUserLoginInfo({

@@ -16,6 +16,7 @@ import EventsPage from "./EventsPage/EventsPage";
 import ParentsPage from "./ParentsPage/ParentsPage";
 import About from "./About/About";
 import EventDetailsPage from "./EventsPage/EventDetailsPage";
+import EventAttendeesPage from "./EventsPage/EventAttendeesPage";
 
 export default function App() {
   //------------------ States ---------------------//
@@ -53,7 +54,6 @@ export default function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!decodedToken) {
-      console.log("decodedToken on front: ", decodedToken);
       axios
         .post("http://localhost:3010/auth/decodedtoken", {
           token: token,
@@ -287,6 +287,19 @@ export default function App() {
                   setSelectedCollege={setSelectedCollege}
                   userType={userType}
                 ></CollegeInfoPage>
+              }
+            ></Route>
+
+<Route
+              path="/event-info/:id"
+              element={
+                <EventAttendeesPage
+                  userLoginInfo={userLoginInfo}
+                  userType={userType}
+                  error={error}
+                  setError={setError}
+                >
+                </EventAttendeesPage>
               }
             ></Route>
             <Route

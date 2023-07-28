@@ -33,7 +33,6 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
           console.log("empty");
           getAllEvents();
         } else {
-          console.log("setting");
           setEvents(response.data);
         }
       });
@@ -53,49 +52,62 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
   }
 
   return (
-    <div className="events-page">
-      <h1>Welcome, {userLoginInfo?.firstName} to the events page!</h1>
-
-      {userType == "college-admission-officer" ? (
-        <button className="add-event-button" onClick={handleAddNewEvent}>
-          Post a new Event
-        </button>
-      ) : null}
-      {events.length != 0 ? (
-        events?.map((event) => <EventCard event={event}></EventCard>)
+    <>
+      {userType != "college-admission-officer" && userType != "student" ? (
+        <h1>
+          Unfortunately, this page is for students and college admission officers only. Please log
+          in <Link to={"/login"}> here. </Link>
+        </h1>
       ) : (
-        <>
-          <input
-            className="events-search"
-            onChange={handleEventSearch}
-            placeholder="Search for a college here"
-            value={eventSearchInput}
-          ></input>
+        <div className="events-page">
+          <h1>Welcome, {userLoginInfo?.firstName} to the events page!</h1>
 
-          <div className="events-grid">
-            {eventSearchInput != "" ? (
-              searchedEvents.length == 0 ? (
-                <h2> No college events found. Please adjust your search. </h2>
-              ) : (
-                searchedEvents.map((event) => (
-                  <EventCard event={event}></EventCard>
-                ))
-              )
-            ) : (
-              <>
-                <h2>
-                  No events for this college have been posted yet. All Events:{" "}
-                </h2>
-                <div>
-                  {allEvents.map((event) => (
-                    <EventCard event={event}></EventCard>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </>
+          {userType == "college-admission-officer" ? (
+            <button className="add-event-button" onClick={handleAddNewEvent}>
+              Post a new Event
+            </button>
+          ) : null}
+          {events.length != 0 ? (
+            events?.map((event) => <EventCard event={event}></EventCard>)
+          ) : (
+            <>
+              <input
+                className="events-search"
+                onChange={handleEventSearch}
+                placeholder="Search for a college here"
+                value={eventSearchInput}
+              ></input>
+
+              <div className="events-grid">
+                {eventSearchInput != "" ? (
+                  searchedEvents.length == 0 ? (
+                    <h2>
+                      {" "}
+                      No college events found. Please adjust your search.{" "}
+                    </h2>
+                  ) : (
+                    searchedEvents.map((event) => (
+                      <EventCard event={event}></EventCard>
+                    ))
+                  )
+                ) : (
+                  <>
+                    <h2>
+                      No events for this college have been posted yet. All
+                      Events:{" "}
+                    </h2>
+                    <div>
+                      {allEvents.map((event) => (
+                        <EventCard event={event}></EventCard>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }

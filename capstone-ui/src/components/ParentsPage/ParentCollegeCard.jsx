@@ -80,6 +80,14 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo }) {
           customColors={customColors}
         ></AverageEarningsPieChart>
       </div>
+      <hr
+   style={{
+   background: "#6F38C5",
+   height: "5px",
+   border: "none",
+   }}
+/>
+ 
     </div>
   );
 }

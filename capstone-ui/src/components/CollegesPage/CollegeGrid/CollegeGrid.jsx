@@ -73,16 +73,19 @@ export default function CollegeGrid({
 
   return (
     <div className="college-grid">
-        <h1>
+        <h1 className="personalizedGridHeader">
           Hi {userLoginInfo.firstName != "" ? userLoginInfo.firstName : null},
           here are your personalized colleges!
         </h1>
-        
+        <div className="searchThings">
+        <label className="searchLabel"> Search College   </label>
           <input
             className="college-search"
+            label="Search"
             onChange={handleSearch}
             placeholder="Search for a college here"
           ></input>
+          </div>
         <div className="colleges">
           {first20Colleges?.map((college, index) => (
             <CollegeCard
@@ -93,7 +96,7 @@ export default function CollegeGrid({
           ))}
           {/* change functionality to be able to back to previous colleges */}
         </div>
-        <button onClick={incrementPage}>See More Colleges</button>
+        <button className="seeMore" onClick={incrementPage}>See More Colleges</button>
         {/* <button onClick={decrementPage}>Previous Colleges</button> */}
     </div>
   );

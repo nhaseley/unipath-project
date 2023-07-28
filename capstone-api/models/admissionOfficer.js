@@ -194,5 +194,20 @@ class AdmissionOfficer {
     return result.rows;
   }
 
+
+    /**
+   * Get list of all attendees in the database at a specific event
+   *
+   * @returns event attendees
+   */
+    static async getEventAttendees(eventId){
+      const result = await db.query (
+        `SELECT * FROM event_attendees
+        WHERE event_id = $1`,
+        [eventId]
+      )
+      return result.rows;
+    }
+
 }
 module.exports = AdmissionOfficer;
