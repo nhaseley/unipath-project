@@ -12,7 +12,7 @@ export default function CollegeGrid({
   setCollegeArrayPointer,
   collegesToDisplay,
   setCollegesToDisplay,
-  setUserLoginInfo
+  setUserLoginInfo,
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [allColleges, setAllColleges] = useState([]);
@@ -69,29 +69,32 @@ export default function CollegeGrid({
       ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
       : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20);
 
-      console.log(first20Colleges)
+  console.log(first20Colleges);
 
-
-   
   return (
     <div className="college-grid">
-      <div className="content">
         <h1>
           Hi {userLoginInfo.firstName != "" ? userLoginInfo.firstName : null},
           here are your personalized colleges!
         </h1>
-        <div className="college-search" > </div>
-        <input onChange={handleSearch} placeholder="Search for a college here"></input>
-
+        
+          <input
+            className="college-search"
+            onChange={handleSearch}
+            placeholder="Search for a college here"
+          ></input>
         <div className="colleges">
           {first20Colleges?.map((college, index) => (
-            <CollegeCard college={college} key={index} setUserLoginInfo={setUserLoginInfo} />
+            <CollegeCard
+              college={college}
+              key={index}
+              setUserLoginInfo={setUserLoginInfo}
+            />
           ))}
           {/* change functionality to be able to back to previous colleges */}
         </div>
         <button onClick={incrementPage}>See More Colleges</button>
         {/* <button onClick={decrementPage}>Previous Colleges</button> */}
-      </div>
     </div>
   );
 }

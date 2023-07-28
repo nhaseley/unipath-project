@@ -23,9 +23,9 @@ router.post("/postEvent", async function (req, res, next) {
   }
 });
 
-router.post("/getAllEvents", async function (req, res, next) {
+router.post("/getCollegeEvents", async function (req, res, next) {
   try {
-    const events = await AdmissionOfficer.getAllEvents(req.body.college);
+    const events = await AdmissionOfficer.getCollegeEvents(req.body.college);
     return res.status(201).json(events);
   } catch (err) {
     res.send(err);

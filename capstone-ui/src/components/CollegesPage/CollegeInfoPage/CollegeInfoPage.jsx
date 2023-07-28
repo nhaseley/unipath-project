@@ -45,7 +45,6 @@ export default function CollegeInfoPage({
         });
     }
   }
-// TODO: fix bug with getting college reviews => selectedCollege is async 
   useEffect(() => {
     getCollege();
     getReviews();
@@ -167,7 +166,7 @@ export default function CollegeInfoPage({
       ) : null}
 
       <div className="alumReviews">
-        {reviews?.map((review) => (
+        {reviews?.length != 0? reviews?.map((review) => (
           <div>
             <div>
               {" "}
@@ -177,7 +176,7 @@ export default function CollegeInfoPage({
             <div>review: {review.review}</div>
             <div>rating: {review.rating}</div>
           </div>
-        ))}
+        )): <h2> No reviews posted for this college yet. </h2>}
       </div>
     </div>
   );

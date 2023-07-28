@@ -181,11 +181,11 @@ class AdmissionOfficer {
   }
 
   /**
-   * Get list of all events in the database
+   * Get list of all events in the database at a specific college
    *
    * @returns events
    */
-  static async getAllEvents(school){
+  static async getCollegeEvents(school){
     const result = await db.query (
       `SELECT * FROM events
       WHERE college = $1`,

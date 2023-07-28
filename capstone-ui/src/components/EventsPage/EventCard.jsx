@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function EventCard({ event }) {
-
   const formatDate = (timestamp) =>
     new Date(timestamp)
       .toLocaleString("en-US", {
@@ -22,6 +21,7 @@ export default function EventCard({ event }) {
   return (
     <div className="event-card">
       <div className="event-date-time">
+        <h3> College: {event.college}</h3>
         <div className="summary">
           <h3>Name: {event.name}</h3>
           <h3>Description: {event.description}</h3>

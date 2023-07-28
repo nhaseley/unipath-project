@@ -1,7 +1,6 @@
 /** Routes for authentication. */
-const authenticateJWT = require("../utils/auth"); //importing the authenticateJWT middleware
-
 const express = require("express");
+const User = require("../models/user");
 const Student = require("../models/student");
 const Parent = require("../models/parent");
 const Alum = require("../models/alum");
@@ -24,8 +23,7 @@ router.post("/login/student", async function (req, res, next) {
   try {
     const student = await Student.authenticate(req.body);
     if (student) {
-      console.log("student on login: ", student)
-      const tokenPromise = Student.generateAuthToken(student, "student");
+      const tokenPromise = User.generateAuthToken(student, "student");
       tokenPromise?.then((token) => {
         res.cookie("token", token); // Set the token in a cookie
         res.status(200).json({ student, token }); // Send the response to the client
@@ -57,8 +55,7 @@ router.post("/login/parent", async function (req, res, next) {
   try {
     const parent = await Parent.authenticate(req.body);
     if (parent) {
-      console.log("parent on login: ", parent)
-      const tokenPromise = Student.generateAuthToken(parent, "parent");
+      const tokenPromise = User.generateAuthToken(parent, "parent");
       tokenPromise?.then((token) => {
         res.cookie("token", token); // Set the token in a cookie
         res.status(200).json({ parent, token }); // Send the response to the client
@@ -92,9 +89,11 @@ router.post(
     try {
       const alum = await Alum.authenticate(req.body);
       if (alum) {
-        return res.status(200).json({alum});
-        // const token = await User.generateAuthToken(user)
-        // return res.status(200).json({ user, token})
+        const tokenPromise = User.generateAuthToken(alum, "college-students-and-alumni");
+        tokenPromise?.then((token) => {
+          res.cookie("token", token); // Set the token in a cookie
+          res.status(200).json({ alum, token }); // Send the response to the client
+        });
       }
     } catch (err) {
       res.send(err);
@@ -123,9 +122,11 @@ router.post(
     try {
       const admissionOfficer = await AdmissionOfficer.authenticate(req.body);
       if (admissionOfficer) {
-        return res.status(200).json({ admissionOfficer });
-        // const token = await User.generateAuthToken(user)
-        // return res.status(200).json({ user, token})
+        const tokenPromise = User.generateAuthToken(admissionOfficer, "college-admission-officer");
+        tokenPromise?.then((token) => {
+          res.cookie("token", token); // Set the token in a cookie
+          res.status(200).json({ admissionOfficer, token }); // Send the response to the client
+        });
       }
     } catch (err) {
       res.send(err);
@@ -136,18 +137,17 @@ router.post(
 
 router.post("/decodedtoken", async (req, res, next) => {
   const token = req.body.token; // Getting the token from the request body
-  const decodedToken = await Student.verifyAuthToken(token); // Decoding the token
+  const decodedToken = await User.verifyAuthToken(token); // Decoding the token
 
   try {
     if (decodedToken) {
-      console.log("user with token: ", decodedToken)
+      // console.log("user with token: ", decodedToken)
       // Returning the decoded token with the user logged in
       return res.status(200).json( decodedToken );
     }
   } catch (err) {
     res.send(err);
     next(err);
-    // throw new UnauthorizedError("No token for this user");
   }
 });
 

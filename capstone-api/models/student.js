@@ -214,61 +214,6 @@ class Student {
   }
 
   /**
-   * Fetch a student in the database by id
-   *
-   * @param {String} student_id
-   * @returns student
-   */
-  // static async fetchById(student_id) {
-  //   const result = await db.query(
-  //     `SELECT id,
-  //             email,
-  //             studentname,
-  //             first_name,
-  //             last_name
-  //          FROM students
-  //          WHERE id = $1`,
-  //     [student_id]
-  //   );
-
-  //   const student = result.rows[0];
-  //   return student;
-  // }
-
-  static async generateAuthToken(user, userType) {
-    const payload = {
-      id: user.id,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      parentPhone: user.parentPhone,
-      zipcode: user.zipcode,
-      satScore: user.satScore,
-      actScore: user.actScore,
-      enrollment: user.enrollment,
-      schoolType: user.schoolType,
-      college: user.college,
-      collegeGradYear: user.collegeGradYear,
-      userType: userType     
-    };
-
-    const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
-    console.log("payload: ", payload)
-    return token;
-  }
-
-
-
-  static async verifyAuthToken(token) {
-    try {
-      const decoded = jwt.verify(token, secretKey); // decoding the token
-      return decoded; // returning the decoded token
-    } catch {
-        return null // return null if the token seems to be invalid or expired
-    }
-  }
-
-  /**
    * Get the personalized college feed for a given user using their exam scores,
    * enrollment size, and school type
    *
@@ -293,20 +238,12 @@ class Student {
       `,
       [safeSatScore, safeActScore]
     );
-    console.log("all colleges for this user: ", result.rows.length)
+    // console.log("all colleges for this user: ", result.rows.length)
     // console.log("getCollegeFeed from database: ", result.rows);
     return result.rows;
 
   }
   
-
-
-
-
-
-
-
-
   // static async getCollegeFeed(sat_score, act_score) {
   //   if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
   //     // throw new BadRequestError("No standardized test scores for this user.");
@@ -341,5 +278,18 @@ class Student {
     );
     return result.rows[0];
   }
+
+  /**
+   * Get list of all events in the database
+   *
+   * @returns events
+   */
+  static async getAllEvents(){
+    const result = await db.query (
+      `SELECT * FROM events`
+    )
+    return result.rows;
+  }
+
 }
 module.exports = Student;

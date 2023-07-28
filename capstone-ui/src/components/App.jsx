@@ -18,6 +18,7 @@ import About from "./About/About";
 import EventDetailsPage from "./EventsPage/EventDetailsPage";
 
 export default function App() {
+  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -47,6 +48,7 @@ export default function App() {
   const [userType, setUserType] = useState();
   const [decodedToken, setDecodedToken] = useState();
   const [collegeArrayPointer, setCollegeArrayPointer] = useState(0);
+
   console.log(userLoginInfo)
 
   useEffect(() => {
@@ -69,10 +71,11 @@ export default function App() {
               actScore: response.data.actScore,
               enrollment: response.data.enrollment,
               schoolType: response.data.schoolType,
+              college: response.data.college,
+              collegeGradYear: response.data.collegeGradYear
             })
-            // TODO: FIX JWT FOR OTHER USER ROLES
-            // fix refresh for events, reviews pages
-            console.log("refresh response: ", response.data)
+            // TODO: fix refresh for events, reviews pages for students/parents 
+            // (store somewhere? only see for liekd colleges?)
             setUserType(response.data.userType)
             setDecodedToken(response.data);
         })
@@ -88,7 +91,6 @@ export default function App() {
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
       if (decodedToken.exp < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
-        // TODO: Redirect to homepage
       }
     }
   }, [decodedToken]);
@@ -133,6 +135,8 @@ export default function App() {
       examScores: {},
       enrollment: 0,
       schoolType: "",
+      college: "",
+      collegeGradYear: ""
     });
     setUserType();
     setSelectedCollege({})

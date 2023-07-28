@@ -30,7 +30,7 @@
   list-style: none;
   padding-right: 5vh;
   color: #213547;
- 
+  align-items: center;
 }
 
 .navItems li {
@@ -49,5 +49,6 @@
   background-color: rgb(209, 209, 209);
   transition: all .4s ease;
 }
+
 
 
