@@ -1,5 +1,7 @@
+/* General styles */
+
 .biography {
-  height: 100vh;
+  height: 95vh;
   background-color: whitesmoke;
   overflow: hidden;
 }
@@ -8,21 +10,24 @@
   margin: 0;
   width: 60%;
   padding-left: 10vh;
-  position: relative;
-  top: 5vh;
-  font-size: 4.5rem;
+  padding-top: 5vh;
+  font-size: 5rem;
+  font-weight: normal;
+  padding-bottom: 2vh;
 }
 
 .bio_spliter {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-   justify-content: space-between; 
-  position: relative;
-  top: 11vh;
-  /* background-color: #ababab; */
-  padding-left: 15vw;
-  padding-right: 15vw;
+  justify-content: space-between;
+  padding-top: 2vh;
+
+  background-color: #ababab;
+
+  margin: 0px auto;
+  max-width: 70vw;
+  border-radius: 5px;
 }
 
 .leftside {
@@ -31,8 +36,9 @@
 }
 
 .left_image {
-  border-radius: 0.2rem;
+  border-radius: 35px;
   width: 35vw;
+  padding: 5%;
 }
 
 .leftside,
@@ -42,10 +48,16 @@
 }
 
 .rightside {
-  font-size: 2.5rem;
-  position: relative;
-  right: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.7rem;
+  padding: 5%;
 }
+
+.rightside_text {
+  flex-grow: 20vh;
+}
+
 .hellotxt {
   color: #dde7d6;
   position: absolute;
@@ -56,25 +68,14 @@
   margin-right: 600px;
 }
 
-/* General styles */
-
-.hero_container {
-  max-width: 1200px;
-  margin-left: 200px;
-
-  position: relative;
-  top: 30%;
-}
-
 /* Hero section styles */
 
 .hero-section {
   background-color: black;
   color: black; /* White text */
-  /* text-align: center; */
   position: relative;
   animation: scaleIn 0.5s ease-out;
-  height: 95vh;
+  height: 100vh;
 }
 
 .hero-heading {
@@ -116,7 +117,7 @@
   padding: 0px 0;
   text-align: center;
   overflow: hidden; /* Hide the overflow to prevent scrolling */
-  height: 92vh;
+  height: 96vh;
 }
 
 .college-list {
@@ -125,6 +126,7 @@
   /* white-space: nowrap; */
   margin: 10 auto; /* Center the container horizontally */
   /* animation: slideLoop 80s linear infinite; */
+  animation: scaleIn 0.5s ease-out;
 }
 
 .college-content {
@@ -146,7 +148,18 @@
 
 .college-image {
   min-width: 100vw; /* Adjust the width as needed */
-  min-height: 92vh;
+  min-height: 100vh;
+}
+
+.footer {
+  height: 20vh;
+  background-color: #cad2c5;
+}
+
+.creators_button {
+  background-color: #475048;
+  font-size: 1.5rem;
+  color: whitesmoke;
 }
 
 /* Animation keyframes... */

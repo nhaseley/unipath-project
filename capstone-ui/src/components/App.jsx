@@ -11,15 +11,14 @@ import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 import CollegesPage from "./CollegesPage/CollegesPage";
 import CollegeInfoPage from "./CollegesPage/CollegeInfoPage/CollegeInfoPage";
 import MyCollegesPage from "./MyCollegesPage/MyCollegesPage";
-import AlumniHomePage from "./AlumniHome/AlumniHomePage"
-import EventsPage from "./EventsPage/EventsPage"
-import ParentsPage from "./ParentsPage/ParentsPage"
+import AlumniHomePage from "./AlumniHome/AlumniHomePage";
+import EventsPage from "./EventsPage/EventsPage";
+import ParentsPage from "./ParentsPage/ParentsPage";
 import About from "./About/About";
 import EventDetailsPage from "./EventsPage/EventDetailsPage";
 import EventAttendeesPage from "./EventsPage/EventAttendeesPage";
 
 export default function App() {
-  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -34,7 +33,7 @@ export default function App() {
     enrollment: 0,
     schoolType: "",
     college: "",
-    collegeGradYear: ""
+    collegeGradYear: "",
   });
 
   const [passwordDisplayed, setPasswordDisplayed] = useState({
@@ -57,7 +56,7 @@ export default function App() {
     if (!decodedToken) {
       axios
         .post("http://localhost:3010/auth/decodedtoken", {
-          token: token
+          token: token,
         })
         .then((response) => {
             setUserLoginInfo({
@@ -136,10 +135,10 @@ export default function App() {
       enrollment: 0,
       schoolType: "",
       college: "",
-      collegeGradYear: ""
+      collegeGradYear: "",
     });
     setUserType();
-    setSelectedCollege({})
+    setSelectedCollege({});
   }
 
   //---------------- Return Object ---------------------//
@@ -189,7 +188,6 @@ export default function App() {
                   setError={setError}
                   userType={userType}
                   setUserType={setUserType}
-                  
                 ></RegistrationPage>
               }
             />
@@ -267,7 +265,6 @@ export default function App() {
               }
             ></Route>
 
-
             <Route
               path="/mycollege"
               element={
@@ -289,8 +286,7 @@ export default function App() {
                   selectedCollege={selectedCollege}
                   setSelectedCollege={setSelectedCollege}
                   userType={userType}
-                >
-                </CollegeInfoPage>
+                ></CollegeInfoPage>
               }
             ></Route>
 

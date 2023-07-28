@@ -34,7 +34,7 @@ export default function ParentsPage({
         </h1>
       ) : (
         <div className="parent-logged-in-page">
-          <h1>Welcome, {userLoginInfo.firstName} to the parents page!</h1>
+          <h1>Welcome, {userLoginInfo?.firstName} to the parents page!</h1>
           <h1> Your child's liked colleges: </h1>
           {childsColleges?.map((childCollege, index) => (
             <ParentCollegeCard
