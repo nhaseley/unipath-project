@@ -28,14 +28,22 @@
 }
 
 .searchLabel{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+    font-family: 'GFS Didot, serif';
     font-size: 30px;
     margin-right: 2%;
 }
 
 .college-search{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+    font-family: 'GFS Didot, serif';
     font-size: large;
+}
+
+
+
+.seeMore{
+    animation: fadeInRight 2.5s ease-in-out;
 }
 
 .content{
@@ -46,6 +54,8 @@
     flex-direction: column;
     margin-left: 10px;
 }
+
+
 
 
 
