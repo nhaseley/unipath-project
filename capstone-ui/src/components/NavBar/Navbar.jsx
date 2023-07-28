@@ -13,33 +13,23 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
         {userLoggedIn ? (
           <ul className="navItems">
             <li>
-              <Link to={"/feed"}>
-                <button className="navButton"> Search Colleges </button>
-              </Link>
+              <Link to={"/feed"}>Search Colleges</Link>
             </li>
 
             <li>
-              <Link to={"/like"}>
-                <button className="navButton"> Liked Colleges</button>
-              </Link>
+              <Link to={"/like"}>Liked Colleges</Link>
             </li>
 
             <li>
-              <Link to={"/child-feed"}>
-                <button className="navButton"> Parents</button>
-              </Link>
+              <Link to={"/child-feed"}>Parents</Link>
             </li>
 
             <li>
-              <Link to={"/events"}>
-                <button className="navButton"> View Events </button>
-              </Link>
+              <Link to={"/events"}>View Events</Link>
             </li>
 
             <li>
-              <Link to={"/mycollege"}>
-                <button className="navButton"> Alumni and Students </button>
-              </Link>
+              <Link to={"/mycollege"}>Alumni and Students</Link>
             </li>
             <li>
               <Link to={"/"} onClick={logoutUser}>
@@ -50,20 +40,15 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
         ) : (
           <ul className="navItems">
             <li>
-              <Link to={"/about"}>
-                <button className="navButton">About Us </button>
-              </Link>
+              <Link to={"/about"}>About Us</Link>
             </li>
             <li>
-              <Link to={"/register"}>
-                <button className="navButton"> Register </button>
-              </Link>
+              <Link to={"/register"}>Register</Link>
             </li>
             <li>
-              <Link to={"/login"}>
-                <button className="navButton">Login </button>
-              </Link>
+              <Link to={"/login"}>Login</Link>
             </li>
+            
           </ul>
         )}
       </div>

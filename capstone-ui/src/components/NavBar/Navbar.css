@@ -1,26 +1,23 @@
 .wholeNavbar {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  /* position: relative; */
-  /* padding: 10px; */
-  /* bottom: 175px; */
-  top: 0;
   /* #354F52; */
   background-color: whitesmoke;
-  width: 100%;
-  padding: 10px 0rem;
+  width: 100vw;
+
   height: 7vh;
   flex-direction: row;
   color: #213547;
 }
 
 .logo {
-  padding-right: 60vh;
+  /* padding-right: 0vw; */
   color: #213547;
   font-size: 4rem;
   font-weight: normal;
   font-family: 'GFS Didot', serif;
+  position: absolute;
+  left: 3vw;
 }
 
 .navItems {
@@ -28,13 +25,16 @@
   flex-direction: row;
   text-decoration: none;
   list-style: none;
-  padding-right: 5vh;
+  /* padding-right: 5vh; */
   color: #213547;
   align-items: center;
+  position: absolute;
+  right: 10vw;
 }
 
 .navItems li {
-  padding-left: 35px;
+  padding-left: 4vw;
+  font-size: 1.4rem;
 }
 
 .navButton {
