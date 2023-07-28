@@ -122,7 +122,9 @@ export default function HomePage() {
         <h1 className="bio_header">
           Simplifying College Search For Pre-College Scholars.
         </h1>
+        
         <div className="bio_spliter">
+        
           <div className="leftside">
             <img
               className="left_image"
@@ -130,13 +132,20 @@ export default function HomePage() {
             ></img>
           </div>
           <div className="rightside">
+          <span className="rightside_text">
             Sayme es tion wayne wif central sea ez wail es skepta init
             accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
             quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim. En headie one is de Best.
+            dicta sunt explicabo. Nemo enim. En headie one is de besth.
+            <div><button className="creators_button">About the Creators</button></div>
+          </span>
           </div>
         </div>
-      </div>
+     
+        </div>
+     
+            {/* make this a component, so it displays at bottom of all pages */}
+      <div className="footer"></div>
     </>
   );
 }
