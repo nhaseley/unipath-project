@@ -137,6 +137,8 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      <div className="footer">footer</div>
     </>
   );
 }

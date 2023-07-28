@@ -17,7 +17,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-   justify-content: space-between; 
+  justify-content: space-between;
   position: relative;
   top: 11vh;
   /* background-color: #ababab; */
@@ -147,6 +147,11 @@
 .college-image {
   min-width: 100vw; /* Adjust the width as needed */
   min-height: 92vh;
+}
+
+.footer {
+  height: 30vh;
+  background-color: rgb(237, 255, 237);
 }
 
 /* Animation keyframes... */

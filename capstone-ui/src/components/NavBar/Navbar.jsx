@@ -8,7 +8,7 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
     <>
       <div className="wholeNavbar">
         <h1 className="logo">
-          <Link to={"/"}>uniF</Link>{" "}
+          <Link to={"/"}>CollegeConnect</Link>{" "}
         </h1>
         {userLoggedIn ? (
           <ul className="navItems">
