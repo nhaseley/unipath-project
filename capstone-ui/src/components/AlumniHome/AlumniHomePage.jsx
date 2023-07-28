@@ -11,7 +11,7 @@ export default function AlumniHomePage({
   setUserLoginInfo,
   setError,
   userLoggedIn,
-  userType
+  userType,
 }) {
   const navigate = useNavigate();
   const [ratingNumber, setRatingNumber] = useState();
@@ -85,17 +85,22 @@ export default function AlumniHomePage({
     <div className="alumni-home-page">
       {!userLoggedIn || userType != "college-students-and-alumni" ? (
         <h1>
-          Unfortunately, this page is for college students and alumni only. Please log
-          in <Link to={"/login"}> here. </Link>
+          Unfortunately, this page is for college students and alumni only.
+          Please log in <Link to={"/login"}> here. </Link>
         </h1>
       ) : (
         <div className="alumni-logged-in-page">
           <h1>
-            Welcome to {userLoginInfo?.college}, {userLoginInfo?.firstName}!
+            Welcome to{" "}
+            <Link
+              to={"/info/" + userLoginInfo?.college}
+              className="college-link"
+            >
+              {userLoginInfo?.college}{" "}
+            </Link>
+            , {userLoginInfo?.firstName}!
           </h1>
-          <Link to={"/info/" + userLoginInfo?.college} className="college-link">
-            View your College
-          </Link>
+
           <h2>
             You can post reviews/ratings for your college to help applicants
             find the school that fits best for them!

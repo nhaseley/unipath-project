@@ -11,15 +11,14 @@ import AlumnSurveyPage from "./RegistrationPage/AlumnSurveyPage";
 import CollegesPage from "./CollegesPage/CollegesPage";
 import CollegeInfoPage from "./CollegesPage/CollegeInfoPage/CollegeInfoPage";
 import MyCollegesPage from "./MyCollegesPage/MyCollegesPage";
-import AlumniHomePage from "./AlumniHome/AlumniHomePage"
-import EventsPage from "./EventsPage/EventsPage"
-import ParentsPage from "./ParentsPage/ParentsPage"
+import AlumniHomePage from "./AlumniHome/AlumniHomePage";
+import EventsPage from "./EventsPage/EventsPage";
+import ParentsPage from "./ParentsPage/ParentsPage";
 import About from "./About/About";
 import EventDetailsPage from "./EventsPage/EventDetailsPage";
 import EventAttendeesPage from "./EventsPage/EventAttendeesPage";
 
 export default function App() {
-  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -34,7 +33,7 @@ export default function App() {
     enrollment: 0,
     schoolType: "",
     college: "",
-    collegeGradYear: ""
+    collegeGradYear: "",
   });
 
   const [passwordDisplayed, setPasswordDisplayed] = useState({
@@ -50,34 +49,34 @@ export default function App() {
   const [decodedToken, setDecodedToken] = useState();
   const [collegeArrayPointer, setCollegeArrayPointer] = useState(0);
 
-  console.log(userLoginInfo)
+  console.log(userLoginInfo);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!decodedToken) {
       axios
         .post("http://localhost:3010/auth/decodedtoken", {
-          token: token
+          token: token,
         })
         .then((response) => {
-            setUserLoginInfo({
-              id: response.data.id,
-              email: response.data.email,
-              firstName: response.data.firstName,
-              lastName: response.data.lastName,
-              parentPhone: response.data.parentPhone,
-              zipcode: response.data.zipcode,
-              satScore: response.data.satScore,
-              actScore: response.data.actScore,
-              enrollment: response.data.enrollment,
-              schoolType: response.data.schoolType,
-              college: response.data.college,
-              collegeGradYear: response.data.collegeGradYear
-            })
-            // TODO: fix refresh for events, reviews pages for students/parents 
-            // (store somewhere? only see for liekd colleges?)
-            setUserType(response.data.userType)
-            setDecodedToken(response.data);
+          setUserLoginInfo({
+            id: response.data.id,
+            email: response.data.email,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            parentPhone: response.data.parentPhone,
+            zipcode: response.data.zipcode,
+            satScore: response.data.satScore,
+            actScore: response.data.actScore,
+            enrollment: response.data.enrollment,
+            schoolType: response.data.schoolType,
+            college: response.data.college,
+            collegeGradYear: response.data.collegeGradYear,
+          });
+          // TODO: fix refresh for events, reviews pages for students/parents
+          // (store somewhere? only see for liekd colleges?)
+          setUserType(response.data.userType);
+          setDecodedToken(response.data);
         })
         .catch((error) => {
           console.error("Error retrieving decoded token:", error);
@@ -136,10 +135,10 @@ export default function App() {
       enrollment: 0,
       schoolType: "",
       college: "",
-      collegeGradYear: ""
+      collegeGradYear: "",
     });
     setUserType();
-    setSelectedCollege({})
+    setSelectedCollege({});
   }
 
   //---------------- Return Object ---------------------//
@@ -189,7 +188,6 @@ export default function App() {
                   setError={setError}
                   userType={userType}
                   setUserType={setUserType}
-                  
                 ></RegistrationPage>
               }
             />
@@ -267,7 +265,6 @@ export default function App() {
               }
             ></Route>
 
-
             <Route
               path="/mycollege"
               element={
@@ -289,12 +286,11 @@ export default function App() {
                   selectedCollege={selectedCollege}
                   setSelectedCollege={setSelectedCollege}
                   userType={userType}
-                >
-                </CollegeInfoPage>
+                ></CollegeInfoPage>
               }
             ></Route>
 
-<Route
+            <Route
               path="/event-info/:id"
               element={
                 <EventAttendeesPage
@@ -302,8 +298,7 @@ export default function App() {
                   userType={userType}
                   error={error}
                   setError={setError}
-                >
-                </EventAttendeesPage>
+                ></EventAttendeesPage>
               }
             ></Route>
             <Route

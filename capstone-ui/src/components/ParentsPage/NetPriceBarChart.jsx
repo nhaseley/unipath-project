@@ -101,7 +101,7 @@ export default function PieChart({ netPriceData, customColors }) {
       .attr("transform", "rotate(-90)")
       .style("text-anchor", "middle")
       .style("font-size", "18px")
-      .text("Net Price ($)");
+      .text("Net Price ($/yr)");
 
     // Add x-axis label
     svg
@@ -111,7 +111,7 @@ export default function PieChart({ netPriceData, customColors }) {
       .attr("y", height + 40) // Position the label at the bottom of the chart
       .attr("text-anchor", "middle")
       .style("font-size", "18px")
-      .text("Income Level ($)");
+      .text("Income Level ($/yr)");
 
     // Add a legend
     const legend = g

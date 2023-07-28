@@ -4,5 +4,9 @@
 
 .event-card{
     padding:10px
-    
+}
+.events-search{
+    width: 60%;
+    font-size: 20px;
+    padding: 10px;
 }

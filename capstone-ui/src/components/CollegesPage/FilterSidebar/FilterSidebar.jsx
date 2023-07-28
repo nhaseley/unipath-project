@@ -128,7 +128,7 @@ export default function FilterSidebar({
           <div>Your SAT Score: {userLoginInfo.satScore}</div>
           <div>Your ACT Score: {userLoginInfo.actScore}</div>
         </div>
-        <div className="price-filter">Price: ${price.toLocaleString()}</div>
+        <div className="price-filter">Tuition: ${price.toLocaleString()}</div>
         <input
           className="price-slider"
           type="range"
