@@ -23,12 +23,11 @@ export default function CollegeCard({ college, setUserLoginInfo }) {
         <>
           <h3>{college.name}</h3>
           <div className="scores">
-            <div className="median-sat"></div>
-            Median SAT Score:
-            <div>{!isNaN(satScore) ? satScore : "Unavailable"}</div>
-            <div className="median-act"></div>
-            Median ACT Score:
-            <div>{college.act_score ? college.act_score : "Unavailable"}</div>
+            <div className="median-sat"> Median SAT Score: {!isNaN(satScore) ? satScore : "Unavailable"} </div>
+            
+            <div className="median-act"> Median ACT Score: {college.act_score ? college.act_score : "Unavailable"} </div>
+            
+
             <div>
               Enrollment Size: {parseInt(college.size).toLocaleString()}
             </div>
