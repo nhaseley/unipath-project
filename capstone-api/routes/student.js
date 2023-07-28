@@ -40,4 +40,14 @@ router.post("/like", async function (req, res, next){
       next(err)
     }
   })
+
+  router.post("/getAllEvents", async function (req, res, next) {
+    try {
+      const events = await Student.getAllEvents();
+      return res.status(201).json(events);
+    } catch (err) {
+      res.send(err);
+      next(err);
+    }
+  });
   module.exports = router

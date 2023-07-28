@@ -47,7 +47,8 @@ export default function App() {
   const [userType, setUserType] = useState();
   const [decodedToken, setDecodedToken] = useState();
   const [collegeArrayPointer, setCollegeArrayPointer] = useState(0);
-  console.log(userLoginInfo);
+
+  console.log(userLoginInfo)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -58,23 +59,24 @@ export default function App() {
           token: token,
         })
         .then((response) => {
-          setUserLoginInfo({
-            id: response.data.id,
-            email: response.data.email,
-            firstName: response.data.firstName,
-            lastName: response.data.lastName,
-            parentPhone: response.data.parentPhone,
-            zipcode: response.data.zipcode,
-            satScore: response.data.satScore,
-            actScore: response.data.actScore,
-            enrollment: response.data.enrollment,
-            schoolType: response.data.schoolType,
-          });
-          // TODO: FIX JWT FOR OTHER USER ROLES
-          // fix refresh for events, reviews pages
-          console.log("refresh response: ", response.data);
-          setUserType(response.data.userType);
-          setDecodedToken(response.data);
+            setUserLoginInfo({
+              id: response.data.id,
+              email: response.data.email,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              parentPhone: response.data.parentPhone,
+              zipcode: response.data.zipcode,
+              satScore: response.data.satScore,
+              actScore: response.data.actScore,
+              enrollment: response.data.enrollment,
+              schoolType: response.data.schoolType,
+              college: response.data.college,
+              collegeGradYear: response.data.collegeGradYear
+            })
+            // TODO: fix refresh for events, reviews pages for students/parents 
+            // (store somewhere? only see for liekd colleges?)
+            setUserType(response.data.userType)
+            setDecodedToken(response.data);
         })
         .catch((error) => {
           console.error("Error retrieving decoded token:", error);
@@ -88,7 +90,6 @@ export default function App() {
       const currentTime = Math.floor(Date.now() / 1000); // Getting the current time in seconds
       if (decodedToken.exp < currentTime) {
         localStorage.removeItem("token"); // Removing the token from local storage
-        // TODO: Redirect to homepage
       }
     }
   }, [decodedToken]);
@@ -133,6 +134,8 @@ export default function App() {
       examScores: {},
       enrollment: 0,
       schoolType: "",
+      college: "",
+      collegeGradYear: "",
     });
     setUserType();
     setSelectedCollege({});

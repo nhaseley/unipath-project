@@ -27,7 +27,7 @@ export default function MyCollegesPage({ userLoginInfo, selectedCollege }) {
       <h1> Your Liked Colleges:</h1>
       <div>
         {likedColleges?.map((college) => (
-          <div className="my-college-name">{college.name}</div>
+          <div className="my-college-name"> <Link to={"/info/" + college.name}> {college.name} </Link></div>
         ))}
       </div>
     </div>

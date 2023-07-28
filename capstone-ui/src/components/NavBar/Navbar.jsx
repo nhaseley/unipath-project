@@ -8,11 +8,10 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
     <>
       <div className="wholeNavbar">
         <h1 className="logo">
-          <Link to={"/"}>CollegeConnect</Link>{" "}
+          <Link to={"/"}>uniPath</Link>
         </h1>
         {userLoggedIn ? (
           <ul className="navItems">
-
             <li>
               <Link to={"/feed"}>
                 <button className="navButton"> Search Colleges </button>
@@ -39,7 +38,7 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
 
             <li>
               <Link to={"/mycollege"}>
-                <button className="navButton"> Alum and Students </button>
+                <button className="navButton"> Alumni and Students </button>
               </Link>
             </li>
             <li>
