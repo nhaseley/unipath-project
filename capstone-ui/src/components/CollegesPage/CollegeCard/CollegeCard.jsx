@@ -10,7 +10,7 @@ export default function CollegeCard({ college, setUserLoginInfo }) {
     parseInt(college.sat_score_math);
     
   function changeCollege() {
-    setUserLoginInfo((u) => ({ ...u, college: college.name }));
+    setUserLoginInfo((u) => ({ ...u, collegeName: college.name }));
   }
 
   return (

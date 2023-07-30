@@ -94,7 +94,7 @@ export default function AlumniHomePage({
               to={"/info/" + userLoginInfo?.collegeName}
               className="college-link"
             >
-              {userLoginInfo?.collegeName}{" "}
+              {userLoginInfo?.collegeName}
             </Link>
             , {userLoginInfo?.firstName}!
           </h1>

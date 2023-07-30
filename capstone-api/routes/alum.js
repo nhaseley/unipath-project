@@ -32,8 +32,7 @@ router.post("/postCollegeReview", async function (req, res, next) {
 
 router.post("/getCollegeReviews", async function (req, res, next) {
   try {
-    // console.log(req.body)
-    const collegeReviews = await Alum.getCollegeReviews(req.body.college);
+    const collegeReviews = await Alum.getCollegeReviews(req.body.collegeName);
     return res.status(201).json(collegeReviews);
   } catch (err) {
     res.send(err);

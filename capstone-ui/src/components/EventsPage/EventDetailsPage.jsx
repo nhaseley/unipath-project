@@ -12,7 +12,6 @@ export default function EventDetailsPage ({setError, userLoginInfo}) {
     async function handleEventSubmit (event) {
         // axios call to store events info in database
         event.preventDefault()
-console.log("colege in her? ", userLoginInfo)
         let result = await axios.post(
             "http://localhost:3010/postEvent",
             {

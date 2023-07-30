@@ -44,7 +44,6 @@ export default function StudentDemographicsPieChart({
     const radius = Math.min(width, height) / 2;
     // const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
     const colorScale = d3.scaleOrdinal(customColors);
-    // console.log("colorScale", d3.schemeCategory10)
     const pie = d3.pie().value((d) => d.value);
     const arc = d3.arc().innerRadius(0).outerRadius(radius);
 

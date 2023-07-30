@@ -16,7 +16,7 @@ export default function EventCard({ event }) {
       .replace(/(\d+:\d+)([AP]M)/i, "$1 $2");
 
   const formattedDate = formatDate(event.date_time);
-console.log(event)
+
   return (
     <div className="event-card">
       <Link to={"/event-info/" + event.id} className="event-link">

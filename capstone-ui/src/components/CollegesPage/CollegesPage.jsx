@@ -22,8 +22,9 @@ export default function CollegesPage({
   
       {userType != "student" ? (
         <h1>
-          Unfortunately, this page is only available for students. Please log in{" "}
+          Unfortunately, this page is for students only. Please log in{" "}
           <Link to={"/login"}>here.</Link>{" "}
+          {/* TODO: onclick change usertype? */}
         </h1>
       ) : (
         <>

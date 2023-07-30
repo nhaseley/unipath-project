@@ -41,7 +41,6 @@ export default function EventsPage({ userLoginInfo, userType }) {
     getCollegeEvents();
   }, [userLoginInfo]);
 
-  console.log(userLoginInfo);
   function handleEventSearch(e) {
     setEventSearchInput(e.target.value);
     let filteredItems = allEvents?.filter((event) =>

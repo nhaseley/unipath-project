@@ -116,7 +116,7 @@ export default function CollegeInfoPage({
   return (
     <div className="college-info-page">
       <div className="title">
-        <h1> Welcome to {college?.name} </h1>
+        <h1> Welcome to {college?.name}</h1>
         {userType == "student" ? (
           <Link
             to={"/like"}

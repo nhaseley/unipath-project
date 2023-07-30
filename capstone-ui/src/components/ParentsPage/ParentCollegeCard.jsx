@@ -40,7 +40,7 @@ export default function ParentCollegeCard({
   };
 
   function changeCollege() {
-    setUserLoginInfo((u) => ({ ...u, college: childCollege?.college_name }));
+    setUserLoginInfo((u) => ({ ...u, collegeName: childCollege?.college_name }));
   }
 
   return (
@@ -48,8 +48,7 @@ export default function ParentCollegeCard({
       <div className="info">
         <h2 className="student-college-name" onClick={changeCollege}>
           <Link to={"/info/" + childCollege?.college_name}>
-            {" "}
-            {childCollege?.college_name}{" "}
+            {childCollege?.college_name}
           </Link>
         </h2>
         <h3 className="out-of-state-tuition">
