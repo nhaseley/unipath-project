@@ -39,7 +39,9 @@ export default function RegistrationSurveyPage({
         password: userLoginInfo.password,
         examScores: userLoginInfo.examScores,
         enrollment: userLoginInfo.enrollment,
-        schoolType: userLoginInfo.schoolType
+        schoolType: userLoginInfo.schoolType,
+        college: userLoginInfo.college,
+        collegeGradYear: userLoginInfo.collegeGradYear
       });
 
       if (result.data.status) {
@@ -57,7 +59,9 @@ export default function RegistrationSurveyPage({
           confirmPassword: "",
           examScores: {},
           enrollment: 0,
-          schoolType: ""
+          schoolType: "",
+          collegeName: "",
+          collegeGradYear: ""
         });
       }
     }

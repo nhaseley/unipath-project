@@ -13,8 +13,8 @@ export default function MyCollegesPage({ userLoginInfo, userType, selectedColleg
     ) {
       axios
         .post("http://localhost:3010/like", {
-          student_id: userLoginInfo.id,
-          college: selectedCollege,
+          studentId: userLoginInfo.id,
+          collegeName: selectedCollege,
         })
         .then((response) => {
           setLikedColleges(response.data);
@@ -34,16 +34,15 @@ export default function MyCollegesPage({ userLoginInfo, userType, selectedColleg
     <div className="my-colleges-page">
 
       <h1> Your Liked Colleges:</h1>
-      {likedColleges.length == 0 ? (
+      {likedColleges?.length == 0 ? (
         <h2>
-          You have not liked any colleges. Start browsing <Link to="feed"> here </Link>!
+          You have not liked any colleges. Start browsing <Link to="feed"> here</Link>!
         </h2>
       ) : (
         <div>
           {likedColleges?.map((college) => (
             <h2 className="my-college-name">
-              {" "}
-              <Link to={"/info/" + college.name}> {college.name} </Link>
+              <Link to={"/info/" + college.college_name} key={college.college_name}> {college.college_name} </Link>
             </h2>
           ))}
         </div>

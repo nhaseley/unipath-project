@@ -15,7 +15,7 @@ class User {
       actScore: user.actScore,
       enrollment: user.enrollment,
       schoolType: user.schoolType,
-      college: user.college,
+      collegeName: user.collegeName,
       collegeGradYear: user.collegeGradYear,
       userType: userType,
     };

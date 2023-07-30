@@ -2,9 +2,6 @@ const db = require('../db')
 const bcrypt = require("bcrypt");
 const { BadRequestError, UnauthorizedError } = require("../utils/errors");
 const { validateFields } = require("../utils/validate");
-const jwt = require("jsonwebtoken"); // importing the jsonwebtoken library
-const crypto = require("crypto");
-const secretKey = crypto.randomBytes(64).toString("hex");
 const { BCRYPT_WORK_FACTOR } = require("../config");
 
 class Alum {
@@ -22,7 +19,7 @@ class Alum {
       email: alum.email,
       firstName: alum.first_name,
       lastName: alum.last_name,
-      college: alum.college,
+      collegeName: alum.college_name,
       collegeGradYear: alum.college_grad_year
     };
   }
@@ -75,7 +72,7 @@ static async register(creds) {
     "firstName",
     "lastName",
     "password",
-    "college",
+    "collegeName",
     "collegeGradYear"
   ];
   try {
@@ -106,7 +103,7 @@ static async register(creds) {
         password,
         first_name,
         last_name,
-        college,
+        college_name,
         college_grad_year 
       )
       VALUES ($1, $2, $3, $4, $5, $6)
@@ -115,18 +112,17 @@ static async register(creds) {
                 email,       
                 first_name, 
                 last_name,
-                college,
+                college_name,
                 college_grad_year`,
     [
       creds.email.toLowerCase(),
       hashedPassword,
       creds.firstName.toLowerCase(),
       creds.lastName.toLowerCase(),
-      creds.college,
+      creds.collegeName,
       creds.collegeGradYear,
     ]
   );
-
   const alum = result.rows[0];
   return alum;
 }
@@ -143,7 +139,7 @@ static async fetchAlumByEmail(email) {
             email, 
             first_name,
             last_name,
-            college,
+            college_name,
             college_grad_year,
             password       
          FROM college_students_and_alumni

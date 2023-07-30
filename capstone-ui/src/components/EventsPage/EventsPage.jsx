@@ -26,7 +26,7 @@ export default function EventsPage({ userLoginInfo, userType }) {
   async function getCollegeEvents() {
     await axios
       .post("http://localhost:3010/getCollegeEvents", {
-        college: userLoginInfo.college,
+        collegeName: userLoginInfo.collegeName,
       })
       .then((response) => {
         if (response.data.length == 0) {
@@ -67,7 +67,7 @@ export default function EventsPage({ userLoginInfo, userType }) {
             </button>
           ) : null}
           {events.length != 0 ? (
-            events?.map((event) => <EventCard event={event}></EventCard>)
+            events?.map((event, i) => <EventCard key={i} event={event}></EventCard>)
           ) : (
             <>
               <input

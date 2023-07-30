@@ -8,7 +8,7 @@ export default function EventAttendeesPage({
   userLoginInfo,
   userType,
   error,
-  setError
+  setError,
 }) {
   const { id } = useParams();
   const [eventAttendees, setEventAttendees] = useState([]);
@@ -69,7 +69,7 @@ export default function EventAttendeesPage({
           eventId: id,
         })
         .then((response) => {
-          getEventAttendees()
+          getEventAttendees();
           if (response.data.message) {
             setError(response.data);
           } else {
@@ -89,22 +89,21 @@ export default function EventAttendeesPage({
     getEventAttendees();
   }, [userLoginInfo]);
 
-  console.log("eventAttendees", eventAttendees);
   return (
     <div className="event-attendees-page">
+      {eventAttendees.length == 0 ? (
+        <h2> No attendees registered for this event yet. </h2>
+      ) : (
+        eventAttendees.map((attendee) => (
+          <div>
+            <h2>First Name: {attendee.first_name}</h2>
+            <h2>Last Name: {attendee.last_name}</h2>
+            <h2>Number of Attendees: {attendee.num_attendees}</h2>
+          </div>
+        ))
+      )}
       {userType == "student" ? (
         <>
-          {eventAttendees.length != 0 ? (
-            eventAttendees.map((attendee) => (
-              <div>
-                <h2>First Name: {attendee.first_name}</h2>
-                <h2>Last Name: {attendee.last_name}</h2>
-                <h2>Number of Attendees: {attendee.num_attendees}</h2>
-              </div>
-            ))
-          ) : (
-            <h2> No attendees registered for this event yet. </h2>
-          )}
           <form>
             <input
               className="first-name-input"
@@ -145,8 +144,7 @@ export default function EventAttendeesPage({
           </form>
           <div className="error">
             {error.status
-              ? "Event Registration Failed: " +
-                error.message
+              ? "Event Registration Failed: " + error.message
               : null}
           </div>
           <button className="demo-button" onClick={handleDemo}>

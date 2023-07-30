@@ -83,7 +83,7 @@ export default function App() {
             actScore: response.data.actScore,
             enrollment: response.data.enrollment,
             schoolType: response.data.schoolType,
-            college: response.data.college,
+            collegeName: response.data.collegeName,
             collegeGradYear: response.data.collegeGradYear,
           });
           // TODO: fix refresh for events, reviews pages for students/parents
@@ -147,7 +147,7 @@ export default function App() {
       examScores: {},
       enrollment: 0,
       schoolType: "",
-      college: "",
+      collegeName: "",
       collegeGradYear: "",
     });
     setUserType();

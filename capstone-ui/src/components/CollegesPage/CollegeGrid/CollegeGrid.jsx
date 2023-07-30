@@ -89,8 +89,8 @@ export default function CollegeGrid({
       <div className="colleges">
         {first20Colleges?.map((college, index) => (
           <CollegeCard
-            college={college}
             key={index}
+            college={college}
             setUserLoginInfo={setUserLoginInfo}
           />
         ))}

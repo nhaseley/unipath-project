@@ -42,7 +42,7 @@ export default function AlumnSurveyPage({
       setSelectedCollege(event.target.value);
       setUserLoginInfo({
         ...userLoginInfo,
-        college: event.target.value,
+        collegeName: event.target.value,
       });
     }
 
@@ -59,7 +59,7 @@ export default function AlumnSurveyPage({
           firstName: userLoginInfo.firstName,
           lastName: userLoginInfo.lastName,
           password: userLoginInfo.password,
-          college: userLoginInfo.college,
+          collegeName: userLoginInfo.collegeName,
           collegeGradYear: userLoginInfo.collegeGradYear,
         }
       );
@@ -81,7 +81,7 @@ export default function AlumnSurveyPage({
           examScores: {},
           enrollment: 0,
           schoolType: "",
-          college: "",
+          collegeName: "",
           collegeGradYear: "",
         });
       }
@@ -124,8 +124,8 @@ export default function AlumnSurveyPage({
                 {collegeOptions
                   .slice()
                   .sort((a, b) => a.name.localeCompare(b.name))
-                  .map((college) => (
-                    <option key={college.id} value={college.name}>
+                  .map((college, i) => (
+                    <option key={i} value={college.name}>
                       {college.name}
                     </option>
                   ))}

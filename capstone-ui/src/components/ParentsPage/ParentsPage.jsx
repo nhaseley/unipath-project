@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./ParentsPage.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ParentCollegeCard from "./ParentCollegeCard";
 
@@ -37,7 +37,7 @@ export default function ParentsPage({
           <h1>Welcome, {userLoginInfo?.firstName} to the parents page!</h1>
           <h1> Your {userType == "parent"?"child's": null} liked colleges: </h1>
 
-          {childsColleges?.map((childCollege, index) => (
+          {childsColleges?.map((childCollege, i) => (
             <>
               <hr
                 style={{
@@ -48,7 +48,7 @@ export default function ParentsPage({
               />
               <ParentCollegeCard
                 childCollege={childCollege}
-                key={index}
+                key={i}
                 setUserLoginInfo={setUserLoginInfo}
                 customColors={customColors}
               ></ParentCollegeCard>

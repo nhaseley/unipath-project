@@ -6,14 +6,14 @@ const router = express.Router();
 
 router.post("/like", async function (req, res, next) {
   try {
-    if (typeof req.body.college == "string") {
+    if (typeof req.body.collegeName == "string") {
       // only add to liked colleges if we pass one in (handles refresh)
-      const college = await Student.likeCollege(
-        req.body.student_id,
-        req.body.college
+      await Student.likeCollege(
+        req.body.studentId,
+        req.body.collegeName
       );
     }
-    const colleges = await Student.getLikedColleges(req.body.student_id);
+    const colleges = await Student.getLikedColleges(req.body.studentId);
     return res.status(201).json(colleges);
   } catch (err) {
     res.send(err);

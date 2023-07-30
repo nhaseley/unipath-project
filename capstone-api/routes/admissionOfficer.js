@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/postEvent", async function (req, res, next) {
   try {
+    
     const postingEvent = await AdmissionOfficer.postEvent(
       req.body.name,
       req.body.desc,
@@ -14,7 +15,7 @@ router.post("/postEvent", async function (req, res, next) {
       req.body.dateTime,
       req.body.dept,
       req.body.maxRegistrants,
-      req.body.college
+      req.body.collegeName
     );
     return res.status(201).json(postingEvent);
   } catch (err) {
@@ -25,7 +26,7 @@ router.post("/postEvent", async function (req, res, next) {
 
 router.post("/getCollegeEvents", async function (req, res, next) {
   try {
-    const events = await AdmissionOfficer.getCollegeEvents(req.body.college);
+    const events = await AdmissionOfficer.getCollegeEvents(req.body.collegeName);
     return res.status(201).json(events);
   } catch (err) {
     res.send(err);

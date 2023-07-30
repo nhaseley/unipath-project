@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./EventsPage.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
@@ -12,7 +12,7 @@ export default function EventDetailsPage ({setError, userLoginInfo}) {
     async function handleEventSubmit (event) {
         // axios call to store events info in database
         event.preventDefault()
-
+console.log("colege in her? ", userLoginInfo)
         let result = await axios.post(
             "http://localhost:3010/postEvent",
             {
@@ -23,7 +23,7 @@ export default function EventDetailsPage ({setError, userLoginInfo}) {
               dateTime: eventInfo.dateTime,
               dept: eventInfo.dept,
               maxRegistrants: eventInfo.maxRegistrants,
-              college: userLoginInfo.college
+              collegeName: userLoginInfo.collegeName
             }
           )
 

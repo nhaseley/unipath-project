@@ -178,37 +178,58 @@ class Student {
   /**
    * Add a college to the database for a given user
    *
-   * @param {*} student_id
+   * @param {Integer} studentId
+   * @param {String} collegeName
    * @return college added to the database
    */
-  static async likeCollege(student_id, college) {
+  static async likeCollege(studentId, collegeName) {
+    if (await Student.userHasLiked(studentId, collegeName)){
+      return
+      // throw new BadRequestError("You have already liked this college!")
+    }
     const result = await db.query(
       `INSERT INTO liked_colleges (
           user_id,
-          name
+          college_name
         )
         VALUES ($1, $2)
         RETURNING 
                   id,
                   user_id,
-                  name
+                  college_name
                   `,
-      [student_id, college]
+      [studentId, collegeName]
     );
     return result.rows[0];
   }
 
   /**
-   * Get the names of all the colleges a given user has liked in the past
+   * Return if an input college has been already liked by a given user
    *
-   * @param {*} student_id
+   * @param {Integer} studentId
+   * @param {String} collegeName
    * @return colleges in the database for a given user
    */
-  static async getLikedColleges(student_id) {
+  static async userHasLiked(userId, collegeName) {
+    const result = await db.query(
+      `SELECT * FROM liked_colleges
+          WHERE user_id = $1 AND college_name=$2`,
+      [userId, collegeName]
+    );
+    return result.rowCount > 0;
+  }
+
+  /**
+   * Get the names of all the colleges a given user has liked in the past
+   *
+   * @param {Integer} studentId
+   * @return colleges in the database for a given user
+   */
+  static async getLikedColleges(studentId) {
     const result = await db.query(
       `SELECT * FROM liked_colleges
           WHERE user_id = $1`,
-      [student_id]
+      [studentId]
     );
     return result.rows;
   }

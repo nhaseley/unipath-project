@@ -41,7 +41,7 @@ export default function AdminRegistrationPage({
       lastName: "haseley-ayende",
       password: "2003nyleve",
       confirmPassword: "2003nyleve",
-      college: "Brown University",
+      collegeName: "Brown University",
     });
   }
   async function handleAdminRegistration(event) {
@@ -56,7 +56,7 @@ export default function AdminRegistrationPage({
           email: userLoginInfo.email,
           firstName: userLoginInfo.firstName,
           lastName: userLoginInfo.lastName,
-          college: userLoginInfo.college,
+          collegeName: userLoginInfo.collegeName,
           password: userLoginInfo.password,
         }
       );
@@ -209,8 +209,8 @@ export default function AdminRegistrationPage({
               {collegeOptions
                 .slice()
                 .sort((a, b) => a.name.localeCompare(b.name))
-                .map((college) => (
-                  <option key={college.id} value={college.name}>
+                .map((college, i) => (
+                  <option key={i} value={college.name}>
                     {college.name}
                   </option>
                 ))}

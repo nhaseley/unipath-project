@@ -50,6 +50,7 @@ export default function LoginPage({
       navigate("/login");
       setError(result?.data);
     } else {
+      console.log("to set login info: ", result.data.admissionOfficer)
       localStorage.setItem("token", result.data.token);
       {
         userType == "student"

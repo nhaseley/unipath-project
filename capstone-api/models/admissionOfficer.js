@@ -23,10 +23,10 @@ class AdmissionOfficer {
   static createPublicadmissionOfficer(admissionOfficer) {
     return {
       id: admissionOfficer.id,
-      email: admissionOfficer.email,
+      email: admissionOfficer.work_email,
       firstName: admissionOfficer.first_name,
       lastName: admissionOfficer.last_name,
-      college: admissionOfficer.college
+      collegeName: admissionOfficer.college_name
     };
   }
 
@@ -79,7 +79,7 @@ class AdmissionOfficer {
       "email",
       "firstName",
       "lastName",
-      "college"
+      "collegeName"
     ];
     try {
       validateFields({
@@ -107,7 +107,7 @@ class AdmissionOfficer {
           work_email,
           first_name,
           last_name,
-          college,
+          college_name,
           password 
         )
         VALUES ($1, $2, $3, $4, $5)
@@ -116,12 +116,12 @@ class AdmissionOfficer {
                   work_email,       
                   first_name, 
                   last_name,
-                  college`,
+                  college_name`,
       [
         creds.email.toLowerCase(),
         creds.firstName.toLowerCase(),
         creds.lastName.toLowerCase(),
-        creds.college,
+        creds.collegeName,
         hashedPassword
       ]
     );
@@ -153,7 +153,7 @@ class AdmissionOfficer {
    * @param {String} email
    * @returns event added
    */
-  static async postEvent(name, desc, email, speaker, dateTime, dept, maxRegistrants, college){
+  static async postEvent(name, desc, email, speaker, dateTime, dept, maxRegistrants, collegeName){
     const result = await db.query (
       `INSERT INTO events (
         name,
@@ -175,7 +175,7 @@ class AdmissionOfficer {
                 dept,
                 max_registrants,
                 college`, 
-                [name, desc, email, speaker, dateTime, dept, maxRegistrants, college]
+                [name, desc, email, speaker, dateTime, dept, maxRegistrants, collegeName]
     )
     return result.rows;
   }

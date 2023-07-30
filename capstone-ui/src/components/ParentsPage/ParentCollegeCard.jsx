@@ -11,8 +11,8 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo, cust
 
   useEffect(() => {
     axios
-      .post("http://localhost:3010/info/" + `${childCollege?.name}`, {
-        id: childCollege?.name,
+      .post("http://localhost:3010/info/" + `${childCollege?.college_name}`, {
+        id: childCollege?.college_name,
       })
       .then((response) => {
         setCollege(response.data);
@@ -36,13 +36,13 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo, cust
   };
 
   function changeCollege(){
-    setUserLoginInfo((u) => ({ ...u, college: childCollege?.name }));
+    setUserLoginInfo((u) => ({ ...u, college: childCollege?.college_name }));
   }
   
   return (
     <div className="parent-college-card">
       <div className="info">
-        <h2 className="student-college-name" onClick={changeCollege}><Link to={"/info/" + childCollege?.name} > {childCollege?.name} </Link></h2>
+        <h2 className="student-college-name" onClick={changeCollege}><Link to={"/info/" + childCollege?.college_name} > {childCollege?.college_name} </Link></h2>
         <h3 className="out-of-state-tuition">
           Out of State Tuition:{" "}
           {college?.tuition_out_of_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}

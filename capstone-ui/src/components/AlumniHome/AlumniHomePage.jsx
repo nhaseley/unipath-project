@@ -60,7 +60,7 @@ export default function AlumniHomePage({
       alumId: userLoginInfo.id,
       alumFirstName: userLoginInfo.firstName,
       alumLastName: userLoginInfo.lastName,
-      collegeName: userLoginInfo.college,
+      collegeName: userLoginInfo.collegeName,
       collegeGradYear: userLoginInfo.collegeGradYear,
       rating: userLoginInfo.ratingNumber,
       review: userLoginInfo.additionalReview,
@@ -74,7 +74,7 @@ export default function AlumniHomePage({
         ratingNumber: "",
         additionalReview: "",
       });
-      navigate("/info/" + userLoginInfo?.college);
+      navigate("/info/" + userLoginInfo?.collegeName);
       setError({});
     }
   }
@@ -91,10 +91,10 @@ export default function AlumniHomePage({
           <h1>
             Welcome to{" "}
             <Link
-              to={"/info/" + userLoginInfo?.college}
+              to={"/info/" + userLoginInfo?.collegeName}
               className="college-link"
             >
-              {userLoginInfo?.college}{" "}
+              {userLoginInfo?.collegeName}{" "}
             </Link>
             , {userLoginInfo?.firstName}!
           </h1>

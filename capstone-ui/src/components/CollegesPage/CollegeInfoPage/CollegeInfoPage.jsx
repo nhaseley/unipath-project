@@ -13,9 +13,8 @@ export default function CollegeInfoPage({
   userLoginInfo,
   setSelectedCollege,
   userType,
-  customColors
+  customColors,
 }) {
-
   const { id } = useParams();
   const [college, setCollege] = useState();
   console.log("college: ", college);
@@ -70,7 +69,7 @@ export default function CollegeInfoPage({
     ) {
       axios
         .post("http://localhost:3010/getCollegeReviews", {
-          college: userLoginInfo.college,
+          collegeName: userLoginInfo.collegeName,
         })
         .then((response) => {
           setReviews(response.data);
@@ -119,7 +118,11 @@ export default function CollegeInfoPage({
       <div className="title">
         <h1> Welcome to {college?.name} </h1>
         {userType == "student" ? (
-          <Link to={"/like"} onClick={setSelectedCollege(college?.name)}>
+          <Link
+            to={"/like"}
+            key={college?.id}
+            onClick={setSelectedCollege(college?.name)}
+          >
             <img
               src="https://www.transparentpng.com/download/instagram-heart/bULeEp-heart-instagram-vector.png"
               className="like-img"
@@ -127,24 +130,23 @@ export default function CollegeInfoPage({
           </Link>
         ) : null}
       </div>
-      
+
       <h2>
-        {college?.name} is a 4-year {findMinorityServingValue(college)}{" "} {college?.avg_net_price_private?"private ":"public "}
+        {college?.name} is a 4-year {findMinorityServingValue(college)}{" "}
+        {college?.avg_net_price_private ? "private " : "public "}
         institution located in {college?.city}, {college?.state}.
       </h2>
       <div className="see-events">
         <button>
-          <Link to={"/events"}>See Upcoming Events</Link>
+          <Link to={"/events"} key={college?.id}>
+            See Upcoming Events
+          </Link>
         </button>
       </div>
-      <a
-          href={"https://" + college?.school_url}
-          className="college-site-link"
-        >
-          See University Site
-        </a>
+      <a href={"https://" + college?.school_url} className="college-site-link">
+        See University Site
+      </a>
       <div className="college-statistics">
-       
         <div>
           <h2>
             Admission Rate:{" "}
@@ -175,7 +177,7 @@ export default function CollegeInfoPage({
               ? parseInt(college?.act_score)
               : "Unavailable"}
           </h2>
-          {!isNaN(parseInt(college?.act_score)) && userLoginInfo.actScore  ? (
+          {!isNaN(parseInt(college?.act_score)) && userLoginInfo.actScore ? (
             <ACTBarChart
               actData={actData}
               customColors={customColors}
@@ -198,14 +200,18 @@ export default function CollegeInfoPage({
           <div className="students-and-faculty-imgs">
             <img
               className="faculty-img"
-              src={"https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"}
+              src={
+                "https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"
+              }
               alt="Faculty Icon"
             />
             <div className="student-imgs-grid">
               {studentImageArray.map((_, i) => (
                 <img
                   className="student-img"
-                  src={"https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"}
+                  src={
+                    "https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"
+                  }
                   key={i}
                   alt={`Student Icon ${i + 1}`}
                 />
@@ -214,20 +220,25 @@ export default function CollegeInfoPage({
           </div>
         </div>
         <h2 className="first-gen-share">
-          First-generation Students:{" "}
-          {(parseFloat(college?.first_generation) * 100).toFixed(1) + "%"}
+          {college?.first_generation
+            ? "First-generation Students: " + (
+                parseFloat(college?.first_generation) * 100
+              ).toFixed(1) + "%"
+            : null}
         </h2>
         <h2 className="retention-rate">
           Retention/Graduation rate:{" "}
           {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
         </h2>
-        <div className="cost-breakdown">
-          <h2>Cost Breakdown:</h2>
-          <TuitionBarChart
-            tuitionData={tuitionData}
-            customColors={customColors}
-          ></TuitionBarChart>
-        </div>
+        {college?.tuition_in_state || college?.tuition_out_of_state ? (
+          <div className="cost-breakdown">
+            <h2>Cost Breakdown:</h2>
+            <TuitionBarChart
+              tuitionData={tuitionData}
+              customColors={customColors}
+            ></TuitionBarChart>
+          </div>
+        ) : null}
       </div>
 
       {userType == "college-students-and-alumni" ? (
@@ -236,15 +247,16 @@ export default function CollegeInfoPage({
         </button>
       ) : null}
 
-      <h2 className="alumReviews"> Past Reviews/Ratings:
-        {reviews?.length != 0 ? (
-          reviews?.map((review) => (
-          <CollegeReview review={review}></CollegeReview>
-          ))
-        ) : (
-          <h2> No reviews posted for this college yet. </h2>
-        )}
-      </h2>
+      {reviews?.length != 0 ? (
+        <h2 className="alumReviews">
+          Past Reviews/Ratings:
+          {reviews?.map((review, i) => (
+            <CollegeReview key={i} review={review}></CollegeReview>
+          ))}
+        </h2>
+      ) : (
+        <h2> No reviews posted for this college yet. </h2>
+      )}
     </div>
   );
 }
