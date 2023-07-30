@@ -6,7 +6,11 @@ import NetPricePieChart from "./NetPriceBarChart";
 import AverageEarningsBarChart from "./AverageEarningsBarChart";
 import FamilyIncomeBarChart from "./FamilyIncomeBarChart";
 
-export default function ParentCollegeCard({ childCollege, setUserLoginInfo, customColors }) {
+export default function ParentCollegeCard({
+  childCollege,
+  setUserLoginInfo,
+  customColors,
+}) {
   const [college, setCollege] = useState();
 
   useEffect(() => {
@@ -32,32 +36,41 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo, cust
 
   const incomeData = {
     median_family_income: parseFloat(college?.median_family_income),
-    average_family_income: parseFloat(college?.avg_family_income)
+    average_family_income: parseFloat(college?.avg_family_income),
   };
 
-  function changeCollege(){
+  function changeCollege() {
     setUserLoginInfo((u) => ({ ...u, college: childCollege?.college_name }));
   }
-  
+
   return (
     <div className="parent-college-card">
       <div className="info">
-        <h2 className="student-college-name" onClick={changeCollege}><Link to={"/info/" + childCollege?.college_name} > {childCollege?.college_name} </Link></h2>
+        <h2 className="student-college-name" onClick={changeCollege}>
+          <Link to={"/info/" + childCollege?.college_name}>
+            {" "}
+            {childCollege?.college_name}{" "}
+          </Link>
+        </h2>
         <h3 className="out-of-state-tuition">
           Out of State Tuition:{" "}
-          {college?.tuition_out_of_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}
+          {college?.tuition_out_of_state
+            ? "$" + parseInt(college?.tuition_out_of_state).toLocaleString()
+            : "Unavailable"}
         </h3>
         <h3 className="in-state-tuition">
-          In-State Tuition: {" "}
-          {college?.tuition_in_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}
+          In-State Tuition:{" "}
+          {college?.tuition_in_state
+            ? "$" + parseInt(college?.tuition_out_of_state).toLocaleString()
+            : "Unavailable"}
         </h3>
         <h3 className="room-and-board">
-          Room and board: {" "}
-          {college?.room_board_offcampus ? "$" + parseInt(college?.room_board_offcampus).toLocaleString(): "Unavailable"}
+          Room and board:{" "}
+          {college?.room_board_offcampus
+            ? "$" + parseInt(college?.room_board_offcampus).toLocaleString()
+            : "Unavailable"}
         </h3>
-        <h3>
-          
-        </h3>
+        <h3></h3>
       </div>
       {/* <div className="parent-data-visuals"> */}
       {college?.tuition_out_of_state ? (
@@ -67,7 +80,7 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo, cust
             customColors={customColors}
           ></NetPricePieChart>
         </div>
-      ) : <h2 className="no-tuition-info">Tuition information not available</h2>}
+      ) :null}
 
       <div className="average-earnings-bar-chart">
         <AverageEarningsBarChart
@@ -76,13 +89,15 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo, cust
         ></AverageEarningsBarChart>
       </div>
 
-      <div className="family-income-bar-chart">
+      {college?.median_family_income && college?.avg_family_income ? (
+        <div className="family-income-bar-chart">
           <FamilyIncomeBarChart
             incomeData={incomeData}
             customColors={customColors}
           ></FamilyIncomeBarChart>
         </div>
-{/* </div> */}
+      ) : null}
+      {/* </div> */}
     </div>
   );
 }
