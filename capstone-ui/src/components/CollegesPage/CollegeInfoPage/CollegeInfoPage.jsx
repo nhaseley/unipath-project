@@ -15,10 +15,11 @@ export default function CollegeInfoPage({
   userType,
   customColors
 }) {
-  console.log("college: ", college);
 
   const { id } = useParams();
   const [college, setCollege] = useState();
+  console.log("college: ", college);
+
   const [reviews, setReviews] = useState();
   const tuitionData = {
     tuition_in_state: parseInt(college?.tuition_in_state),
