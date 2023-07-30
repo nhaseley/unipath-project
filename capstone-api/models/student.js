@@ -220,7 +220,6 @@ class Student {
    * @param {*} student_id
    * @return colleges in the database for a given user
    */
-
   static async getCollegeFeed(sat_score, act_score) {
     const safeSatScore =
       sat_score !== "" && Number.isFinite(Number(sat_score))
@@ -250,25 +249,6 @@ class Student {
     return result.rows;
   }
 
-  // static async getCollegeFeed(sat_score, act_score) {
-  //   if (typeof sat_score == "undefined" && typeof act_score == "undefined") {
-  //     // throw new BadRequestError("No standardized test scores for this user.");
-  //   }
-  //   const result = await db.query(
-  //     `SELECT * FROM colleges_from_api
-  //       WHERE
-  //         ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) +
-  //            CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) +
-  //            CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1) <= 200
-  //         OR
-  //         ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2) <= 4
-  //     `,
-  //     [sat_score, act_score]
-  //   );
-  //   console.log("all colleges for this user: ", result.rows.length)
-  //   return result.rows;
-  // }
-
   /**
    * Get all the college info from the database given the name of the college
    *
@@ -284,15 +264,55 @@ class Student {
     return result.rows[0];
   }
 
+   /**
+   * Gets the total number of current registrants for a particular
+   * event from the event_attendees table in the database
+   *
+   * @returns events
+   */
+  static async getSumRegistrants(eventId) {
+    const total_attendees = await db.query(
+      `SELECT SUM(num_attendees)
+      FROM event_attendees WHERE event_id=$1`, [eventId]
+    );
+    if (total_attendees.rows[0].sum){
+      return parseInt(total_attendees.rows[0].sum);
+    } 
+    return 0
+  }
+
+  /**
+   * Gets the max number of registrants for a particular
+   * event from the events table in the database
+   *
+   * @returns max number of registrants for that event
+   */
+  static async getMaxNumRegistrants(eventId) {
+    const maxRegistrants = await db.query(
+      `SELECT max_registrants
+      FROM events WHERE id=$1`
+    , [parseInt(eventId)]);
+    return maxRegistrants.rows[0].max_registrants;
+  }
+
+
   /**
    * Add the user's event registration information into 
    * the event_attendees table in the database
    *
-   * @returns events
+   * @returns user information registered
    */
   static async registerForEvent(studentId, firstName, lastName, numAttendees, eventId) {
     if (await Student.fetchEventAttendeeById(studentId, eventId)) {
       throw new BadRequestError(`You have already registered for this event.`);
+    }
+
+    const maxRegistrants = await Student.getMaxNumRegistrants(eventId)
+    const totalRegistrants = await Student.getSumRegistrants(eventId)
+    const spotsLeft = maxRegistrants-totalRegistrants
+
+    if (parseInt(numAttendees) + totalRegistrants > maxRegistrants){
+      throw new BadRequestError(`This event is full, sorry! Limited to ${maxRegistrants} registrants. ${spotsLeft} spots left.`)
     }
 
     const result = await db.query(
@@ -358,8 +378,6 @@ class Student {
    * @returns student
    */
      static async removeEventRegistration(studentId, eventId) {
-      console.log("student id: ", studentId)
-      console.log("event id :", eventId)
       const result = await db.query(
         `DELETE FROM event_attendees
              WHERE student_id = $1 AND event_id = $2`,

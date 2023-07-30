@@ -190,10 +190,7 @@ export default function ParentRegistrationForm({
         <div className="error">
           {error.status
             ? "Registration Failed: " +
-              error.message +
-              ". " +
-              error.status +
-              " Error."
+              error.message
             : null}
         </div>
       </form>

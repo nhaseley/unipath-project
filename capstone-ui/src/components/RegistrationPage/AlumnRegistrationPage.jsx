@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AlumnRegistrationPage(  
     {userLoginInfo,
@@ -8,8 +8,7 @@ export default function AlumnRegistrationPage(
     passwordDisplayed,
     error}
     ) {
-
-
+      
     function handleDemo() {
         setUserLoginInfo({
             email: "nylevenya@brown.edu",
@@ -19,7 +18,6 @@ export default function AlumnRegistrationPage(
             confirmPassword: "2003nyleve",
           });
     }
-
 
     return (
         <div className="alumn-registration">
@@ -138,10 +136,7 @@ export default function AlumnRegistrationPage(
         <div className="error">
           {error.status
             ? "Registration Failed: " +
-              error.message +
-              ". " +
-              error.status +
-              " Error."
+              error.message
             : null}
         </div>
       </form>

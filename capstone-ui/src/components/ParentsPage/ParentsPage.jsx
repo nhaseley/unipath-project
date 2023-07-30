@@ -7,9 +7,9 @@ import ParentCollegeCard from "./ParentCollegeCard";
 
 export default function ParentsPage({
   userLoginInfo,
-  userLoggedIn,
   userType,
   setUserLoginInfo,
+  customColors,
 }) {
   const [childsColleges, setChildsColleges] = useState([]);
 
@@ -27,7 +27,7 @@ export default function ParentsPage({
 
   return (
     <div className="parents-page">
-      {!userLoggedIn || userType != "parent" ? (
+      {userType != "parent" && userType != "student" ? (
         <h1>
           Unfortunately, this page is for parents only. Please log in{" "}
           <Link to={"/login"}> here. </Link>
@@ -35,13 +35,24 @@ export default function ParentsPage({
       ) : (
         <div className="parent-logged-in-page">
           <h1>Welcome, {userLoginInfo?.firstName} to the parents page!</h1>
-          <h1> Your child's liked colleges: </h1>
+          <h1> Your {userType == "parent"?"child's": null} liked colleges: </h1>
+
           {childsColleges?.map((childCollege, index) => (
-            <ParentCollegeCard
-              childCollege={childCollege}
-              key={index}
-              setUserLoginInfo={setUserLoginInfo}
-            ></ParentCollegeCard>
+            <>
+              <hr
+                style={{
+                  background: "green",
+                  height: "5px",
+                  border: "none",
+                }}
+              />
+              <ParentCollegeCard
+                childCollege={childCollege}
+                key={index}
+                setUserLoginInfo={setUserLoginInfo}
+                customColors={customColors}
+              ></ParentCollegeCard>
+            </>
           ))}
         </div>
       )}

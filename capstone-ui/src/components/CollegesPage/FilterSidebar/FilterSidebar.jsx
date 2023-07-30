@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 export default function FilterSidebar({
   userLoginInfo,
   collegeList,
-  setCollegeList,
-  collegesToDisplay,
   setCollegesToDisplay,
 }) {
   const [price, setPrice] = useState(30000);

@@ -1,9 +1,7 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 import "./LoginPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 
 export default function LoginPage({
   userLoginInfo,
@@ -18,22 +16,6 @@ export default function LoginPage({
   setUserType,
 }) {
   const navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     const checkLoggedIn = () => {
-  //     // check if user is already logged in when they first access the webapp
-  //     const token = localStorage.getItem("token");
-  //     if (token){
-  //       const decodedToken = jwtDecode(token);
-  //       if (decodedToken.exp * 1000 > Date.now()){
-  //         setUserLoggedIn(true)
-  //       } else {
-  //         // Token has expired, log out the user
-  //         logoutUser();
-  //       }
-  //     }
-  // }; checkLoggedIn()
-  // }, [])
 
   function handleChangeUserType(event) {
     setUserType(event.target.value);
@@ -68,11 +50,7 @@ export default function LoginPage({
       navigate("/login");
       setError(result?.data);
     } else {
-      // else if (result?.data) {
-
       localStorage.setItem("token", result.data.token);
-      // const decodedToken = jwtDecode(token);
-      // setUserData(decodedToken)
       {
         userType == "student"
           ? setUserLoginInfo(result.data.student)
@@ -99,9 +77,6 @@ export default function LoginPage({
           : null;
       }
     }
-    // else {
-    //   setError(result?.data);
-    // }
   }
 
   return (
@@ -143,7 +118,7 @@ export default function LoginPage({
       </div>
 
       {userType ? (
-        <>
+        <div>
           <h2> Welcome Back! </h2>
           <form className="login-form">
             <div className="email">
@@ -193,11 +168,8 @@ export default function LoginPage({
 
             <div className="error">
               {error.status
-                ? "Registration Failed: " +
-                  error.message +
-                  ". " +
-                  error.status +
-                  " Error."
+                ? "Login Failed: " +
+                  error.message
                 : null}
             </div>
           </form>
@@ -210,7 +182,7 @@ export default function LoginPage({
               <Link to={"/register"}> Register </Link>
             </button>
           </div>
-        </>
+        </div>
       ) : null}
     </div>
   );

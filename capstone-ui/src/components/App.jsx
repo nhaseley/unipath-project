@@ -48,6 +48,19 @@ export default function App() {
   const [userType, setUserType] = useState();
   const [decodedToken, setDecodedToken] = useState();
   const [collegeArrayPointer, setCollegeArrayPointer] = useState(0);
+  const customColors = [
+    "#F2DDA4",
+    "#9DCBBA",
+    "#1f77b4",
+    "#2ca02c",
+    "#8c564b",
+    "#A8763E",
+    "#734B5E",
+    "#44633F",
+    "#3F4B3B",
+
+  
+  ];
 
   console.log(userLoginInfo);
 
@@ -197,9 +210,9 @@ export default function App() {
               element={
                 <RegistrationSurveyPage
                   userLoginInfo={userLoginInfo}
+                  error={error}
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
-                  userType={userType}
                 ></RegistrationSurveyPage>
               }
             ></Route>
@@ -224,7 +237,6 @@ export default function App() {
                   setUserLoginInfo={setUserLoginInfo}
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
-                  userLoggedIn={userLoggedIn}
                   collegeArrayPointer={collegeArrayPointer}
                   setCollegeArrayPointer={setCollegeArrayPointer}
                   userType={userType}
@@ -236,9 +248,9 @@ export default function App() {
               element={
                 <ParentsPage
                   userLoginInfo={userLoginInfo}
-                  userLoggedIn={userLoggedIn}
                   userType={userType}
                   setUserLoginInfo={setUserLoginInfo}
+                  customColors={customColors}
                 ></ParentsPage>
               }
             ></Route>
@@ -248,7 +260,6 @@ export default function App() {
                 <EventsPage
                   userType={userType}
                   userLoginInfo={userLoginInfo}
-                  userLoggedIn={userLoggedIn}
                 ></EventsPage>
               }
             ></Route>
@@ -272,7 +283,6 @@ export default function App() {
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
                   userLoginInfo={userLoginInfo}
-                  userLoggedIn={userLoggedIn}
                   userType={userType}
                 ></AlumniHomePage>
               }
@@ -282,10 +292,9 @@ export default function App() {
               element={
                 <CollegeInfoPage
                   userLoginInfo={userLoginInfo}
-                  setUserLoginInfo={setUserLoginInfo}
-                  selectedCollege={selectedCollege}
                   setSelectedCollege={setSelectedCollege}
                   userType={userType}
+                  customColors={customColors}
                 ></CollegeInfoPage>
               }
             ></Route>
@@ -307,7 +316,8 @@ export default function App() {
                 <MyCollegesPage
                   userLoginInfo={userLoginInfo}
                   selectedCollege={selectedCollege}
-                ></MyCollegesPage>
+                  userType={userType}
+                  ></MyCollegesPage>
               }
             ></Route>
             <Route path="/about" element={<About></About>}></Route>

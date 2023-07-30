@@ -10,7 +10,6 @@ export default function CollegesPage({
   setUserLoginInfo,
   collegeList,
   setCollegeList,
-  userLoggedIn,
   collegeArrayPointer,
   setCollegeArrayPointer,
   userType,
@@ -21,7 +20,7 @@ export default function CollegesPage({
     <div className="colleges-page">
 
   
-      {!userLoggedIn || userType != "student" ? (
+      {userType != "student" ? (
         <h1>
           Unfortunately, this page is only available for students. Please log in{" "}
           <Link to={"/login"}>here.</Link>{" "}
@@ -31,8 +30,6 @@ export default function CollegesPage({
           <FilterSidebar
             userLoginInfo={userLoginInfo}
             collegeList={collegeList}
-            setCollegeList={setCollegeList}
-            collegesToDisplay={collegesToDisplay}
             setCollegesToDisplay={setCollegesToDisplay}
           ></FilterSidebar>
 

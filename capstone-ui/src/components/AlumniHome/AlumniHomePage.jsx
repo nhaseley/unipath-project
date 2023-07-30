@@ -1,8 +1,7 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./AlumniHomePage.css";
-
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 
@@ -10,7 +9,6 @@ export default function AlumniHomePage({
   userLoginInfo,
   setUserLoginInfo,
   setError,
-  userLoggedIn,
   userType,
 }) {
   const navigate = useNavigate();
@@ -83,7 +81,7 @@ export default function AlumniHomePage({
 
   return (
     <div className="alumni-home-page">
-      {!userLoggedIn || userType != "college-students-and-alumni" ? (
+      {userType != "college-students-and-alumni" ? (
         <h1>
           Unfortunately, this page is for college students and alumni only.
           Please log in <Link to={"/login"}> here. </Link>

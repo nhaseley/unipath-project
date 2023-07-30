@@ -3,21 +3,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NetPricePieChart from "./NetPriceBarChart";
-import AverageEarningsPieChart from "./AverageEarningsBarChart";
+import AverageEarningsBarChart from "./AverageEarningsBarChart";
+import FamilyIncomeBarChart from "./FamilyIncomeBarChart";
 
-export default function ParentCollegeCard({ childCollege, setUserLoginInfo }) {
-  const customColors = [
-    "#F2DDA4",
-    "#9DCBBA",
-    "#1f77b4",
-    "#A8763E",
-    "#734B5E",
-    "#44633F",
-    "#3F4B3B",
-    "#2ca02c",
-    "#8c564b",
-  ];
-
+export default function ParentCollegeCard({ childCollege, setUserLoginInfo, customColors }) {
   const [college, setCollege] = useState();
 
   useEffect(() => {
@@ -41,6 +30,11 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo }) {
     earnings_4yr_after_completion: college?.earnings_4yr_after_completion,
   };
 
+  const incomeData = {
+    median_family_income: parseFloat(college?.median_family_income),
+    average_family_income: parseFloat(college?.avg_family_income)
+  };
+
   function changeCollege(){
     setUserLoginInfo((u) => ({ ...u, college: childCollege?.name }));
   }
@@ -50,11 +44,11 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo }) {
       <div className="info">
         <h2 className="student-college-name" onClick={changeCollege}><Link to={"/info/" + childCollege?.name} > {childCollege?.name} </Link></h2>
         <h3 className="out-of-state-tuition">
-          Out of state tuition:{" "}
+          Out of State Tuition:{" "}
           {college?.tuition_out_of_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}
         </h3>
         <h3 className="in-state-tuition">
-          In state tuition: {" "}
+          In-State Tuition: {" "}
           {college?.tuition_in_state? "$" + parseInt(college?.tuition_out_of_state).toLocaleString(): "Unavailable"}
         </h3>
         <h3 className="room-and-board">
@@ -65,8 +59,9 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo }) {
           
         </h3>
       </div>
+      {/* <div className="parent-data-visuals"> */}
       {college?.tuition_out_of_state ? (
-        <div className="net-price-pie-chart">
+        <div className="net-price-bar-chart">
           <NetPricePieChart
             netPriceData={netPriceData}
             customColors={customColors}
@@ -74,20 +69,20 @@ export default function ParentCollegeCard({ childCollege, setUserLoginInfo }) {
         </div>
       ) : <h2 className="no-tuition-info">Tuition information not available</h2>}
 
-      <div className="average-earnings-pie-chart">
-        <AverageEarningsPieChart
+      <div className="average-earnings-bar-chart">
+        <AverageEarningsBarChart
           averageEarningsData={averageEarningsData}
           customColors={customColors}
-        ></AverageEarningsPieChart>
+        ></AverageEarningsBarChart>
       </div>
-      <hr
-   style={{
-   background: "#6F38C5",
-   height: "5px",
-   border: "none",
-   }}
-/>
- 
+
+      <div className="family-income-bar-chart">
+          <FamilyIncomeBarChart
+            incomeData={incomeData}
+            customColors={customColors}
+          ></FamilyIncomeBarChart>
+        </div>
+{/* </div> */}
     </div>
   );
 }

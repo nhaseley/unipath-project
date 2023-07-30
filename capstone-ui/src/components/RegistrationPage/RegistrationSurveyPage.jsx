@@ -2,21 +2,19 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import "./RegistrationPage.css";
 import { Link, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import Select from "react-select";
 
 export default function RegistrationSurveyPage({
   userLoginInfo,
+  error,
   setError,
-  setUserLoginInfo,
-  userType
+  setUserLoginInfo
 }) {
   const navigate = useNavigate();
-
   const [selectedButton, setSelectedButton] = useState({});
   const [examScores, setExamScores] = useState({ satScore: "", actScore: "" });
-
-
   const satExamScoreOptions = Array.from({ length: 161 }, (_, i) => ({
     value: i * 10,
     label: (i * 10).toString(),
@@ -43,7 +41,6 @@ export default function RegistrationSurveyPage({
         enrollment: userLoginInfo.enrollment,
         schoolType: userLoginInfo.schoolType
       });
-      console.log("student registration result on frontend: ", result);
 
       if (result.data.status) {
         setError(result.data);
@@ -96,6 +93,9 @@ export default function RegistrationSurveyPage({
     });
   }
 
+  function handleBack(){
+    navigate("/register")
+  }
   return (
     <div className="registration-survey-page">
       <div className="sat-input">
@@ -165,14 +165,17 @@ export default function RegistrationSurveyPage({
           <option value="aanipi"> Asian American, Native Hawaiian, and Pacific Islander</option>
         </select>
       </div>
+      <div className="error">
+          {error.status
+            ? handleBack():null}
+        </div>
       <button className="registration-submit" onClick={handleRegistration}>
         <Link to={"/register"}> Submit</Link>
       </button>
 
-      {/* <button className="back-to-register-button" */}
-    {/* onClick={navigate("/register")}> Back */}
-      {/* error check for if registration failed? */}
-      {/* </button> */}
+      <button className="back-to-register-button"
+        onClick={handleBack}> Back
+      </button>
     </div>
   );
 }

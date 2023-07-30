@@ -129,7 +129,7 @@ CREATE TABLE events (
   speaker           TEXT,
   date_time         TIMESTAMP DEFAULT NOW(),
   dept              TEXT,
-  max_registrants   INT,
+  max_registrants   INTEGER,
   college           TEXT NOT NULL
 );
 
@@ -145,12 +145,12 @@ CREATE TABLE event_attendees (
 
 CREATE TABLE reviews (
   id                SERIAL PRIMARY KEY,
-  user_id           INT,
+  user_id           INTEGER,
   first_name        TEXT NOT NULL,
   last_name         TEXT NOT NULL,
   college_name      TEXT,
   college_grad_year INTEGER,
-  rating            INT,
+  rating            INTEGER,
   review            TEXT
 );
 

@@ -51,8 +51,7 @@ export default function EventDetailsPage ({setError, userLoginInfo}) {
           desc: "This is a really cool event!!",
           email: "nylevenya@brown.edu",
           speaker: "nya",
-        //   dateTime: (userLoginInfo.dateTime.toISOString().slice(0, 16)), 1000,
-          dept: "6464080591",
+          dept: "Mathematics",
           maxRegistrants: 100
         });
       }
@@ -100,20 +99,20 @@ export default function EventDetailsPage ({setError, userLoginInfo}) {
             </div>
 
             <div className="event-dept">
-                <label htmlFor="event-dept-label" className="event-dept-label" >Dept:</label>
+                <label htmlFor="event-dept-label" className="event-dept-label">Dept: </label>
                 <input type="text" className="event-dept-input" value={eventInfo.dept} onChange={(e) =>
               setEventInfo((u) => ({ ...u, dept: e.target.value }))
             } />
             </div>
 
             <div className="event-max-registrants">
-                <label htmlFor="event-max-registrants-label" className="event-max-registrants-label"  > Max Registrants: </label>
+                <label htmlFor="event-max-registrants-label" className="event-max-registrants-label"> Max Registrants: </label>
                 <input type="number" className="event-max-registrants-input" value={eventInfo.maxRegistrants} onChange={(e) =>
               setEventInfo((u) => ({ ...u, maxRegistrants: e.target.value }))
             } />
             </div>
 
-            <button className="event-registration" onClick={handleEventSubmit}>  Submit </button>
+            <button className="event-registration" onClick={handleEventSubmit}>Submit</button>
         </form>
 
         <button className="demo-button" onClick={handleDemo}>

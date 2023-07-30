@@ -47,14 +47,14 @@ router.post("/info/:id", async function (req, res, next) {
 
 router.post("/register/event", async function (req, res, next) {
   try {
-    const studentInfo = await Student.registerForEvent(
+    const studentRegistrationInfo = await Student.registerForEvent(
       req.body.studentId,
       req.body.firstName,
       req.body.lastName,
       req.body.numAttendees,
       req.body.eventId
     );
-    return res.status(201).json(studentInfo);
+    return res.status(201).json(studentRegistrationInfo);
   } catch (err) {
     res.send(err);
     next(err);

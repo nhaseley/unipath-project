@@ -11,9 +11,7 @@ export default function AdminRegistrationPage({
   handleHidePassword,
   passwordDisplayed,
   error,
-  setError,
-  userType,
-  userLoggedIn
+  setError
 }) {
   const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
@@ -202,10 +200,7 @@ export default function AdminRegistrationPage({
             <div className="error">
               {error.status
                 ? "Registration Failed: " +
-                  error.message +
-                  ". " +
-                  error.status +
-                  " Error."
+                  error.message
                 : null}
             </div>
             <select onChange={handleCollegeSelect}>

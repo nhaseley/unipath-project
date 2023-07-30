@@ -65,25 +65,19 @@ export default function HomePage() {
     return () => clearInterval(imageTransitionInterval); // Clean up on component unmount
   }, []);
 
-  // useEffect(() => {
-  //   setLoopArray([...loopArray, ...collegeNames]);
-  // }, [loopArray]);
-
   return (
     <>
       <div className="hellotxt">
-        {" "}
         <h1 className="hero-heading">Your Search Starts Here.</h1>
         <h2 className="hero-subheading">
           Sayme es tion wayne wif Central Sea as well es skepta init accusantium
           doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
           inventore veritatis et quasi architecto beatae vitae dicta sunt
           explicabo. Nemo enim. En headie one is de Best.
-        </h2>{" "}
-        <Link to={"/feed"}>
-          {" "}
-          <button className="get-started-button">Get Started</button>{" "}
-        </Link>{" "}
+        </h2>
+        <Link to={"/login"}>
+          <button className="get-started-button">Get Started</button>
+        </Link>
       </div>
       <section className="additional-section">
         <div className="container">

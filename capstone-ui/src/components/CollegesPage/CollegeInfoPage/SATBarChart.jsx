@@ -1,29 +1,26 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-export default function AverageEarningsBarChart({ averageEarningsData, customColors }) {
+export default function SATBarChart({ satData, customColors }) {
   const chartRef = useRef(null);
 
   useEffect(() => {
     function getCustomLabels(label) {
       switch (label) {
-        case "earnings_1yr_after_completion":
-          return "1 year post-grad";
-        case "earnings_4yr_after_completion":
-          return "4 years post-grad";
+        case "averageSAT":
+          return "Average SAT";
+        case "mySAT":
+          return "Your SAT";
         default:
           return "";
       }
     }
 
     // Prepare the data
-    const data = Object.entries(averageEarningsData).map(
-      ([timePoint, earnings]) => ({
-        timePoint: getCustomLabels(timePoint),
-        // timePoint,
-        earnings: +earnings,
-      })
-    );
+    const data = Object.entries(satData).map(([timePoint, earnings]) => ({
+      timePoint: getCustomLabels(timePoint),
+      earnings: +earnings,
+    }));
 
     const width = 400;
     const height = 300;
@@ -33,7 +30,8 @@ export default function AverageEarningsBarChart({ averageEarningsData, customCol
 
     // Define color scale using custom colors
     const colorScale = d3.scaleOrdinal(customColors);
-
+    // Define the y-axis tick format without commas
+    const yAxisTickFormat = d3.format(".0f");
     // Define scales
     const xScale = d3
       .scaleBand()
@@ -41,10 +39,7 @@ export default function AverageEarningsBarChart({ averageEarningsData, customCol
       .range([0, innerWidth])
       .padding(0.1);
 
-    const yScale = d3
-      .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.earnings)])
-      .range([innerHeight, 0]);
+    const yScale = d3.scaleLinear().domain([0, 2400]).range([innerHeight, 0]);
 
     // Create SVG container
     const svg = d3
@@ -78,18 +73,19 @@ export default function AverageEarningsBarChart({ averageEarningsData, customCol
       .attr("y", (d) => yScale(d.earnings) - 5) // Position the label above each bar
       .style("text-anchor", "middle")
       .style("font-size", "14px")
-      .text((d) => `${d.earnings? "$" + d.earnings.toLocaleString(): ""}`);
+      .text((d) => `${d.earnings ? +d.earnings : ""}`);
 
     // Add x-axis
     g.append("g")
       .attr("transform", `translate(25,${innerHeight})`)
       .call(d3.axisBottom(xScale))
-      .style("font-size", "14px")
+      .style("font-size", "14px");
 
     // Add y-axis
     g.append("g")
       .attr("transform", `translate(25,0)`)
-      .call(d3.axisLeft(yScale));
+      .call(d3.axisLeft(yScale).tickFormat(yAxisTickFormat)) // Apply the custom tick format
+      .style("font-size", "14px");
 
     // Add y-axis label
     g.append("text")
@@ -99,16 +95,7 @@ export default function AverageEarningsBarChart({ averageEarningsData, customCol
       .attr("dy", "1em")
       .attr("transform", "rotate(-90)")
       .style("text-anchor", "middle")
-      .text("Average Earnings ($/yr)");
-
-    // Add x-axis label
-    svg
-      .append("text")
-      .attr("class", "x-axis-label")
-      .attr("x", width / 2 + 25)
-      .attr("y", height + 50) // Position the label at the bottom of the chart
-      .attr("text-anchor", "middle")
-      .text("Years After Completion");
+      .text("Score (out of 2400)");
 
     // Add chart title
     svg
@@ -118,8 +105,8 @@ export default function AverageEarningsBarChart({ averageEarningsData, customCol
       .attr("y", margin.top / 2 + 10)
       .attr("text-anchor", "middle")
       .style("font-size", "22px")
-      .text("Average Earnings After Graduation");
-  }, [averageEarningsData]);
+      .text("SAT Score Comparison");
+  }, [satData]);
 
   return <svg ref={chartRef} />;
 }

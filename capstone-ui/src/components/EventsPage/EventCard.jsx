@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./EventsPage.css";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function EventCard({ event }) {
   const formatDate = (timestamp) =>

@@ -160,10 +160,7 @@ export default function StudentRegistrationForm({
         <div className="error">
           {error.status
             ? "Registration Failed: " +
-              error.message +
-              ". " +
-              error.status +
-              " Error."
+              error.message
             : null}
         </div>
       </form>

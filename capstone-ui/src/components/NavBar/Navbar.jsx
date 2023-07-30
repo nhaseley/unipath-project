@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 import "./Navbar.css";
 import { Outlet, Link } from "react-router-dom";
 

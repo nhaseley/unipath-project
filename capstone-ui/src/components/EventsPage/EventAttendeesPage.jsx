@@ -8,7 +8,7 @@ export default function EventAttendeesPage({
   userLoginInfo,
   userType,
   error,
-  setError,
+  setError
 }) {
   const { id } = useParams();
   const [eventAttendees, setEventAttendees] = useState([]);
@@ -18,7 +18,7 @@ export default function EventAttendeesPage({
     numAttendees: 0,
   });
 
-  function handleDemo(event) {
+  function handleDemo() {
     setEventRegistrationInfo({
       firstName: "John",
       lastName: "Doe",
@@ -28,7 +28,7 @@ export default function EventAttendeesPage({
 
   async function getEventAttendees() {
     // axios call to get the attendees for this event from the database
-    let result = await axios
+    await axios
       .post("http://localhost:3010/getEventAttendees", {
         eventId: id,
       })
@@ -69,7 +69,7 @@ export default function EventAttendeesPage({
           eventId: id,
         })
         .then((response) => {
-          console.log("student registered: ", response.data);
+          getEventAttendees()
           if (response.data.message) {
             setError(response.data);
           } else {
@@ -89,11 +89,9 @@ export default function EventAttendeesPage({
     getEventAttendees();
   }, [userLoginInfo]);
 
-  // TODO: registraton only appearing on refresh or return 
   console.log("eventAttendees", eventAttendees);
   return (
     <div className="event-attendees-page">
-      This is the attendees for this event
       {userType == "student" ? (
         <>
           {eventAttendees.length != 0 ? (
@@ -147,11 +145,8 @@ export default function EventAttendeesPage({
           </form>
           <div className="error">
             {error.status
-              ? "Registration Failed: " +
-                error.message +
-                " " +
-                error.status +
-                " Error."
+              ? "Event Registration Failed: " +
+                error.message
               : null}
           </div>
           <button className="demo-button" onClick={handleDemo}>

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import EventCard from "./EventCard";
 
-export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
+export default function EventsPage({ userLoginInfo, userType }) {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
@@ -30,7 +30,6 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
       })
       .then((response) => {
         if (response.data.length == 0) {
-          console.log("empty");
           getAllEvents();
         } else {
           setEvents(response.data);
@@ -82,8 +81,7 @@ export default function EventsPage({ userLoginInfo, userLoggedIn, userType }) {
                 {eventSearchInput != "" ? (
                   searchedEvents.length == 0 ? (
                     <h2>
-                      {" "}
-                      No college events found. Please adjust your search.{" "}
+                      No college events found. Please adjust your search.
                     </h2>
                   ) : (
                     searchedEvents.map((event) => (

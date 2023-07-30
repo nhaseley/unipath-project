@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./MyCollegesPage.css";
 
-export default function MyCollegesPage({ userLoginInfo, selectedCollege }) {
+export default function MyCollegesPage({ userLoginInfo, userType, selectedCollege }) {
   const [likedColleges, setLikedColleges] = useState([]);
 
   useEffect(() => {
@@ -23,13 +23,32 @@ export default function MyCollegesPage({ userLoginInfo, selectedCollege }) {
   }, [userLoginInfo]);
 
   return (
+    <>
+    
+    {userType != "student" ? (
+        <h1>
+          Unfortunately, this page is for students only. Please log
+          in <Link to={"/login"}> here. </Link>
+        </h1>
+      ):
     <div className="my-colleges-page">
+
       <h1> Your Liked Colleges:</h1>
-      <div>
-        {likedColleges?.map((college) => (
-          <h2 className="my-college-name"> <Link to={"/info/" + college.name}> {college.name} </Link></h2>
-        ))}
-      </div>
-    </div>
+      {likedColleges.length == 0 ? (
+        <h2>
+          You have not liked any colleges. Start browsing <Link to="feed"> here </Link>!
+        </h2>
+      ) : (
+        <div>
+          {likedColleges?.map((college) => (
+            <h2 className="my-college-name">
+              {" "}
+              <Link to={"/info/" + college.name}> {college.name} </Link>
+            </h2>
+          ))}
+        </div>
+      )}
+    </div>}
+    </>
   );
 }

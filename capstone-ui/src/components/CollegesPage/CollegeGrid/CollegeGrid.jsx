@@ -33,7 +33,6 @@ export default function CollegeGrid({
             "colleges for this user: ",
             response.data.collegesToDisplay
           );
-          // setCollegeList((prevList) => [...prevList, ...response?.data]);
           setCollegeList(response?.data.collegesToDisplay);
           setCollegesToDisplay(response?.data.collegesToDisplay);
           setAllColleges(response?.data.allColleges);
@@ -46,13 +45,6 @@ export default function CollegeGrid({
     getCollegeGrid();
   }, [userLoginInfo, collegeArrayPointer]);
 
-  function incrementPage() {
-    setCollegeArrayPointer(collegeArrayPointer + 20);
-  }
-  // function decrementPage() {
-  //   setCollegeArrayPointer(collegeArrayPointer - 20);
-  // }
-
   //  Render each keystroke and filter collegeList with it
   function handleSearch(event) {
     setSearchInput(event.target.value);
@@ -64,10 +56,18 @@ export default function CollegeGrid({
     setSearchedColleges(filteredItems);
   }
 
+  function incrementPage() {
+    setCollegeArrayPointer(collegeArrayPointer + 20);
+  }
+  function decrementPage() {
+    setCollegeArrayPointer(collegeArrayPointer - 20);
+  }
+
+  // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =
-    searchInput != ""
-      ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
-      : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20);
+      searchInput != ""
+        ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
+        : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20)
 
   console.log(first20Colleges);
 
@@ -101,7 +101,7 @@ export default function CollegeGrid({
           See More Colleges
         </button>
       ) : null}
-      {/* <button onClick={decrementPage}>Previous Colleges</button> */}
+      <button onClick={decrementPage}>Previous Colleges</button>
     </div>
   );
 }
