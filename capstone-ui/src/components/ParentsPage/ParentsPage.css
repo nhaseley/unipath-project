@@ -9,7 +9,7 @@
 .average-earnings-bar-chart{
     margin-left: 40px;
 }
-.info{
+.parent-info{
     display: flex;
     flex-direction: column;
     padding: 30px;
