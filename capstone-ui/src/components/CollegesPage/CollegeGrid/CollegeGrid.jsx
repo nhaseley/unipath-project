@@ -64,7 +64,7 @@ export default function CollegeGrid({
     let filteredItems = allColleges?.filter((college) =>
     college.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    setCollegeArrayPointer(filteredItems.length)
+    // setCollegeArrayPointer(filteredItems.length)
     console.log("filtered: ", filteredItems);
     setSearchedColleges(filteredItems);
   }
@@ -99,7 +99,7 @@ export default function CollegeGrid({
       searchInput != ""
         ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
         : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20)
-
+console.log(collegeArrayPointer)
   console.log(first20Colleges);
 
   return (
