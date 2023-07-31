@@ -172,7 +172,7 @@ class Student {
     );
 
     const student = result.rows[0];
-    console.log("student: ", student)
+    console.log("student: ", student);
     return student;
   }
 
@@ -184,8 +184,8 @@ class Student {
    * @return college added to the database
    */
   static async likeCollege(studentId, collegeName) {
-    if (await Student.userHasLiked(studentId, collegeName)){
-      return
+    if (await Student.userHasLiked(studentId, collegeName)) {
+      return;
       // throw new BadRequestError("You have already liked this college!")
     }
     const result = await db.query(
@@ -243,7 +243,7 @@ class Student {
    * @return colleges in the database for a given user
    */
   static async getCollegeFeed(sat_score, act_score, school_type, enrollment) {
-    // console.log("type: ", school_type==="historically_black")
+    // console.log(typeof enrollment);
     const safeSatScore =
       sat_score !== "" && Number.isFinite(Number(sat_score))
         ? Number(sat_score)
@@ -253,45 +253,60 @@ class Student {
         ? Number(act_score)
         : null;
 
-    const condition =
-      safeSatScore !== null
-        ? `ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) +
+    const scoresCondition =
+      safeSatScore !== null && safeActScore !== null
+        ? `ABS(
+          (CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) +
+           CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) +
+           CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 300 
+           AND ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2) <= 5`
+        : safeSatScore !== null
+        ? `ABS(
+          (CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) +
            CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) +
            CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 300`
+        : safeActScore !== null
+        ? `ABS(CAST(COALESCE(act_score::NUMERIC, 0) AS NUMERIC) - $2) <= 5`
         : "TRUE"; // Return all colleges if safeSatScore is null
 
-    const schoolTypeCondition = school_type != "" ? 
-    school_type === "historically_black" ? 
-      `CAST(COALESCE(historically_black::NUMERIC, 0) AS NUMERIC) = 1` :  
-    school_type === "women_only"?
-    `CAST(COALESCE(women_only::NUMERIC, 0) AS NUMERIC) = 1` : 
-    school_type === "men_only"?
-    `CAST(COALESCE(men_only::NUMERIC, 0) AS NUMERIC) = 1` : 
-    school_type === "tribal"?
-    `CAST(COALESCE(tribal::NUMERIC, 0) AS NUMERIC) = 1` : 
-    school_type === "annh"?
-    `CAST(COALESCE(annh::NUMERIC, 0) AS NUMERIC)= 1` : 
-    school_type === "aanipi"?
-    `CAST(COALESCE(aanipi::NUMERIC, 0) AS NUMERIC) = 1` : 
-    "TRUE" 
-      : "TRUE"
+    const enrollmentCondition =
+      enrollment == 5000
+        ? `size::NUMERIC <= 5000`
+        : enrollment == 7000
+        ? `CAST(COALESCE(size::NUMERIC,0)AS NUMERIC) < 10000 AND CAST(COALESCE(size::NUMERIC,0)AS NUMERIC) > 5000`
+        : enrollment == 10000
+        ? `size::NUMERIC >= 10000`
+        // console.log("hi")
+        : "TRUE"; // Return all colleges if enrollment is 0
 
-      // const enrollmentCondition =
-      // enrollment !== null
-      //   ? `ABS((CAST(COALESCE(size::NUMERIC, 0) AS NUMERIC) - $1::NUMERIC) <= 300`
-      //   : "TRUE"; // Return all colleges if safeSatScore is null
-
+    const schoolTypeCondition =
+      school_type != ""
+        ? school_type == "historically_black"
+          ? `CAST(COALESCE(historically_black::NUMERIC, 0) AS NUMERIC) = 1`
+          : school_type == "women_only"
+          ? `CAST(COALESCE(women_only::INTEGER, 0) AS INTEGER) = 1`
+          : school_type == "men_only"
+          ? `CAST(COALESCE(men_only::INTEGER, 0) AS INTEGER) = 1`
+          : school_type == "tribal"
+          ? `CAST(COALESCE(tribal::NUMERIC, 0) AS NUMERIC) = 1`
+          : school_type == "annh"
+          ? `CAST(COALESCE(annh::NUMERIC, 0) AS NUMERIC) = 1`
+          : school_type == "aanipi"
+          ? `CAST(COALESCE(aanipi::NUMERIC, 0) AS NUMERIC) = 1`
+          : "TRUE"
+        : "TRUE"; // Return all colleges if school_type is null
 
     const result = await db.query(
       `SELECT * FROM colleges_from_api
-       WHERE ${condition}
+       WHERE ${scoresCondition}
         AND ${schoolTypeCondition} 
+         AND ${enrollmentCondition}
          AND ($2::VARCHAR IS NULL OR ABS(COALESCE(act_score::NUMERIC, 0) - $2::NUMERIC) <= 5)
       `,
       [safeSatScore, safeActScore]
     );
-    console.log("all colleges for this user: ", result.rows.length)
-    // console.log("getCollegeFeed from database: ", result.rows);
+
+    console.log("all colleges for this user: ", result.rows.length);
     return result.rows;
   }
 
@@ -310,7 +325,7 @@ class Student {
     return result.rows[0];
   }
 
-   /**
+  /**
    * Gets the total number of current registrants for a particular
    * event from the event_attendees table in the database
    *
@@ -319,12 +334,13 @@ class Student {
   static async getSumRegistrants(eventId) {
     const total_attendees = await db.query(
       `SELECT SUM(num_attendees)
-      FROM event_attendees WHERE event_id=$1`, [eventId]
+      FROM event_attendees WHERE event_id=$1`,
+      [eventId]
     );
-    if (total_attendees.rows[0].sum){
+    if (total_attendees.rows[0].sum) {
       return parseInt(total_attendees.rows[0].sum);
-    } 
-    return 0
+    }
+    return 0;
   }
 
   /**
@@ -336,29 +352,37 @@ class Student {
   static async getMaxNumRegistrants(eventId) {
     const maxRegistrants = await db.query(
       `SELECT max_registrants
-      FROM events WHERE id=$1`
-    , [parseInt(eventId)]);
+      FROM events WHERE id=$1`,
+      [parseInt(eventId)]
+    );
     return maxRegistrants.rows[0].max_registrants;
   }
 
-
   /**
-   * Add the user's event registration information into 
+   * Add the user's event registration information into
    * the event_attendees table in the database
    *
    * @returns user information registered
    */
-  static async registerForEvent(studentId, firstName, lastName, numAttendees, eventId) {
+  static async registerForEvent(
+    studentId,
+    firstName,
+    lastName,
+    numAttendees,
+    eventId
+  ) {
     if (await Student.fetchEventAttendeeById(studentId, eventId)) {
       throw new BadRequestError(`You have already registered for this event.`);
     }
 
-    const maxRegistrants = await Student.getMaxNumRegistrants(eventId)
-    const totalRegistrants = await Student.getSumRegistrants(eventId)
-    const spotsLeft = maxRegistrants-totalRegistrants
+    const maxRegistrants = await Student.getMaxNumRegistrants(eventId);
+    const totalRegistrants = await Student.getSumRegistrants(eventId);
+    const spotsLeft = maxRegistrants - totalRegistrants;
 
-    if (parseInt(numAttendees) + totalRegistrants > maxRegistrants){
-      throw new BadRequestError(`This event is full, sorry! Limited to ${maxRegistrants} registrants. ${spotsLeft} spots left.`)
+    if (parseInt(numAttendees) + totalRegistrants > maxRegistrants) {
+      throw new BadRequestError(
+        `This event is full, sorry! Limited to ${maxRegistrants} registrants. ${spotsLeft} spots left.`
+      );
     }
 
     const result = await db.query(
@@ -398,40 +422,39 @@ class Student {
     return result.rows;
   }
 
-    /**
-   * Fetch a student in event attendees table 
+  /**
+   * Fetch a student in event attendees table
    * in the database by student id and particular event id
    *
    * @param {String} studentId
    * @returns student
    */
-    static async fetchEventAttendeeById(studentId, eventId) {
-      const result = await db.query(
-        `SELECT * FROM event_attendees
+  static async fetchEventAttendeeById(studentId, eventId) {
+    const result = await db.query(
+      `SELECT * FROM event_attendees
              WHERE student_id = $1 AND event_id = $2`,
-        [studentId, eventId]
-      );
-      const student = result.rows[0];
-      return student;
-    }
+      [studentId, eventId]
+    );
+    const student = result.rows[0];
+    return student;
+  }
 
-
-     /**
-   * Delete a student in event attendees table 
+  /**
+   * Delete a student in event attendees table
    * in the database by student id and particular event id
    *
    * @param {String} studentId
    * @returns student
    */
-     static async removeEventRegistration(studentId, eventId) {
-      const result = await db.query(
-        `DELETE FROM event_attendees
+  static async removeEventRegistration(studentId, eventId) {
+    const result = await db.query(
+      `DELETE FROM event_attendees
              WHERE student_id = $1 AND event_id = $2`,
-        [studentId, eventId]
-      );
-      // returning if the student was removed
-      return result.rowCount > 0;
-    }
+      [studentId, eventId]
+    );
+    // returning if the student was removed
+    return result.rowCount > 0;
+  }
 }
 
 module.exports = Student;

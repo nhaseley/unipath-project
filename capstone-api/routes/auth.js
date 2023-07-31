@@ -12,6 +12,7 @@ const router = express.Router();
 router.post("/register", async function (req, res, next) {
   try {
     const student = await Student.register(req.body);
+    console.log(student)
     return res.status(201).json(student);
   } catch (err) {
     res.send(err);

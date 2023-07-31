@@ -82,31 +82,34 @@ export default function CollegeInfoPage({
   }, [userLoginInfo]);
 
   function findMinorityServingValue(data) {
+    // add to an array instead of returning
+    let res = "";
     if (data) {
       if (data.aanipi == 1) {
-        return "aanipi-serving";
+        res += "aanipi-serving";
       }
       if (data.annh == 1) {
-        return "annh-serving";
+        res += "annh-serving";
       }
       if (data.hispanic == 1) {
-        return "hispanic-serving";
+        res += "hispanic-serving";
       }
       if (data.predominantly_black == 1) {
-        return "predominantly black";
+        res += "predominantly-black";
       }
       if (data.historically_black == 1) {
-        return "historically black";
+        res += "historically-black";
       }
       if (data.tribal == 1) {
-        return "tribal-serving";
+        res += "tribal-serving";
       }
       if (data.women_only == 1) {
-        return "women only";
+        res += "women-only";
       }
       if (data.men_only == 1) {
-        return "men only";
+        res += "men-only";
       }
+      return res;
     }
   }
   const studentImageArray = Array.from({
@@ -147,43 +150,42 @@ export default function CollegeInfoPage({
         See University Site
       </a>
       <div className="college-statistics">
-        <div>
-          <h2>
-            Admission Rate:{" "}
-            {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
-          </h2>
-          <AdmissionRatePieChart
-            admissionRate={parseFloat(
-              (college?.admission_rate * 100).toFixed(1)
-            )}
-            customColors={customColors}
-          ></AdmissionRatePieChart>
-        </div>
-        <div className="median SAT">
-          <h2>
-            Average SAT: {!isNaN(averageSAT) ? averageSAT : "Unavailable"}
-          </h2>
-          {!isNaN(averageSAT) && userLoginInfo.satScore ? (
-            <SATBarChart
-              satData={satData}
+        {college?.admission_rate ? (
+          <div>
+            <h2>
+              Admission Rate:{" "}
+              {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
+            </h2>
+            <AdmissionRatePieChart
+              admissionRate={parseFloat(
+                (college?.admission_rate * 100).toFixed(1)
+              )}
               customColors={customColors}
-            ></SATBarChart>
-          ) : null}
-        </div>
-        <div className="avg-ACT">
-          <h2>
-            Average ACT:{" "}
-            {!isNaN(parseInt(college?.act_score))
-              ? parseInt(college?.act_score)
-              : "Unavailable"}
-          </h2>
-          {!isNaN(parseInt(college?.act_score)) && userLoginInfo.actScore ? (
-            <ACTBarChart
-              actData={actData}
-              customColors={customColors}
-            ></ACTBarChart>
-          ) : null}
-        </div>
+            ></AdmissionRatePieChart>
+          </div>
+        ) : null}
+        {!isNaN(averageSAT) ? (
+          <div className="median SAT">
+            <h2>Average SAT: {averageSAT}</h2>
+            {userLoginInfo.satScore ? (
+              <SATBarChart
+                satData={satData}
+                customColors={customColors}
+              ></SATBarChart>
+            ) : null}
+          </div>
+        ) : null}
+        {college?.act_score ? (
+          <div className="avg-ACT">
+            <h2>Average ACT: {parseInt(college?.act_score)}</h2>
+            {userLoginInfo.actScore ? (
+              <ACTBarChart
+                actData={actData}
+                customColors={customColors}
+              ></ACTBarChart>
+            ) : null}
+          </div>
+        ) : null}
         <h2 className="undergrad-enrollment">
           Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
         </h2>
@@ -221,9 +223,9 @@ export default function CollegeInfoPage({
         </div>
         <h2 className="first-gen-share">
           {college?.first_generation
-            ? "First-generation Students: " + (
-                parseFloat(college?.first_generation) * 100
-              ).toFixed(1) + "%"
+            ? "First-generation Students: " +
+              (parseFloat(college?.first_generation) * 100).toFixed(1) +
+              "%"
             : null}
         </h2>
         <h2 className="retention-rate">

@@ -26,7 +26,7 @@ export default function CollegeGrid({
           satScore: userLoginInfo.satScore,
           actScore: userLoginInfo.actScore,
           enrollment: userLoginInfo.enrollment,
-          schoolType: userLoginInfo.schoolType,
+          schoolType: userLoginInfo.schoolType
         })
         .then((response) => {
           console.log(
@@ -62,7 +62,6 @@ export default function CollegeGrid({
   function decrementPage() {
     setCollegeArrayPointer(collegeArrayPointer - 20);
   }
-
   // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =
       searchInput != ""
