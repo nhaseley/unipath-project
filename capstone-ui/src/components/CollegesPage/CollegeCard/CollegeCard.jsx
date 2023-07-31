@@ -20,7 +20,7 @@ export default function CollegeCard({ college, setUserLoginInfo }) {
         className="college-link"
         onClick={changeCollege}
       >
-        <>
+        <div className="card-info">
           <h3>{college.name}</h3>
           <div className="scores">
             <div className="median-sat"> Median SAT Score: {!isNaN(satScore) ? satScore : "Unavailable"} </div>
@@ -36,7 +36,7 @@ export default function CollegeCard({ college, setUserLoginInfo }) {
               {parseFloat(college.tuition_out_of_state).toLocaleString()}
             </div>
           </div>
-        </>
+        </div>
         {/* ) : null} */}
       </Link>
     </div>

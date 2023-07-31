@@ -45,7 +45,7 @@ export default function ParentCollegeCard({
 
   return (
     <div className="parent-college-card">
-      <div className="info">
+      <div className="parent-info">
         <h2 className="student-college-name" onClick={changeCollege}>
           <Link to={"/info/" + childCollege?.college_name}>
             {childCollege?.college_name}
