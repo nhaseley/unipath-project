@@ -12,8 +12,7 @@ export default function EventsPage({ userLoginInfo, userType }) {
   const [eventSearchInput, setEventSearchInput] = useState("");
   const [searchedEvents, setSearchedEvents] = useState([]);
 
-  function handleAddNewEvent(event) {
-    event.preventDefault();
+  function handleAddNewEvent() {
     navigate("/eventDetails");
   }
 
@@ -79,7 +78,7 @@ export default function EventsPage({ userLoginInfo, userType }) {
               <div className="events-grid">
                 {eventSearchInput != "" ? (
                   searchedEvents.length == 0 ? (
-                    <h2>
+                    <h2 className="no-events">
                       No college events found. Please adjust your search.
                     </h2>
                   ) : (
@@ -91,13 +90,11 @@ export default function EventsPage({ userLoginInfo, userType }) {
                   <>
                     <h2>
                       No events for this college have been posted yet. All
-                      Events:{" "}
+                      Events:
                     </h2>
-                    <div>
                       {allEvents.map((event) => (
                         <EventCard event={event}></EventCard>
                       ))}
-                    </div>
                   </>
                 )}
               </div>

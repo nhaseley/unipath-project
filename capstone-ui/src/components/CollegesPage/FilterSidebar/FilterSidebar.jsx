@@ -57,7 +57,7 @@ export default function FilterSidebar({
             parseInt(college.sat_score_writing) +
             parseInt(college.sat_score_math) -
             sat
-        ) <= 100
+        ) <= 300
     );
     // .sort((a, b) => parseInt((parseInt(b.sat_score_critical_reading) + parseInt(b.sat_score_writing) + parseInt(b.sat_score_math)) - parseInt(parseInt(a.sat_score_critical_reading) + parseInt(a.sat_score_writing) + parseInt(a.sat_score_math))))
     setFilteredBySAT(satFiltered);
@@ -77,7 +77,7 @@ export default function FilterSidebar({
     setACT(event.target.value);
     let actFiltered = collegeList.filter((college) =>
       college.act_score
-        ? Math.abs(parseInt(college.act_score - event.target.value)) <= 4
+        ? Math.abs(parseInt(college.act_score - event.target.value)) <= 5
         : null
     );
     setFilteredByACT(

@@ -1,10 +1,12 @@
 import * as React from "react";
 import "./EventsPage.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ButtonMailto from "./ButtonMailto";
 
 export default function EventCard({ event }) {
-  const formatDate = (timestamp) =>
-    new Date(timestamp)
+  const navigate = useNavigate();
+  function formatDate(timestamp) {
+    return new Date(timestamp)
       .toLocaleString("en-US", {
         month: "long",
         day: "numeric",
@@ -14,25 +16,50 @@ export default function EventCard({ event }) {
       })
       .replace(/(\d{4}),/, "$1")
       .replace(/(\d+:\d+)([AP]M)/i, "$1 $2");
-
+  }
   const formattedDate = formatDate(event.date_time);
+
+  function handleEventInfo() {
+    navigate("/event-info/" + event.id);
+  }
 
   return (
     <div className="event-card">
-      <Link to={"/event-info/" + event.id} className="event-link">
-        <div className="event-date-time">
-          <h3> College: {event.college}</h3>
-          <div className="summary">
-            <h3>Name: {event.name}</h3>
-            <h3>Description: {event.description}</h3>
+      <div className="intro">
+        <h2 className="event-name">{event.name}</h2>
+        <h3 className="event-college"> {event.college}</h3>
+      </div>
+
+      <div className="summary">
+        <div className="info">
+          <h3 className="event-description">
+            Description: {event.description}
+          </h3>
+
+          <h3 className="event-time">Date/Time: {formattedDate}</h3>
+          <div className="event-email-info">
+            <h3 className="event-organizer-email">
+              Organizer email: {event.organizer_email}
+            </h3>
+            <ButtonMailto
+              label="Contact Organizer"
+              mailto={"mailto:" + event.organizer_email}
+            ></ButtonMailto>
           </div>
-          <h3>Date/Time: {formattedDate}</h3>
-          <h3>Organizer email: {event.organizer_email}</h3>
-          <h3>Speaker: {event.speaker}</h3>
-          <h3>Department: {event.dept}</h3>
-          <h3>Max Number of Registrants: {event.max_registrants}</h3>
+          <h3 className="event-speaker">Speaker: {event.speaker}</h3>
+          <h3 className="event-dept">Department: {event.dept}</h3>
+
+          <div className="event-button"></div>
         </div>
-      </Link>
+        <div className="registration">
+          <button className="event-register-button" onClick={handleEventInfo}>
+            Register
+          </button>
+          <h3 className="event-registration-limit">
+            (Limit: {event.max_registrants})
+          </h3>
+        </div>
+      </div>
     </div>
   );
 }

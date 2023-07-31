@@ -25,7 +25,8 @@ router.post("/colleges", async function (req, res, next) {
   try {
     const collegesToDisplay = await Student.getCollegeFeed(
       req.body.satScore,
-      req.body.actScore
+      req.body.actScore,
+      req.body.schoolType
     );
     const allColleges = await Alum.getColleges();
     return res.status(201).json({ collegesToDisplay, allColleges });

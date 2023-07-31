@@ -25,7 +25,7 @@ export default function StudentRegistrationForm({
   }
   return (
     <div className="student-registration">
-      <h2> Create a student account: </h2>
+      <h2 className="register title"> Create a student account: </h2>
       <form className="registration-form">
         <div className="email">
           <img

@@ -172,6 +172,7 @@ class Student {
     );
 
     const student = result.rows[0];
+    console.log("student: ", student)
     return student;
   }
 
@@ -241,7 +242,8 @@ class Student {
    * @param {*} student_id
    * @return colleges in the database for a given user
    */
-  static async getCollegeFeed(sat_score, act_score) {
+  static async getCollegeFeed(sat_score, act_score, school_type, enrollment) {
+    // console.log("type: ", school_type==="historically_black")
     const safeSatScore =
       sat_score !== "" && Number.isFinite(Number(sat_score))
         ? Number(sat_score)
@@ -255,17 +257,40 @@ class Student {
       safeSatScore !== null
         ? `ABS((CAST(COALESCE(sat_score_critical_reading::NUMERIC, 0) AS NUMERIC) +
            CAST(COALESCE(sat_score_writing::NUMERIC, 0) AS NUMERIC) +
-           CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 200`
+           CAST(COALESCE(sat_score_math::NUMERIC, 0) AS NUMERIC)) - $1::NUMERIC) <= 300`
         : "TRUE"; // Return all colleges if safeSatScore is null
+
+    const schoolTypeCondition = school_type != "" ? 
+    school_type === "historically_black" ? 
+      `CAST(COALESCE(historically_black::NUMERIC, 0) AS NUMERIC) = 1` :  
+    school_type === "women_only"?
+    `CAST(COALESCE(women_only::NUMERIC, 0) AS NUMERIC) = 1` : 
+    school_type === "men_only"?
+    `CAST(COALESCE(men_only::NUMERIC, 0) AS NUMERIC) = 1` : 
+    school_type === "tribal"?
+    `CAST(COALESCE(tribal::NUMERIC, 0) AS NUMERIC) = 1` : 
+    school_type === "annh"?
+    `CAST(COALESCE(annh::NUMERIC, 0) AS NUMERIC)= 1` : 
+    school_type === "aanipi"?
+    `CAST(COALESCE(aanipi::NUMERIC, 0) AS NUMERIC) = 1` : 
+    "TRUE" 
+      : "TRUE"
+
+      // const enrollmentCondition =
+      // enrollment !== null
+      //   ? `ABS((CAST(COALESCE(size::NUMERIC, 0) AS NUMERIC) - $1::NUMERIC) <= 300`
+      //   : "TRUE"; // Return all colleges if safeSatScore is null
+
 
     const result = await db.query(
       `SELECT * FROM colleges_from_api
        WHERE ${condition}
-         AND ($2::VARCHAR IS NULL OR ABS(COALESCE(act_score::NUMERIC, 0) - $2::NUMERIC) <= 4)
+        AND ${schoolTypeCondition} 
+         AND ($2::VARCHAR IS NULL OR ABS(COALESCE(act_score::NUMERIC, 0) - $2::NUMERIC) <= 5)
       `,
       [safeSatScore, safeActScore]
     );
-    // console.log("all colleges for this user: ", result.rows.length)
+    console.log("all colleges for this user: ", result.rows.length)
     // console.log("getCollegeFeed from database: ", result.rows);
     return result.rows;
   }

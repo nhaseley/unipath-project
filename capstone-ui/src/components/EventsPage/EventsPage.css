@@ -1,12 +1,96 @@
 .events-page{
     margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .event-card{
-    padding:10px
+    padding:2%;
+    width: 75%;
+    background:#213547;
+    margin-top: 4%;
+    color:white;
+    border-radius: 2em;
 }
 .events-search{
     width: 60%;
     font-size: 20px;
-    padding: 10px;
+    padding: 2%;
+
 }
+.add-event-button{
+    background: #213547;
+    color:white
+}
+.event-name{
+    font-size:2.2em;
+
+}
+.event-college{
+    font-size:1.5em;
+}
+.event-register-button{
+    color: #213547;
+    background: lightyellow;
+    font-size:1.4em;    
+    max-height: 7vh;
+}
+.intro{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.summary{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.event-email-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.event-organizer-email{
+    margin-right: 4%;
+}
+.registration{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction:column;
+}
+.events-grid{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items:center;
+}
+.no-events{
+    margin-bottom: -2%;
+}
+.event-attendee-card{
+    background:#213547;
+    color:white;
+    width:30%;
+    margin-top: 4%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.event-attendees-page{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.event-registration-form{
+    display: flex;
+    flex-direction: column;
+}
+.num-attendees {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    height: 25px;
+  }
