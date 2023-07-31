@@ -48,14 +48,10 @@ export default function CollegeGrid({
     getCollegeGrid();
     if (collegeArrayPointer === 0) {
       setIsPreviousCollegesDisabled(true)
-      scrollToTop() 
+      scrollToTop(); 
     } else {
       scrollToTop();
     }
-
-  
-
-    ;
   }, [userLoginInfo, collegeArrayPointer]);
 
   //  Render each keystroke and filter collegeList with it
@@ -92,7 +88,7 @@ export default function CollegeGrid({
       behavior: 'smooth', // This creates a smooth scrolling effect
     });
   };
-
+console.log(isPreviousCollegesDisabled)
 
   // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =
@@ -129,7 +125,7 @@ export default function CollegeGrid({
       </div>
       <div className="incrementingButtons">
         {/* <button className="previousColleges" onClick={() => { decrementPage(); scrollToTop(); }}> */}
-        <button className={`previousColleges ${isPreviousCollegesDisabled ? "disabled" : ""}`} onClick={() => {decrementPage();}} disabled={isPreviousCollegesDisabled}>
+        <button className={`previousColleges ${collegeArrayPointer === 0 ? "disabled" : ""}`} onClick={() => {decrementPage(); scrollToTop();}} disabled={collegeArrayPointer === 0}>
           Previous Colleges</button>
 
       {first20Colleges.length != 0 ? (

@@ -166,7 +166,7 @@ export default function App() {
               <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
             }
           >
-            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/" element={<HomePage userLoggedIn={userLoggedIn} userType={userType} />}></Route>
 
             <Route
               path="/login"
