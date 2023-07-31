@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     /* gap: 20px; */
-    justify-content: center;
+    justify-content: space-around;
     /* margin-right: 10%; */
     /* margin-left: -4%; */
     animation: fadeInRight 2s ease-in-out;
@@ -42,9 +42,68 @@
 
 
 
+
+
+
 .seeMore{
-    animation: fadeInRight 2.5s ease-in-out;
+    display: flex;
+    margin-right: 11.3%;
 }
+
+.previousColleges {
+    display: flex;
+    margin-left: 11.3%;
+}
+
+
+
+
+.seeMore, .previousColleges{
+    animation: fadeInRight 2.5s ease-in-out;
+    /*background-color: #1f4ca5;  Darker blue */
+    background-color:  #354F52;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+    box-shadow: 0 4px 6px; /* Add a subtle box shadow */
+    margin-top: 5%;
+    
+      
+
+
+    }
+    
+
+.seeMore:hover, .previousColleges:hover {
+      background-color: #213547; /* Darken the button color on hover
+      /* background-color: rgba(92, 88, 7, 0.435); */
+      transform: translateY(-2px); /* Add a slight vertical lift on hover */
+    }
+
+
+
+
+.incrementingButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.disabled{
+    opacity: 0.3; /* Set the opacity to make the button look dimmed */
+    cursor: not-allowed; /* Set the cursor to not-allowed to indicate it's disabled */
+}
+
+
+
+
+
+
+
 
 .content{
     max-width: 1100px;

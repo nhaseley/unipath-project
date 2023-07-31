@@ -17,6 +17,9 @@ export default function CollegeGrid({
   const [searchInput, setSearchInput] = useState("");
   const [allColleges, setAllColleges] = useState([]);
   const [searchedColleges, setSearchedColleges] = useState([]);
+  const [isPreviousCollegesDisabled, setIsPreviousCollegesDisabled] = useState(true);
+  const [isSeeMoreCollegesDisabled, setIsSeeMoreCollegesDisabled] = useState(false);
+  
 
   // Function to display colleges on the grid
   async function getCollegeGrid() {
@@ -43,25 +46,53 @@ export default function CollegeGrid({
   // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
+    if (collegeArrayPointer === 0) {
+      setIsPreviousCollegesDisabled(true)
+      scrollToTop() 
+    } else {
+      scrollToTop();
+    }
+
+  
+
+    ;
   }, [userLoginInfo, collegeArrayPointer]);
 
   //  Render each keystroke and filter collegeList with it
   function handleSearch(event) {
     setSearchInput(event.target.value);
-
     let filteredItems = allColleges?.filter((college) =>
-      college.name.toLowerCase().includes(event.target.value.toLowerCase())
+    college.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
+    setCollegeArrayPointer(filteredItems.length)
     console.log("filtered: ", filteredItems);
     setSearchedColleges(filteredItems);
   }
 
   function incrementPage() {
     setCollegeArrayPointer(collegeArrayPointer + 20);
+    setIsPreviousCollegesDisabled(false);
+
+    if(collegeArrayPointer + 20 >= collegesToDisplay.length) {
+      setIsSeeMoreCollegesDisabled(true)
+    }
+
+
   }
+
   function decrementPage() {
     setCollegeArrayPointer(collegeArrayPointer - 20);
+    scrollToTop();
   }
+
+
+  function scrollToTop () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // This creates a smooth scrolling effect
+    });
+  };
+
 
   // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =
@@ -96,12 +127,18 @@ export default function CollegeGrid({
         ))}
         {/* change functionality to be able to back to previous colleges */}
       </div>
+      <div className="incrementingButtons">
+        {/* <button className="previousColleges" onClick={() => { decrementPage(); scrollToTop(); }}> */}
+        <button className={`previousColleges ${isPreviousCollegesDisabled ? "disabled" : ""}`} onClick={() => {decrementPage();}} disabled={isPreviousCollegesDisabled}>
+          Previous Colleges</button>
+
       {first20Colleges.length != 0 ? (
-        <button className="seeMore" onClick={incrementPage}>
-          See More Colleges
+        // <button className="seeMore" onClick={() => { incrementPage(); scrollToTop(); }}>
+       <button className={`seeMore ${collegeArrayPointer + 20 >= collegesToDisplay.length ? "disabled" : ""}`} onClick={() => {incrementPage();}} disabled={collegeArrayPointer + 20 >= collegesToDisplay.length}>
+        See More Colleges
         </button>
       ) : null}
-      <button onClick={decrementPage}>Previous Colleges</button>
+    </div>
     </div>
   );
 }
