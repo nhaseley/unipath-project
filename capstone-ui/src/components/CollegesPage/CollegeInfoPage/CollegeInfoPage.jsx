@@ -46,6 +46,10 @@ export default function CollegeInfoPage({
     two_or_more_students: college?.two_or_more_students,
     unknown_students: college?.unknown_students,
   };
+  const studentImageArray = Array.from({
+    length: parseInt(college?.student_faculty_ratio),
+  });
+
   // get info for particular college for this user
   async function getCollege() {
     if (
@@ -112,9 +116,21 @@ export default function CollegeInfoPage({
       return res;
     }
   }
-  const studentImageArray = Array.from({
-    length: parseInt(college?.student_faculty_ratio),
-  });
+
+  const zipcode = 10469;
+  const apiKey =
+    "q7AsIQrw7PfuF4eJAwPCHdVSu0fvhgpixGPlbuYCU7lp2LeAHDd5fYL0GLLvXttQ";
+  const ORIGINAL_COLLEGE_API_URL = "https://www.zipcodeapi.com/rest";
+
+  // useEffect(() => {
+  //   getZipcodeDistance();
+  // }, [userLoginInfo]);
+  
+  async function getZipcodeDistance() {
+    const response = await axios
+    .get("http://localhost:3010/zipcodeapi")
+    console.log("RESPONSE: ", response)
+  }
 
   return (
     <div className="college-info-page">
@@ -221,17 +237,18 @@ export default function CollegeInfoPage({
             </div>
           </div>
         </div>
-        <h2 className="first-gen-share">
-          {college?.first_generation
-            ? "First-generation Students: " +
-              (parseFloat(college?.first_generation) * 100).toFixed(1) +
-              "%"
-            : null}
-        </h2>
-        <h2 className="retention-rate">
-          Retention/Graduation rate:{" "}
-          {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
-        </h2>
+        {college?.first_generation ? (
+          <h2 className="first-gen-share">
+            First-generation Students:{" "}
+            {(parseFloat(college?.first_generation) * 100).toFixed(1)}%
+          </h2>
+        ) : null}
+        {college?.retention_rate ? (
+          <h2 className="retention-rate">
+            Retention/Graduation rate:{" "}
+            {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
+          </h2>
+        ) : null}
         {college?.tuition_in_state || college?.tuition_out_of_state ? (
           <div className="cost-breakdown">
             <h2>Cost Breakdown:</h2>

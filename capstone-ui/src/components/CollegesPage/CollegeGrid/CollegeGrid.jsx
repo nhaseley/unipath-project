@@ -88,15 +88,14 @@ export default function CollegeGrid({
       behavior: 'smooth', // This creates a smooth scrolling effect
     });
   };
-console.log(isPreviousCollegesDisabled)
 
   // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =
       searchInput != ""
         ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
         : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20)
-console.log(collegeArrayPointer)
-  console.log(first20Colleges);
+
+        console.log(first20Colleges);
 
   return (
     <div className="college-grid">
