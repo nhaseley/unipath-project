@@ -1,13 +1,12 @@
 import * as React from "react";
 import "./CollegeCard.css";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function CollegeCard({ college, setUserLoginInfo }) {
+export default function CollegeCard({ college, setUserLoginInfo, convertCollegeSAT }) {
   let satScore =
-    parseInt(college.sat_score_critical_reading) +
+  convertCollegeSAT(`${parseInt(college.sat_score_critical_reading) +
     parseInt(college.sat_score_writing) +
-    parseInt(college.sat_score_math);
+    parseInt(college.sat_score_math)}`)
     
   function changeCollege() {
     localStorage.setItem("selected-college", college.name);

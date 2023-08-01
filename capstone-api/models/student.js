@@ -455,6 +455,26 @@ class Student {
     // returning if the student was removed
     return result.rowCount > 0;
   }
+
+
+  /**
+   * Convert the user's sat score in the new scale (out of 1600)
+   * to the sat score in the old scale (out of 2400) using
+   * conversion table in the database
+   *
+   * @param {String} studentId
+   * @returns student
+   */
+  static async getSATScoreUpdated(newSAT) {
+    const result = await db.query(
+      `SELECT oldSAT FROM sat_conversion
+          WHERE newSAT = $1`,
+      [newSAT]
+    );
+    console.log("old SAT: ", result.rows[0])
+    return result.rows[0];
+  }
+
 }
 
 module.exports = Student;

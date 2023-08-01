@@ -23,7 +23,9 @@ router.post("/like", async function (req, res, next) {
 
 router.post("/colleges", async function (req, res, next) {
   try {
+    // oldSATScore = await Student. getSATScoreUpdated(req.body.satScore)
     const collegesToDisplay = await Student.getCollegeFeed(
+      // oldSATScore,
       req.body.satScore,
       req.body.actScore,
       req.body.schoolType,
@@ -87,6 +89,17 @@ router.delete("/removeEventRegistration", async function (req, res, next) {
     next(err);
   }
 });
+
+router.post("/getUpdatedSATScore", async function (req, res, next) {
+  try {
+    const updatedScore = await Student.getSATScoreUpdated(req.body.oldCollegeSAT);
+    return res.status(201).json(updatedScore);
+  } catch (err) {
+    res.send(err);
+    next(err);
+  }
+});
+
 
 // router.get('/zipcodeapi', async (req, res) => {
 //   try {

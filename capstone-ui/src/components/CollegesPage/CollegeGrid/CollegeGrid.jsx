@@ -12,6 +12,7 @@ export default function CollegeGrid({
   collegesToDisplay,
   setCollegesToDisplay,
   setUserLoginInfo,
+  convertCollegeSAT
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [allColleges, setAllColleges] = useState([]);
@@ -105,6 +106,7 @@ export default function CollegeGrid({
             key={index}
             college={college}
             setUserLoginInfo={setUserLoginInfo}
+            convertCollegeSAT={convertCollegeSAT}
           />
         ))}
       </div>

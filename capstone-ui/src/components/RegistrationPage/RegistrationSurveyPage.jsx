@@ -15,13 +15,13 @@ export default function RegistrationSurveyPage({
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState({});
   const [examScores, setExamScores] = useState({ satScore: "", actScore: "" });
-  const satExamScoreOptions = Array.from({ length: 161 }, (_, i) => ({
-    value: i * 10,
-    label: (i * 10).toString(),
+  const satExamScoreOptions = Array.from({ length: 121 }, (_, i) => ({
+    value: i * 10 + 400,
+    label: ((i * 10) + 400).toString(),
   }));
-  const actExamScoreOptions = Array.from({ length: 37 }, (_, i) => ({
-    value: i,
-    label: i.toString(),
+  const actExamScoreOptions = Array.from({ length: 36 }, (_, i) => ({
+    value: i+1,
+    label: (i+1).toString(),
   }));
 
   async function handleRegistration(event) {

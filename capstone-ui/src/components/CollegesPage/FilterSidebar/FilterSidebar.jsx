@@ -6,6 +6,7 @@ export default function FilterSidebar({
   userLoginInfo,
   collegeList,
   setCollegesToDisplay,
+  convertCollegeSAT
 }) {
   const [price, setPrice] = useState(30000);
   const [sat, setSAT] = useState(userLoginInfo.satScore);
@@ -54,9 +55,9 @@ export default function FilterSidebar({
     let satFiltered = collegeList.filter(
       (college) =>
         Math.abs(
-          parseInt(college.sat_score_critical_reading) +
+          convertCollegeSAT(`${parseInt(college.sat_score_critical_reading) +
             parseInt(college.sat_score_writing) +
-            parseInt(college.sat_score_math) -
+            parseInt(college.sat_score_math)}`) -
             sat
         ) <= 300
     );
@@ -152,7 +153,7 @@ export default function FilterSidebar({
           className="sat-slider"
           type="range"
           min={400}
-          max={2400}
+          max={1600}
           step={10}
           value={sat}
           onChange={changeSATFilter}

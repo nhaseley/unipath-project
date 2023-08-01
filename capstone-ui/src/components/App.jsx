@@ -62,7 +62,18 @@ export default function App() {
   
   ];
 
-  console.log(userLoginInfo);
+  console.log("user info: ", userLoginInfo);
+
+  async function convertCollegeSAT(oldSATScore){
+    console.log("OLD SCORE (OUT OF 2400): ", oldSATScore)
+    axios
+        .post("http://localhost:3010/getUpdatedSATScore", {
+          oldSATScore: oldSATScore
+        })
+        .then((response) => {
+          console.log("CONVERTED SCORE (OUT OF 1600): ", response.data);
+        });
+  }
 
   useEffect(() => {
     const selectedCollegeStored = localStorage.getItem("selected-college");
@@ -241,6 +252,7 @@ export default function App() {
                   collegeArrayPointer={collegeArrayPointer}
                   setCollegeArrayPointer={setCollegeArrayPointer}
                   userType={userType}
+                  convertCollegeSAT={convertCollegeSAT}
                 ></CollegesPage>
               }
             ></Route>
