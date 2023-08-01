@@ -5,6 +5,7 @@ import StudentRegistrationForm from "./StudentRegistrationForm";
 import ParentRegistrationForm from "./ParentRegistrationForm";
 import AlumnRegistrationPage from "./AlumnRegistrationPage";
 import AdminRegistrationPage from "./AdminRegistrationPage";
+import RegistrationSurveyPage from "./RegistrationSurveyPage";
 
 export default function RegistrationPage({
   userLoginInfo,
@@ -16,8 +17,11 @@ export default function RegistrationPage({
   setError,
   userType,
   setUserType,
+  nextRegistrationPage,
+  setNextRegistrationPage,
 }) {
   function handleChangeUserType(event) {
+    setNextRegistrationPage(true);
     setUserType(event.target.value);
   }
 
@@ -58,16 +62,31 @@ export default function RegistrationPage({
           College Student/Alum
         </button>
       </div>
-
+      {/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */}
+      {/* will need somethin similar for another other user with "next" */}
       {userType == "student" ? (
-        <StudentRegistrationForm
-          userLoginInfo={userLoginInfo}
-          setUserLoginInfo={setUserLoginInfo}
-          handleShowPassword={handleShowPassword}
-          handleHidePassword={handleHidePassword}
-          passwordDisplayed={passwordDisplayed}
-          error={error}
-        ></StudentRegistrationForm>
+        // useState for "Next" click goes here...
+        nextRegistrationPage ? (
+          <StudentRegistrationForm
+            userLoginInfo={userLoginInfo}
+            setUserLoginInfo={setUserLoginInfo}
+            handleShowPassword={handleShowPassword}
+            handleHidePassword={handleHidePassword}
+            passwordDisplayed={passwordDisplayed}
+            error={error}
+            nextRegistrationPage={nextRegistrationPage}
+            setNextRegistrationPage={setNextRegistrationPage}
+          />
+        ) : (
+          <RegistrationSurveyPage
+            userLoginInfo={userLoginInfo}
+            error={error}
+            setError={setError}
+            setUserLoginInfo={setUserLoginInfo}
+            nextRegistrationPage={nextRegistrationPage}
+            setNextRegistrationPage={setNextRegistrationPage}
+          ></RegistrationSurveyPage>
+        )
       ) : userType == "parent" ? (
         <ParentRegistrationForm
           userLoginInfo={userLoginInfo}
@@ -77,7 +96,7 @@ export default function RegistrationPage({
           passwordDisplayed={passwordDisplayed}
           error={error}
           setError={setError}
-        ></ParentRegistrationForm>
+        />
       ) : userType == "college-students-and-alumni" ? (
         <AlumnRegistrationPage
           userLoginInfo={userLoginInfo}
@@ -87,7 +106,7 @@ export default function RegistrationPage({
           passwordDisplayed={passwordDisplayed}
           error={error}
           setError={setError}
-        ></AlumnRegistrationPage>
+        />
       ) : userType == "college-admission-officer" ? (
         <AdminRegistrationPage
           userLoginInfo={userLoginInfo}
@@ -97,7 +116,7 @@ export default function RegistrationPage({
           passwordDisplayed={passwordDisplayed}
           error={error}
           setError={setError}
-        ></AdminRegistrationPage>
+        />
       ) : null}
     </div>
   );

@@ -10,7 +10,9 @@ export default function RegistrationSurveyPage({
   userLoginInfo,
   error,
   setError,
-  setUserLoginInfo
+  setUserLoginInfo,
+  nextRegistrationPage,
+  setNextRegistrationPage,
 }) {
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState({});
@@ -41,7 +43,7 @@ export default function RegistrationSurveyPage({
         enrollment: userLoginInfo.enrollment,
         schoolType: userLoginInfo.schoolType,
         college: userLoginInfo.college,
-        collegeGradYear: userLoginInfo.collegeGradYear
+        collegeGradYear: userLoginInfo.collegeGradYear,
       });
 
       if (result.data.status) {
@@ -61,7 +63,7 @@ export default function RegistrationSurveyPage({
           enrollment: 0,
           schoolType: "",
           collegeName: "",
-          collegeGradYear: ""
+          collegeGradYear: "",
         });
       }
     }
@@ -85,35 +87,39 @@ export default function RegistrationSurveyPage({
   function handleEnrollmentSelect(event) {
     setUserLoginInfo({
       ...userLoginInfo,
-      enrollment: parseInt(event.target.value)
+      enrollment: parseInt(event.target.value),
     });
   }
-
 
   function handleSchoolTypeSelect(event) {
     setUserLoginInfo({
       ...userLoginInfo,
-      schoolType: event.target.value
+      schoolType: event.target.value,
     });
   }
 
-  function handleBack(){
-    navigate("/register")
+  function handleBack() {
+    setNextRegistrationPage(!nextRegistrationPage);
   }
   return (
     <div className="registration-survey-page">
+      <h2 className="create_student_header"> Create a student account: </h2>
       <div className="sat-input">
         Have you taken the SAT?
-        <button
-          onClick={() => setSelectedButton({ ...selectedButton, sat: "Yes" })}
-        >
-          Yes
-        </button>
-        <button
-          onClick={() => setSelectedButton({ ...selectedButton, sat: "No" })}
-        >
-          No
-        </button>
+        <div className="yes_no_container">
+          <button
+            className="yes_button"
+            onClick={() => setSelectedButton({ ...selectedButton, sat: "Yes" })}
+          >
+            Yes
+          </button>
+          <button
+            className="no_button"
+            onClick={() => setSelectedButton({ ...selectedButton, sat: "No" })}
+          >
+            No
+          </button>
+        </div>
         {selectedButton.sat == "Yes" ? (
           <Select
             options={satExamScoreOptions}
@@ -127,16 +133,20 @@ export default function RegistrationSurveyPage({
       </div>
       <div className="act-input">
         Have you take the ACT?
-        <button
-          onClick={() => setSelectedButton({ ...selectedButton, act: "Yes" })}
-        >
-          Yes
-        </button>
-        <button
-          onClick={() => setSelectedButton({ ...selectedButton, act: "No" })}
-        >
-          No
-        </button>
+        <div className="yes_no_container">
+          <button
+            className="yes_button"
+            onClick={() => setSelectedButton({ ...selectedButton, act: "Yes" })}
+          >
+            Yes
+          </button>
+          <button
+            className="no_button"
+            onClick={() => setSelectedButton({ ...selectedButton, act: "No" })}
+          >
+            No
+          </button>
+        </div>
         {selectedButton.act == "Yes" ? (
           <Select
             options={actExamScoreOptions}
@@ -150,35 +160,42 @@ export default function RegistrationSurveyPage({
       </div>
       <div className="enrollment-input">
         Prospective school size? Please select one.
-        <select onChange={handleEnrollmentSelect}>
-          <option value=""></option>
-          <option value="5000" > Less than 5,000</option>
+        <select className="select_size_bar" onChange={handleEnrollmentSelect}>
+          <option value="None"></option>
+          <option value="5000"> Less than 5,000</option>
           <option value="7000"> 5,000 - 10,000</option>
           <option value="10000"> More than 10,000</option>
         </select>
       </div>
       <div className="school-type">
-        Any of these minority serving institutions that you expect to attend? Please select one.
-        <select onChange={handleSchoolTypeSelect}>
-        <option value=""></option>
+        Any of these minority serving institutions that you expect to attend?
+        Please select one.
+        <select
+          className="select_minority_bar"
+          onChange={handleSchoolTypeSelect}
+        >
+          <option value=""></option>
           <option value="women_only"> Women only</option>
           <option value="men_only"> Men only</option>
-          <option value="historically_black"> Historically/predominantly Black </option>          
+          <option value="historically_black">
+            {" "}
+            Historically/predominantly Black{" "}
+          </option>
           <option value="tribal"> Tribal </option>
           <option value="annh"> Alaska Native and Native Hawaiian</option>
-          <option value="aanipi"> Asian American, Native Hawaiian, and Pacific Islander</option>
+          <option value="aanipi">
+            {" "}
+            Asian American, Native Hawaiian, and Pacific Islander
+          </option>
         </select>
       </div>
-      <div className="error">
-          {error.status
-            ? handleBack():null}
-        </div>
+      <div className="error">{error.status ? handleBack() : null}</div>
+      <button className="back-to-register-button" onClick={handleBack}>
+        {" "}
+        Back
+      </button>
       <button className="registration-submit" onClick={handleRegistration}>
         <Link to={"/register"}> Submit</Link>
-      </button>
-
-      <button className="back-to-register-button"
-        onClick={handleBack}> Back
       </button>
     </div>
   );

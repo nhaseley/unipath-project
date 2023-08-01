@@ -21,9 +21,8 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 2vh;
 
-  background-color: #ababab;
+  background-color: #dedede;
 
   margin: 0px auto;
   max-width: 70vw;
@@ -39,12 +38,14 @@
   border-radius: 35px;
   width: 35vw;
   padding: 5%;
+
 }
 
 .leftside,
 .rightside {
   width: 40%;
   height: fit-content;
+  margin: auto 0px;
 }
 
 .rightside {
@@ -91,6 +92,7 @@
   font-size: 1.5rem;
   animation: fadeInRight 1.5s ease-out;
   font-weight: normal;
+  width: 65vw;
 }
 
 .get-started-button {
@@ -160,6 +162,7 @@
   background-color: #475048;
   font-size: 1.5rem;
   color: whitesmoke;
+  margin-top: 5vh;
 }
 
 /* Animation keyframes... */
