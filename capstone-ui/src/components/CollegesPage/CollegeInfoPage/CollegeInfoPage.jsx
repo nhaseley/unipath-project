@@ -118,6 +118,8 @@ export default function CollegeInfoPage({
   }
 
   const zipcode = 10469;
+
+  // client side apiKey: js-Iedaayr15fYgbtL5zPqzkxHdZ7ZhqOyD1RzsvYBfYwLIzDtwpX3qh78PfUjkdvYf
   const apiKey =
     "q7AsIQrw7PfuF4eJAwPCHdVSu0fvhgpixGPlbuYCU7lp2LeAHDd5fYL0GLLvXttQ";
   const ORIGINAL_COLLEGE_API_URL = "https://www.zipcodeapi.com/rest";
@@ -125,11 +127,12 @@ export default function CollegeInfoPage({
   // useEffect(() => {
   //   getZipcodeDistance();
   // }, [userLoginInfo]);
-  
+
   async function getZipcodeDistance() {
-    const response = await axios
-    .get("http://localhost:3010/zipcodeapi")
-    console.log("RESPONSE: ", response)
+    const response = await axios.get(
+      `https://www.zipcodeapi.com/rest/${apiKey}/distance.json/10803/${zipcode}/mile`
+    );
+    console.log("RESPONSE: ", response);
   }
 
   return (
@@ -156,11 +159,13 @@ export default function CollegeInfoPage({
         institution located in {college?.city}, {college?.state}.
       </h2>
       <div className="see-events">
-        <button>
-          <Link to={"/events"} key={college?.id}>
-            See Upcoming Events
-          </Link>
-        </button>
+        {userType == "student" || userType == "college-admission-officer" ? (
+          <button>
+            <Link to={"/events"} key={college?.id}>
+              See Upcoming Events
+            </Link>
+          </button>
+        ) : null}
       </div>
       <a href={"https://" + college?.school_url} className="college-site-link">
         See University Site
@@ -202,41 +207,45 @@ export default function CollegeInfoPage({
             ) : null}
           </div>
         ) : null}
-        <h2 className="undergrad-enrollment">
-          Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
-        </h2>
+        {college?.size ? (
+          <h2 className="undergrad-enrollment">
+            Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
+          </h2>
+        ) : null}
         <div className="student-demographics-pie-chart">
           <StudentDemographicsPieChart
             studentDemographicsData={studentDemographicsData}
             customColors={customColors}
           ></StudentDemographicsPieChart>
         </div>
-        <div className="student-faculty-ratio">
-          <h2>
-            Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}
-          </h2>
-          <div className="students-and-faculty-imgs">
-            <img
-              className="faculty-img"
-              src={
-                "https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"
-              }
-              alt="Faculty Icon"
-            />
-            <div className="student-imgs-grid">
-              {studentImageArray.map((_, i) => (
-                <img
-                  className="student-img"
-                  src={
-                    "https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"
-                  }
-                  key={i}
-                  alt={`Student Icon ${i + 1}`}
-                />
-              ))}
+        {college?.student_faculty_ratio ? (
+          <div className="student-faculty-ratio">
+            <h2>
+              Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}
+            </h2>
+            <div className="students-and-faculty-imgs">
+              <img
+                className="faculty-img"
+                src={
+                  "https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"
+                }
+                alt="Faculty Icon"
+              />
+              <div className="student-imgs-grid">
+                {studentImageArray.map((_, i) => (
+                  <img
+                    className="student-img"
+                    src={
+                      "https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"
+                    }
+                    key={i}
+                    alt={`Student Icon ${i + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
         {college?.first_generation ? (
           <h2 className="first-gen-share">
             First-generation Students:{" "}

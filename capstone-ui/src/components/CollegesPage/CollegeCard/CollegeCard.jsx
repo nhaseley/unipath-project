@@ -10,6 +10,7 @@ export default function CollegeCard({ college, setUserLoginInfo }) {
     parseInt(college.sat_score_math);
     
   function changeCollege() {
+    localStorage.setItem("selected-college", college.name);
     setUserLoginInfo((u) => ({ ...u, collegeName: college.name }));
   }
 

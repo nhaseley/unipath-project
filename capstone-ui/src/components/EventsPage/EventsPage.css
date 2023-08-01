@@ -28,13 +28,31 @@
 
 }
 .event-college{
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+.event-college-button{
     font-size:1.5em;
+    color: #213547;
+    background: lightyellow;
+    max-height: 7vh;
 }
 .event-register-button{
     color: #213547;
     background: lightyellow;
     font-size:1.4em;    
     max-height: 7vh;
+}
+.contact-organizer{
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+.mailto-button{
+    color: #213547;
+    background: lightyellow;
+    font-size:1.2em;    
 }
 .intro{
     display: flex;
@@ -48,7 +66,6 @@
 }
 .event-email-info{
     display:flex;
-    justify-content:space-between;
     align-items:center;
 }
 .event-organizer-email{

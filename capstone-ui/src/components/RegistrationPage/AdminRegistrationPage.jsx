@@ -25,8 +25,6 @@ export default function AdminRegistrationPage({
   }, []);
 
   function handleCollegeSelect(event) {
-    // setSelectedCollege(event.target.value);
-
     setUserLoginInfo({
       ...userLoginInfo,
       college: event.target.value,

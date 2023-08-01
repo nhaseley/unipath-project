@@ -40,7 +40,8 @@ export default function ParentCollegeCard({
   };
 
   function changeCollege() {
-    setUserLoginInfo((u) => ({ ...u, collegeName: childCollege?.college_name }));
+    setUserLoginInfo((u) => ({ ...u, collegeName: childCollege?.college_name }));    
+    localStorage.setItem("selected-college", childCollege?.college_name);
   }
 
   return (

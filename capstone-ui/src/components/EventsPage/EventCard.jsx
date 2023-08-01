@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./EventsPage.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ButtonMailto from "./ButtonMailto";
 
 export default function EventCard({ event }) {
@@ -27,7 +27,9 @@ export default function EventCard({ event }) {
     <div className="event-card">
       <div className="intro">
         <h2 className="event-name">{event.name}</h2>
-        <h3 className="event-college"> {event.college}</h3>
+        <div className="event-college">
+        <button className="event-college-button"><Link to={"/info/" + event.college} key={event.college}> {event.college}</Link></button>
+        </div>
       </div>
 
       <div className="summary">
@@ -41,10 +43,14 @@ export default function EventCard({ event }) {
             <h3 className="event-organizer-email">
               Organizer email: {event.organizer_email}
             </h3>
+            <div className="contact-organizer">
+              <button className="mailto-button">
             <ButtonMailto
               label="Contact Organizer"
               mailto={"mailto:" + event.organizer_email}
             ></ButtonMailto>
+            </button>
+            </div>
           </div>
           <h3 className="event-speaker">Speaker: {event.speaker}</h3>
           <h3 className="event-dept">Department: {event.dept}</h3>
