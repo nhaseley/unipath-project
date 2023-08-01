@@ -1,113 +1,99 @@
-.login-page{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.email-img{
-    margin-right: 6px;
-    width: 20px;
-    height: 20px;
-}
-.email {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 40px;
-}
-.password{
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 40px;
+.email-img {
+  margin-right: 6px;
+  width: 20px;
+  height: 20px;
 }
 
-.password-img{
-    margin-right: 6px;
-    height: 20px;
-    width: 20px
+.password-img {
+  margin-right: 6px;
+  height: 20px;
+  width: 20px;
 }
 
 .user-types > button {
-    background-color:#ebf2e5;
+  background-color: #ebf2e5;
 
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .user-types > button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .login-form > button {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
+  border-radius: 0.7rem;
+  font-size: 18px;
+  border: none;
+  color: #354f52;
+  padding: 10px;
+  /* border: 2px solid #84A98C; */
+}
+.user-types > button:hover {
+  background-color: goldenrod;
+  color: white;
+}
+.login-form > button {
+  background-color: #ebf2e5;
+  border-radius: 0.7rem;
+  font-size: 18px;
+  border: none;
+  color: #354f52;
+  padding: 10px;
+  /* border: 2px solid #84A98C; */
+}
 
-  .login-form > button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .password-toggle {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .password-toggle:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .login-submit {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .login-submit:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .register-button {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .register-button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .demo-button {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  
-  .demo-button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
+.login-form > button:hover {
+  background-color: goldenrod;
+  color: white;
+}
+.password-toggle {
+  background-color: #ebf2e5;
+  border-radius: 0.7rem;
+  font-size: 18px;
+  border: none;
+  color: #354f52;
+  padding: 1px;
+  /* border: 2px solid #84A98C; */
+}
+.password-toggle:hover {
+  background-color: goldenrod;
+  color: white;
+}
+.login-submit {
+  background-color: #ebf2e5;
+  border-radius: 0.7rem;
+  font-size: 18px;
+  border: none;
+  color: #354f52;
+  padding: 10px;
+  /* border: 2px solid #84A98C; */
+}
+.login-submit:hover {
+  background-color: goldenrod;
+  color: white;
+}
+.register-button {
+  background-color: #ebf2e5;
+  border-radius: 0.7rem;
+  font-size: 18px;
+  border: none;
+  color: #354f52;
+  padding: 10px;
+  /* border: 2px solid #84A98C; */
+}
+.register-button:hover {
+  background-color: goldenrod;
+  color: white;
+}
+.demo-button {
+  background-color: #92fcce;
+  border-radius: 0.4rem;
+  font-size: 1.1rem;
+  border: none;
+  color: black;
+  padding: 0.5vh;
+  /* border: 2px solid #84A98C; */
+}
 
-  
+.demo-button:hover {
+  background-color: goldenrod;
+  color: white;
+}
