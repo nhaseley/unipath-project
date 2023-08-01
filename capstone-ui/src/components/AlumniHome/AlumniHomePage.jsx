@@ -88,17 +88,22 @@ export default function AlumniHomePage({
         </h1>
       ) : (
         <div className="alumni-logged-in-page">
-          <h1>
-            Welcome to{" "}
-            <Link
-              to={"/info/" + userLoginInfo?.collegeName}
-              className="college-link"
-            >
-              {userLoginInfo?.collegeName}
-            </Link>
-            , {userLoginInfo?.firstName}!
-          </h1>
-
+          <div className="alumni-header">
+            <h1>
+              Welcome to {userLoginInfo.collegeName}, {userLoginInfo?.firstName}
+              !
+            </h1>
+            <div className="alumni-view-college">
+            <button className="alumni-college-button">
+              <Link
+                to={"/info/" + userLoginInfo.collegeName}
+                className="college-link"
+              >
+                View Your College
+              </Link>
+            </button>
+            </div>
+          </div>
           <h2>
             You can post reviews/ratings for your college to help applicants
             find the school that fits best for them!

@@ -85,26 +85,17 @@ export default function EventAttendeesPage({
     }
   }
 
-  useEffect(() => {
-    getEventAttendees();
-  }, [userLoginInfo]);
+  // useEffect(() => {
+    // getEventAttendees();
+  // }, [userLoginInfo]);
 
   return (
     <div className="event-attendees-page">
-      {eventAttendees.length == 0 ? (
-        <h2> No attendees registered for this event yet. </h2>
-      ) : (
-        eventAttendees.map((attendee) => (
-          <div>
-            <h2>First Name: {attendee.first_name}</h2>
-            <h2>Last Name: {attendee.last_name}</h2>
-            <h2>Number of Attendees: {attendee.num_attendees}</h2>
-          </div>
-        ))
-      )}
       {userType == "student" ? (
         <>
-          <form>
+        <h2 className="register-title"> Register here! </h2>
+          <form className="event-registration-form">
+            <div className="first-name">
             <input
               className="first-name-input"
               type="text"
@@ -117,6 +108,8 @@ export default function EventAttendeesPage({
                 }))
               }
             />
+            </div>
+            <div className="last-name">
             <input
               className="last-name-input"
               type="text"
@@ -129,6 +122,8 @@ export default function EventAttendeesPage({
                 }))
               }
             />
+            </div>
+            <div className="num-attendees">
             <input
               className="num-attendees-input"
               type="number"
@@ -141,6 +136,7 @@ export default function EventAttendeesPage({
                 }))
               }
             />
+            </div>
           </form>
           <div className="error">
             {error.status
@@ -150,17 +146,32 @@ export default function EventAttendeesPage({
           <button className="demo-button" onClick={handleDemo}>
             Demo Event Registration
           </button>
+          <div className="event-register-buttons">
           <button
             className="student-event-registration-button"
             onClick={handleEventRegistration}
           >
             Register
           </button>
+          
           <button onClick={handleRemoveEventRegistration}>
             Can't make it? Cancel Registration
           </button>
+          </div>
         </>
       ) : null}
+
+      {eventAttendees.length == 0 ? (
+        <h2> Please register for the event to view attendees. </h2>
+      ) : (
+        eventAttendees.map((attendee) => (
+          <div className="event-attendee-card">
+            <h2 className="attendee-name">{(attendee.first_name + " " + attendee.last_name).replace(/\b\w/g, (match) => match.toUpperCase())}</h2>
+            <h2 className="attendees-num">Party Size: {attendee.num_attendees}</h2>
+          </div>
+        ))
+      )}
+      
     </div>
   );
 }

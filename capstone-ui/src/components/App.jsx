@@ -65,6 +65,7 @@ export default function App() {
   console.log(userLoginInfo);
 
   useEffect(() => {
+    const selectedCollegeStored = localStorage.getItem("selected-college");
     const token = localStorage.getItem("token");
     if (!decodedToken) {
       axios
@@ -83,7 +84,7 @@ export default function App() {
             actScore: response.data.actScore,
             enrollment: response.data.enrollment,
             schoolType: response.data.schoolType,
-            collegeName: response.data.collegeName,
+            collegeName: response.data.collegeName? response.data.collegeName: selectedCollegeStored,
             collegeGradYear: response.data.collegeGradYear,
           });
           // TODO: fix refresh for events, reviews pages for students/parents
@@ -133,6 +134,7 @@ export default function App() {
   }
 
   function logoutUser() {
+    localStorage.removeItem("selected-college");
     localStorage.removeItem("token");
     setUserLoggedIn(false);
     // setUserData({});
@@ -166,7 +168,7 @@ export default function App() {
               <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
             }
           >
-            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/" element={<HomePage userLoggedIn={userLoggedIn} userType={userType} />}></Route>
 
             <Route
               path="/login"

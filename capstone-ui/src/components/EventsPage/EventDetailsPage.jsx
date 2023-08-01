@@ -4,7 +4,6 @@ import "./EventsPage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 export default function EventDetailsPage ({setError, userLoginInfo}) {
     const [eventInfo, setEventInfo] = useState({})
     const navigate = useNavigate()
@@ -117,6 +116,9 @@ export default function EventDetailsPage ({setError, userLoginInfo}) {
         <button className="demo-button" onClick={handleDemo}>
             Demo Post Event
         </button>
+
+
+
     </div>
 </>
     )

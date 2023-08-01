@@ -8,12 +8,10 @@ export default function AlumnSurveyPage({
   userLoginInfo,
   setError,
   setUserLoginInfo,
-  userType,
 }) {
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState({});
   const [graduationYear, setGraduationYear] = useState();
-  const [selectedCollege, setSelectedCollege] = useState();
   const [collegeOptions, setCollegeOptions] = useState([]);
 
   const collegeYearOptions = Array.from({ length: 44 }, (_, i) => ({
@@ -38,8 +36,6 @@ export default function AlumnSurveyPage({
   }
 
     function handleCollegeSelect(event) {
-      // TODO: fix this func
-      setSelectedCollege(event.target.value);
       setUserLoginInfo({
         ...userLoginInfo,
         collegeName: event.target.value,
@@ -87,7 +83,7 @@ export default function AlumnSurveyPage({
       }
     }
   }
-
+console.log(selectedButton)
   return (
     <div className="alumn-survery-page">
       <div className="first-question-input">
@@ -96,13 +92,15 @@ export default function AlumnSurveyPage({
           onClick={() =>
             setSelectedButton({ ...selectedButton, highsch: "Yes" })
           }
+          style={{ background: selectedButton.highsch === "Yes" ? "lightyellow" : "" }}
         >
           Yes
         </button>
-        <button
+        <button 
           onClick={() =>
             setSelectedButton({ ...selectedButton, highsch: "No" })
           }
+          style={{ background: selectedButton.highsch === "No" ? "red" : "" }}
         >
           No
         </button>
@@ -110,15 +108,6 @@ export default function AlumnSurveyPage({
           <div className="studentsAndAlumniInfo">
             <div className="whatCollege">
               What college are you affiliated with?
-              {/* <Select
-                        options={collegeOptions.slice(0, 5)}
-                        onChange={handleCollegeSelect}
-                        // value={selectedCollege}
-                        value={collegeOptions.find(
-                          (option) => option.name === selectedCollege
-                        )?.name}
-                      ></Select> */}
-              {/* {selectedCollege} */}
               <select onChange={handleCollegeSelect}>
                 {/* Sorting dropdown options in alphabetical order */}
                 {collegeOptions
@@ -137,6 +126,7 @@ export default function AlumnSurveyPage({
                 onClick={() =>
                   setSelectedButton({ ...selectedButton, collegeUni: "Yes" })
                 }
+                style={{ background: selectedButton.collegeUni === "Yes" ? "lightyellow" : "" }}
               >
                 Yes
               </button>
@@ -144,6 +134,7 @@ export default function AlumnSurveyPage({
                 onClick={() =>
                   setSelectedButton({ ...selectedButton, collegeUni: "No" })
                 }
+                style={{ background: selectedButton.collegeUni === "No" ? "red" : "" }}
               >
                 No
               </button>
@@ -159,14 +150,7 @@ export default function AlumnSurveyPage({
                   )}
                 ></Select>
               </div>
-            ) : selectedButton.collegeUni == "No" ? (
-              <button
-                className="registration-submit"
-                onClick={handleAlumniRegistration}
-              >
-                <Link to={"/register/college-students-and-alumni"}> Submit</Link>
-              </button>
-            ) : null}
+            ):null}
           </div>
         ) : selectedButton.highsch == "No" ? (
           <div className="redirectToRegister">

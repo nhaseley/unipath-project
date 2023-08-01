@@ -23,6 +23,7 @@ export default function FilterSidebar({
     setEnrollment(userLoginInfo.enrollment);
   }, [userLoginInfo]);
 
+
   function changePriceFilter(event) {
     setPrice(event.target.value);
     let priceFiltered = collegeList.filter(
@@ -30,7 +31,7 @@ export default function FilterSidebar({
         Math.abs(parseFloat(college.tuition_out_of_state) - event.target.value) <= 5000
     ).sort((a, b) => parseFloat(b.tuition_out_of_state) - parseFloat(a.tuition_out_of_state));
     setFilteredByPrice(priceFiltered);
-
+    console.log(priceFiltered)
     if (
       filteredBySAT.length != 0 &&
       filteredByACT.length != 0 &&
@@ -57,7 +58,7 @@ export default function FilterSidebar({
             parseInt(college.sat_score_writing) +
             parseInt(college.sat_score_math) -
             sat
-        ) <= 100
+        ) <= 300
     );
     // .sort((a, b) => parseInt((parseInt(b.sat_score_critical_reading) + parseInt(b.sat_score_writing) + parseInt(b.sat_score_math)) - parseInt(parseInt(a.sat_score_critical_reading) + parseInt(a.sat_score_writing) + parseInt(a.sat_score_math))))
     setFilteredBySAT(satFiltered);
@@ -77,7 +78,7 @@ export default function FilterSidebar({
     setACT(event.target.value);
     let actFiltered = collegeList.filter((college) =>
       college.act_score
-        ? Math.abs(parseInt(college.act_score - event.target.value)) <= 4
+        ? Math.abs(parseInt(college.act_score - event.target.value)) <= 5
         : null
     );
     setFilteredByACT(
@@ -126,7 +127,7 @@ export default function FilterSidebar({
           <div>Your SAT Score: {userLoginInfo.satScore}</div>
           <div>Your ACT Score: {userLoginInfo.actScore}</div>
         </div>
-        <div className="price-filter">Tuition: ${price.toLocaleString()}</div>
+        <div className="price-filter">Tuition: ${parseInt(price).toLocaleString()}</div>
         <input
           className="price-slider"
           type="range"
@@ -134,7 +135,6 @@ export default function FilterSidebar({
           max={100000}
           step={1000}
           value={price.toLocaleString()}
-          // TODO: fix - not appearing as toLocaleString on slide
           onChange={changePriceFilter}
         ></input>
         <div className="act-score">ACT: {act ? act : null}</div>
@@ -151,7 +151,7 @@ export default function FilterSidebar({
         <input
           className="sat-slider"
           type="range"
-          min={0}
+          min={400}
           max={2400}
           step={10}
           value={sat}
@@ -165,7 +165,7 @@ export default function FilterSidebar({
             className="enrollment-slider"
             type="range"
             min={0}
-            max={100000}
+            max={80000}
             step={1000}
             value={enrollment}
             onChange={changeEnrollmentFilter}

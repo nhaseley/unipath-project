@@ -40,12 +40,13 @@ export default function ParentCollegeCard({
   };
 
   function changeCollege() {
-    setUserLoginInfo((u) => ({ ...u, collegeName: childCollege?.college_name }));
+    setUserLoginInfo((u) => ({ ...u, collegeName: childCollege?.college_name }));    
+    localStorage.setItem("selected-college", childCollege?.college_name);
   }
 
   return (
     <div className="parent-college-card">
-      <div className="info">
+      <div className="parent-info">
         <h2 className="student-college-name" onClick={changeCollege}>
           <Link to={"/info/" + childCollege?.college_name}>
             {childCollege?.college_name}

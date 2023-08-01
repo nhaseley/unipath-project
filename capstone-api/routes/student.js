@@ -25,7 +25,9 @@ router.post("/colleges", async function (req, res, next) {
   try {
     const collegesToDisplay = await Student.getCollegeFeed(
       req.body.satScore,
-      req.body.actScore
+      req.body.actScore,
+      req.body.schoolType,
+      req.body.enrollment
     );
     const allColleges = await Alum.getColleges();
     return res.status(201).json({ collegesToDisplay, allColleges });
@@ -85,4 +87,22 @@ router.delete("/removeEventRegistration", async function (req, res, next) {
     next(err);
   }
 });
+
+// router.get('/zipcodeapi', async (req, res) => {
+//   try {
+//     const apiKey = 'https://www.zipcodeapi.com/rest';
+//     // const { fromZipcode, toZipcode } = req.query;
+
+//     const response = await axios.get(
+//       `https://www.zipcodeapi.com/rest/${apiKey}/distance.json/10803/10469/mile`
+//     );
+//     console.log("response in backend: ",response)
+//     res.json(response.data);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to fetch data from the API' });
+//   }
+// });
+
+
+
 module.exports = router;

@@ -46,6 +46,10 @@ export default function CollegeInfoPage({
     two_or_more_students: college?.two_or_more_students,
     unknown_students: college?.unknown_students,
   };
+  const studentImageArray = Array.from({
+    length: parseInt(college?.student_faculty_ratio),
+  });
+
   // get info for particular college for this user
   async function getCollege() {
     if (
@@ -82,36 +86,54 @@ export default function CollegeInfoPage({
   }, [userLoginInfo]);
 
   function findMinorityServingValue(data) {
+    // add to an array instead of returning
+    let res = "";
     if (data) {
       if (data.aanipi == 1) {
-        return "aanipi-serving";
+        res += "aanipi-serving";
       }
       if (data.annh == 1) {
-        return "annh-serving";
+        res += "annh-serving";
       }
       if (data.hispanic == 1) {
-        return "hispanic-serving";
+        res += "hispanic-serving";
       }
       if (data.predominantly_black == 1) {
-        return "predominantly black";
+        res += "predominantly-black";
       }
       if (data.historically_black == 1) {
-        return "historically black";
+        res += "historically-black";
       }
       if (data.tribal == 1) {
-        return "tribal-serving";
+        res += "tribal-serving";
       }
       if (data.women_only == 1) {
-        return "women only";
+        res += "women-only";
       }
       if (data.men_only == 1) {
-        return "men only";
+        res += "men-only";
       }
+      return res;
     }
   }
-  const studentImageArray = Array.from({
-    length: parseInt(college?.student_faculty_ratio),
-  });
+
+  const zipcode = 10469;
+
+  // client side apiKey: js-Iedaayr15fYgbtL5zPqzkxHdZ7ZhqOyD1RzsvYBfYwLIzDtwpX3qh78PfUjkdvYf
+  const apiKey =
+    "q7AsIQrw7PfuF4eJAwPCHdVSu0fvhgpixGPlbuYCU7lp2LeAHDd5fYL0GLLvXttQ";
+  const ORIGINAL_COLLEGE_API_URL = "https://www.zipcodeapi.com/rest";
+
+  // useEffect(() => {
+  //   getZipcodeDistance();
+  // }, [userLoginInfo]);
+
+  async function getZipcodeDistance() {
+    const response = await axios.get(
+      `https://www.zipcodeapi.com/rest/${apiKey}/distance.json/10803/${zipcode}/mile`
+    );
+    console.log("RESPONSE: ", response);
+  }
 
   return (
     <div className="college-info-page">
@@ -137,99 +159,105 @@ export default function CollegeInfoPage({
         institution located in {college?.city}, {college?.state}.
       </h2>
       <div className="see-events">
-        <button>
-          <Link to={"/events"} key={college?.id}>
-            See Upcoming Events
-          </Link>
-        </button>
+        {userType == "student" || userType == "college-admission-officer" ? (
+          <button>
+            <Link to={"/events"} key={college?.id}>
+              See Upcoming Events
+            </Link>
+          </button>
+        ) : null}
       </div>
       <a href={"https://" + college?.school_url} className="college-site-link">
         See University Site
       </a>
       <div className="college-statistics">
-        <div>
-          <h2>
-            Admission Rate:{" "}
-            {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
-          </h2>
-          <AdmissionRatePieChart
-            admissionRate={parseFloat(
-              (college?.admission_rate * 100).toFixed(1)
-            )}
-            customColors={customColors}
-          ></AdmissionRatePieChart>
-        </div>
-        <div className="median SAT">
-          <h2>
-            Average SAT: {!isNaN(averageSAT) ? averageSAT : "Unavailable"}
-          </h2>
-          {!isNaN(averageSAT) && userLoginInfo.satScore ? (
-            <SATBarChart
-              satData={satData}
+        {college?.admission_rate ? (
+          <div>
+            <h2>
+              Admission Rate:{" "}
+              {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
+            </h2>
+            <AdmissionRatePieChart
+              admissionRate={parseFloat(
+                (college?.admission_rate * 100).toFixed(1)
+              )}
               customColors={customColors}
-            ></SATBarChart>
-          ) : null}
-        </div>
-        <div className="avg-ACT">
-          <h2>
-            Average ACT:{" "}
-            {!isNaN(parseInt(college?.act_score))
-              ? parseInt(college?.act_score)
-              : "Unavailable"}
+            ></AdmissionRatePieChart>
+          </div>
+        ) : null}
+        {!isNaN(averageSAT) ? (
+          <div className="median SAT">
+            <h2>Average SAT: {averageSAT}</h2>
+            {userLoginInfo.satScore ? (
+              <SATBarChart
+                satData={satData}
+                customColors={customColors}
+              ></SATBarChart>
+            ) : null}
+          </div>
+        ) : null}
+        {college?.act_score ? (
+          <div className="avg-ACT">
+            <h2>Average ACT: {parseInt(college?.act_score)}</h2>
+            {userLoginInfo.actScore ? (
+              <ACTBarChart
+                actData={actData}
+                customColors={customColors}
+              ></ACTBarChart>
+            ) : null}
+          </div>
+        ) : null}
+        {college?.size ? (
+          <h2 className="undergrad-enrollment">
+            Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
           </h2>
-          {!isNaN(parseInt(college?.act_score)) && userLoginInfo.actScore ? (
-            <ACTBarChart
-              actData={actData}
-              customColors={customColors}
-            ></ACTBarChart>
-          ) : null}
-        </div>
-        <h2 className="undergrad-enrollment">
-          Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
-        </h2>
+        ) : null}
         <div className="student-demographics-pie-chart">
           <StudentDemographicsPieChart
             studentDemographicsData={studentDemographicsData}
             customColors={customColors}
           ></StudentDemographicsPieChart>
         </div>
-        <div className="student-faculty-ratio">
-          <h2>
-            Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}
-          </h2>
-          <div className="students-and-faculty-imgs">
-            <img
-              className="faculty-img"
-              src={
-                "https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"
-              }
-              alt="Faculty Icon"
-            />
-            <div className="student-imgs-grid">
-              {studentImageArray.map((_, i) => (
-                <img
-                  className="student-img"
-                  src={
-                    "https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"
-                  }
-                  key={i}
-                  alt={`Student Icon ${i + 1}`}
-                />
-              ))}
+        {college?.student_faculty_ratio ? (
+          <div className="student-faculty-ratio">
+            <h2>
+              Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}
+            </h2>
+            <div className="students-and-faculty-imgs">
+              <img
+                className="faculty-img"
+                src={
+                  "https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"
+                }
+                alt="Faculty Icon"
+              />
+              <div className="student-imgs-grid">
+                {studentImageArray.map((_, i) => (
+                  <img
+                    className="student-img"
+                    src={
+                      "https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"
+                    }
+                    key={i}
+                    alt={`Student Icon ${i + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <h2 className="first-gen-share">
-          {college?.first_generation
-            ? "First-generation Students: " + (
-                parseFloat(college?.first_generation) * 100
-              ).toFixed(1) + "%"
-            : null}
-        </h2>
-        <h2 className="retention-rate">
-          Retention/Graduation rate:{" "}
-          {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
-        </h2>
+        ) : null}
+        {college?.first_generation ? (
+          <h2 className="first-gen-share">
+            First-generation Students:{" "}
+            {(parseFloat(college?.first_generation) * 100).toFixed(1)}%
+          </h2>
+        ) : null}
+        {college?.retention_rate ? (
+          <h2 className="retention-rate">
+            Retention/Graduation rate:{" "}
+            {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
+          </h2>
+        ) : null}
         {college?.tuition_in_state || college?.tuition_out_of_state ? (
           <div className="cost-breakdown">
             <h2>Cost Breakdown:</h2>

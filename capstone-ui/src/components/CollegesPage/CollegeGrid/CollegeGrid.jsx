@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./CollegeGrid.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import CollegeCard from "../CollegeCard/CollegeCard";
 
@@ -26,7 +25,7 @@ export default function CollegeGrid({
           satScore: userLoginInfo.satScore,
           actScore: userLoginInfo.actScore,
           enrollment: userLoginInfo.enrollment,
-          schoolType: userLoginInfo.schoolType,
+          schoolType: userLoginInfo.schoolType
         })
         .then((response) => {
           console.log(
@@ -43,25 +42,39 @@ export default function CollegeGrid({
   // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
+    scrollToTop();
   }, [userLoginInfo, collegeArrayPointer]);
 
   //  Render each keystroke and filter collegeList with it
   function handleSearch(event) {
+    setCollegeArrayPointer(0)
+    scrollToTop();
     setSearchInput(event.target.value);
-
     let filteredItems = allColleges?.filter((college) =>
-      college.name.toLowerCase().includes(event.target.value.toLowerCase())
+    college.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    console.log("filtered: ", filteredItems);
+    filteredItems.sort((a, b) => a.name.localeCompare(b.name))
+    // console.log("filtered: ", filteredItems);
     setSearchedColleges(filteredItems);
   }
 
   function incrementPage() {
     setCollegeArrayPointer(collegeArrayPointer + 20);
+    scrollToTop();
   }
+
   function decrementPage() {
     setCollegeArrayPointer(collegeArrayPointer - 20);
+    scrollToTop();
   }
+
+
+  function scrollToTop () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // This creates a smooth scrolling effect
+    });
+  };
 
   // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =
@@ -69,7 +82,7 @@ export default function CollegeGrid({
         ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
         : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20)
 
-  console.log(first20Colleges);
+        console.log(first20Colleges);
 
   return (
     <div className="college-grid">
@@ -78,7 +91,7 @@ export default function CollegeGrid({
         here are your personalized colleges!
       </h1>
       <div className="searchThings">
-        <label className="searchLabel"> Search College </label>
+        <label className="searchLabel"> Search All Colleges </label>
         <input
           className="college-search"
           label="Search"
@@ -94,14 +107,17 @@ export default function CollegeGrid({
             setUserLoginInfo={setUserLoginInfo}
           />
         ))}
-        {/* change functionality to be able to back to previous colleges */}
       </div>
-      {first20Colleges.length != 0 ? (
-        <button className="seeMore" onClick={incrementPage}>
+      <div className="paginationButtons">
+        <button className={`previousColleges ${collegeArrayPointer === 0 ? "disabled" : ""}`} onClick={() => {decrementPage()}} disabled={collegeArrayPointer === 0}>
+          Previous Colleges</button>
+
+        {first20Colleges.length != 0 ? (
+        <button className={`seeMore ${collegeArrayPointer + 20 >= collegesToDisplay.length ? "disabled" : ""}`} onClick={() => {incrementPage()}} disabled={collegeArrayPointer + 20 >= collegesToDisplay.length}>
           See More Colleges
-        </button>
-      ) : null}
-      <button onClick={decrementPage}>Previous Colleges</button>
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }

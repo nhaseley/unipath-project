@@ -1,9 +1,12 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./HomePage.css";
 
-export default function HomePage() {
+export default function HomePage({userLoggedIn, userType}) {
+
+  const navigate = useNavigate();
+
   const collegeNames = [
     {
       name: "Massachusetts Institute of Technology",
@@ -62,6 +65,19 @@ export default function HomePage() {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % collegeNames.length);
   };
 
+
+  function getStarted () {
+    { userLoggedIn ? ( userType == "student"
+          ? navigate("/feed")
+          : userType == "parent"
+          ? navigate("/child-feed")
+          : userType == "college-admission-officer"
+          ? navigate("/events")
+          : userType == "college-students-and-alumni"
+          ? navigate("/mycollege")
+          : null) : ( navigate("/register"))}
+  }
+
   // useEffect to set the image transition interval
   useEffect(() => {
     const imageTransitionInterval = setInterval(handleImageTransition, 5000); // 10000ms (3 seconds) interval
@@ -78,10 +94,7 @@ export default function HomePage() {
           inventore veritatis et quasi architecto beatae vitae dicta sunt
           explicabo. Nemo enim. En headie one is de Best.
         </h2>
-        <Link to={"/login"}>
-          {/* when signed in, change to "jump back in! with appropriate link" */}
-          <button className="get-started-button">Get Started</button>
-        </Link>
+          <button className="get-started-button" onClick={getStarted}>Get Started</button>
       </div>
       <section className="additional-section">
         <div className="container">
