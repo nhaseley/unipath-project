@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
+import "./AlumnSurveyPage.css";
 
 export default function AlumnSurveyPage({
   userLoginInfo,
+  setUserType,
   setError,
   setUserLoginInfo,
   nextAlumnRegistrationPage,
@@ -114,7 +116,7 @@ export default function AlumnSurveyPage({
             onClick={() =>
               setSelectedButton({ ...selectedButton, highsch: "No" })
             }
-            style={{ background: selectedButton.highsch === "No" ? "lightBlue" : "" }}
+            style={{ background: selectedButton.highsch === "No" ? "#FFCCCB" : "" }}
           >
             No
           </button>
@@ -156,7 +158,7 @@ export default function AlumnSurveyPage({
                     setSelectedButton({ ...selectedButton, collegeUni: "No" })
                   }
                   style={{
-                    background: selectedButton.collegeUni === "No" ? "lightBlue" : "",
+                    background: selectedButton.collegeUni === "No" ? "#FFCCCB" : "",
                   }}
                 >
                   No
@@ -177,14 +179,17 @@ export default function AlumnSurveyPage({
             ) : null}
           </div>
         ) : selectedButton.highsch == "No" ? (
-          <div className="redirectToRegister">
+          
+          <div>
             Please register as a student
-            <Link to={"/register"}> here </Link>
+            <button className="redirectToRegister"
+              onClick={() => {window.location.reload(); setUserType("student")}}>
+              <Link to={"/register"}> here. </Link>
+            </button>
           </div>
         ) : null}
       </div>
       <button className="back-to-register-button" onClick={handleAlumnBack}>
-        {" "}
         Back
       </button>
       <button

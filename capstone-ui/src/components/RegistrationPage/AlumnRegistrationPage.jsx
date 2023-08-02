@@ -22,9 +22,9 @@ export default function AlumnRegistrationPage({
 
   function handleNextAlumn() {
     // set useState to true, so it goes to next page.
-    console.log(nextAlumnRegistrationPage);
+    // console.log(nextAlumnRegistrationPage);
     setNextAlumnRegistrationPage(!nextAlumnRegistrationPage);
-    console.log(nextAlumnRegistrationPage);
+    // console.log(nextAlumnRegistrationPage);
   }
 
   return (

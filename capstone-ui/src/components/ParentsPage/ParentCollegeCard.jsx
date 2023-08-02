@@ -12,7 +12,7 @@ export default function ParentCollegeCard({
   customColors,
 }) {
   const [college, setCollege] = useState();
-
+console.log(college)
   useEffect(() => {
     axios
       .post("http://localhost:3010/info/" + `${childCollege?.college_name}`, {

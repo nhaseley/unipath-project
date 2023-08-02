@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import EventCard from "./EventCard";
 
-export default function EventsPage({ userLoginInfo, userType }) {
+export default function EventsPage({ userLoginInfo, userType, userLoggedIn, setUserType }) {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
@@ -50,11 +50,18 @@ export default function EventsPage({ userLoginInfo, userType }) {
 
   return (
     <>
-      {userType != "college-admission-officer" && userType != "student" ? (
+      {userType != "college-admission-officer" && userType != "student" || !userLoggedIn ? (
+        <div className="invalid-user">
         <h1>
-          Unfortunately, this page is for students and college admission officers only. Please log
-          in <Link to={"/login"}> here. </Link>
+          Unfortunately, this page is for students and college admission officers only. Please log in{" "}
         </h1>
+        <button
+          className="incorrect-user-type-button"
+          onClick={() => setUserType("college-admission-officer")}>
+          <Link to={"/login"}> here. </Link>
+        </button>
+    </div>
+    
       ) : (
         <div className="events-page">
           <h1>Welcome, {userLoginInfo?.firstName} to the events page!</h1>

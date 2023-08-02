@@ -87,7 +87,7 @@ export default function StudentRegistrationForm({
           <input
             className="parent-phone-input"
             type="text"
-            placeholder="Phone Number"
+            placeholder="Parent Phone Number"
             value={userLoginInfo.parentPhone}
             onChange={(e) =>
               setUserLoginInfo((u) => ({
@@ -180,10 +180,9 @@ export default function StudentRegistrationForm({
       </button>
 
       <div className="login_prompt">
-        Already have an account?
+        Already have an account?{" "}
         <Link style={{ color: "#a57548" }} to={"/login"}>
-          {" "}
-          Login{" "}
+          Login
         </Link>
       </div>
     </div>

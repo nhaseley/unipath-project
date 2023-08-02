@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 export default function CollegesPage({
   userLoginInfo,
   setUserLoginInfo,
+  userLoggedIn,
   collegeList,
   setCollegeList,
   collegeArrayPointer,
   setCollegeArrayPointer,
   userType,
+  setUserType,
   convertCollegeSAT
 }) {
   const [collegesToDisplay, setCollegesToDisplay] = useState(collegeList);
@@ -21,12 +23,14 @@ export default function CollegesPage({
     <div className="colleges-page">
 
   
-      {userType != "student" ? (
-        <h1>
-          Unfortunately, this page is for students only. Please log in{" "}
-          <Link to={"/login"}>here.</Link>{" "}
-          {/* TODO: onclick change usertype? */}
-        </h1>
+      {userType != "student" || !userLoggedIn ? (
+         <div className="invalid-user">
+          <h1> Unfortunately, this page is for students only.
+          Please log in </h1>
+          <button className="incorrect-user-type-button" onClick={() => setUserType("student")}>
+            <Link to={"/login"}> here. </Link>
+          </button>
+         </div>
       ) : (
         <>
           <FilterSidebar

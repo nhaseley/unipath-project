@@ -1,3 +1,8 @@
+.parent-logged-in-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .parent-college-card{
     display: flex;
     align-items: center;
@@ -23,6 +28,7 @@
     display: flex;
     flex-direction: column;
 }
-.parent-data-visuals{
-
+.parent-please-log-in{
+    display:flex;
+    flex-direction:column;
 }

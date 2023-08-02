@@ -60,9 +60,9 @@ export default function App() {
     "#3F4B3B",
   ];
 
-  const [nextRegistrationPage, setNextRegistrationPage] = useState(true);
-  const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] =
-    useState(true);
+  const [nextRegistrationPage, setNextRegistrationPage] = useState(true); 
+  // boolean for if we're on the next page (used for both students and alumni)
+  const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] = useState(true);
 
   console.log("user info: ", userLoginInfo);
 
@@ -252,6 +252,7 @@ export default function App() {
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
                   userType={userType}
+                  setUserType={setUserType}
                   nextAlumnRegistrationPage={nextAlumnRegistrationPage}
                   setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
                 />
@@ -264,11 +265,13 @@ export default function App() {
                 <CollegesPage
                   userLoginInfo={userLoginInfo}
                   setUserLoginInfo={setUserLoginInfo}
+                  userLoggedIn={userLoggedIn}
                   collegeList={collegeList}
                   setCollegeList={setCollegeList}
                   collegeArrayPointer={collegeArrayPointer}
                   setCollegeArrayPointer={setCollegeArrayPointer}
                   userType={userType}
+                  setUserType={setUserType}
                   convertCollegeSAT={convertCollegeSAT}
                 ></CollegesPage>
               }
@@ -278,7 +281,9 @@ export default function App() {
               element={
                 <ParentsPage
                   userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
                   userType={userType}
+                  setUserType={setUserType}
                   setUserLoginInfo={setUserLoginInfo}
                   customColors={customColors}
                 />
@@ -287,7 +292,7 @@ export default function App() {
             <Route
               path="/events"
               element={
-                <EventsPage userType={userType} userLoginInfo={userLoginInfo} userLoggedIn={userLoggedIn}/>
+                <EventsPage userType={userType} userLoginInfo={userLoginInfo} userLoggedIn={userLoggedIn} setUserType={setUserType}/>
               }
             ></Route>
 
@@ -310,6 +315,7 @@ export default function App() {
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
                   userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
                   userType={userType}
                   setUserType={setUserType}
                 />
@@ -346,6 +352,8 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   selectedCollege={selectedCollege}
                   userType={userType}
+                  setUserType={setUserType}
+                  userLoggedIn={userLoggedIn}
                 />
               }
             ></Route>

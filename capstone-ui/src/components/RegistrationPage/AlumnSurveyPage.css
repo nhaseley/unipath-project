@@ -5,3 +5,11 @@
 .light-red-background{
     background:red;
 }
+.redirectToRegister{
+    color: #26393b;
+    margin-left: -0.2vh;
+}
+.redirectToRegister:hover{
+    transition: transform 0.3s ease;
+    transform: scale(1.4);
+}
