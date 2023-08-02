@@ -43,7 +43,7 @@
   justify-content: center;
   justify-items: center;
   text-align: center;
-  height: 25px;
+  height: 3vh;
   width: 100%;
 }
 
@@ -215,7 +215,7 @@ input:focus {
 }
 
 .p_select_college {
-  padding-left: 4.5vw;
+  padding-left: 2.5vw;
   margin: 0;
   padding-bottom: 1vh;
 }

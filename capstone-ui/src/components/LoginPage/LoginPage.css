@@ -4,17 +4,6 @@
   align-items: center;
   justify-content: center;
 }
-.email-img {
-  margin-right: 6px;
-  width: 20px;
-  height: 20px;
-}
-
-.password-img {
-  margin-right: 6px;
-  height: 20px;
-  width: 20px;
-}
 
 .user-types > button {
   background-color: #ebf2e5;
@@ -23,7 +12,7 @@
   font-size: 18px;
   border: none;
   color: #354f52;
-  padding: 10px;
+  padding: 0.5vw;
   /* border: 2px solid #84A98C; */
 }
 .user-types > button:hover {
@@ -37,9 +26,8 @@
 }
 
 .student-registration > .login-submit {
-
-position:sticky;
-margin-left: 20vw;
+  position: sticky;
+  margin-left: 20vw;
 }
 .password-toggle,
 .confirm-password-toggle {
@@ -48,7 +36,7 @@ margin-left: 20vw;
   font-size: 1rem;
   border: none;
   color: white;
-  padding: 1px;
+  padding: 0.5vw;
 }
 .password-toggle:hover,
 .confirm-password-toggle:hover {
