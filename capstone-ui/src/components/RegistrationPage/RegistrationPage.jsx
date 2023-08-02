@@ -6,6 +6,7 @@ import ParentRegistrationForm from "./ParentRegistrationForm";
 import AlumnRegistrationPage from "./AlumnRegistrationPage";
 import AdminRegistrationPage from "./AdminRegistrationPage";
 import RegistrationSurveyPage from "./RegistrationSurveyPage";
+import AlumnSurveyPage from "./AlumnSurveyPage";
 
 export default function RegistrationPage({
   userLoginInfo,
@@ -17,11 +18,16 @@ export default function RegistrationPage({
   setError,
   userType,
   setUserType,
+  // for the student survey "Next" button
   nextRegistrationPage,
   setNextRegistrationPage,
+  // for the Alumn survey "Next" button
+  nextAlumnRegistrationPage,
+  setNextAlumnRegistrationPage,
 }) {
   function handleChangeUserType(event) {
     setNextRegistrationPage(true);
+    setNextAlumnRegistrationPage(true);
     setUserType(event.target.value);
   }
 
@@ -98,15 +104,28 @@ export default function RegistrationPage({
           setError={setError}
         />
       ) : userType == "college-students-and-alumni" ? (
-        <AlumnRegistrationPage
-          userLoginInfo={userLoginInfo}
-          setUserLoginInfo={setUserLoginInfo}
-          handleShowPassword={handleShowPassword}
-          handleHidePassword={handleHidePassword}
-          passwordDisplayed={passwordDisplayed}
-          error={error}
-          setError={setError}
-        />
+        nextAlumnRegistrationPage ? (
+          <AlumnRegistrationPage
+            userLoginInfo={userLoginInfo}
+            setUserLoginInfo={setUserLoginInfo}
+            handleShowPassword={handleShowPassword}
+            handleHidePassword={handleHidePassword}
+            passwordDisplayed={passwordDisplayed}
+            error={error}
+            setError={setError}
+            nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+            setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
+          />
+        ) : (
+          <AlumnSurveyPage
+            userLoginInfo={userLoginInfo}
+            setError={setError}
+            setUserLoginInfo={setUserLoginInfo}
+            userType={userType}
+            nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+            setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
+          />
+        )
       ) : userType == "college-admission-officer" ? (
         <AdminRegistrationPage
           userLoginInfo={userLoginInfo}
