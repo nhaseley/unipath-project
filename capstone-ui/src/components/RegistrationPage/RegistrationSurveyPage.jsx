@@ -122,7 +122,7 @@ export default function RegistrationSurveyPage({
             onClick={() => setSelectedButton({ ...selectedButton, sat: "No" })}
             style={{
               background:
-                selectedButton.sat === "No" ? "#FFCCCB" : "",
+                selectedButton.sat === "No" ? "lightblue" : "",
             }}
           >
             No
@@ -157,7 +157,7 @@ export default function RegistrationSurveyPage({
             onClick={() => setSelectedButton({ ...selectedButton, act: "No" })}
             style={{
               background:
-                selectedButton.act === "No" ? "#FFCCCB" : "",
+                selectedButton.act === "No" ? "lightblue" : "",
             }}
           >
             No
