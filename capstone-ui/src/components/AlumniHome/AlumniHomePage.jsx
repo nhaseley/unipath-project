@@ -8,6 +8,7 @@ import Select from "react-select";
 export default function AlumniHomePage({
   userLoginInfo,
   setUserLoginInfo,
+  userLoggedIn,
   setError,
   userType,
   setUserType
@@ -82,16 +83,17 @@ export default function AlumniHomePage({
 
   return (
     <div className="alumni-home-page">
-      {userType != "college-students-and-alumni" ? (
-        <>
-        <h1> Unfortunately, this page is for college students and alumni only.
-        Please log in </h1>
-        <button className="incorrect-user-type-button" onClick={() => setUserType("college-students-and-alumni")}>
-          <Link to={"/login"}> here. </Link>
-        </button>
-        </>
+      {userType != "college-students-and-alumni" || !userLoggedIn ? (
+        <div className="invalid-user">
+          <h1> Unfortunately, this page is for college students and alumni only.
+          Please log in </h1>
+          <button className="incorrect-user-type-button" onClick={() => setUserType("college-students-and-alumni")}>
+            <Link to={"/login"}> here. </Link>
+          </button>
+        </div>
       ) : (
         <div className="alumni-logged-in-page">
+          
           <div className="alumni-header">
             <h1>
               Welcome to {userLoginInfo.collegeName}, {userLoginInfo?.firstName}
@@ -149,10 +151,10 @@ export default function AlumniHomePage({
               </div>
 
               <div className="email">
-                <img
+                {/* <img
                   src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
                   className="email-img"
-                ></img>
+                ></img> */}
                 <input
                   className="email-input"
                   type="email"
@@ -185,15 +187,18 @@ export default function AlumniHomePage({
                   onChange={handleAdditionalInfo}
                 />
               </div>
-
-              <button className="review-submit" onClick={handleReviewSubmit}>
-                Submit
-              </button>
             </form>
+            <div className="review-buttons">
             <button className="demo-button" onClick={handleDemo}>
               Demo Post Review
             </button>
+            <button className="review-submit" onClick={handleReviewSubmit}>
+                Submit
+            </button>
+            </div>
           </div>
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80">
+          </img>
         </div>
       )}
     </div>

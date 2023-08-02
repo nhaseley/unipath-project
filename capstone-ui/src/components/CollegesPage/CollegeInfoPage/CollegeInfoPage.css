@@ -1,3 +1,12 @@
+.college-info-page{
+  padding-bottom: 2vh;
+}
+.all-college-info{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: center;
+}
 .like-img {
   height: 80px;
   width: 80px;
@@ -9,36 +18,56 @@
   background: #5f3d66;
   color: white;
 }
+.college-statistics{
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .like-img:hover {
   background: radial-gradient(pink, transparent);
 }
+.standardized-tests{
+  display:flex;
+  flex-direction:row;
+  margin-left: 6vh;
+  align-items: center;
+
+}
+
+
+
+
 
 .cost-breakdown {
   padding: 10px;
 }
 .student-img {
   /* height: 5%; */
-  width: 10%;
+  width: 15%;
 }
-.faculty-img {
-  /* height: 5%; */
-  /* width: 5% */
+.student-faculty-ratio{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .students-and-faculty-imgs {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .student-imgs-grid {
   display: flex;
-  width: 60%;
+  width: 50vh;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
-.star-img {
-  width: 4vh;
-}
-.rating {
-  display: flex;
-  align-items: center;
+.alumReviews{
+  display:flex;
+  flex-direction:column;
+  align-items:center
 }
 .college-review {
   padding: 2%;
@@ -48,3 +77,15 @@
   color: white;
   border-radius: 0.5em;
 }
+.college-review:hover{
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
+}
+.star-img {
+  width: 4vh;
+}
+.rating {
+  display: flex;
+  align-items: center;
+}
+

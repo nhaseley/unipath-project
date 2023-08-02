@@ -19,7 +19,7 @@ export default function FamilyIncomeBarChart({ incomeData, customColors }) {
     // Prepare the data
     const data = Object.entries(incomeData).map(([timePoint, earnings]) => ({
       timePoint: getCustomLabels(timePoint),
-      earnings: +earnings,
+      earnings: Math.max(0, +earnings), // Treat negative values as 0
     }));
 
     const width = 400;
@@ -75,7 +75,7 @@ export default function FamilyIncomeBarChart({ incomeData, customColors }) {
       .attr("y", (d) => yScale(d.earnings) - 5) // Position the label above each bar
       .style("text-anchor", "middle")
       .style("font-size", "14px")
-      .text((d) => `${d.earnings ? "$" + d.earnings.toLocaleString() : ""}`);
+      .text((d) => `${d.earnings > 0 ? "$" + d.earnings.toLocaleString() : "hi"}`);
 
     // Add x-axis
     g.append("g")

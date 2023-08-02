@@ -167,129 +167,134 @@ async function getUpdatedScore(reading, writing, math) {
           </Link>
         ) : null}
       </div>
-
-      <h2>
-        {college?.name} is a 4-year {findMinorityServingValue(college)}{" "}
-        {college?.avg_net_price_private ? "private " : "public "}
-        institution located in {college?.city}, {college?.state}.
-      </h2>
-      <div className="see-events">
-        {userType == "student" || userType == "college-admission-officer" ? (
-          <button>
-            <Link to={"/events"} key={college?.id}>
-              See Upcoming Events
-            </Link>
+      <div>
+      <img src="https://images.unsplash.com/photo-1567168544646-208fa5d408fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" />
+      </div>
+      <div className="all-college-info">
+        <h2>
+          {college?.name} is a 4-year {findMinorityServingValue(college)}{" "}
+          {college?.avg_net_price_private ? "private " : "public "}
+          institution located in {college?.city}, {college?.state}.
+        </h2>
+        <div className="see-events">
+          {userType == "student" || userType == "college-admission-officer" ? (
+            <button>
+              <Link to={"/events"} key={college?.id}>
+                See Upcoming Events
+              </Link>
+            </button>
+          ) : null}
+        </div>
+        <a href={"https://" + college?.school_url} className="college-site-link">
+          See University Site
+        </a>
+        <div className="college-statistics">
+          {college?.admission_rate ? (
+            <div>
+              <h2>
+                Admission Rate:{" "}
+                {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
+              </h2>
+              <AdmissionRatePieChart
+                admissionRate={parseFloat(
+                  (college?.admission_rate * 100).toFixed(1)
+                )}
+                customColors={customColors}
+              ></AdmissionRatePieChart>
+            </div>
+          ) : null}
+          <div className="standardized-tests">
+          {!isNaN(averageSAT) ? (
+            <div className="median SAT">
+              <h2>Average SAT: {averageSAT}</h2>
+              {userLoginInfo.satScore ? (
+                <SATBarChart
+                  satData={satData}
+                  customColors={customColors}
+                ></SATBarChart>
+              ) : null}
+            </div>
+          ) : null}
+          {college?.act_score ? (
+            <div className="avg-ACT">
+              <h2>Average ACT: {parseInt(college?.act_score)}</h2>
+              {userLoginInfo.actScore ? (
+                <ACTBarChart
+                  actData={actData}
+                  customColors={customColors}
+                ></ACTBarChart>
+              ) : null}
+            </div>
+          ) : null}
+          </div>
+          {college?.size ? (
+            <h2 className="undergrad-enrollment">
+              Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
+            </h2>
+          ) : null}
+          <div className="student-demographics-pie-chart">
+            <StudentDemographicsPieChart
+              studentDemographicsData={studentDemographicsData}
+              customColors={customColors}
+            ></StudentDemographicsPieChart>
+          </div>
+          {college?.student_faculty_ratio ? (
+            <div className="student-faculty-ratio">
+              <h2>
+                Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}
+              </h2>
+              <div className="students-and-faculty-imgs">
+                <img
+                  className="faculty-img"
+                  src={
+                    "https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"
+                  }
+                  alt="Faculty Icon"
+                />
+                <div className="student-imgs-grid">
+                  {studentImageArray.map((_, i) => (
+                    <img
+                      className="student-img"
+                      src={
+                        "https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"
+                      }
+                      key={i}
+                      alt={`Student Icon ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {college?.first_generation ? (
+            <h2 className="first-gen-share">
+              First-generation Students:{" "}
+              {(parseFloat(college?.first_generation) * 100).toFixed(1)}%
+            </h2>
+          ) : null}
+          {college?.retention_rate ? (
+            <h2 className="retention-rate">
+              Retention/Graduation rate:{" "}
+              {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
+            </h2>
+          ) : null}
+          {college?.tuition_in_state || college?.tuition_out_of_state ? (
+            <div className="cost-breakdown">
+              <h2>Cost Breakdown:</h2>
+              <TuitionBarChart
+                tuitionData={tuitionData}
+                customColors={customColors}
+              ></TuitionBarChart>
+            </div>
+          ) : null}
+        </div>
+     
+        {userType == "college-students-and-alumni" ? (
+          <button className="add-more-reviews-button">
+            <Link to="/mycollege">Add more reviews!</Link>
           </button>
         ) : null}
       </div>
-      <a href={"https://" + college?.school_url} className="college-site-link">
-        See University Site
-      </a>
-      <div className="college-statistics">
-        {college?.admission_rate ? (
-          <div>
-            <h2>
-              Admission Rate:{" "}
-              {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
-            </h2>
-            <AdmissionRatePieChart
-              admissionRate={parseFloat(
-                (college?.admission_rate * 100).toFixed(1)
-              )}
-              customColors={customColors}
-            ></AdmissionRatePieChart>
-          </div>
-        ) : null}
-        {!isNaN(averageSAT) ? (
-          <div className="median SAT">
-            <h2>Average SAT: {averageSAT}</h2>
-            {userLoginInfo.satScore ? (
-              <SATBarChart
-                satData={satData}
-                customColors={customColors}
-              ></SATBarChart>
-            ) : null}
-          </div>
-        ) : null}
-        {college?.act_score ? (
-          <div className="avg-ACT">
-            <h2>Average ACT: {parseInt(college?.act_score)}</h2>
-            {userLoginInfo.actScore ? (
-              <ACTBarChart
-                actData={actData}
-                customColors={customColors}
-              ></ACTBarChart>
-            ) : null}
-          </div>
-        ) : null}
-        {college?.size ? (
-          <h2 className="undergrad-enrollment">
-            Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
-          </h2>
-        ) : null}
-        <div className="student-demographics-pie-chart">
-          <StudentDemographicsPieChart
-            studentDemographicsData={studentDemographicsData}
-            customColors={customColors}
-          ></StudentDemographicsPieChart>
-        </div>
-        {college?.student_faculty_ratio ? (
-          <div className="student-faculty-ratio">
-            <h2>
-              Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}
-            </h2>
-            <div className="students-and-faculty-imgs">
-              <img
-                className="faculty-img"
-                src={
-                  "https://em-content.zobj.net/thumbs/320/apple/354/woman-teacher-medium-dark-skin-tone_1f469-1f3fe-200d-1f3eb.png"
-                }
-                alt="Faculty Icon"
-              />
-              <div className="student-imgs-grid">
-                {studentImageArray.map((_, i) => (
-                  <img
-                    className="student-img"
-                    src={
-                      "https://em-content.zobj.net/thumbs/320/apple/354/woman-technologist-medium-dark-skin-tone_1f469-1f3fe-200d-1f4bb.png"
-                    }
-                    key={i}
-                    alt={`Student Icon ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : null}
-        {college?.first_generation ? (
-          <h2 className="first-gen-share">
-            First-generation Students:{" "}
-            {(parseFloat(college?.first_generation) * 100).toFixed(1)}%
-          </h2>
-        ) : null}
-        {college?.retention_rate ? (
-          <h2 className="retention-rate">
-            Retention/Graduation rate:{" "}
-            {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
-          </h2>
-        ) : null}
-        {college?.tuition_in_state || college?.tuition_out_of_state ? (
-          <div className="cost-breakdown">
-            <h2>Cost Breakdown:</h2>
-            <TuitionBarChart
-              tuitionData={tuitionData}
-              customColors={customColors}
-            ></TuitionBarChart>
-          </div>
-        ) : null}
-      </div>
-
-      {userType == "college-students-and-alumni" ? (
-        <button className="add-more-reviews-button">
-          <Link to="/mycollege">Add more reviews!</Link>
-        </button>
-      ) : null}
-
       {reviews?.length != 0 ? (
         <h2 className="alumReviews">
           Past Reviews/Ratings:
@@ -298,7 +303,7 @@ async function getUpdatedScore(reading, writing, math) {
           ))}
         </h2>
       ) : (
-        <h2> No reviews posted for this college yet. </h2>
+        <h2 className="alumReviews"> No reviews posted for this college yet. </h2>
       )}
     </div>
   );

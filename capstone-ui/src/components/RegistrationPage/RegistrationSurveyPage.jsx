@@ -110,12 +110,20 @@ export default function RegistrationSurveyPage({
           <button
             className="yes_button"
             onClick={() => setSelectedButton({ ...selectedButton, sat: "Yes" })}
+            style={{
+              background:
+                selectedButton.sat === "Yes" ? "lightBlue" : "",
+            }}
           >
             Yes
           </button>
           <button
             className="no_button"
             onClick={() => setSelectedButton({ ...selectedButton, sat: "No" })}
+            style={{
+              background:
+                selectedButton.sat === "No" ? "#FFCCCB" : "",
+            }}
           >
             No
           </button>
@@ -137,12 +145,20 @@ export default function RegistrationSurveyPage({
           <button
             className="yes_button"
             onClick={() => setSelectedButton({ ...selectedButton, act: "Yes" })}
+            style={{
+              background:
+                selectedButton.act === "Yes" ? "lightBlue" : "",
+            }}
           >
             Yes
           </button>
           <button
             className="no_button"
             onClick={() => setSelectedButton({ ...selectedButton, act: "No" })}
+            style={{
+              background:
+                selectedButton.act === "No" ? "#FFCCCB" : "",
+            }}
           >
             No
           </button>

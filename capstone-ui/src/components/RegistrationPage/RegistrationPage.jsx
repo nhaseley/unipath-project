@@ -41,6 +41,7 @@ export default function RegistrationPage({
           className="student"
           value="student"
           onClick={handleChangeUserType}
+          style={{ background: userType === "student" ? "lightblue" : "" }}
         >
           Student
         </button>
@@ -49,6 +50,7 @@ export default function RegistrationPage({
           className="parent"
           value="parent"
           onClick={handleChangeUserType}
+          style={{ background: userType === "parent" ? "lightblue" : "" }}
         >
           Parent/Guardian of Student
         </button>
@@ -57,6 +59,7 @@ export default function RegistrationPage({
           className="college-admission-officer"
           value="college-admission-officer"
           onClick={handleChangeUserType}
+          style={{ background: userType === "college-admission-officer" ? "lightblue" : "" }}
         >
           College Admission Officer
         </button>
@@ -64,14 +67,13 @@ export default function RegistrationPage({
           className="college-students-and-alumni"
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
+          style={{ background: userType === "college-students-and-alumni" ? "lightblue" : "" }}
         >
           College Student/Alum
         </button>
       </div>
-      {/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */}
-      {/* will need somethin similar for another other user with "next" */}
+
       {userType == "student" ? (
-        // useState for "Next" click goes here...
         nextRegistrationPage ? (
           <StudentRegistrationForm
             userLoginInfo={userLoginInfo}
@@ -80,7 +82,7 @@ export default function RegistrationPage({
             handleHidePassword={handleHidePassword}
             passwordDisplayed={passwordDisplayed}
             error={error}
-            nextRegistrationPage={nextRegistrationPage}
+            nextRegistrationPage={nextRegistrationPage} // setting to true onClick for next button
             setNextRegistrationPage={setNextRegistrationPage}
           />
         ) : (
