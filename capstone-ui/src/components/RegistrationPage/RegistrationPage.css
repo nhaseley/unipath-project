@@ -12,7 +12,8 @@
 
 .student-registration,
 .registration-survey-page,
-.alumn-survey-page {
+.alumn-survey-page,
+.event-registration {
   background-color: #f0f0f0;
   width: fit-content;
   height: fit-content;
@@ -26,7 +27,8 @@
 .create_parent_header,
 .parent_prompt,
 .create_alum_header,
-.create_admin_header {
+.create_admin_header,
+.post_new_event_header {
   text-align: center;
 }
 
@@ -54,7 +56,7 @@
 }
 .next-page,
 .registration-submit,
-.back-to-register-button {
+.back-to-register-button, .event-registration-submit {
   text-decoration: none;
   color: black;
   background-color: transparent;
@@ -90,7 +92,13 @@
 .sat-input,
 .act-input,
 .enrollment-input,
-.school-type {
+.school-type,
+.event-dept-input,
+.event-name-input,
+.event-desc-input,
+.event-speaker-input,
+.event-max-registrants-input,
+.event-date-time-input {
   height: 3.75vh;
   width: 25vw;
   background-color: white;
@@ -100,6 +108,9 @@
   font-size: 1rem;
 }
 
+.event-desc-input{
+  height: 10vh
+}
 input:focus {
   /* outline: ; */
   /* border-color: blue;

@@ -37,9 +37,7 @@
   transition: transform 0.3s ease;
   transform: scale(1.2);
 }
-.event-name {
-  font-size: 2.2em;
-}
+
 .event-college {
   display: flex;
   align-items: center;
@@ -127,4 +125,23 @@
   margin-bottom: 10px;
   justify-content: center;
   height: 25px;
+}
+
+.event-registration {
+  margin: auto;
+  margin-top: 5vh;
+}
+
+.post_new_event_header {
+  padding-top: 1vh;
+}
+
+.event-name,
+.event-email,
+.event-date-time,
+.event-speaker,
+.event-dept,
+.event-max-registrants,
+.event-desc {
+  height: 8vh;
 }

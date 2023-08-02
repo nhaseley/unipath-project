@@ -202,18 +202,21 @@ export default function AdminRegistrationPage({
           </div>
           <div className="select_college_admin_container">
             <p className="p_select_college">Select Your Institution</p>
-          <select className="select_college_admin_bar" onChange={handleCollegeSelect}>
-            {/* Sorting dropdown options in alphabetical order */}
-            {/* wb the onclick to make the decision */}
-            {collegeOptions
-              .slice()
-              .sort((a, b) => a.name.localeCompare(b.name))
-              .map((college, i) => (
-                <option key={i} value={college.name}>
-                  {college.name}
-                </option>
-              ))}
-          </select>
+            <select
+              className="select_college_admin_bar"
+              onChange={handleCollegeSelect}
+            >
+              {/* Sorting dropdown options in alphabetical order */}
+              {/* wb the onclick to make the decision */}
+              {collegeOptions
+                .slice()
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((college, i) => (
+                  <option key={i} value={college.name}>
+                    {college.name}
+                  </option>
+                ))}
+            </select>
           </div>
         </form>
 

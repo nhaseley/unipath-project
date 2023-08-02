@@ -39,7 +39,14 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
         ) : (
           <ul className="navItems">
             <li>
-              <Link to={"/about"}>About Us</Link>
+              <a className="about_link"
+                style={{ scrollBehavior: "smooth" }}
+                href="#biography"
+                // Adjust this value to fine-tune the scroll position if necessary
+                duration={500} // Duration of the smooth scroll animation in milliseconds
+              >
+                About Us
+              </a>
             </li>
             <li>
               <Link to={"/register"}>Register</Link>
@@ -47,7 +54,6 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
             <li>
               <Link to={"/login"}>Login</Link>
             </li>
-            
           </ul>
         )}
       </div>
