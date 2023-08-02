@@ -18,6 +18,7 @@ jest.clearAllMocks())
 
 
 describe("AdmissionOfficer fetchAdmissionOfficerByEmail", () => {
+
     test('should return the admission officer with the given email', async () => {
       const mockResult = {
         rows: [
@@ -51,35 +52,32 @@ describe("AdmissionOfficer fetchAdmissionOfficerByEmail", () => {
     describe("The authenticate/ login", () => {
 
         const expectedPassword = 'test-password';
-        // Mock bcrypt.hash
         bcrypt.hash.mockImplementation(async (password) => password);
-        // Mock bcrypt.compare
         bcrypt.compare.mockImplementation(async (plainTextPassword, hashedPassword) => plainTextPassword === expectedPassword);
 
-        
-        // test('should return the officer if email and password exist and match in the db', async () => {
-        //   validateFields.mockImplementation(() => {});
+        test('authenticate should return the user if email and password exists and match in the db', async function () {
+          validateFields.mockImplementation(() => {});
+          const mockAdmin = {
+            id: 0,
+            work_email: 'test-email@test.com',
+            first_name: 'test-first_name',
+            last_name: 'test-last_name',
+            college_name: 'test-college',
+            password: 'test-hashed-password'
+          }
 
-        //   const mockOfficer = {
-        //     id: 0,
-        //     email: 'test-email@test.com',
-        //     firstName: undefined,
-        //     lastName: undefined,
-        //     password: 'test-password',
-        //     college: 'test-college'
-        //   };
-        //   AdmissionOfficer.fetchAdmissionOfficerByEmail = jest.fn().mockReturnValue(mockOfficer)
-        //   bcrypt.compare.mockResolvedValue(true);
-        //   const result = await AdmissionOfficer.authenticate({ email: 'test-email@test.com', password: 'test-password' });
-        //   expect(result).toEqual({
-        //     id: 0,
-        //     email: 'test-email@test.com',
-        //     firstName: 'test-first_name',
-        //     lastName: 'test-last_name',
-        //     college: 'test-college'
-        //   });
-        // });
-      
+          AdmissionOfficer.fetchAdmissionOfficerByEmail = jest.fn().mockResolvedValue(mockAdmin)
+          const result =  await AdmissionOfficer.authenticate( {email: 'test-email@test.com', password: 'test-password'} )
+    
+          expect(result).toEqual({
+            id: 0,
+            email: 'test-email@test.com', 
+            firstName: 'test-first_name',
+            lastName: 'test-last_name',
+            collegeName: 'test-college'   
+        })
+        })
+        
         test("should throw UnauthorizedError if user hasn't registered yet", async function () {
           validateFields.mockImplementation(() => {});
           AdmissionOfficer.fetchAdmissionOfficerByEmail = jest.fn().mockResolvedValue(undefined);
@@ -110,5 +108,115 @@ describe("AdmissionOfficer fetchAdmissionOfficerByEmail", () => {
         });
       });
 })
+
+
+
+
+
+
+describe("Admin register", () => {
+  const db = require('../db.js')
+
+  afterEach(() => {
+    jest.clearAllMocks(); // Clear mocks after each test
+  });
+
+
+  test('should register a new Admin successfully', async () => {
+
+    validateFields.mockImplementation(() => {});
+    // Mock the fetchAdmissionOfficerByEmail function to return undefined, indicating that the email is not already registered
+    AdmissionOfficer.fetchAdmissionOfficerByEmail = jest.fn().mockResolvedValue(undefined);
+
+
+    
+
+    const expectedRow = {
+      id: 1,
+      work_email: 'testing@email.com',
+      first_name: 'testingFirstName',
+      last_name: 'testingLastName',
+      college_name: 'Test-College',
+    };
+
+    // db.query.mockResolvedValue({ rows: [expectedRow] });
+    
+    db.query = jest.fn().mockResolvedValue({rows: [expectedRow]});
+
+
+    const creds = {
+      email: 'testing@email.com',
+      firstName: 'testingFirstName',
+      lastName: 'testingLastName',
+      collegeName: 'Test-College',
+      password: 'test-password'
+    };
+
+
+    // Call the register function with valid credentials
+    const result = await AdmissionOfficer.register( creds);
+
+    expect(result).toEqual({
+      id: 1,
+      work_email: 'testing@email.com',
+      first_name: 'testingFirstName',
+      last_name: 'testingLastName',
+      college_name: 'Test-College' 
+      });
+  });
+
+
+
+  test("should throw BadRequestError if credentials are missing", async function () {
+    // Mock the validateFields function to throw an error for missing credentials
+    validateFields.mockImplementation(() => {
+      throw new BadRequestError('Missing required fields');
+    });
+
+    // Call the register function with missing credentials
+    try {
+      await AdmissionOfficer.register({
+        email: 'test-email@test.com',
+        firstName: 'test-first_name',
+        lastName: 'test-last_name',
+        collegeName: '',
+      });
+    } catch (err) {
+      expect(err instanceof BadRequestError).toBeTruthy();
+    }
+  });
+
+  test("should throw BadRequestError if email is already registered", async function () {
+    // Mock the validateFields function to avoid throwing errors
+    validateFields.mockImplementation(() => {});
+
+    // Mock the fetchParentByEmail function to return a valid parent, indicating that the email is already registered
+    const mockAdmission = {
+      id: 1,
+      work_email: 'test-email@test.com',
+      first_name: 'test-first_name',
+      last_name: 'test-last_name',
+      college_name: 'test-college',
+    };
+    AdmissionOfficer.fetchAdmissionOfficerByEmail = jest.fn().mockResolvedValue(mockAdmission);
+
+    // Call the register function with a duplicate email
+    try {
+      await AdmissionOfficer.register({
+        work_email: 'test-email@test.com',
+        first_name: 'test-first_name',
+        last_name: 'test-last_name',
+        college_name: 'test-college'
+      });
+    } catch (err) {
+      expect(err instanceof BadRequestError).toBeTruthy();
+    }
+  });
+});
+
+
+
+
+
 
 

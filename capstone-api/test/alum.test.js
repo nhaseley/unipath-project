@@ -60,7 +60,7 @@ describe('authenticate', () => {
             first_name: 'test-first_name',
             last_name: 'test-last_name',
             password: 'test-hashed-password',
-            college: 'test-college',
+            college_name: 'test-college',
             college_grad_year: 2020
           };
           Alum.fetchAlumByEmail = jest.fn().mockResolvedValue(mockAlum);
@@ -71,7 +71,7 @@ describe('authenticate', () => {
             email: 'test-email@test.com',
             firstName: 'test-first_name',
             lastName: 'test-last_name',
-            college: 'test-college',
+            collegeName: 'test-college',
             collegeGradYear: 2020
           });
         });

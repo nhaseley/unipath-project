@@ -20,10 +20,13 @@
     /* height: 5%; */
     width: 10%;
 }
-.faculty-img{
+
+
+/* .faculty-img{ */
     /* height: 5%; */
     /* width: 5% */
-}
+/* } */
+
 .students-and-faculty-imgs{
     display: flex;
     align-items: center;
