@@ -37,6 +37,23 @@
 }
 
 
+.guyInLibraryDiv{
+  display: flex;
+  justify-content: center;
+}
+.guyInLibrary{ 
+/* overflow-clip-margin: content-box; */
+   /* overflow: clip; */
+  /* width: fit-content;  */
+  display: flex;
+  width: 1795px;
+  /* height: 600px; */
+  height: 28.125rem;
+  justify-content: center;
+  /* border-radius: 3%; */
+ }
+
+
 
 
 
