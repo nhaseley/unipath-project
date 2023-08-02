@@ -11,7 +11,8 @@
 }
 
 .student-registration,
-.registration-survey-page {
+.registration-survey-page,
+.alumn-survey-page {
   background-color: #f0f0f0;
   width: fit-content;
   height: fit-content;
@@ -21,7 +22,11 @@
   border-radius: 0.5rem;
 }
 
-.create_student_header {
+.create_student_header,
+.create_parent_header,
+.parent_prompt,
+.create_alum_header,
+.create_admin_header {
   text-align: center;
 }
 
@@ -31,7 +36,8 @@
 .password,
 .confirm-password,
 .parent-phone,
-.zipcode {
+.zipcode,
+.work-email {
   display: flex;
   padding-bottom: 2.2vh;
   justify-content: center;
@@ -64,10 +70,6 @@
 .next-page:hover {
   background-color: goldenrod;
   color: black;
-}
-.login-button {
-  text-decoration: none;
-  color: white;
 }
 
 .student,
@@ -104,6 +106,7 @@ input:focus {
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.6); */
   outline: 0 none;
 }
+
 .confirm-password-toggle,
 .password-toggle {
   font-size: 1rem;
@@ -145,7 +148,9 @@ input:focus {
 }
 
 .select_minority_bar,
-.select_size_bar {
+.select_size_bar,
+.select_college_bar,
+.select_college_admin_bar {
   width: 15vw;
   height: 4vh;
   border-color: rgb(213, 213, 213);
@@ -153,7 +158,12 @@ input:focus {
   font-size: 1rem;
 }
 
-.registration-submit {
+.select_college_bar {
+  width: 25vw;
+}
+
+.registration-submit,
+.login-submit {
   border-color: rgb(0, 176, 0);
   margin-left: 17vw;
 }
@@ -184,12 +194,28 @@ input:focus {
   width: 5vw;
 }
 
-.no_button{
+.no_button {
   margin-left: 2vw;
 }
 
 .yes_no_container {
   margin-left: 2vw;
+}
 
-  
+.parent_prompt {
+  width: 25vw;
+  margin: 0 auto;
+  padding-bottom: 2vh;
+}
+
+.select_college_admin_bar {
+  display: block;
+  margin: 0 auto;
+  width: 25.5vw;
+}
+
+.p_select_college {
+  padding-left: 4.5vw;
+  margin: 0;
+  padding-bottom: 1vh;
 }

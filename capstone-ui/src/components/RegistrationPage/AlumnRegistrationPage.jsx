@@ -1,67 +1,75 @@
 import { Link } from "react-router-dom";
 
-export default function AlumnRegistrationPage(  
-    {userLoginInfo,
-    setUserLoginInfo,
-    handleShowPassword,
-    handleHidePassword,
-    passwordDisplayed,
-    error}
-    ) {
-      
-    function handleDemo() {
-        setUserLoginInfo({
-            email: "nylevenya@brown.edu",
-            firstName: "nya",
-            lastName: "haseley-ayende",
-            password: "2003nyleve",
-            confirmPassword: "2003nyleve",
-          });
-    }
+export default function AlumnRegistrationPage({
+  userLoginInfo,
+  setUserLoginInfo,
+  handleShowPassword,
+  handleHidePassword,
+  passwordDisplayed,
+  error,
+  nextAlumnRegistrationPage,
+  setNextAlumnRegistrationPage,
+}) {
+  function handleDemo() {
+    setUserLoginInfo({
+      email: "nylevenya@brown.edu",
+      firstName: "nya",
+      lastName: "haseley-ayende",
+      password: "2003nyleve",
+      confirmPassword: "2003nyleve",
+    });
+  }
 
-    return (
-        <div className="alumn-registration">
-            <h2>Create an alumn/college student account</h2>
-            <form className="alumn-form">
+  function handleNextAlumn() {
+    // set useState to true, so it goes to next page.
+    console.log(nextAlumnRegistrationPage);
+    setNextAlumnRegistrationPage(!nextAlumnRegistrationPage);
+    console.log(nextAlumnRegistrationPage);
+  }
 
-              <div className="names">
-                <div className="first-name">
-                    <input 
-                    className="first-name-input"
-                    type="text"
-                    placeholder="First Name"
-                    value={userLoginInfo.firstName}
-                    onChange={(e) =>
-                        setUserLoginInfo((u) => ({
-                         ...u,
-                         firstName: e.target.value,
-                        }))
-                      }
-                     />
-                </div>
+  return (
+    <div className="student-registration">
+      <h2 className="create_alum_header">
+        Create an Alumn/College Student account:
+      </h2>
+      <form className="alumn-form">
+        <div className="names">
+          <div className="first-name">
+            <input
+              className="first-name-input"
+              type="text"
+              placeholder="First Name"
+              value={userLoginInfo.firstName}
+              onChange={(e) =>
+                setUserLoginInfo((u) => ({
+                  ...u,
+                  firstName: e.target.value,
+                }))
+              }
+            />
+          </div>
 
-                <div className="last-name">
-                <input 
-                    className="last-name-input"
-                    type="text"
-                    placeholder="Last Name"
-                    value={userLoginInfo.lastName}
-                    onChange={(e) =>
-                        setUserLoginInfo((u) => ({
-                         ...u,
-                         lastName: e.target.value,
-                        }))
-                      }
-                     />
-                </div>
-              </div>
+          <div className="last-name">
+            <input
+              className="last-name-input"
+              type="text"
+              placeholder="Last Name"
+              value={userLoginInfo.lastName}
+              onChange={(e) =>
+                setUserLoginInfo((u) => ({
+                  ...u,
+                  lastName: e.target.value,
+                }))
+              }
+            />
+          </div>
+        </div>
 
-              <div className="email">
-
-          <img
+        <div className="email">
+          {/* <img
             src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
             className="email-img"
-          ></img>
+          ></img> */}
           <input
             className="email-input"
             type="email"
@@ -74,10 +82,10 @@ export default function AlumnRegistrationPage(
         </div>
 
         <div className="password">
-          <img
+          {/* <img
             src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
             className="password-img"
-          ></img>
+          ></img> */}
           <input
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
@@ -102,10 +110,10 @@ export default function AlumnRegistrationPage(
         </div>
 
         <div className="confirm-password">
-          <img
+          {/* <img
             src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
             className="password-img"
-          ></img>
+          ></img> */}
 
           <input
             name="confirm-password"
@@ -134,19 +142,26 @@ export default function AlumnRegistrationPage(
           </button>
         </div>
         <div className="error">
-          {error.status
-            ? "Registration Failed: " +
-              error.message
-            : null}
+          {error.status ? "Registration Failed: " + error.message : null}
         </div>
       </form>
 
       <button className="demo-button" onClick={handleDemo}>
         Demo Registration
       </button>
-      <button className="next-page">
-        <Link to={"/registration-survey/alumn"}>Next</Link>
+      <button className="next-page" onClick={handleNextAlumn}>
+        Next
       </button>
+
+      <div className="login_prompt">
+        Already have an account?
+        <Link style={{ color: "#a57548" }} to={"/login"}>
+          {" "}
+          Login{" "}
+        </Link>
+      </div>
     </div>
   );
 }
+
+

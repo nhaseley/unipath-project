@@ -61,6 +61,8 @@ export default function App() {
   ];
 
   const [nextRegistrationPage, setNextRegistrationPage] = useState(true);
+  const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] =
+    useState(true);
 
   console.log(userLoginInfo);
 
@@ -84,7 +86,9 @@ export default function App() {
             actScore: response.data.actScore,
             enrollment: response.data.enrollment,
             schoolType: response.data.schoolType,
-            collegeName: response.data.collegeName? response.data.collegeName: selectedCollegeStored,
+            collegeName: response.data.collegeName
+              ? response.data.collegeName
+              : selectedCollegeStored,
             collegeGradYear: response.data.collegeGradYear,
           });
           // TODO: fix refresh for events, reviews pages for students/parents
@@ -168,7 +172,12 @@ export default function App() {
               <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
             }
           >
-            <Route path="/" element={<HomePage userLoggedIn={userLoggedIn} userType={userType} />}></Route>
+            <Route
+              path="/"
+              element={
+                <HomePage userLoggedIn={userLoggedIn} userType={userType} />
+              }
+            ></Route>
 
             <Route
               path="/login"
@@ -203,8 +212,12 @@ export default function App() {
                   setError={setError}
                   userType={userType}
                   setUserType={setUserType}
+                  // for the Student survey
                   nextRegistrationPage={nextRegistrationPage}
                   setNextRegistrationPage={setNextRegistrationPage}
+                  // for the Alumn survey
+                  nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+                  setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
                 />
               }
             />
@@ -231,6 +244,8 @@ export default function App() {
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
                   userType={userType}
+                  nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+                  setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
                 />
               }
             ></Route>
