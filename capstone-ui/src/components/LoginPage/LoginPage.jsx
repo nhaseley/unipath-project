@@ -24,16 +24,16 @@ export default function LoginPage({
   function handleDemo(event) {
     event.preventDefault();
 
-    userType == "college-admission-officer" || userType == "college-students-and-alumni"
+    userType == "college-admission-officer" ||
+    userType == "college-students-and-alumni"
       ? setUserLoginInfo({
           email: "nylevenya@brown.edu",
-          password: "2003nyleve"
+          password: "2003nyleve",
         })
       : setUserLoginInfo({
           email: "nylevenya@hotmail.com",
           password: "2003nyleve",
         });
-
   }
   async function handleLogin(event) {
     event.preventDefault();
@@ -118,8 +118,8 @@ export default function LoginPage({
       </div>
 
       {userType ? (
-        <div>
-          <h2> Welcome Back! </h2>
+        <div className="student-registration">
+          <h2 className="login_header"> Welcome Back! </h2>
           <form className="login-form">
             <div className="email">
               {/* <img
@@ -168,20 +168,18 @@ export default function LoginPage({
             </button>
 
             <div className="error">
-              {error.status
-                ? "Login Failed: " +
-                  error.message
-                : null}
+              {error.status ? "Login Failed: " + error.message : null}
             </div>
           </form>
           <button className="login-submit" onClick={handleLogin}>
             Submit
           </button>
-          <div>
+          <div className="register_prompt">
             Don't have an account?
-            <button className="register-button">
-              <Link to={"/register"}> Register </Link>
-            </button>
+            <Link style={{ color: "#a57548" }} to={"/register"}>
+              {" "}
+              Register{" "}
+            </Link>
           </div>
         </div>
       ) : null}

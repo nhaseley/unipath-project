@@ -61,6 +61,8 @@ export default function App() {
   ];
 
   const [nextRegistrationPage, setNextRegistrationPage] = useState(true);
+  const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] =
+    useState(true);
 
   console.log("user info: ", userLoginInfo);
 
@@ -218,8 +220,12 @@ export default function App() {
                   setError={setError}
                   userType={userType}
                   setUserType={setUserType}
+                  // for the Student survey
                   nextRegistrationPage={nextRegistrationPage}
                   setNextRegistrationPage={setNextRegistrationPage}
+                  // for the Alumn survey
+                  nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+                  setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
                 />
               }
             />
@@ -246,6 +252,8 @@ export default function App() {
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
                   userType={userType}
+                  nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+                  setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
                 />
               }
             ></Route>

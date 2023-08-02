@@ -35,6 +35,10 @@ h1 {
   line-height: 1.1;
 }
 
+h2{
+  font-weight: normal;
+}
+
 button {
   /* border-radius: 8px; */
   border: 1px solid transparent;
@@ -54,15 +58,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+
   :root {
-    color: #354F52;
+    color: #26393b;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #84A98C;
-  }
-  button {
-    /* background-color: #354F52; */
-  }
+  
+  
+
+button {
+  font-weight: normal;
 }

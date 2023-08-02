@@ -11,7 +11,7 @@ export default function AdminRegistrationPage({
   handleHidePassword,
   passwordDisplayed,
   error,
-  setError
+  setError,
 }) {
   const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
@@ -83,149 +83,157 @@ export default function AdminRegistrationPage({
   }
 
   return (
-    <div className="admin-registration">
-        <div className="admin-logged-in-page">
-          <h2>Create a College Admission Officer account</h2>
-          <form className="admin-form">
-            <div className="names">
-              <div className="first-name">
-                <input
-                  className="first-name-input"
-                  type="text"
-                  placeholder="First Name"
-                  value={userLoginInfo.firstName}
-                  onChange={(e) =>
-                    setUserLoginInfo((u) => ({
-                      ...u,
-                      firstName: e.target.value,
-                    }))
-                  }
-                />
-              </div>
-
-              <div className="last-name">
-                <input
-                  className="last-name-input"
-                  type="text"
-                  placeholder="Last Name"
-                  value={userLoginInfo.lastName}
-                  onChange={(e) =>
-                    setUserLoginInfo((u) => ({
-                      ...u,
-                      lastName: e.target.value,
-                    }))
-                  }
-                />
-              </div>
-            </div>
-
-            <div className="work-email">
-              {/* <img
-                src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
-                className="email-img"
-              ></img> */}
+    <div className="student-registration">
+      <div className="admin-logged-in-page">
+        <h2 className="create_admin_header">
+          Create a College Admission Officer account:
+        </h2>
+        <form className="registration-form">
+          <div className="names">
+            <div className="first-name">
               <input
-                className="email-input"
-                type="email"
-                placeholder="Work/Institution Email"
-                value={userLoginInfo.email}
-                onChange={(e) =>
-                  setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
-                }
-              ></input>
-            </div>
-
-            <div className="password">
-              {/* <img
-                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-                className="password-img"
-              ></img> */}
-              <input
-                className="password-input"
-                type={passwordDisplayed.password ? "text" : "password"}
-                placeholder="Password"
-                value={userLoginInfo.password}
-                onChange={(e) =>
-                  setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
-                }
-              ></input>
-              <button
-                name="password-toggle"
-                className="password-toggle"
-                type="button"
-                onClick={
-                  passwordDisplayed.password
-                    ? handleHidePassword
-                    : handleShowPassword
-                }
-              >
-                {passwordDisplayed.password ? "Hide" : "Show"}
-              </button>
-            </div>
-
-            <div className="confirm-password">
-              {/* <img
-                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-                className="password-img"
-              ></img> */}
-
-              <input
-                name="confirm-password"
-                type={passwordDisplayed.confirmPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                className="confirm-password-input"
-                value={userLoginInfo.confirmPassword}
+                className="first-name-input"
+                type="text"
+                placeholder="First Name"
+                value={userLoginInfo.firstName}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({
                     ...u,
-                    confirmPassword: e.target.value,
+                    firstName: e.target.value,
                   }))
                 }
-              ></input>
-              <button
-                name="confirm-password-toggle"
-                type="button"
-                className="confirm-password-toggle"
-                onClick={
-                  passwordDisplayed.confirmPassword
-                    ? handleHidePassword
-                    : handleShowPassword
-                }
-              >
-                {passwordDisplayed.confirmPassword ? "Hide" : "Show"}
-              </button>
+              />
             </div>
-            <div className="error">
-              {error.status
-                ? "Registration Failed: " +
-                  error.message
-                : null}
-            </div>
-            <select onChange={handleCollegeSelect}>
-              {/* Sorting dropdown options in alphabetical order */}
-              {/* wb the onclick to make the decision */}
-              {collegeOptions
-                .slice()
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((college, i) => (
-                  <option key={i} value={college.name}>
-                    {college.name}
-                  </option>
-                ))}
-            </select>
-          </form>
 
-          <button className="demo-button" onClick={handleDemo}>
-            Demo Registration
-          </button>
-          <button
-            className="registration-submit"
-            onClick={handleAdminRegistration}
-          >
-            <Link to={"/register/"}> Submit</Link>
-          </button>
-        </div>
-      {/* )} */}
+            <div className="last-name">
+              <input
+                className="last-name-input"
+                type="text"
+                placeholder="Last Name"
+                value={userLoginInfo.lastName}
+                onChange={(e) =>
+                  setUserLoginInfo((u) => ({
+                    ...u,
+                    lastName: e.target.value,
+                  }))
+                }
+              />
+            </div>
+          </div>
+
+          <div className="work-email">
+            {/* <img
+                src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
+                className="email-img"
+              ></img> */}
+            <input
+              className="email-input"
+              type="email"
+              placeholder="Work/Institution Email"
+              value={userLoginInfo.email}
+              onChange={(e) =>
+                setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
+              }
+            ></input>
+          </div>
+
+          <div className="password">
+            {/* <img
+                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
+                className="password-img"
+              ></img> */}
+            <input
+              className="password-input"
+              type={passwordDisplayed.password ? "text" : "password"}
+              placeholder="Password"
+              value={userLoginInfo.password}
+              onChange={(e) =>
+                setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
+              }
+            ></input>
+            <button
+              name="password-toggle"
+              className="password-toggle"
+              type="button"
+              onClick={
+                passwordDisplayed.password
+                  ? handleHidePassword
+                  : handleShowPassword
+              }
+            >
+              {passwordDisplayed.password ? "Hide" : "Show"}
+            </button>
+          </div>
+
+          <div className="confirm-password">
+            {/* <img
+                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
+                className="password-img"
+              ></img> */}
+
+            <input
+              name="confirm-password"
+              type={passwordDisplayed.confirmPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              className="confirm-password-input"
+              value={userLoginInfo.confirmPassword}
+              onChange={(e) =>
+                setUserLoginInfo((u) => ({
+                  ...u,
+                  confirmPassword: e.target.value,
+                }))
+              }
+            ></input>
+            <button
+              name="confirm-password-toggle"
+              type="button"
+              className="confirm-password-toggle"
+              onClick={
+                passwordDisplayed.confirmPassword
+                  ? handleHidePassword
+                  : handleShowPassword
+              }
+            >
+              {passwordDisplayed.confirmPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          <div className="error">
+            {error.status ? "Registration Failed: " + error.message : null}
+          </div>
+          <div className="select_college_admin_container">
+            <p className="p_select_college"> Your Institution</p>
+          <select className="select_college_admin_bar" onChange={handleCollegeSelect}>
+            {/* Sorting dropdown options in alphabetical order */}
+            {/* wb the onclick to make the decision */}
+            {collegeOptions
+              .slice()
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((college, i) => (
+                <option key={i} value={college.name}>
+                  {college.name}
+                </option>
+              ))}
+          </select>
+          </div>
+        </form>
+
+        <button className="demo-button" onClick={handleDemo}>
+          Demo Registration
+        </button>
+        <button
+          className="registration-submit"
+          onClick={handleAdminRegistration}
+        >
+          <Link to={"/register/"}> Submit</Link>
+        </button>
+      </div>
+      <div className="login_prompt">
+        Already have an account?
+        <Link style={{ color: "#a57548" }} to={"/login"}>
+          {" "}
+          Login{" "}
+        </Link>
+      </div>
     </div>
   );
 }
