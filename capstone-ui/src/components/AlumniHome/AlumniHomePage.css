@@ -1,0 +1,25 @@
+.alumni-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.alumni-view-college{
+    display:flex;
+    align-items:center
+}
+.alumni-college-button{
+    font-size:1.5em;
+    color: #213547;
+    background: lightyellow;
+    max-height: 7vh;
+}
+.incorrect-user-type-button{
+    font-size:3.2em;
+    color: #354F52;
+    font-weight: bold;
+    max-height: 7vh;
+}
+.alumni-home-page{
+    display:flex;
+}

@@ -24,16 +24,16 @@ export default function LoginPage({
   function handleDemo(event) {
     event.preventDefault();
 
-    userType == "college-admission-officer" || userType == "college-students-and-alumni"
+    userType == "college-admission-officer" ||
+    userType == "college-students-and-alumni"
       ? setUserLoginInfo({
           email: "nylevenya@brown.edu",
-          password: "2003nyleve"
+          password: "2003nyleve",
         })
       : setUserLoginInfo({
           email: "nylevenya@hotmail.com",
           password: "2003nyleve",
         });
-
   }
   async function handleLogin(event) {
     event.preventDefault();
@@ -118,14 +118,14 @@ export default function LoginPage({
       </div>
 
       {userType ? (
-        <div>
-          <h2> Welcome Back! </h2>
+        <div className="student-registration">
+          <h2 className="login_header"> Welcome Back! </h2>
           <form className="login-form">
             <div className="email">
-              <img
+              {/* <img
                 src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
                 className="email-img"
-              ></img>
+              ></img> */}
               <input
                 className="email-input"
                 type="email"
@@ -137,15 +137,15 @@ export default function LoginPage({
               ></input>
             </div>
             <div className="password">
-              <img
+              {/* <img
                 src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
                 className="password-img"
-              ></img>
+              ></img> */}
               <input
                 className="password-input"
                 type={passwordDisplayed.password ? "text" : "password"}
                 placeholder="Password"
-                value={userLoginInfo?.password}
+                value={userLoginInfo.password}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
                 }
@@ -153,6 +153,7 @@ export default function LoginPage({
               <button
                 className="password-toggle"
                 name="password-toggle"
+                type="button"
                 onClick={
                   passwordDisplayed.password
                     ? handleHidePassword
@@ -167,20 +168,18 @@ export default function LoginPage({
             </button>
 
             <div className="error">
-              {error.status
-                ? "Login Failed: " +
-                  error.message
-                : null}
+              {error.status ? "Login Failed: " + error.message : null}
             </div>
           </form>
           <button className="login-submit" onClick={handleLogin}>
             Submit
           </button>
-          <div>
+          <div className="register_prompt">
             Don't have an account?
-            <button className="register-button">
-              <Link to={"/register"}> Register </Link>
-            </button>
+            <Link style={{ color: "#a57548" }} to={"/register"}>
+              {" "}
+              Register{" "}
+            </Link>
           </div>
         </div>
       ) : null}

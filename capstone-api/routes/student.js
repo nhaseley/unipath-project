@@ -23,8 +23,12 @@ router.post("/like", async function (req, res, next) {
 
 router.post("/colleges", async function (req, res, next) {
   try {
+    console.log("PASSING INTO COLLEGE FEED", req.body.satScore)
+    oldSATScore = await Student. getOldSATScore(req.body.satScore)
+    console.log("AFTER CONVERTING", oldSATScore)
     const collegesToDisplay = await Student.getCollegeFeed(
-      req.body.satScore,
+      oldSATScore,
+      // req.body.satScore,
       req.body.actScore,
       req.body.schoolType,
       req.body.enrollment
@@ -88,20 +92,32 @@ router.delete("/removeEventRegistration", async function (req, res, next) {
   }
 });
 
-router.get('/zipcodeapi', async (req, res) => {
+router.post("/getUpdatedSATScore", async function (req, res, next) {
   try {
-    const apiKey = 'https://www.zipcodeapi.com/rest';
-    // const { fromZipcode, toZipcode } = req.query;
-
-    const response = await axios.get(
-      `https://www.zipcodeapi.com/rest/${apiKey}/distance.json/10803/10469/mile`
-    );
-    console.log("response in backend: ",response)
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch data from the API' });
+    const updatedScore = await Student.getNewCollegeSATScore(req.body.oldCollegeSAT);
+    // console.log("updated to new score: ", updatedScore)
+    return res.status(201).json(updatedScore);
+  } catch (err) {
+    res.send(err);
+    next(err);
   }
 });
+
+
+// router.get('/zipcodeapi', async (req, res) => {
+//   try {
+//     const apiKey = 'https://www.zipcodeapi.com/rest';
+//     // const { fromZipcode, toZipcode } = req.query;
+
+//     const response = await axios.get(
+//       `https://www.zipcodeapi.com/rest/${apiKey}/distance.json/10803/10469/mile`
+//     );
+//     console.log("response in backend: ",response)
+//     res.json(response.data);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to fetch data from the API' });
+//   }
+// });
 
 
 

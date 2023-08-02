@@ -10,6 +10,7 @@ export default function AlumniHomePage({
   setUserLoginInfo,
   setError,
   userType,
+  setUserType
 }) {
   const navigate = useNavigate();
   const [ratingNumber, setRatingNumber] = useState();
@@ -17,14 +18,14 @@ export default function AlumniHomePage({
 
   function handleDemo() {
     setRatingNumber(5);
-    setAdditionalReview("this is a cooooool review!");
+    setAdditionalReview("This school is the best!");
     setUserLoginInfo({
       ...userLoginInfo,
       email: "nylevenya@brown.edu",
       firstName: "nya",
       lastName: "haseley-ayende",
       ratingNumber: 5,
-      additionalReview: "this is a cooooool review!",
+      additionalReview: "This school is the best!",
     });
   }
 
@@ -82,23 +83,31 @@ export default function AlumniHomePage({
   return (
     <div className="alumni-home-page">
       {userType != "college-students-and-alumni" ? (
-        <h1>
-          Unfortunately, this page is for college students and alumni only.
-          Please log in <Link to={"/login"}> here. </Link>
-        </h1>
+        <>
+        <h1> Unfortunately, this page is for college students and alumni only.
+        Please log in </h1>
+        <button className="incorrect-user-type-button" onClick={() => setUserType("college-students-and-alumni")}>
+          <Link to={"/login"}> here. </Link>
+        </button>
+        </>
       ) : (
         <div className="alumni-logged-in-page">
-          <h1>
-            Welcome to{" "}
-            <Link
-              to={"/info/" + userLoginInfo?.collegeName}
-              className="college-link"
-            >
-              {userLoginInfo?.collegeName}
-            </Link>
-            , {userLoginInfo?.firstName}!
-          </h1>
-
+          <div className="alumni-header">
+            <h1>
+              Welcome to {userLoginInfo.collegeName}, {userLoginInfo?.firstName}
+              !
+            </h1>
+            <div className="alumni-view-college">
+            <button className="alumni-college-button">
+              <Link
+                to={"/info/" + userLoginInfo.collegeName}
+                className="college-link"
+              >
+                View Your College
+              </Link>
+            </button>
+            </div>
+          </div>
           <h2>
             You can post reviews/ratings for your college to help applicants
             find the school that fits best for them!

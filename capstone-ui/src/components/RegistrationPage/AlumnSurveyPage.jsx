@@ -8,12 +8,12 @@ export default function AlumnSurveyPage({
   userLoginInfo,
   setError,
   setUserLoginInfo,
-  userType,
+  nextAlumnRegistrationPage,
+  setNextAlumnRegistrationPage,
 }) {
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState({});
   const [graduationYear, setGraduationYear] = useState();
-  const [selectedCollege, setSelectedCollege] = useState();
   const [collegeOptions, setCollegeOptions] = useState([]);
 
   const collegeYearOptions = Array.from({ length: 44 }, (_, i) => ({
@@ -37,14 +37,16 @@ export default function AlumnSurveyPage({
     });
   }
 
-    function handleCollegeSelect(event) {
-      // TODO: fix this func
-      setSelectedCollege(event.target.value);
-      setUserLoginInfo({
-        ...userLoginInfo,
-        collegeName: event.target.value,
-      });
-    }
+  function handleCollegeSelect(event) {
+    setUserLoginInfo({
+      ...userLoginInfo,
+      collegeName: event.target.value,
+    });
+  }
+
+  function handleAlumnBack() {
+    setNextAlumnRegistrationPage(!nextAlumnRegistrationPage);
+  }
 
   async function handleAlumniRegistration(event) {
     event.preventDefault();
@@ -87,66 +89,79 @@ export default function AlumnSurveyPage({
       }
     }
   }
-
+  console.log(selectedButton);
   return (
-    <div className="alumn-survery-page">
+    <div className="alumn-survey-page">
+      <h2 className="create_alum_header">
+        Create an Alumn/College Student account:
+      </h2>
       <div className="first-question-input">
         Are you a high school graduate?
-        <button
-          onClick={() =>
-            setSelectedButton({ ...selectedButton, highsch: "Yes" })
-          }
-        >
-          Yes
-        </button>
-        <button
-          onClick={() =>
-            setSelectedButton({ ...selectedButton, highsch: "No" })
-          }
-        >
-          No
-        </button>
+        <div className="yes_no_container">
+          <button
+            className="yes_button"
+            onClick={() =>
+              setSelectedButton({ ...selectedButton, highsch: "Yes" })
+            }
+            style={{
+              background: selectedButton.highsch === "Yes" ? "lightBlue" : "",
+            }}
+          >
+            Yes
+          </button>
+          <button
+            className="no_button"
+            onClick={() =>
+              setSelectedButton({ ...selectedButton, highsch: "No" })
+            }
+            style={{ background: selectedButton.highsch === "No" ? "lightBlue" : "" }}
+          >
+            No
+          </button>
+        </div>
         {selectedButton.highsch == "Yes" ? (
           <div className="studentsAndAlumniInfo">
             <div className="whatCollege">
               What college are you affiliated with?
-              {/* <Select
-                        options={collegeOptions.slice(0, 5)}
-                        onChange={handleCollegeSelect}
-                        // value={selectedCollege}
-                        value={collegeOptions.find(
-                          (option) => option.name === selectedCollege
-                        )?.name}
-                      ></Select> */}
-              {/* {selectedCollege} */}
-              <select onChange={handleCollegeSelect}>
-                {/* Sorting dropdown options in alphabetical order */}
-                {collegeOptions
-                  .slice()
-                  .sort((a, b) => a.name.localeCompare(b.name))
-                  .map((college, i) => (
-                    <option key={i} value={college.name}>
-                      {college.name}
-                    </option>
-                  ))}
-              </select>
+              <div>
+                <select className="select_college_bar"onChange={handleCollegeSelect}>
+                  {/* Sorting dropdown options in alphabetical order */}
+                  {collegeOptions
+                    .slice()
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((college, i) => (
+                      <option key={i} value={college.name}>
+                        {college.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
             </div>
             <div className="AreYouCollegeGrad">
               Are you a college graduate?
-              <button
-                onClick={() =>
-                  setSelectedButton({ ...selectedButton, collegeUni: "Yes" })
-                }
-              >
-                Yes
-              </button>
-              <button
-                onClick={() =>
-                  setSelectedButton({ ...selectedButton, collegeUni: "No" })
-                }
-              >
-                No
-              </button>
+              <div className="yes_no_container">
+                <button className="yes_button"
+                  onClick={() =>
+                    setSelectedButton({ ...selectedButton, collegeUni: "Yes" })
+                  }
+                  style={{
+                    background:
+                      selectedButton.collegeUni === "Yes" ? "lightBlue" : "",
+                  }}
+                >
+                  Yes
+                </button>
+                <button className="no_button"
+                  onClick={() =>
+                    setSelectedButton({ ...selectedButton, collegeUni: "No" })
+                  }
+                  style={{
+                    background: selectedButton.collegeUni === "No" ? "lightBlue" : "",
+                  }}
+                >
+                  No
+                </button>
+              </div>
             </div>
             {selectedButton.collegeUni == "Yes" ? (
               <div className="yearOfCollegeGrad">
@@ -159,13 +174,6 @@ export default function AlumnSurveyPage({
                   )}
                 ></Select>
               </div>
-            ) : selectedButton.collegeUni == "No" ? (
-              <button
-                className="registration-submit"
-                onClick={handleAlumniRegistration}
-              >
-                <Link to={"/register/college-students-and-alumni"}> Submit</Link>
-              </button>
             ) : null}
           </div>
         ) : selectedButton.highsch == "No" ? (
@@ -175,6 +183,10 @@ export default function AlumnSurveyPage({
           </div>
         ) : null}
       </div>
+      <button className="back-to-register-button" onClick={handleAlumnBack}>
+        {" "}
+        Back
+      </button>
       <button
         className="registration-submit"
         onClick={handleAlumniRegistration}

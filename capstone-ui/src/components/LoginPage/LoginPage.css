@@ -1,113 +1,109 @@
-.login-page{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.email-img{
-    margin-right: 6px;
-    width: 20px;
-    height: 20px;
-}
-.email {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 40px;
-}
-.password{
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 40px;
+.email-img {
+  margin-right: 6px;
+  width: 20px;
+  height: 20px;
 }
 
-.password-img{
-    margin-right: 6px;
-    height: 20px;
-    width: 20px
+.password-img {
+  margin-right: 6px;
+  height: 20px;
+  width: 20px;
 }
 
 .user-types > button {
-    background-color:#ebf2e5;
+  background-color: #ebf2e5;
 
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .user-types > button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .login-form > button {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
+  border-radius: 0.7rem;
+  font-size: 18px;
+  border: none;
+  color: #354f52;
+  padding: 10px;
+  /* border: 2px solid #84A98C; */
+}
+.user-types > button:hover {
+  background-color: goldenrod;
+  color: white;
+}
 
-  .login-form > button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .password-toggle {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .password-toggle:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .login-submit {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .login-submit:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .register-button {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  .register-button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
-  .demo-button {
-    background-color:#ebf2e5;
-    border-radius: 0.7rem;
-    font-size: 18px;
-    border: none;
-    color: #354f52;
-    padding: 10px;
-    border: 2px solid #84A98C;
-  }
-  
-  .demo-button:hover {
-    background-color: goldenrod;
-    color: white;
-  }
+.login-form > .demo-button {
+  position: absolute;
+  margin-top: 7vh;
+}
 
-  
+.student-registration > .login-submit {
+
+position:sticky;
+margin-left: 20vw;
+}
+.password-toggle,
+.confirm-password-toggle {
+  background-color: #ebf2e5;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  border: none;
+  color: white;
+  padding: 1px;
+}
+.password-toggle:hover,
+.confirm-password-toggle:hover {
+  background-color: goldenrod;
+  color: white;
+}
+
+.login-submit {
+  border-color: rgb(0, 176, 0);
+  margin-left: 17vw;
+}
+.login_header {
+  text-align: center;
+}
+.login-submit {
+  text-decoration: none;
+  color: black;
+  background-color: transparent;
+  margin-left: 13vw;
+  padding: 1vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  margin-top: 3vh;
+  border-radius: 0.5rem;
+  border: 2px solid goldenrod;
+}
+
+.register_prompt {
+  padding-top: 3vh;
+  text-align: center;
+}
+
+.register-button {
+  background-color: #ebf2e5;
+  border-radius: 0.7rem;
+  font-size: 18px;
+  border: none;
+  color: #354f52;
+  padding: 10px;
+  /* border: 2px solid #84A98C; */
+}
+.register-button:hover {
+  background-color: goldenrod;
+  color: white;
+}
+.demo-button {
+  background-color: #92fcce;
+  border-radius: 0.4rem;
+  font-size: 1.1rem;
+  border: none;
+  color: black;
+  padding: 0.5vh;
+}
+
+.demo-button:hover {
+  background-color: goldenrod;
+  color: white;
+}

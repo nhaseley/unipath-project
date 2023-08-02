@@ -13,6 +13,7 @@ export default function CollegesPage({
   collegeArrayPointer,
   setCollegeArrayPointer,
   userType,
+  convertCollegeSAT
 }) {
   const [collegesToDisplay, setCollegesToDisplay] = useState(collegeList);
 
@@ -32,6 +33,7 @@ export default function CollegesPage({
             userLoginInfo={userLoginInfo}
             collegeList={collegeList}
             setCollegesToDisplay={setCollegesToDisplay}
+            convertCollegeSAT={convertCollegeSAT}
           ></FilterSidebar>
 
           <CollegeGrid
@@ -42,6 +44,7 @@ export default function CollegesPage({
             setCollegeArrayPointer={setCollegeArrayPointer}
             collegesToDisplay={collegesToDisplay}
             setCollegesToDisplay={setCollegesToDisplay}
+            convertCollegeSAT={convertCollegeSAT}
           ></CollegeGrid>
         </>
       )}

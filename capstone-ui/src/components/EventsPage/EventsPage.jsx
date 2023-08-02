@@ -65,7 +65,7 @@ export default function EventsPage({ userLoginInfo, userType }) {
             </button>
           ) : null}
           {events.length != 0 ? (
-            events?.map((event, i) => <EventCard key={i} event={event}></EventCard>)
+            events?.map((event, i) => <EventCard key={i} event={event} userType={userType}></EventCard>)
           ) : (
             <>
               <input
@@ -93,7 +93,7 @@ export default function EventsPage({ userLoginInfo, userType }) {
                       Events:
                     </h2>
                       {allEvents.map((event) => (
-                        <EventCard event={event}></EventCard>
+                        <EventCard event={event} userType={userType}></EventCard>
                       ))}
                   </>
                 )}

@@ -9,10 +9,9 @@ export default function ParentRegistrationForm({
   handleHidePassword,
   passwordDisplayed,
   error,
-  setError
+  setError,
 }) {
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   function handleDemo() {
     setUserLoginInfo({
@@ -30,14 +29,17 @@ export default function ParentRegistrationForm({
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
-      let result = await axios.post("http://localhost:3010/auth/register/parent", {
-        email: userLoginInfo.email,
-        firstName: userLoginInfo.firstName,
-        lastName: userLoginInfo.lastName,
-        parentPhone: userLoginInfo.parentPhone,
-        password: userLoginInfo.password
-      });
-      
+      let result = await axios.post(
+        "http://localhost:3010/auth/register/parent",
+        {
+          email: userLoginInfo.email,
+          firstName: userLoginInfo.firstName,
+          lastName: userLoginInfo.lastName,
+          parentPhone: userLoginInfo.parentPhone,
+          password: userLoginInfo.password,
+        }
+      );
+
       if (result.data.status) {
         navigate("/register");
         setError(result.data);
@@ -54,24 +56,26 @@ export default function ParentRegistrationForm({
           confirmPassword: "",
           examScores: {},
           enrollment: 0,
-          schoolType: ""
+          schoolType: "",
         });
       }
     }
   }
   return (
-    <div className="parent-registration">
-      <h2> Create a parent account: </h2>
-      <p>
+    <div className="student-registration">
+      <h2 className="create_parent_header">
+        Create a Parent/Guardian account:
+      </h2>
+      <p className="parent_prompt">
         Your phone number must match the phone number exactly listed on your
-        child's account.
+        scholar's account!
       </p>
       <form className="registration-form">
         <div className="email">
-          <img
+          {/* <img
             src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
             className="email-img"
-          ></img>
+          ></img> */}
           <input
             className="email-input"
             type="email"
@@ -129,10 +133,10 @@ export default function ParentRegistrationForm({
         </div>
 
         <div className="password">
-          <img
+          {/* <img
             src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
             className="password-img"
-          ></img>
+          ></img> */}
           <input
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
@@ -156,10 +160,10 @@ export default function ParentRegistrationForm({
           </button>
         </div>
         <div className="confirm-password">
-          <img
+          {/* <img
             src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
             className="password-img"
-          ></img>
+          ></img> */}
 
           <input
             name="confirm-password"
@@ -188,24 +192,25 @@ export default function ParentRegistrationForm({
           </button>
         </div>
         <div className="error">
-          {error.status
-            ? "Registration Failed: " +
-              error.message
-            : null}
+          {error.status ? "Registration Failed: " + error.message : null}
         </div>
       </form>
       <button className="demo-button" onClick={handleDemo}>
         Demo Registration
       </button>
-      <button className="registration-submit" onClick={handleParentRegistration}>
+      <button
+        className="registration-submit"
+        onClick={handleParentRegistration}
+      >
         <Link to={"/register/parent"}> Submit</Link>
       </button>
 
-      <div>
+      <div className="login_prompt">
         Already have an account?
-        <button className="login-button">
-          <Link to={"/login"}> Login </Link>
-        </button>
+        <Link style={{ color: "#a57548" }} to={"/login"}>
+          {" "}
+          Login{" "}
+        </Link>
       </div>
     </div>
   );

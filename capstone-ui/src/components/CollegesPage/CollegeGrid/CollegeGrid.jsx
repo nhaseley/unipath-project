@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./CollegeGrid.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import CollegeCard from "../CollegeCard/CollegeCard";
 
@@ -13,13 +12,11 @@ export default function CollegeGrid({
   collegesToDisplay,
   setCollegesToDisplay,
   setUserLoginInfo,
+  convertCollegeSAT
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [allColleges, setAllColleges] = useState([]);
   const [searchedColleges, setSearchedColleges] = useState([]);
-  const [isPreviousCollegesDisabled, setIsPreviousCollegesDisabled] = useState(true);
-  const [isSeeMoreCollegesDisabled, setIsSeeMoreCollegesDisabled] = useState(false);
-  
 
   // Function to display colleges on the grid
   async function getCollegeGrid() {
@@ -46,34 +43,25 @@ export default function CollegeGrid({
   // UseEffect to display colleges on the grid
   useEffect(() => {
     getCollegeGrid();
-    if (collegeArrayPointer === 0) {
-      setIsPreviousCollegesDisabled(true)
-      scrollToTop(); 
-    } else {
-      scrollToTop();
-    }
+    scrollToTop();
   }, [userLoginInfo, collegeArrayPointer]);
 
   //  Render each keystroke and filter collegeList with it
   function handleSearch(event) {
+    setCollegeArrayPointer(0)
+    scrollToTop();
     setSearchInput(event.target.value);
     let filteredItems = allColleges?.filter((college) =>
     college.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    // setCollegeArrayPointer(filteredItems.length)
-    console.log("filtered: ", filteredItems);
+    filteredItems.sort((a, b) => a.name.localeCompare(b.name))
+    // console.log("filtered: ", filteredItems);
     setSearchedColleges(filteredItems);
   }
 
   function incrementPage() {
     setCollegeArrayPointer(collegeArrayPointer + 20);
-    setIsPreviousCollegesDisabled(false);
-
-    if(collegeArrayPointer + 20 >= collegesToDisplay.length) {
-      setIsSeeMoreCollegesDisabled(true)
-    }
-
-
+    scrollToTop();
   }
 
   function decrementPage() {
@@ -104,7 +92,7 @@ export default function CollegeGrid({
         here are your personalized colleges!
       </h1>
       <div className="searchThings">
-        <label className="searchLabel"> Search College </label>
+        <label className="searchLabel"> Search All Colleges </label>
         <input
           className="college-search"
           label="Search"
@@ -118,22 +106,21 @@ export default function CollegeGrid({
             key={index}
             college={college}
             setUserLoginInfo={setUserLoginInfo}
+            convertCollegeSAT={convertCollegeSAT}
+            userLoginInfo={userLoginInfo}
           />
         ))}
-        {/* change functionality to be able to back to previous colleges */}
       </div>
-      <div className="incrementingButtons">
-        {/* <button className="previousColleges" onClick={() => { decrementPage(); scrollToTop(); }}> */}
-        <button className={`previousColleges ${collegeArrayPointer === 0 ? "disabled" : ""}`} onClick={() => {decrementPage(); scrollToTop();}} disabled={collegeArrayPointer === 0}>
+      <div className="paginationButtons">
+        <button className={`previousColleges ${collegeArrayPointer === 0 ? "disabled" : ""}`} onClick={() => {decrementPage()}} disabled={collegeArrayPointer === 0}>
           Previous Colleges</button>
 
-      {first20Colleges.length != 0 ? (
-        // <button className="seeMore" onClick={() => { incrementPage(); scrollToTop(); }}>
-       <button className={`seeMore ${collegeArrayPointer + 20 >= collegesToDisplay.length ? "disabled" : ""}`} onClick={() => {incrementPage();}} disabled={collegeArrayPointer + 20 >= collegesToDisplay.length}>
-        See More Colleges
-        </button>
-      ) : null}
-    </div>
+        {first20Colleges.length != 0 ? (
+        <button className={`seeMore ${collegeArrayPointer + 20 >= collegesToDisplay.length ? "disabled" : ""}`} onClick={() => {incrementPage()}} disabled={collegeArrayPointer + 20 >= collegesToDisplay.length}>
+          See More Colleges
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }

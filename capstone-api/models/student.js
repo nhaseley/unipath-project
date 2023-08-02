@@ -455,6 +455,48 @@ class Student {
     // returning if the student was removed
     return result.rowCount > 0;
   }
+
+
+  /**
+   * Convert the user's sat score in the NEW scale (out of 1600)
+   * to the sat score in the OLD scale (out of 2400) using
+   * conversion table in the database
+   *
+   * @param {String} studentId
+   * @returns student
+   */
+  static async getOldSATScore(newSAT) {
+    const result = await db.query(
+      `SELECT oldSAT FROM sat_conversion_new_to_old
+          WHERE newSAT = $1`,
+      [newSAT]
+    );
+    return result.rows[0].oldsat;
+  }
+
+
+    /**
+   * Convert the OLD sat score for the college (out of 2400)
+   * to the sat score in the NEW scale (out of 1600) using
+   * conversion table in the database
+   *
+   * @param {String} studentId
+   * @returns student
+   */
+    static async getNewCollegeSATScore(oldSAT) {
+      // console.log("CONVERTING THIS TO NEW: ", oldSAT)
+      const result = await db.query(
+        `SELECT newSAT FROM sat_conversion_old_to_new
+            WHERE oldSAT = $1`,
+        [`${Math.round(parseInt(oldSAT) / 10) * 10}`]
+      );
+      
+      // console.log("NEW SAT IN HERE ", result.rows[0].newsat)
+      // if (result.rows[0]){
+      return result.rows[0].newsat
+
+    }
+
 }
 
 module.exports = Student;

@@ -58,13 +58,26 @@ export default function App() {
     "#734B5E",
     "#44633F",
     "#3F4B3B",
-
-  
   ];
 
-  console.log(userLoginInfo);
+  const [nextRegistrationPage, setNextRegistrationPage] = useState(true);
+  const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] =
+    useState(true);
+
+  console.log("user info: ", userLoginInfo);
+
+  async function convertCollegeSAT(oldCollegeSAT) {
+    if (oldCollegeSAT) {
+      let response = await axios
+        .post("http://localhost:3010/getUpdatedSATScore", {
+          oldCollegeSAT: oldCollegeSAT,
+        })
+        return parseInt(response.data)
+    }
+  }
 
   useEffect(() => {
+    const selectedCollegeStored = localStorage.getItem("selected-college");
     const token = localStorage.getItem("token");
     if (!decodedToken) {
       axios
@@ -83,11 +96,11 @@ export default function App() {
             actScore: response.data.actScore,
             enrollment: response.data.enrollment,
             schoolType: response.data.schoolType,
-            collegeName: response.data.collegeName,
+            collegeName: response.data.collegeName
+              ? response.data.collegeName
+              : selectedCollegeStored,
             collegeGradYear: response.data.collegeGradYear,
           });
-          // TODO: fix refresh for events, reviews pages for students/parents
-          // (store somewhere? only see for liekd colleges?)
           setUserType(response.data.userType);
           setDecodedToken(response.data);
         })
@@ -133,6 +146,7 @@ export default function App() {
   }
 
   function logoutUser() {
+    localStorage.removeItem("selected-college");
     localStorage.removeItem("token");
     setUserLoggedIn(false);
     // setUserData({});
@@ -166,7 +180,12 @@ export default function App() {
               <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
             }
           >
-            <Route path="/" element={<HomePage userLoggedIn={userLoggedIn} userType={userType} />}></Route>
+            <Route
+              path="/"
+              element={
+                <HomePage userLoggedIn={userLoggedIn} userType={userType} />
+              }
+            ></Route>
 
             <Route
               path="/login"
@@ -184,7 +203,7 @@ export default function App() {
                   logoutUser={logoutUser}
                   userType={userType}
                   setUserType={setUserType}
-                ></LoginPage>
+                />
               }
             />
 
@@ -201,7 +220,13 @@ export default function App() {
                   setError={setError}
                   userType={userType}
                   setUserType={setUserType}
-                ></RegistrationPage>
+                  // for the Student survey
+                  nextRegistrationPage={nextRegistrationPage}
+                  setNextRegistrationPage={setNextRegistrationPage}
+                  // for the Alumn survey
+                  nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+                  setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
+                />
               }
             />
 
@@ -213,7 +238,9 @@ export default function App() {
                   error={error}
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
-                ></RegistrationSurveyPage>
+                  nextRegistrationPage={nextRegistrationPage}
+                  setNextRegistrationPage={setNextRegistrationPage}
+                />
               }
             ></Route>
 
@@ -225,7 +252,9 @@ export default function App() {
                   setError={setError}
                   setUserLoginInfo={setUserLoginInfo}
                   userType={userType}
-                ></AlumnSurveyPage>
+                  nextAlumnRegistrationPage={nextAlumnRegistrationPage}
+                  setNextAlumnRegistrationPage={setNextAlumnRegistrationPage}
+                />
               }
             ></Route>
 
@@ -240,6 +269,7 @@ export default function App() {
                   collegeArrayPointer={collegeArrayPointer}
                   setCollegeArrayPointer={setCollegeArrayPointer}
                   userType={userType}
+                  convertCollegeSAT={convertCollegeSAT}
                 ></CollegesPage>
               }
             ></Route>
@@ -251,16 +281,13 @@ export default function App() {
                   userType={userType}
                   setUserLoginInfo={setUserLoginInfo}
                   customColors={customColors}
-                ></ParentsPage>
+                />
               }
             ></Route>
             <Route
               path="/events"
               element={
-                <EventsPage
-                  userType={userType}
-                  userLoginInfo={userLoginInfo}
-                ></EventsPage>
+                <EventsPage userType={userType} userLoginInfo={userLoginInfo} userLoggedIn={userLoggedIn}/>
               }
             ></Route>
 
@@ -272,7 +299,7 @@ export default function App() {
                   userType={userType}
                   userLoginInfo={userLoginInfo}
                   userLoggedIn={userLoggedIn}
-                ></EventDetailsPage>
+                />
               }
             ></Route>
 
@@ -284,7 +311,8 @@ export default function App() {
                   setUserLoginInfo={setUserLoginInfo}
                   userLoginInfo={userLoginInfo}
                   userType={userType}
-                ></AlumniHomePage>
+                  setUserType={setUserType}
+                />
               }
             ></Route>
             <Route
@@ -295,7 +323,8 @@ export default function App() {
                   setSelectedCollege={setSelectedCollege}
                   userType={userType}
                   customColors={customColors}
-                ></CollegeInfoPage>
+                  convertCollegeSAT={convertCollegeSAT}
+                />
               }
             ></Route>
 
@@ -307,7 +336,7 @@ export default function App() {
                   userType={userType}
                   error={error}
                   setError={setError}
-                ></EventAttendeesPage>
+                />
               }
             ></Route>
             <Route
@@ -317,7 +346,7 @@ export default function App() {
                   userLoginInfo={userLoginInfo}
                   selectedCollege={selectedCollege}
                   userType={userType}
-                  ></MyCollegesPage>
+                />
               }
             ></Route>
             <Route path="/about" element={<About></About>}></Route>
