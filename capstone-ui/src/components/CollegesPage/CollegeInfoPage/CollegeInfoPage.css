@@ -20,13 +20,17 @@
   /* height: 5%; */
   width: 10%;
 }
-.faculty-img {
-  /* height: 5%; */
-  /* width: 5% */
-}
-.students-and-faculty-imgs {
-  display: flex;
-  align-items: center;
+
+
+/* .faculty-img{ */
+    /* height: 5%; */
+    /* width: 5% */
+/* } */
+
+.students-and-faculty-imgs{
+    display: flex;
+    align-items: center;
+
 }
 .student-imgs-grid {
   display: flex;
