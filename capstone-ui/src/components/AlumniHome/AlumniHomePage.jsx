@@ -84,10 +84,10 @@ export default function AlumniHomePage({
     <div className="alumni-home-page">
       {userType != "college-students-and-alumni" ? (
         <>
-        <h1> Unfortunately, this page is for college students and alumni only.
-        Please log in </h1>
+        <h2>Unfortunately, this page is for college students and alumni only.
+        Please log in </h2>
         <button className="incorrect-user-type-button" onClick={() => setUserType("college-students-and-alumni")}>
-          <Link to={"/login"}> here. </Link>
+          <Link to={"/login"}> here.</Link>
         </button>
         </>
       ) : (
