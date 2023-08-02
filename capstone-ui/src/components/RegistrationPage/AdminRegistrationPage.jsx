@@ -201,7 +201,7 @@ export default function AdminRegistrationPage({
             {error.status ? "Registration Failed: " + error.message : null}
           </div>
           <div className="select_college_admin_container">
-            <p className="p_select_college"> Your Institution</p>
+            <p className="p_select_college">Select Your Institution</p>
           <select className="select_college_admin_bar" onChange={handleCollegeSelect}>
             {/* Sorting dropdown options in alphabetical order */}
             {/* wb the onclick to make the decision */}

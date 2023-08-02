@@ -102,6 +102,7 @@ CREATE TABLE parents (
   email         TEXT NOT NULL UNIQUE CHECK (position('@' IN email) > 1 AND RIGHT(email, 4) = '.com'),
   password      TEXT NOT NULL
 );
+
 CREATE TABLE college_students_and_alumni (
   id                SERIAL PRIMARY KEY,
   first_name        TEXT NOT NULL,
@@ -112,6 +113,7 @@ CREATE TABLE college_students_and_alumni (
   college_grad_year INTEGER
 
 );
+
 CREATE TABLE admission_officers (
   id            SERIAL PRIMARY KEY,
   first_name    TEXT NOT NULL,
@@ -142,7 +144,6 @@ CREATE TABLE event_attendees (
   num_attendees INTEGER
 );
 
-
 CREATE TABLE reviews (
   id                SERIAL PRIMARY KEY,
   user_id           INTEGER,
@@ -154,8 +155,6 @@ CREATE TABLE reviews (
   review            TEXT
 );
 
-
-
 CREATE TABLE sat_conversion_new_to_old (
   newSAT          VARCHAR,
   oldSAT          VARCHAR
@@ -165,7 +164,6 @@ CREATE TABLE sat_conversion_old_to_new (
   oldSAT          VARCHAR,
   newSAT          VARCHAR
 );
-
 
 INSERT INTO sat_conversion_old_to_new(
   oldSAT,
