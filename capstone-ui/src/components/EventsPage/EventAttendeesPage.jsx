@@ -54,7 +54,6 @@ export default function EventAttendeesPage({
       });
   }
   async function handleEventRegistration() {
-    // axios call to get the attendees for this event from the database
     if (
       eventRegistrationInfo.firstName != "" &&
       eventRegistrationInfo.lastName != "" &&
@@ -85,9 +84,9 @@ export default function EventAttendeesPage({
     }
   }
 
-  // useEffect(() => {
-    // getEventAttendees();
-  // }, [userLoginInfo]);
+  useEffect(() => {
+    getEventAttendees();
+  }, [userLoginInfo]);
 
   return (
     <div className="event-attendees-page">

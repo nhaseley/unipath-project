@@ -107,6 +107,7 @@ export default function CollegeGrid({
             college={college}
             setUserLoginInfo={setUserLoginInfo}
             convertCollegeSAT={convertCollegeSAT}
+            userLoginInfo={userLoginInfo}
           />
         ))}
       </div>

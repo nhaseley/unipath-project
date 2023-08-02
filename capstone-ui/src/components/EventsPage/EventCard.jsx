@@ -3,7 +3,7 @@ import "./EventsPage.css";
 import { useNavigate, Link } from "react-router-dom";
 import ButtonMailto from "./ButtonMailto";
 
-export default function EventCard({ event }) {
+export default function EventCard({ event, userType }) {
   const navigate = useNavigate();
   function formatDate(timestamp) {
     return new Date(timestamp)
@@ -59,7 +59,7 @@ export default function EventCard({ event }) {
         </div>
         <div className="registration">
           <button className="event-register-button" onClick={handleEventInfo}>
-            Register
+            {userType == "student"? "Register" : "View Attendees"}
           </button>
           <h3 className="event-registration-limit">
             (Limit: {event.max_registrants})

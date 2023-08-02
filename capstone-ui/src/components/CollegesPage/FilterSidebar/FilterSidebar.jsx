@@ -25,6 +25,7 @@ export default function FilterSidebar({
   }, [userLoginInfo]);
 
 
+
   function changePriceFilter(event) {
     setPrice(event.target.value);
     let priceFiltered = collegeList.filter(
@@ -49,19 +50,27 @@ export default function FilterSidebar({
       setCollegesToDisplay(priceFiltered);
     }
   }
-
-  function changeSATFilter(event) {
+  
+  /////////////////////////////////////////////////////////////////
+  
+  async function handleChangeSAT(college, sat){
+    let convertedSAT = await convertCollegeSAT(`${parseInt(college.sat_score_critical_reading) +
+      parseInt(college.sat_score_writing) +
+      parseInt(college.sat_score_math)}`);
+      return (Math.abs(convertedSAT - sat) <= 300)
+  }
+  
+  async function changeSATFilter(event) {
     setSAT(event.target.value);
-    let satFiltered = collegeList.filter(
-      (college) =>
-        Math.abs(
-          convertCollegeSAT(`${parseInt(college.sat_score_critical_reading) +
-            parseInt(college.sat_score_writing) +
-            parseInt(college.sat_score_math)}`) -
-            sat
-        ) <= 300
+    // Use Promise.all to filter the collegeList asynchronously
+    const filteredIndexes = await Promise.all(
+      collegeList.map((college) => handleChangeSAT(college, sat))
     );
-    // .sort((a, b) => parseInt((parseInt(b.sat_score_critical_reading) + parseInt(b.sat_score_writing) + parseInt(b.sat_score_math)) - parseInt(parseInt(a.sat_score_critical_reading) + parseInt(a.sat_score_writing) + parseInt(a.sat_score_math))))
+  
+    // Create a filtered list based on the resolved values
+    const satFiltered = collegeList.filter((_, index) => filteredIndexes[index]);
+    console.log("FILTERED BY SAT", satFiltered.length);
+
     setFilteredBySAT(satFiltered);
 
     if (filteredByACT.length != 0 && filteredByPrice.length != 0 &&
@@ -75,6 +84,9 @@ export default function FilterSidebar({
     }
   }
 
+
+
+  /////////////////////////////////////////////////////////////////
   function changeACTFilter(event) {
     setACT(event.target.value);
     let actFiltered = collegeList.filter((college) =>

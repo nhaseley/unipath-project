@@ -23,10 +23,12 @@ router.post("/like", async function (req, res, next) {
 
 router.post("/colleges", async function (req, res, next) {
   try {
-    // oldSATScore = await Student. getSATScoreUpdated(req.body.satScore)
+    console.log("PASSING INTO COLLEGE FEED", req.body.satScore)
+    oldSATScore = await Student. getOldSATScore(req.body.satScore)
+    console.log("AFTER CONVERTING", oldSATScore)
     const collegesToDisplay = await Student.getCollegeFeed(
-      // oldSATScore,
-      req.body.satScore,
+      oldSATScore,
+      // req.body.satScore,
       req.body.actScore,
       req.body.schoolType,
       req.body.enrollment
@@ -92,7 +94,8 @@ router.delete("/removeEventRegistration", async function (req, res, next) {
 
 router.post("/getUpdatedSATScore", async function (req, res, next) {
   try {
-    const updatedScore = await Student.getSATScoreUpdated(req.body.oldCollegeSAT);
+    const updatedScore = await Student.getNewCollegeSATScore(req.body.oldCollegeSAT);
+    // console.log("updated to new score: ", updatedScore)
     return res.status(201).json(updatedScore);
   } catch (err) {
     res.send(err);

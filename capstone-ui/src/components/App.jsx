@@ -64,15 +64,14 @@ export default function App() {
 
   console.log("user info: ", userLoginInfo);
 
-  async function convertCollegeSAT(oldSATScore){
-    console.log("OLD SCORE (OUT OF 2400): ", oldSATScore)
-    axios
+  async function convertCollegeSAT(oldCollegeSAT) {
+    if (oldCollegeSAT) {
+      let response = await axios
         .post("http://localhost:3010/getUpdatedSATScore", {
-          oldSATScore: oldSATScore
+          oldCollegeSAT: oldCollegeSAT,
         })
-        .then((response) => {
-          console.log("CONVERTED SCORE (OUT OF 1600): ", response.data);
-        });
+        return parseInt(response.data)
+    }
   }
 
   useEffect(() => {
@@ -95,11 +94,11 @@ export default function App() {
             actScore: response.data.actScore,
             enrollment: response.data.enrollment,
             schoolType: response.data.schoolType,
-            collegeName: response.data.collegeName? response.data.collegeName: selectedCollegeStored,
+            collegeName: response.data.collegeName
+              ? response.data.collegeName
+              : selectedCollegeStored,
             collegeGradYear: response.data.collegeGradYear,
           });
-          // TODO: fix refresh for events, reviews pages for students/parents
-          // (store somewhere? only see for liekd colleges?)
           setUserType(response.data.userType);
           setDecodedToken(response.data);
         })
@@ -179,7 +178,12 @@ export default function App() {
               <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
             }
           >
-            <Route path="/" element={<HomePage userLoggedIn={userLoggedIn} userType={userType} />}></Route>
+            <Route
+              path="/"
+              element={
+                <HomePage userLoggedIn={userLoggedIn} userType={userType} />
+              }
+            ></Route>
 
             <Route
               path="/login"
@@ -275,7 +279,7 @@ export default function App() {
             <Route
               path="/events"
               element={
-                <EventsPage userType={userType} userLoginInfo={userLoginInfo} />
+                <EventsPage userType={userType} userLoginInfo={userLoginInfo} userLoggedIn={userLoggedIn}/>
               }
             ></Route>
 
@@ -299,6 +303,7 @@ export default function App() {
                   setUserLoginInfo={setUserLoginInfo}
                   userLoginInfo={userLoginInfo}
                   userType={userType}
+                  setUserType={setUserType}
                 />
               }
             ></Route>
@@ -310,6 +315,7 @@ export default function App() {
                   setSelectedCollege={setSelectedCollege}
                   userType={userType}
                   customColors={customColors}
+                  convertCollegeSAT={convertCollegeSAT}
                 />
               }
             ></Route>

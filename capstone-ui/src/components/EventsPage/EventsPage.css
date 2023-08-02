@@ -1,113 +1,130 @@
-.events-page{
-    margin-left: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.events-page {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.event-card{
-    padding:2%;
-    width: 75%;
-    background:#213547;
-    margin-top: 4%;
-    color:white;
-    border-radius: 2em;
+.event-card {
+  padding: 2%;
+  width: 75%;
+  background: #213547;
+  margin-top: 4%;
+  color: white;
+  border-radius: 2em;
 }
-.events-search{
-    width: 60%;
-    font-size: 20px;
-    padding: 2%;
 
+.event-college-button:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
 }
-.add-event-button{
-    background: #213547;
-    color:white
+.event-register-button:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
 }
-.event-name{
-    font-size:2.2em;
 
+.events-search {
+  width: 60%;
+  font-size: 20px;
+  padding: 2%;
 }
-.event-college{
-    display:flex;
-    align-items:center;
-    justify-content:center
+.add-event-button {
+  background: #213547;
+  color: white;
+  font-size: 1.5em;
 }
-.event-college-button{
-    font-size:1.5em;
-    color: #213547;
-    background: lightyellow;
-    max-height: 7vh;
+.add-event-button:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
 }
-.event-register-button{
-    color: #213547;
-    background: lightyellow;
-    font-size:1.4em;    
-    max-height: 7vh;
+.event-name {
+  font-size: 2.2em;
 }
-.contact-organizer{
-    display:flex;
-    align-items:center;
-    justify-content:center
+.event-college {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.mailto-button{
-    color: #213547;
-    background: lightyellow;
-    font-size:1.2em;    
+.event-college-button {
+  font-size: 1.5em;
+  color: #213547;
+  background: lightyellow;
+  max-height: 7vh;
 }
-.intro{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.event-register-button {
+  color: #213547;
+  background: lightyellow;
+  font-size: 1.4em;
+  max-height: 7vh;
 }
-.summary{
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
+.contact-organizer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.event-email-info{
-    display:flex;
-    align-items:center;
+.mailto-button {
+  color: #213547;
+  background: lightyellow;
+  font-size: 1.2em;
 }
-.event-organizer-email{
-    margin-right: 4%;
+.mailto-button:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
 }
-.registration{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction:column;
+.intro {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.events-grid{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items:center;
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.no-events{
-    margin-bottom: -2%;
+.event-email-info {
+  display: flex;
+  align-items: center;
 }
-.event-attendee-card{
-    background:#213547;
-    color:white;
-    width:30%;
-    margin-top: 4%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+.event-organizer-email {
+  margin-right: 4%;
 }
-.event-attendees-page{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+.registration {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
-.event-registration-form{
-    display: flex;
-    flex-direction: column;
+.events-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.no-events {
+  margin-bottom: -2%;
+}
+.event-attendee-card {
+  background: #213547;
+  color: white;
+  width: 30%;
+  margin-top: 4%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.event-attendees-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.event-registration-form {
+  display: flex;
+  flex-direction: column;
 }
 .num-attendees {
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-    height: 25px;
-  }
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  height: 25px;
+}

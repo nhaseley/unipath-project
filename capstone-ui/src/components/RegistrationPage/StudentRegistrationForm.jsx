@@ -176,7 +176,6 @@ export default function StudentRegistrationForm({
         Demo Registration
       </button>
       <button className="next-page" onClick={handleNext}>
-        {console.log(nextRegistrationPage)}
         Next
       </button>
 

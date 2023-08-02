@@ -14,3 +14,12 @@
     background: lightyellow;
     max-height: 7vh;
 }
+.incorrect-user-type-button{
+    font-size:3.2em;
+    color: #354F52;
+    font-weight: bold;
+    max-height: 7vh;
+}
+.alumni-home-page{
+    display:flex;
+}

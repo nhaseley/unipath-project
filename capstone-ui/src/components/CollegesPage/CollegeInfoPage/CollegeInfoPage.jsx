@@ -14,9 +14,12 @@ export default function CollegeInfoPage({
   setSelectedCollege,
   userType,
   customColors,
+  convertCollegeSAT
 }) {
   const { id } = useParams();
   const [college, setCollege] = useState();
+  const [averageSAT, setAverageSAT] = useState()
+
   console.log("college: ", college);
 
   const [reviews, setReviews] = useState();
@@ -24,10 +27,22 @@ export default function CollegeInfoPage({
     tuition_in_state: parseInt(college?.tuition_in_state),
     tuition_out_of_state: parseInt(college?.tuition_out_of_state),
   };
-  let averageSAT =
-    parseInt(college?.sat_score_critical_reading) +
-    parseInt(college?.sat_score_writing) +
-    parseInt(college?.sat_score_math);
+  let reading = college?.sat_score_critical_reading ? parseInt(college?.sat_score_critical_reading):0
+  let writing = college?.sat_score_writing?parseInt(college?.sat_score_writing):0
+  let math = college?.sat_score_math?parseInt(college?.sat_score_math):0
+
+async function getUpdatedScore(reading, writing, math) {
+    let updatedScore = await convertCollegeSAT(
+      `${
+        reading+writing+math
+      }`
+    );
+    setAverageSAT(updatedScore)
+  }
+  useEffect(() => {
+    getUpdatedScore(reading, writing, math);
+  }, [userLoginInfo, college]);
+
   const satData = {
     mySAT: parseInt(userLoginInfo.satScore),
     averageSAT: averageSAT,

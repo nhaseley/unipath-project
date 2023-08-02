@@ -58,10 +58,10 @@ export default function AlumnRegistrationPage(
 
               <div className="email">
 
-          <img
+          {/* <img
             src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
             className="email-img"
-          ></img>
+          ></img> */}
           <input
             className="email-input"
             type="email"
@@ -74,10 +74,10 @@ export default function AlumnRegistrationPage(
         </div>
 
         <div className="password">
-          <img
+          {/* <img
             src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
             className="password-img"
-          ></img>
+          ></img> */}
           <input
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
@@ -102,10 +102,10 @@ export default function AlumnRegistrationPage(
         </div>
 
         <div className="confirm-password">
-          <img
+          {/* <img
             src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
             className="password-img"
-          ></img>
+          ></img> */}
 
           <input
             name="confirm-password"
