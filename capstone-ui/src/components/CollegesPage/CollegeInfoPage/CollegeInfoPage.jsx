@@ -19,6 +19,7 @@ export default function CollegeInfoPage({
   const { id } = useParams();
   const [college, setCollege] = useState();
   const [averageSAT, setAverageSAT] = useState()
+  const [collegeImage, setCollegeImage] = useState("")
 
   console.log("college: ", college);
 
@@ -98,6 +99,7 @@ async function getUpdatedScore(reading, writing, math) {
   useEffect(() => {
     getCollege();
     getReviews();
+    getUnsplashSearchImg();
   }, [userLoginInfo]);
 
   function findMinorityServingValue(data) {
@@ -150,6 +152,24 @@ async function getUpdatedScore(reading, writing, math) {
     console.log("RESPONSE: ", response);
   }
 
+
+  const unsplash_apiKey = "kxZZFQtQoSI-4HpAr_ca1QXcfDWZ21Y6x1wFLvBLRNQ"
+  const apiUrl = `https://api.unsplash.com/search/photos?page=1&query=studying&client_id=${unsplash_apiKey}`;
+
+
+
+  async function getUnsplashSearchImg () {
+    const response = await axios.get(apiUrl)
+    console.log('the lenght', response.data.results.length)
+
+    const imageUrl = response.data.results[1]?.urls.regular; // Get the URL of the first image (you can adjust this as needed)
+   
+    if (imageUrl) {
+      setCollegeImage(imageUrl); // Update the state
+    }
+
+  }
+
   return (
     <div className="college-info-page">
       <div className="title">
@@ -167,8 +187,9 @@ async function getUpdatedScore(reading, writing, math) {
           </Link>
         ) : null}
       </div>
-      <div>
-      <img src="https://images.unsplash.com/photo-1567168544646-208fa5d408fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" />
+      <div className="guyInLibraryDiv">
+        {collegeImage && (<img id="unsplashImage" className="guyInLibrary" src={collegeImage} alt="Unsplash Library"/>)} 
+      {/* <img className="guyInLibrary" src="https://images.unsplash.com/photo-1567168544646-208fa5d408fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" /> */}
       </div>
       <div className="all-college-info">
         <h2>

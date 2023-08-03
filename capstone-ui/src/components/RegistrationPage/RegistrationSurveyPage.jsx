@@ -154,6 +154,7 @@ export default function RegistrationSurveyPage({
             onClick={() => setSelectedButton({ ...selectedButton, act: "No" })}
             style={{
               background: selectedButton.act === "No" ? "lightBlue" : "",
+
             }}
           >
             No

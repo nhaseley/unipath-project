@@ -57,12 +57,7 @@ export default function ParentsPage({
 
           {childsColleges?.map((childCollege, i) => (
             <>
-              <hr
-                style={{
-                  background: "green",
-                  height: "5px",
-                  border: "none",
-                }}
+              <hr className="parent-card-break"
               />
               <ParentCollegeCard
                 childCollege={childCollege}

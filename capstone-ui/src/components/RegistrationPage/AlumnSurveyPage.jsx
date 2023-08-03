@@ -167,6 +167,7 @@ export default function AlumnSurveyPage({
                   style={{
                     background:
                       selectedButton.collegeUni === "No" ? "lightBlue" : "",
+
                   }}
                 >
                   No
