@@ -7,20 +7,20 @@ export default function CollegeCard({
   college,
   setUserLoginInfo,
   convertCollegeSAT,
-  userLoginInfo
+  userLoginInfo,
 }) {
-  const [satScore, setSATScore] = useState()
-  let reading = college?.sat_score_critical_reading ? parseInt(college?.sat_score_critical_reading):0
-  let writing = college?.sat_score_writing?parseInt(college?.sat_score_writing):0
-  let math = college?.sat_score_math?parseInt(college?.sat_score_math):0
+  const [satScore, setSATScore] = useState();
+  let reading = college?.sat_score_critical_reading
+    ? parseInt(college?.sat_score_critical_reading)
+    : 0;
+  let writing = college?.sat_score_writing
+    ? parseInt(college?.sat_score_writing)
+    : 0;
+  let math = college?.sat_score_math ? parseInt(college?.sat_score_math) : 0;
 
   async function getUpdatedScore(reading, writing, math) {
-    let updatedScore = await convertCollegeSAT(
-      `${
-        reading + writing + math
-      }`
-    );
-    setSATScore(updatedScore)
+    let updatedScore = await convertCollegeSAT(`${reading + writing + math}`);
+    setSATScore(updatedScore);
   }
   useEffect(() => {
     getUpdatedScore(reading, writing, math);
@@ -39,26 +39,27 @@ export default function CollegeCard({
         onClick={changeCollege}
       >
         <div className="card-info">
-          <h3>{college.name}</h3>
+          <h3 className="collegeTitle">
+            <b>{college.name}</b>
+          </h3>
           <div className="scores">
             <div className="median-sat">
               {" "}
-              Median SAT Score: {!isNaN(satScore)
-                ? satScore
-                : "Unavailable"}{" "}
+              <b>Median SAT Score:</b>{" "}
+              {!isNaN(satScore) ? satScore : "Unavailable"}{" "}
             </div>
 
             <div className="median-act">
               {" "}
-              Median ACT Score:{" "}
+              <b>Median ACT Score:</b>{" "}
               {college.act_score ? college.act_score : "Unavailable"}{" "}
             </div>
 
             <div>
-              Enrollment Size: {parseInt(college.size).toLocaleString()}
+              <b>Enrollment Size:</b> {parseInt(college.size).toLocaleString()}
             </div>
             <div>
-              Tuition: $
+              <b>Tuition:</b> $
               {parseFloat(college.tuition_out_of_state).toLocaleString()}
             </div>
           </div>

@@ -1,15 +1,18 @@
-.colleges-page{
-    display: flex;
-    flex-direction: row;
-    background-color: #b6cdd0;
+.colleges-page {
+  display: flex;
+  flex-direction: row;
+  background-color: #b6cdd0;
 }
-.collegepage-header{
-    text-align: center;
+.collegepage-header {
+  text-align: center;
 }
-.college-grid{
-    width:80%
+.college-grid {
+  width: 80%;
+  height: auto;
 }
-.college-search{
-    width: 500px;
-    height:30px
+.college-search {
+  width: 20vw;
+  height: 3.7vh;
+  border: none;
+  font-size: 1.2rem;
 }

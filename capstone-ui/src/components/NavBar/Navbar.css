@@ -14,6 +14,7 @@
   color: #213547;
   font-size: 4rem;
   font-weight: normal;
+  /* only logo should be in gfs font */
   font-family: "GFS Didot", serif;
   position: absolute;
   left: 3vw;

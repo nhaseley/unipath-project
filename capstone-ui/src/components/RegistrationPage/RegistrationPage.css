@@ -162,7 +162,7 @@ input:focus {
 .select_minority_bar,
 .select_size_bar,
 .select_college_bar,
-.select_college_admin_bar {
+.select_college_admin_bar, .college-search {
   width: 15vw;
   height: 4vh;
   border-color: white;

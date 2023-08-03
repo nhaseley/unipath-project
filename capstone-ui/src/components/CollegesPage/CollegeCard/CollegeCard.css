@@ -1,16 +1,16 @@
-.college-card{
-    /* height: 350px;
+.college-card {
+  /* height: 350px;
     width: 250px;
     display: flex;
     flex-direction: column;
     border: solid 3px lightblue; */
-    /* height: 350px;
+  /* height: 350px;
     width: 250px;
     display: flex; */
-    /* flex-direction: column; */
-    /* border: solid 1px #e4e4e4; */
-    /* background: #354F52; */
-    /* align-items: center;
+  /* flex-direction: column; */
+  /* border: solid 1px #e4e4e4; */
+  /* background: #354F52; */
+  /* align-items: center;
     justify-content: center;
     margin: 0.7vw;
     border-radius: 5%;
@@ -20,31 +20,35 @@
     font-size: 100%;
     box-shadow: -11px 5px 11px 0px #52796F */
 
-align-self: center;
-    height: 350px;
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    background: #354F52;
-    align-items: center;
-    justify-content: center;
-    margin: 0.7vw;
-    border-radius: 4%;
-    padding: 1%;
-    color: white;
-    font-family: 'GFS Didot, serif';
-    font-size: 100%;
-    box-shadow: 0px 2px 11px 8px #80b2b8;
+  align-self: center;
+  height: 350px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  background: #354f52;
+  align-items: center;
+  justify-content: center;
+  margin: 0.7vw;
+  border-radius: 4%;
+  padding: 0.5vw;
+  color: white;
+  font-size: 100%;
+  box-shadow: 0px 2px 11px 3px #80b2b8;
 }
-.card-info{
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    max-width: 380px;
+.card-info {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5vh;
+  padding-top: 0;
+  max-width: 380px;
 }
 
+.college-card:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.02);
+}
 
-.college-card:hover{
-    transition: transform 0.3s ease;
-    transform: scale(1.05);
+.collegeTitle {
+  margin-bottom: 3vh;
+  font-size: 1.6rem;
 }
