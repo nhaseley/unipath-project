@@ -1,5 +1,6 @@
 .college-info-page{
   padding-bottom: 2vh;
+  /* background-color: white; */
 }
 .all-college-info{
   display:flex;
@@ -31,8 +32,10 @@
 .standardized-tests{
   display:flex;
   flex-direction:row;
-  margin-left: 6vh;
+  /* margin-left: 6vh; */
+  justify-content: center;
   align-items: center;
+  margin-bottom: 15%;
 
 }
 
@@ -46,20 +49,111 @@
    /* overflow: clip; */
   /* width: fit-content;  */
   display: flex;
-  width: 1795px;
-  /* height: 600px; */
-  height: 28.125rem;
+  width: 1791px;
+  height: 630px;
+  /* height: 28.125rem; */
   justify-content: center;
   /* border-radius: 3%; */
+  border-bottom-left-radius: 1%;
+  border-bottom-right-radius: 1%;
+ }
+
+ .college-minority-info {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
+  font-size: 2.2vw;
+  font-family: 'GFS Didot, serif';
+ }
+
+ .minority-and-events{
+  margin-bottom: 5%;
+ }
+
+ .events-and-university {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  font-family: 'GFS Didot, serif';
+  
+ }
+
+ .see-events{
+  font-family: 'GFS Didot, serif';
+  margin-left: 10px;
+ }
+
+ .admissionEverything{
+  margin-bottom: 15%;
+ }
+
+
+ .admissionRate{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+ }
+
+
+ .admittedImg {
+  display: flex;
+  width: 70%;
+  height: 80%
  }
 
 
 
+ .studyingImg{
+  /* margin-right: 5%; */
+  display: flex;
+  width: 95%;
+ }
+
+ .student-demographics-pie-chart{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15%;
+  justify-content: center;
+ }
+
+
+
+.diverseImgForPie{
+  border-radius: 10%;
+  
+  /* background-color: antiquewhite; */
+
+}
+
+
+.costOverall{
+  margin-top: 15%;
+}
+
+.costHeading{
+  display: flex;
+  justify-content: center;
+  /* font-family: 'GFS Didot, serif'; */
+}
 
 
 .cost-breakdown {
+  display: flex;
+  flex-direction: row;
   padding: 10px;
+  justify-content: center;
 }
+
+.costImg{
+  display: flex;
+  width: 70%;
+  height: 80%;
+  margin-right: 5%;
+
+}
+
+
 .student-img {
   /* height: 5%; */
   width: 15%;

@@ -8,6 +8,11 @@ import ACTBarChart from "./ACTBarChart";
 import AdmissionRatePieChart from "./AdmissionRatePieChart";
 import StudentDemographicsPieChart from "./StudentDemographicsPieChart";
 import CollegeReview from "./CollegeReview";
+import diverseImg from '../../../assets/diverseImg.png'
+import studyingImg from '../../../assets/studyingImg.png'
+import costImg from '../../../assets/costImg.png'
+import admittedImg from '../../../assets/admittedImg.png'
+
 
 export default function CollegeInfoPage({
   userLoginInfo,
@@ -99,7 +104,7 @@ async function getUpdatedScore(reading, writing, math) {
   useEffect(() => {
     getCollege();
     getReviews();
-    getUnsplashSearchImg();
+    getUnsplashSearchImg('Library');
   }, [userLoginInfo]);
 
   function findMinorityServingValue(data) {
@@ -153,16 +158,13 @@ async function getUpdatedScore(reading, writing, math) {
   }
 
 
-  const unsplash_apiKey = "kxZZFQtQoSI-4HpAr_ca1QXcfDWZ21Y6x1wFLvBLRNQ"
-  const apiUrl = `https://api.unsplash.com/search/photos?page=1&query=studying&client_id=${unsplash_apiKey}`;
 
 
-
-  async function getUnsplashSearchImg () {
-    const response = await axios.get(apiUrl)
+  async function getUnsplashSearchImg (searchName) {
+    const response = await axios.get(`https://api.unsplash.com/search/photos?page=2&query=${searchName}&client_id=${unsplash_apiKey}`)
     console.log('the lenght', response.data.results.length)
 
-    const imageUrl = response.data.results[1]?.urls.regular; // Get the URL of the first image (you can adjust this as needed)
+    const imageUrl = response.data.results[0]?.urls.regular; // Get the URL of the first image (you can adjust this as needed)
    
     if (imageUrl) {
       setCollegeImage(imageUrl); // Update the state
@@ -192,11 +194,13 @@ async function getUpdatedScore(reading, writing, math) {
       {/* <img className="guyInLibrary" src="https://images.unsplash.com/photo-1567168544646-208fa5d408fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" /> */}
       </div>
       <div className="all-college-info">
-        <h2>
+        <div className="minority-and-events">
+        <h2 className="college-minority-info">
           {college?.name} is a 4-year {findMinorityServingValue(college)}{" "}
           {college?.avg_net_price_private ? "private " : "public "}
           institution located in {college?.city}, {college?.state}.
         </h2>
+        <div className="events-and-university">
         <div className="see-events">
           {userType == "student" || userType == "college-admission-officer" ? (
             <button>
@@ -209,22 +213,32 @@ async function getUpdatedScore(reading, writing, math) {
         <a href={"https://" + college?.school_url} className="college-site-link">
           See University Site
         </a>
+        </div>
+        </div>
         <div className="college-statistics">
           {college?.admission_rate ? (
-            <div>
-              <h2>
+            <div className="admissionEverything">
+              <h2 className="admissionRateHeading">
                 Admission Rate:{" "}
                 {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
               </h2>
+            <div className="admissionRate">
               <AdmissionRatePieChart
                 admissionRate={parseFloat(
                   (college?.admission_rate * 100).toFixed(1)
                 )}
                 customColors={customColors}
               ></AdmissionRatePieChart>
+              <div>
+                <img className="admittedImg" src={admittedImg} alt="" />
+              </div>
+            </div>
             </div>
           ) : null}
           <div className="standardized-tests">
+            <div className="studying">
+              <img className="studyingImg" src={studyingImg} alt="" />
+            </div>
           {!isNaN(averageSAT) ? (
             <div className="median SAT">
               <h2>Average SAT: {averageSAT}</h2>
@@ -249,15 +263,24 @@ async function getUpdatedScore(reading, writing, math) {
           ) : null}
           </div>
           {college?.size ? (
+            <div>
             <h2 className="undergrad-enrollment">
               Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
             </h2>
+            </div>
           ) : null}
           <div className="student-demographics-pie-chart">
+          <div className="pieChart">
             <StudentDemographicsPieChart
               studentDemographicsData={studentDemographicsData}
               customColors={customColors}
             ></StudentDemographicsPieChart>
+            </div>
+
+              <div>
+              <img className="diverseImgForPie" src={diverseImg} alt="" srcset="" />
+              </div>
+            
           </div>
           {college?.student_faculty_ratio ? (
             <div className="student-faculty-ratio">
@@ -300,13 +323,20 @@ async function getUpdatedScore(reading, writing, math) {
             </h2>
           ) : null}
           {college?.tuition_in_state || college?.tuition_out_of_state ? (
+              <div className="costOverall">
+              <h2 className="costHeading">Cost Breakdown:</h2>
             <div className="cost-breakdown">
-              <h2>Cost Breakdown:</h2>
-              <TuitionBarChart
+              <div className="cost-things">
+                <img className="costImg" src={costImg} alt="" srcset="" />
+              </div>
+              <div className="costChart">
+                <TuitionBarChart
                 tuitionData={tuitionData}
                 customColors={customColors}
               ></TuitionBarChart>
+              </div>
             </div>
+              </div>
           ) : null}
         </div>
      
