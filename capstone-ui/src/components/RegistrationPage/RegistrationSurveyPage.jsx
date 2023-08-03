@@ -120,7 +120,7 @@ export default function RegistrationSurveyPage({
             className="no_button"
             onClick={() => setSelectedButton({ ...selectedButton, sat: "No" })}
             style={{
-              background: selectedButton.sat === "No" ? "#FFCCCB" : "",
+              background: selectedButton.sat === "No" ? "lightBlue" : "",
             }}
           >
             No
@@ -153,7 +153,7 @@ export default function RegistrationSurveyPage({
             className="no_button"
             onClick={() => setSelectedButton({ ...selectedButton, act: "No" })}
             style={{
-              background: selectedButton.act === "No" ? "#FFCCCB" : "",
+              background: selectedButton.act === "No" ? "lightBlue" : "",
             }}
           >
             No
@@ -201,7 +201,9 @@ export default function RegistrationSurveyPage({
           </option>
         </select>
       </div>
-      <div className="error">{error.status ? handleBack() : null}</div>
+      <div className="error" style={{ color: "#cc0000" }}>
+        {error.status ? handleBack() : null}
+      </div>
       <div className="bottom_buttons">
         <button className="back-to-register-button" onClick={handleBack}>
           {" "}

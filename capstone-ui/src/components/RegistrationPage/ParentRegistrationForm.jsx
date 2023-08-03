@@ -191,7 +191,7 @@ export default function ParentRegistrationForm({
             {passwordDisplayed.confirmPassword ? "Hide" : "Show"}
           </button>
         </div>
-        <div className="error">
+        <div className="error" style={{ color: "#cc0000" }}>
           {error.status ? "Registration Failed: " + error.message : null}
         </div>
       </form>

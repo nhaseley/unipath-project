@@ -58,7 +58,7 @@
 .registration-submit,
 .back-to-register-button,
 .event-registration-submit,
-.login-submit {
+.login-submit, .add-event-button {
   text-decoration: none;
   color: black;
   background-color: transparent;
@@ -165,9 +165,10 @@ input:focus {
 .select_college_admin_bar {
   width: 15vw;
   height: 4vh;
-  border-color: rgb(213, 213, 213);
+  border-color: white;
   border-radius: 0.3rem;
   font-size: 1rem;
+  background-color: white;
 }
 
 .select_college_bar {

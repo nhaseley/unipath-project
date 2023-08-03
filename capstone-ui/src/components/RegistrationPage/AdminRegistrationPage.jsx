@@ -197,7 +197,7 @@ export default function AdminRegistrationPage({
               {passwordDisplayed.confirmPassword ? "Hide" : "Show"}
             </button>
           </div>
-          <div className="error">
+          <div className="error" style={{ color: "#cc0000" }}>
             {error.status ? "Registration Failed: " + error.message : null}
           </div>
           <div className="select_college_admin_container">

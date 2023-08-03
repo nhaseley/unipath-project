@@ -28,38 +28,49 @@ export default function EventCard({ event, userType }) {
       <div className="intro">
         <h2 className="event-name">{event.name}</h2>
         <div className="event-college">
-        <button className="event-college-button"><Link to={"/info/" + event.college} key={event.college}> {event.college}</Link></button>
+          <button className="event-college-button">
+            <Link to={"/info/" + event.college} key={event.college}>
+              {" "}
+              {event.college}
+            </Link>
+          </button>
         </div>
       </div>
 
       <div className="summary">
         <div className="info">
           <h3 className="event-description">
-            Description: {event.description}
+            <strong><u>Description:</u></strong> {event.description}
           </h3>
 
-          <h3 className="event-time">Date/Time: {formattedDate}</h3>
+          <h3 className="event-time">
+            <strong><u>Date/Time:</u></strong> {formattedDate}
+          </h3>
           <div className="event-email-info">
             <h3 className="event-organizer-email">
-              Organizer email: {event.organizer_email}
+              <b><u>Organizer email:</u></b> {event.organizer_email}
             </h3>
             <div className="contact-organizer">
               <button className="mailto-button">
-            <ButtonMailto
-              label="Contact Organizer"
-              mailto={"mailto:" + event.organizer_email}
-            ></ButtonMailto>
-            </button>
+                <ButtonMailto
+                  label="Contact Organizer"
+                  mailto={"mailto:" + event.organizer_email}
+                ></ButtonMailto>
+              </button>
             </div>
           </div>
-          <h3 className="event-speaker">Speaker: {event.speaker}</h3>
-          <h3 className="event-dept">Department: {event.dept}</h3>
+          <h3 className="event-speaker">
+            <strong><u>Speaker:</u></strong> {event.speaker}
+          </h3>
+          <h3 className="event-dept">
+            <strong><u>Department:</u></strong> {event.dept}
+          </h3>
 
           <div className="event-button"></div>
         </div>
         <div className="registration">
           <button className="event-register-button" onClick={handleEventInfo}>
-            {userType == "student"? "Register" : "View Attendees"}
+            {userType == "student" ? "Register" : "View Attendees"}
           </button>
           <h3 className="event-registration-limit">
             (Limit: {event.max_registrants})

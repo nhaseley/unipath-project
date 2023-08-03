@@ -117,7 +117,7 @@ export default function AlumnSurveyPage({
               setSelectedButton({ ...selectedButton, highsch: "No" })
             }
             style={{
-              background: selectedButton.highsch === "No" ? "#FFCCCB" : "",
+              background: selectedButton.highsch === "No" ? "lightBlue" : "",
             }}
           >
             No
@@ -166,7 +166,7 @@ export default function AlumnSurveyPage({
                   }
                   style={{
                     background:
-                      selectedButton.collegeUni === "No" ? "#FFCCCB" : "",
+                      selectedButton.collegeUni === "No" ? "lightBlue" : "",
                   }}
                 >
                   No

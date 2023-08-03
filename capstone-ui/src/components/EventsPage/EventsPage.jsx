@@ -5,7 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import EventCard from "./EventCard";
 
-export default function EventsPage({ userLoginInfo, userType, userLoggedIn, setUserType }) {
+export default function EventsPage({
+  userLoginInfo,
+  userType,
+  userLoggedIn,
+  setUserType,
+}) {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
@@ -50,29 +55,33 @@ export default function EventsPage({ userLoginInfo, userType, userLoggedIn, setU
 
   return (
     <>
-      {userType != "college-admission-officer" && userType != "student" || !userLoggedIn ? (
+      {(userType != "college-admission-officer" && userType != "student") ||
+      !userLoggedIn ? (
         <div className="invalid-user">
-        <h1>
-          Unfortunately, this page is for students and college admission officers only. Please log in{" "}
-        </h1>
-        <button
-          className="incorrect-user-type-button"
-          onClick={() => setUserType("college-admission-officer")}>
-          <Link to={"/login"}> here. </Link>
-        </button>
-    </div>
-    
+          <h1>
+            Unfortunately, this page is for students and college admission
+            officers only. Please log in{" "}
+          </h1>
+          <button
+            className="incorrect-user-type-button"
+            onClick={() => setUserType("college-admission-officer")}
+          >
+            <Link to={"/login"}> here. </Link>
+          </button>
+        </div>
       ) : (
-        <div className="events-page">
-          <h1>Welcome, {userLoginInfo?.firstName} to the events page!</h1>
+        <div className="events-page" >
+          <h1 style={{fontWeight: "normal"}}>Welcome to the events page, {userLoginInfo?.firstName}!</h1>
 
           {userType == "college-admission-officer" ? (
             <button className="add-event-button" onClick={handleAddNewEvent}>
-              Post a new Event
+              + Post a new Event
             </button>
           ) : null}
           {events.length != 0 ? (
-            events?.map((event, i) => <EventCard key={i} event={event} userType={userType}></EventCard>)
+            events?.map((event, i) => (
+              <EventCard key={i} event={event} userType={userType}></EventCard>
+            ))
           ) : (
             <>
               <input
@@ -99,9 +108,9 @@ export default function EventsPage({ userLoginInfo, userType, userLoggedIn, setU
                       No events for this college have been posted yet. All
                       Events:
                     </h2>
-                      {allEvents.map((event) => (
-                        <EventCard event={event} userType={userType}></EventCard>
-                      ))}
+                    {allEvents.map((event) => (
+                      <EventCard event={event} userType={userType}></EventCard>
+                    ))}
                   </>
                 )}
               </div>

@@ -149,7 +149,6 @@ export default function App() {
     localStorage.removeItem("selected-college");
     localStorage.removeItem("token");
     setUserLoggedIn(false);
-    // setUserData({});
     setUserLoginInfo({
       email: "",
       firstName: "",

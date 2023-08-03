@@ -56,7 +56,7 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
       <div className="event-registration">
         <h2 className="post_new_event_header">Post a new event here!</h2>
         <form className="event-form">
-          <div className="event-name">
+          <div className="event-name1">
             <div>
               <label htmlFor="event-name-label" className="event-name-label">
                 Event Name:{" "}
@@ -187,7 +187,7 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
               <textarea
                 className="event-desc-input"
                 value={eventInfo.desc}
-                placeholder="Write your additional comments here"
+                placeholder=""
                 onChange={(e) =>
                   setEventInfo((u) => ({ ...u, desc: e.target.value }))
                 }
