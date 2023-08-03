@@ -116,7 +116,9 @@ export default function AlumnSurveyPage({
             onClick={() =>
               setSelectedButton({ ...selectedButton, highsch: "No" })
             }
-            style={{ background: selectedButton.highsch === "No" ? "#FFCCCB" : "" }}
+            style={{
+              background: selectedButton.highsch === "No" ? "#FFCCCB" : "",
+            }}
           >
             No
           </button>
@@ -126,7 +128,10 @@ export default function AlumnSurveyPage({
             <div className="whatCollege">
               What college are you affiliated with?
               <div>
-                <select className="select_college_bar"onChange={handleCollegeSelect}>
+                <select
+                  className="select_college_bar"
+                  onChange={handleCollegeSelect}
+                >
                   {/* Sorting dropdown options in alphabetical order */}
                   {collegeOptions
                     .slice()
@@ -142,7 +147,8 @@ export default function AlumnSurveyPage({
             <div className="AreYouCollegeGrad">
               Are you a college graduate?
               <div className="yes_no_container">
-                <button className="yes_button"
+                <button
+                  className="yes_button"
                   onClick={() =>
                     setSelectedButton({ ...selectedButton, collegeUni: "Yes" })
                   }
@@ -153,12 +159,14 @@ export default function AlumnSurveyPage({
                 >
                   Yes
                 </button>
-                <button className="no_button"
+                <button
+                  className="no_button"
                   onClick={() =>
                     setSelectedButton({ ...selectedButton, collegeUni: "No" })
                   }
                   style={{
-                    background: selectedButton.collegeUni === "No" ? "#FFCCCB" : "",
+                    background:
+                      selectedButton.collegeUni === "No" ? "#FFCCCB" : "",
                   }}
                 >
                   No
@@ -179,25 +187,31 @@ export default function AlumnSurveyPage({
             ) : null}
           </div>
         ) : selectedButton.highsch == "No" ? (
-          
           <div>
             Please register as a student
-            <button className="redirectToRegister"
-              onClick={() => {window.location.reload(); setUserType("student")}}>
+            <button
+              className="redirectToRegister"
+              onClick={() => {
+                window.location.reload();
+                setUserType("student");
+              }}
+            >
               <Link to={"/register"}> here. </Link>
             </button>
           </div>
         ) : null}
       </div>
-      <button className="back-to-register-button" onClick={handleAlumnBack}>
-        Back
-      </button>
-      <button
-        className="registration-submit"
-        onClick={handleAlumniRegistration}
-      >
-        <Link to={"/register/college-students-and-alumni"}> Submit</Link>
-      </button>
+      <div className="bottom_buttons">
+        <button className="back-to-register-button" onClick={handleAlumnBack}>
+          Back
+        </button>
+        <button
+          className="registration-submit"
+          onClick={handleAlumniRegistration}
+        >
+          <Link to={"/register/college-students-and-alumni"}> Submit</Link>
+        </button>
+      </div>
     </div>
   );
 }

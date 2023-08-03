@@ -56,7 +56,6 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
       <div className="event-registration">
         <h2 className="post_new_event_header">Post a new event here!</h2>
         <form className="event-form">
-
           <div className="event-name">
             <div>
               <label htmlFor="event-name-label" className="event-name-label">
@@ -141,7 +140,7 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
           <div className="event-dept">
             <div>
               <label htmlFor="event-dept-label" className="event-dept-label">
-                Dept:{" "}
+                Department:{" "}
               </label>
             </div>
             <input
@@ -195,15 +194,19 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
               />
             </div>
           </div>
+        </form>
+        <div className="bottom_buttons">
+          <button className="demo-button" onClick={handleDemo}>
+            Demo Post Event
+          </button>
 
-          <button className="event-registration-submit" onClick={handleEventSubmit}>
+          <button
+            className="event-registration-submit"
+            onClick={handleEventSubmit}
+          >
             Submit
           </button>
-        </form>
-
-        <button className="demo-button" onClick={handleDemo}>
-          Demo Post Event
-        </button>
+        </div>
       </div>
     </>
   );

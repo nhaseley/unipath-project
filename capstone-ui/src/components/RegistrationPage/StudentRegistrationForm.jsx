@@ -172,12 +172,14 @@ export default function StudentRegistrationForm({
           {error.status ? "Registration Failed: " + error.message : null}
         </div>
       </form>
-      <button className="demo-button" onClick={handleDemo}>
-        Demo Registration
-      </button>
-      <button className="next-page" onClick={handleNext}>
-        Next
-      </button>
+      <div className="bottom_buttons">
+        <button className="demo-button" onClick={handleDemo}>
+          Demo Registration
+        </button>
+        <button className="next-page" onClick={handleNext}>
+          Next
+        </button>
+      </div>
 
       <div className="login_prompt">
         Already have an account?{" "}

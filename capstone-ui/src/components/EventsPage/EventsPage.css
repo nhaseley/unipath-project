@@ -141,7 +141,14 @@
 .event-date-time,
 .event-speaker,
 .event-dept,
-.event-max-registrants,
-.event-desc {
+.event-max-registrants {
   height: 8vh;
+}
+.event-desc {
+  height: 12vh;
+}
+.bottom_buttons {
+  padding-top: 4vh;
+  display: flex;
+  justify-content: space-between;
 }

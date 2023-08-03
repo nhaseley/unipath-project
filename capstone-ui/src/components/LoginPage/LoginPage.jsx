@@ -107,7 +107,10 @@ export default function LoginPage({
           className="college-admission-officer"
           value="college-admission-officer"
           onClick={handleChangeUserType}
-          style={{ background: userType === "college-admission-officer" ? "lightblue" : "" }}
+          style={{
+            background:
+              userType === "college-admission-officer" ? "lightblue" : "",
+          }}
         >
           College Admission Officer
         </button>
@@ -115,7 +118,10 @@ export default function LoginPage({
           className="college-students-and-alumni"
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
-          style={{ background: userType === "college-students-and-alumni" ? "lightblue" : "" }}
+          style={{
+            background:
+              userType === "college-students-and-alumni" ? "lightblue" : "",
+          }}
         >
           College Student/Alum
         </button>
@@ -167,17 +173,19 @@ export default function LoginPage({
                 {passwordDisplayed.password ? "Hide" : "Show"}
               </button>
             </div>
-            <button className="demo-button" onClick={handleDemo}>
-              Demo Login
-            </button>
 
             <div className="error">
               {error.status ? "Login Failed: " + error.message : null}
             </div>
           </form>
-          <button className="login-submit" onClick={handleLogin}>
-            Submit
-          </button>
+          <div className="bottom_buttons">
+            <button className="demo-button" onClick={handleDemo}>
+              Demo Login
+            </button>
+            <button className="login-submit" onClick={handleLogin}>
+              Submit
+            </button>
+          </div>
           <div className="register_prompt">
             Don't have an account?
             <Link style={{ color: "#a57548" }} to={"/register"}>

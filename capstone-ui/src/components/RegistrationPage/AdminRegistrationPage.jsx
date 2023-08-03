@@ -219,16 +219,17 @@ export default function AdminRegistrationPage({
             </select>
           </div>
         </form>
-
-        <button className="demo-button" onClick={handleDemo}>
-          Demo Registration
-        </button>
-        <button
-          className="registration-submit"
-          onClick={handleAdminRegistration}
-        >
-          <Link to={"/register/"}> Submit</Link>
-        </button>
+        <div className="bottom_buttons">
+          <button className="demo-button" onClick={handleDemo}>
+            Demo Registration
+          </button>
+          <button
+            className="registration-submit"
+            onClick={handleAdminRegistration}
+          >
+            <Link to={"/register/"}> Submit</Link>
+          </button>
+        </div>
       </div>
       <div className="login_prompt">
         Already have an account?

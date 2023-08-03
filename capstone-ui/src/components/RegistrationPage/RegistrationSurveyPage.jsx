@@ -19,11 +19,11 @@ export default function RegistrationSurveyPage({
   const [examScores, setExamScores] = useState({ satScore: "", actScore: "" });
   const satExamScoreOptions = Array.from({ length: 121 }, (_, i) => ({
     value: i * 10 + 400,
-    label: ((i * 10) + 400).toString(),
+    label: (i * 10 + 400).toString(),
   }));
   const actExamScoreOptions = Array.from({ length: 36 }, (_, i) => ({
-    value: i+1,
-    label: (i+1).toString(),
+    value: i + 1,
+    label: (i + 1).toString(),
   }));
 
   async function handleRegistration(event) {
@@ -111,8 +111,7 @@ export default function RegistrationSurveyPage({
             className="yes_button"
             onClick={() => setSelectedButton({ ...selectedButton, sat: "Yes" })}
             style={{
-              background:
-                selectedButton.sat === "Yes" ? "lightBlue" : "",
+              background: selectedButton.sat === "Yes" ? "lightBlue" : "",
             }}
           >
             Yes
@@ -121,8 +120,7 @@ export default function RegistrationSurveyPage({
             className="no_button"
             onClick={() => setSelectedButton({ ...selectedButton, sat: "No" })}
             style={{
-              background:
-                selectedButton.sat === "No" ? "#FFCCCB" : "",
+              background: selectedButton.sat === "No" ? "#FFCCCB" : "",
             }}
           >
             No
@@ -146,8 +144,7 @@ export default function RegistrationSurveyPage({
             className="yes_button"
             onClick={() => setSelectedButton({ ...selectedButton, act: "Yes" })}
             style={{
-              background:
-                selectedButton.act === "Yes" ? "lightBlue" : "",
+              background: selectedButton.act === "Yes" ? "lightBlue" : "",
             }}
           >
             Yes
@@ -156,8 +153,7 @@ export default function RegistrationSurveyPage({
             className="no_button"
             onClick={() => setSelectedButton({ ...selectedButton, act: "No" })}
             style={{
-              background:
-                selectedButton.act === "No" ? "#FFCCCB" : "",
+              background: selectedButton.act === "No" ? "#FFCCCB" : "",
             }}
           >
             No
@@ -206,13 +202,15 @@ export default function RegistrationSurveyPage({
         </select>
       </div>
       <div className="error">{error.status ? handleBack() : null}</div>
-      <button className="back-to-register-button" onClick={handleBack}>
-        {" "}
-        Back
-      </button>
-      <button className="registration-submit" onClick={handleRegistration}>
-        <Link to={"/register"}> Submit</Link>
-      </button>
+      <div className="bottom_buttons">
+        <button className="back-to-register-button" onClick={handleBack}>
+          {" "}
+          Back
+        </button>
+        <button className="registration-submit" onClick={handleRegistration}>
+          <Link to={"/register"}> Submit</Link>
+        </button>
+      </div>
     </div>
   );
 }

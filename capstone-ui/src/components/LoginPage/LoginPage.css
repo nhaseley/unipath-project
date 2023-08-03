@@ -21,7 +21,7 @@
 }
 
 .login-form > .demo-button {
-  position: absolute;
+
   margin-top: 7vh;
 }
 
@@ -46,23 +46,11 @@
 
 .login-submit {
   border-color: rgb(0, 176, 0);
-  margin-left: 17vw;
 }
 .login_header {
   text-align: center;
 }
-.login-submit {
-  text-decoration: none;
-  color: black;
-  background-color: transparent;
-  margin-left: 13vw;
-  padding: 1vh;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  margin-top: 3vh;
-  border-radius: 0.5rem;
-  border: 2px solid goldenrod;
-}
+
 
 .register_prompt {
   padding-top: 3vh;
@@ -89,6 +77,8 @@
   border: none;
   color: black;
   padding: 0.5vh;
+  height: fit-content;
+  margin-top: 1vh;
 }
 
 .demo-button:hover {
