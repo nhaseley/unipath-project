@@ -10,7 +10,7 @@ import ButtonMailto from "../EventsPage/ButtonMailto";
 export default function About() {
   return (
     <div className="about">
-      <h1> Meet the UniPath Creators! </h1>
+      <h1> Meet the Creators! </h1>
       {/* <h2> We are a passionate team of technology enthusiasts dedicated to helping high school seniors embark on their journey to higher education. Our mission is to provide a personalized and seamless experience for students as they explore and discover the perfect colleges that align with their unique interests, aspirations, and academic accomplishments.</h2> */}
       <div className="us">
         <img className="us-photo" src={usImage} alt="Us Image" />

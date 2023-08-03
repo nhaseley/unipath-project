@@ -92,12 +92,12 @@ export default function CollegeGrid({
         here are your personalized colleges!
       </h1>
       <div className="searchThings">
-        <label className="searchLabel"> Search All Colleges </label>
+        <label className="searchLabel">Search All Colleges</label>
         <input
           className="college-search"
           label="Search"
           onChange={handleSearch}
-          placeholder="Search for a college here"
+          placeholder="..."
         ></input>
       </div>
       <div className="colleges">
