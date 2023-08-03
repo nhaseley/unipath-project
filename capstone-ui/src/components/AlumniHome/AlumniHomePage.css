@@ -49,11 +49,15 @@
     justify-content: center;
   }
 
-  .additional-text{
+  .additional-text, .event-desc-input{
     width: 100%;
     padding-bottom: 4vh;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     border-radius: 0.4vh;
+  }
+
+  .event-desc-input{
+    padding-bottom: 0vh;
   }
   .review-form > * {
     margin: 2vh 0;

@@ -14,7 +14,7 @@
   color: #213547;
   font-size: 4rem;
   font-weight: normal;
-  font-family: 'GFS Didot', serif;
+  font-family: "GFS Didot", serif;
   position: absolute;
   left: 3vw;
 }
@@ -28,11 +28,11 @@
   color: #213547;
   align-items: center;
   position: absolute;
-  right: 10vw;
+  right: 5vw;
 }
 
 .navItems li {
-  padding-left: 4vw;
+  padding-left: 3vw;
   font-size: 1.3rem;
 }
 
@@ -41,13 +41,13 @@
   font-size: 20px;
   border: none;
   color: #213547;
-
 }
 
-.navButton:hover{
+.navButton:hover {
   background-color: rgb(209, 209, 209);
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
-
-
+.about_link {
+  scroll-behavior: smooth;
+}

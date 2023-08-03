@@ -21,6 +21,11 @@ export default function LoginPage({
     setUserType(event.target.value);
   }
 
+  const handleEmailInputChange = (e) => {
+    setError({});
+    setUserLoginInfo((u) => ({ ...u, email: e.target.value }));
+  };
+
   function handleDemo(event) {
     event.preventDefault();
 
@@ -81,9 +86,7 @@ export default function LoginPage({
 
   return (
     <div className="login-page">
-      <h1 className="user-type-prompt">
-        Which of the following best describes you?
-      </h1>
+      <h1 className="user-type-prompt">Welcome Back!</h1>
       <div className="user-types">
         <button
           className="student"
@@ -107,7 +110,10 @@ export default function LoginPage({
           className="college-admission-officer"
           value="college-admission-officer"
           onClick={handleChangeUserType}
-          style={{ background: userType === "college-admission-officer" ? "lightblue" : "" }}
+          style={{
+            background:
+              userType === "college-admission-officer" ? "lightblue" : "",
+          }}
         >
           College Admission Officer
         </button>
@@ -115,7 +121,10 @@ export default function LoginPage({
           className="college-students-and-alumni"
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
-          style={{ background: userType === "college-students-and-alumni" ? "lightblue" : "" }}
+          style={{
+            background:
+              userType === "college-students-and-alumni" ? "lightblue" : "",
+          }}
         >
           College Student/Alum
         </button>
@@ -123,7 +132,7 @@ export default function LoginPage({
 
       {userType ? (
         <div className="student-registration">
-          <h2 className="login_header"> Welcome Back! </h2>
+          <h2 className="login_header">Login</h2>
           <form className="login-form">
             <div className="email">
               {/* <img
@@ -135,9 +144,7 @@ export default function LoginPage({
                 type="email"
                 placeholder="Email"
                 value={userLoginInfo?.email}
-                onChange={(e) =>
-                  setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
-                }
+                onChange={handleEmailInputChange}
               ></input>
             </div>
             <div className="password">
@@ -167,17 +174,19 @@ export default function LoginPage({
                 {passwordDisplayed.password ? "Hide" : "Show"}
               </button>
             </div>
-            <button className="demo-button" onClick={handleDemo}>
-              Demo Login
-            </button>
 
-            <div className="error">
+            <div className="error" style={{ color: "#cc0000" }}>
               {error.status ? "Login Failed: " + error.message : null}
             </div>
           </form>
-          <button className="login-submit" onClick={handleLogin}>
-            Submit
-          </button>
+          <div className="bottom_buttons">
+            <button className="demo-button" onClick={handleDemo}>
+              Demo Login
+            </button>
+            <button className="login-submit" onClick={handleLogin}>
+              Submit
+            </button>
+          </div>
           <div className="register_prompt">
             Don't have an account?
             <Link style={{ color: "#a57548" }} to={"/register"}>

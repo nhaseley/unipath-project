@@ -141,18 +141,18 @@ export default function AlumnRegistrationPage({
             {passwordDisplayed.confirmPassword ? "Hide" : "Show"}
           </button>
         </div>
-        <div className="error">
+        <div className="error" style={{ color: "#cc0000" }}>
           {error.status ? "Registration Failed: " + error.message : null}
         </div>
       </form>
-
-      <button className="demo-button" onClick={handleDemo}>
-        Demo Registration
-      </button>
-      <button className="next-page" onClick={handleNextAlumn}>
-        Next
-      </button>
-
+      <div className="bottom_buttons">
+        <button className="demo-button" onClick={handleDemo}>
+          Demo Registration
+        </button>
+        <button className="next-page" onClick={handleNextAlumn}>
+          Next
+        </button>
+      </div>
       <div className="login_prompt">
         Already have an account?
         <Link style={{ color: "#a57548" }} to={"/login"}>
@@ -163,5 +163,3 @@ export default function AlumnRegistrationPage({
     </div>
   );
 }
-
-

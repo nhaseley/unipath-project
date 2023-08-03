@@ -12,6 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -40,7 +41,6 @@ h2 {
 }
 
 button {
-
   border: 0.2vw solid transparent;
 
   font-size: 1em;
@@ -49,12 +49,16 @@ button {
   background-color: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-
 }
 
 button:focus,
 button:focus-visible {
   outline: 0.2vh auto -webkit-focus-ring-color;
+}
+
+button:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.02);
 }
 
 :root {
@@ -63,5 +67,9 @@ button:focus-visible {
 }
 
 button {
+  font-weight: normal;
+}
+
+h3 {
   font-weight: normal;
 }

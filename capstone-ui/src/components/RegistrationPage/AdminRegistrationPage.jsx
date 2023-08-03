@@ -197,35 +197,39 @@ export default function AdminRegistrationPage({
               {passwordDisplayed.confirmPassword ? "Hide" : "Show"}
             </button>
           </div>
-          <div className="error">
+          <div className="error" style={{ color: "#cc0000" }}>
             {error.status ? "Registration Failed: " + error.message : null}
           </div>
           <div className="select_college_admin_container">
             <p className="p_select_college">Select Your Institution</p>
-          <select className="select_college_admin_bar" onChange={handleCollegeSelect}>
-            {/* Sorting dropdown options in alphabetical order */}
-            {/* wb the onclick to make the decision */}
-            {collegeOptions
-              .slice()
-              .sort((a, b) => a.name.localeCompare(b.name))
-              .map((college, i) => (
-                <option key={i} value={college.name}>
-                  {college.name}
-                </option>
-              ))}
-          </select>
+            <select
+              className="select_college_admin_bar"
+              onChange={handleCollegeSelect}
+            >
+              {/* Sorting dropdown options in alphabetical order */}
+              {/* wb the onclick to make the decision */}
+              {collegeOptions
+                .slice()
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((college, i) => (
+                  <option key={i} value={college.name}>
+                    {college.name}
+                  </option>
+                ))}
+            </select>
           </div>
         </form>
-
-        <button className="demo-button" onClick={handleDemo}>
-          Demo Registration
-        </button>
-        <button
-          className="registration-submit"
-          onClick={handleAdminRegistration}
-        >
-          <Link to={"/register/"}> Submit</Link>
-        </button>
+        <div className="bottom_buttons">
+          <button className="demo-button" onClick={handleDemo}>
+            Demo Registration
+          </button>
+          <button
+            className="registration-submit"
+            onClick={handleAdminRegistration}
+          >
+            <Link to={"/register/"}> Submit</Link>
+          </button>
+        </div>
       </div>
       <div className="login_prompt">
         Already have an account?

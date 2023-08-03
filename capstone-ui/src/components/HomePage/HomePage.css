@@ -159,10 +159,12 @@
 }
 
 .creators_button {
-  background-color: #475048;
+  background-color: #0d669e;
   font-size: 1.5rem;
   color: whitesmoke;
   margin-top: 5vh;
+  padding: 0.5vh;
+  border-radius: 0.25rem;
 }
 
 /* Animation keyframes... */

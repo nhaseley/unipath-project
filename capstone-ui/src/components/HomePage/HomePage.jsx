@@ -2,9 +2,9 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./HomePage.css";
-
-export default function HomePage({userLoggedIn, userType}) {
-
+import { animateScroll as scroll } from "react-scroll";
+import Biography from "../Biography/Biography";
+export default function HomePage({ userLoggedIn, userType }) {
   const navigate = useNavigate();
 
   const collegeNames = [
@@ -55,7 +55,7 @@ export default function HomePage({userLoggedIn, userType}) {
       imageSrc:
         "https://www.brown.edu/sites/default/files/styles/wide_xlrg/public/2019-04/01_About.jpg?h=920929c4&itok=lgYUTHil",
     },
-  ]; 
+  ];
 
   // const [loopArray, setLoopArray] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -65,9 +65,10 @@ export default function HomePage({userLoggedIn, userType}) {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % collegeNames.length);
   };
 
-
-  function getStarted () {
-    { userLoggedIn ? ( userType == "student"
+  function getStarted() {
+    {
+      userLoggedIn
+        ? userType == "student"
           ? navigate("/feed")
           : userType == "parent"
           ? navigate("/child-feed")
@@ -75,7 +76,9 @@ export default function HomePage({userLoggedIn, userType}) {
           ? navigate("/events")
           : userType == "college-students-and-alumni"
           ? navigate("/mycollege")
-          : null) : ( navigate("/register"))}
+          : null
+        : navigate("/register");
+    }
   }
 
   // useEffect to set the image transition interval
@@ -94,25 +97,14 @@ export default function HomePage({userLoggedIn, userType}) {
           inventore veritatis et quasi architecto beatae vitae dicta sunt
           explicabo. Nemo enim. En headie one is de Best.
         </h2>
-          <button className="get-started-button" onClick={getStarted}>Get Started</button>
+        <button className="get-started-button" onClick={getStarted}>
+          Get Started
+        </button>
       </div>
       <section className="additional-section">
         <div className="container">
           <div className="college-list">
             <div className="college-item">
-              {/* {loopArray.map((college, index) => (
-              <div key={index} className="college-item">
-                <div className="college-content">
-                  <span className="college-name">{college.name}</span>
-                  <img
-                    style={{ opacity: "0.5" }}
-                    className="college-image"
-                    src={college.imageSrc}
-                    alt={college.name}
-                  />
-                </div>
-              </div>
-            ))} */}
               <div className="college-content">
                 <span className="college-name">
                   {collegeNames[currentImageIndex].name}
@@ -128,32 +120,8 @@ export default function HomePage({userLoggedIn, userType}) {
           </div>
         </div>
       </section>
-      {/* turn the rest of this to into a component */}
-      <div className="biography">
-        <h1 className="bio_header">
-          Simplifying College Search For Pre-College Scholars.
-        </h1>
-
-        <div className="bio_spliter">
-          <div className="leftside">
-            <img
-              className="left_image"
-              src="https://images.pexels.com/photos/3184396/pexels-photo-3184396.jpeg?cs=srgb&dl=pexels-fauxels-3184396.jpg&fm=jpg"
-            ></img>
-          </div>
-          <div className="rightside">
-            <span className="rightside_text">
-              Sayme es tion wayne wif central sea ez wail es skepta init
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim. En headie one is de besth.
-              <div>
-                <button className="creators_button" ><Link to={"/about"}> About the Creators</Link></button>
-              </div>
-            </span>
-          </div>
-        </div>
-      </div>
+  
+      <Biography />
 
       {/* make this a component, so it displays at bottom of all pages */}
       <div className="footer"></div>

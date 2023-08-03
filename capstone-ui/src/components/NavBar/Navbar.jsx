@@ -32,7 +32,7 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
             </li>
             <li>
               <Link to={"/"} onClick={logoutUser}>
-                <button className="navButton">Sign Out</button>
+                Sign Out
               </Link>
             </li>
           </ul>
@@ -47,7 +47,6 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
             <li>
               <Link to={"/login"}>Login</Link>
             </li>
-            
           </ul>
         )}
       </div>

@@ -11,16 +11,7 @@
   background: #213547;
   margin-top: 4%;
   color: white;
-  border-radius: 2em;
-}
-
-.event-college-button:hover {
-  transition: transform 0.3s ease;
-  transform: scale(1.2);
-}
-.event-register-button:hover {
-  transition: transform 0.3s ease;
-  transform: scale(1.2);
+  border-radius: 1em;
 }
 
 .events-search {
@@ -32,14 +23,9 @@
   background: #213547;
   color: white;
   font-size: 1.5em;
+  border: none;
 }
-.add-event-button:hover {
-  transition: transform 0.3s ease;
-  transform: scale(1.2);
-}
-.event-name {
-  font-size: 2.2em;
-}
+
 .event-college {
   display: flex;
   align-items: center;
@@ -50,12 +36,15 @@
   color: #213547;
   background: lightyellow;
   max-height: 7vh;
+  border-radius: 0.25rem;
+  padding: 1vh;
 }
 .event-register-button {
   color: #213547;
   background: lightyellow;
-  font-size: 1.4em;
-  max-height: 7vh;
+  font-size: 1.4rem;
+  border-radius: 0.25rem;
+  padding: 1vh;
 }
 .contact-organizer {
   display: flex;
@@ -66,15 +55,15 @@
   color: #213547;
   background: lightyellow;
   font-size: 1.2em;
+  border-radius: 0.25rem;
+  padding: 0.5vh;
 }
-.mailto-button:hover {
-  transition: transform 0.3s ease;
-  transform: scale(1.2);
-}
+
 .intro {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 5vh;
 }
 .summary {
   display: flex;
@@ -86,7 +75,7 @@
   align-items: center;
 }
 .event-organizer-email {
-  margin-right: 4%;
+  padding-right: 1%;
 }
 .registration {
   align-items: center;
@@ -104,6 +93,7 @@
   margin-bottom: -2%;
 }
 .event-attendee-card {
+  /* background: #213547; */
   background: #213547;
   color: white;
   width: 30%;
@@ -127,4 +117,36 @@
   margin-bottom: 10px;
   justify-content: center;
   height: 25px;
+}
+
+.event-registration {
+  margin: auto;
+  margin-top: 5vh;
+}
+
+.post_new_event_header {
+  padding-top: 1vh;
+}
+
+.event-name1,
+.event-name,
+.event-email,
+.event-date-time,
+.event-speaker,
+.event-dept,
+.event-max-registrants {
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+}
+.event-desc {
+  height: 12vh;
+}
+.bottom_buttons {
+  padding-top: 4vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-name {
+  font-size: 3rem;
 }

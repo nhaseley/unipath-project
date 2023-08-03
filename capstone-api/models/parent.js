@@ -45,7 +45,7 @@ class Parent {
       validateFields({
         required: requiredCreds,
         obj: creds,
-        location: "parent authentication",
+        location: "parent authentication/password",
       });
     } catch (err) {
       throw err;

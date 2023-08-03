@@ -12,7 +12,8 @@
 
 .student-registration,
 .registration-survey-page,
-.alumn-survey-page {
+.alumn-survey-page,
+.event-registration {
   background-color: #f0f0f0;
   width: fit-content;
   height: fit-content;
@@ -26,7 +27,8 @@
 .create_parent_header,
 .parent_prompt,
 .create_alum_header,
-.create_admin_header {
+.create_admin_header,
+.post_new_event_header {
   text-align: center;
 }
 
@@ -54,15 +56,16 @@
 }
 .next-page,
 .registration-submit,
-.back-to-register-button {
+.back-to-register-button,
+.event-registration-submit,
+.login-submit, .add-event-button {
   text-decoration: none;
   color: black;
   background-color: transparent;
-  margin-left: 13vw;
   padding: 1vh;
   padding-left: 1vw;
   padding-right: 1vw;
-  margin-top: 3vh;
+  /* margin-top: 3vh; */
   border-radius: 0.5rem;
   border: 2px solid goldenrod;
 }
@@ -90,7 +93,13 @@
 .sat-input,
 .act-input,
 .enrollment-input,
-.school-type {
+.school-type,
+.event-dept-input,
+.event-name-input,
+.event-desc-input,
+.event-speaker-input,
+.event-max-registrants-input,
+.event-date-time-input {
   height: 3.75vh;
   width: 25vw;
   background-color: white;
@@ -100,6 +109,9 @@
   font-size: 1rem;
 }
 
+.event-desc-input {
+  height: 10vh;
+}
 input:focus {
   /* outline: ; */
   /* border-color: blue;
@@ -153,9 +165,10 @@ input:focus {
 .select_college_admin_bar {
   width: 15vw;
   height: 4vh;
-  border-color: rgb(213, 213, 213);
+  border-color: white;
   border-radius: 0.3rem;
   font-size: 1rem;
+  background-color: white;
 }
 
 .select_college_bar {
@@ -165,7 +178,6 @@ input:focus {
 .registration-submit,
 .login-submit {
   border-color: rgb(0, 176, 0);
-  margin-left: 17vw;
 }
 
 .back-to-register-button {
@@ -192,6 +204,7 @@ input:focus {
   border-radius: 0.4rem;
   height: 3vh;
   width: 5vw;
+  color: black;
 }
 
 .no_button {
