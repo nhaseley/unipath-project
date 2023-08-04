@@ -16,7 +16,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #5f3d66;
+  /* background: #5f3d66; */
+  background: #354f52;
   color: white;
 }
 .college-statistics{
@@ -36,6 +37,8 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 15%;
+  animation: fadeInLeft 7s ease-in-out;
+
 
 }
 
@@ -46,7 +49,7 @@
 }
 .guyInLibrary{ 
 /* overflow-clip-margin: content-box; */
-   /* overflow: clip; */
+   /* overflow: clip; *
   /* width: fit-content;  */
   display: flex;
   width: 1791px;
@@ -63,7 +66,7 @@
   /* flex-direction: row; */
   justify-content: center;
   font-size: 2.2vw;
-  font-family: 'GFS Didot, serif';
+  /* font-family: 'GFS Didot, serif'; */
  }
 
  .minority-and-events{
@@ -74,17 +77,33 @@
   display: flex;
   /* flex-direction: column; */
   justify-content: space-between;
-  font-family: 'GFS Didot, serif';
+  /* font-family: 'GFS Didot, serif'; */
   
  }
 
  .see-events{
-  font-family: 'GFS Didot, serif';
+  /* font-family: 'GFS Didot, serif'; */
   margin-left: 10px;
+  font-size: larger;
+  color: #213547;
+ }
+ .upcoming-events{
+  color:#213547;
+ }
+
+ .college-site-link{
+  font-size: larger;
+  color: #213547;
  }
 
  .admissionEverything{
   margin-bottom: 15%;
+  animation: fadeInRight 4s ease-in-out;
+ }
+
+ .admissionRateHeading{
+  display: flex;
+justify-content: center;
  }
 
 
@@ -102,7 +121,9 @@
   height: 80%
  }
 
-
+.demographics{
+  animation: fadeInRight 9s ease-in-out;
+}
 
  .studyingImg{
   /* margin-right: 5%; */
@@ -111,6 +132,7 @@
  }
 
  .student-demographics-pie-chart{
+  animation: fadeInRight 9s ease-in-out;
   display: flex;
   flex-direction: row;
   margin-bottom: 15%;
@@ -127,8 +149,10 @@
 }
 
 
+
 .costOverall{
   margin-top: 15%;
+  animation: fadeInRight 13s ease-in-out;
 }
 
 .costHeading{
@@ -163,6 +187,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: fadeInLeft 11s ease-in-out;
 }
 .students-and-faculty-imgs {
   display: flex;
@@ -198,5 +223,31 @@
 .rating {
   display: flex;
   align-items: center;
+}
+
+
+
+/* Animation */
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 

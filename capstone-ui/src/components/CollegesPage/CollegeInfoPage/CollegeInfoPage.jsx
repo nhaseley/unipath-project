@@ -12,6 +12,7 @@ import diverseImg from '../../../assets/diverseImg.png'
 import studyingImg from '../../../assets/studyingImg.png'
 import costImg from '../../../assets/costImg.png'
 import admittedImg from '../../../assets/admittedImg.png'
+import config from "../../../../../config.dev";
 
 
 export default function CollegeInfoPage({
@@ -25,6 +26,7 @@ export default function CollegeInfoPage({
   const [college, setCollege] = useState();
   const [averageSAT, setAverageSAT] = useState()
   const [collegeImage, setCollegeImage] = useState("")
+  const [collegeImages, setCollegeImages] = useState([]);
 
   console.log("college: ", college);
 
@@ -160,15 +162,16 @@ async function getUpdatedScore(reading, writing, math) {
 
 
 
-  async function getUnsplashSearchImg (searchName) {
-    const response = await axios.get(`https://api.unsplash.com/search/photos?page=2&query=${searchName}&client_id=${unsplash_apiKey}`)
-    console.log('the lenght', response.data.results.length)
 
-    const imageUrl = response.data.results[0]?.urls.regular; // Get the URL of the first image (you can adjust this as needed)
-   
-    if (imageUrl) {
-      setCollegeImage(imageUrl); // Update the state
-    }
+  async function getUnsplashSearchImg (searchName) {
+    const unsplashApi = config.unsplashApiKey;
+    const randomPage = Math.floor(Math.random() * 2) + 1;
+    const response = await axios.get(`https://api.unsplash.com/search/photos?page=${randomPage}&query=${searchName}&client_id=${unsplashApi}`)
+    const imageUrls = response.data.results.map(result => result.urls.regular);
+    setCollegeImages((prevImages) => [...prevImages, ...imageUrls]);
+    // console.log('the lenght', response.data.results.length)
+    // const imageUrl = response.data.results[3]?.urls.regular;
+    // console.log(imageUrls)
 
   }
 
@@ -190,7 +193,10 @@ async function getUpdatedScore(reading, writing, math) {
         ) : null}
       </div>
       <div className="guyInLibraryDiv">
-        {collegeImage && (<img id="unsplashImage" className="guyInLibrary" src={collegeImage} alt="Unsplash Library"/>)} 
+      {collegeImages.length > 0 && 
+      (<img id="unsplashImage" className="guyInLibrary" src={collegeImages[Math.floor(Math.random() * collegeImages.length)]} alt="Unsplash Library"/>
+      )}
+        {/* {collegeImage && (<img id="unsplashImage" className="guyInLibrary" src={collegeImages} alt="Unsplash Library"/>)}  */}
       {/* <img className="guyInLibrary" src="https://images.unsplash.com/photo-1567168544646-208fa5d408fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" /> */}
       </div>
       <div className="all-college-info">
@@ -204,20 +210,23 @@ async function getUpdatedScore(reading, writing, math) {
         <div className="see-events">
           {userType == "student" || userType == "college-admission-officer" ? (
             <button>
-              <Link to={"/events"} key={college?.id}>
+              <Link className="upcoming-events" to={"/events"} key={college?.id}>
                 See Upcoming Events
               </Link>
             </button>
           ) : null}
         </div>
-        <a href={"https://" + college?.school_url} className="college-site-link">
+        <button>
+        <Link to={"https://" + college?.school_url} className="college-site-link" > See University Site </Link>
+        </button>
+        {/* <a href={"https://" + college?.school_url} className="college-site-link">
           See University Site
-        </a>
+        </a> */}
         </div>
         </div>
         <div className="college-statistics">
           {college?.admission_rate ? (
-            <div className="admissionEverything">
+            <div id="admissions" className="admissionEverything">
               <h2 className="admissionRateHeading">
                 Admission Rate:{" "}
                 {(parseFloat(college?.admission_rate) * 100).toFixed(1) + "%"}
@@ -235,7 +244,7 @@ async function getUpdatedScore(reading, writing, math) {
             </div>
             </div>
           ) : null}
-          <div className="standardized-tests">
+          <div id="tests" className="standardized-tests">
             <div className="studying">
               <img className="studyingImg" src={studyingImg} alt="" />
             </div>
@@ -263,7 +272,7 @@ async function getUpdatedScore(reading, writing, math) {
           ) : null}
           </div>
           {college?.size ? (
-            <div>
+            <div id="demographics" className="demographics">
             <h2 className="undergrad-enrollment">
               Undergraduate Enrollment: {parseInt(college?.size).toLocaleString()}
             </h2>
@@ -283,7 +292,7 @@ async function getUpdatedScore(reading, writing, math) {
             
           </div>
           {college?.student_faculty_ratio ? (
-            <div className="student-faculty-ratio">
+            <div id="studentFaculty" className="student-faculty-ratio">
               <h2>
                 Student/Faculty Ratio: {parseInt(college?.student_faculty_ratio)}
               </h2>
@@ -323,7 +332,7 @@ async function getUpdatedScore(reading, writing, math) {
             </h2>
           ) : null}
           {college?.tuition_in_state || college?.tuition_out_of_state ? (
-              <div className="costOverall">
+              <div id="costEverything" className="costOverall">
               <h2 className="costHeading">Cost Breakdown:</h2>
             <div className="cost-breakdown">
               <div className="cost-things">
