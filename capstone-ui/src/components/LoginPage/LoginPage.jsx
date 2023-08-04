@@ -92,7 +92,7 @@ export default function LoginPage({
           className="student"
           value="student"
           onClick={handleChangeUserType}
-          style={{ background: userType === "student" ? "lightblue" : "" }}
+          style={{ background: userType === "student" ? "gold" : "" }}
         >
           Student
         </button>
@@ -101,7 +101,7 @@ export default function LoginPage({
           className="parent"
           value="parent"
           onClick={handleChangeUserType}
-          style={{ background: userType === "parent" ? "lightblue" : "" }}
+          style={{ background: userType === "parent" ? "#gold" : "" }}
         >
           Parent/Guardian of Student
         </button>
@@ -112,7 +112,7 @@ export default function LoginPage({
           onClick={handleChangeUserType}
           style={{
             background:
-              userType === "college-admission-officer" ? "lightblue" : "",
+              userType === "college-admission-officer" ? "gold" : "",
           }}
         >
           College Admission Officer
@@ -123,7 +123,7 @@ export default function LoginPage({
           onClick={handleChangeUserType}
           style={{
             background:
-              userType === "college-students-and-alumni" ? "lightblue" : "",
+              userType === "college-students-and-alumni" ? "gold" : "",
           }}
         >
           College Student/Alum

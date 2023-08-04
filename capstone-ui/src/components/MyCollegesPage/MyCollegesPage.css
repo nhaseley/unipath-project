@@ -1,0 +1,14 @@
+.my-colleges-page {
+  margin: 0 auto;
+  margin-top: 5vh;
+  padding: 3.5vh;
+}
+
+.yourLikedColleges {
+  margin-top: 1vh;
+  font-weight: 400;
+}
+
+.likedCollegePrompt{
+    font-size: 1rem;
+}
