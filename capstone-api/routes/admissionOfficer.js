@@ -34,9 +34,6 @@ router.post("/getCollegeEvents", async function (req, res, next) {
   }
 });
 
-
-
-
 router.post("/getEventAttendees", async function (req, res, next) {
   try {
     const attendees = await AdmissionOfficer.getEventAttendees(req.body.eventId);

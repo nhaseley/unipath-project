@@ -35,7 +35,7 @@ export default function About() {
         <div className="creator-bio">
           <div className="image-container">
             <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
-            <p className="overlay-text" style={{ "font-weight": "bold" }}>
+            <p className="overlay-text" style={{ fontWeight: "bold" }}>
               Junior at Brown University studying Applied Mathematics and
               Computer Science
             </p>
@@ -62,7 +62,7 @@ export default function About() {
         <div className="creator-bio">
           <div className="image-container">
             <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
-            <p className="overlay-text" style={{ "font-weight": "bold" }}>
+            <p className="overlay-text" style={{ "fontWeight": "bold" }}>
               Junior at Brown University studying Applied Mathematics and
               Computer Science
             </p>
@@ -89,7 +89,7 @@ export default function About() {
         <div className="creator-bio">
           <div className="image-container">
             <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
-            <p className="overlay-text" style={{ "font-weight": "bold" }}>
+            <p className="overlay-text" style={{ "fontWeight": "bold" }}>
               Junior at Brown University studying Applied Mathematics and
               Computer Science
             </p>
@@ -127,7 +127,7 @@ export default function About() {
         vision have culminated in this platform, and we can't wait to see the
         positive impact it has on your path to higher education!
       </h2>
-      <div class="header">
+      <div className="header">
         {/* <div class="overlay">
         <div class="jumbotron" id="header1">
             
