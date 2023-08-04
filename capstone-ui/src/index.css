@@ -27,7 +27,8 @@ body {
   /* causin a lot of split  */
   min-width: 100vw;
   min-height: 100vh;
-  background: #cad2c5;
+  /* background: #cad2c5; */
+  background: #b6c5d1;
   padding: 0;
 }
 
@@ -53,7 +54,7 @@ button {
 
 button:focus,
 button:focus-visible {
-  outline: 0.2vh auto -webkit-focus-ring-color;
+  /* outline: 0.2vh auto -webkit-focus-ring-color; */
 }
 
 button:hover {
@@ -62,7 +63,7 @@ button:hover {
 }
 
 :root {
-  color: #26393b;
+  color: #000000;
   background-color: #ffffff;
 }
 

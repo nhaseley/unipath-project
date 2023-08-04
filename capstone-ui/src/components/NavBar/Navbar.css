@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   /* #354F52; */
-  background-color: whitesmoke;
+  background-color: white;
   width: 100vw;
-
+  justify-content: space-between;
   height: 7vh;
   flex-direction: row;
   color: #213547;
@@ -51,4 +51,21 @@
 
 .about_link {
   scroll-behavior: smooth;
+}
+
+.logo_picture {
+  width: 28rem;
+  margin-top: 1.7vh;
+  height: fit-content;
+  /* margin-right: 20vw; */
+}
+
+.logo-container {
+  overflow: hidden;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 0.7vh;
+  height: 21vh;
+  overflow: hidden;
+  margin-bottom: 13.5vh;
 }

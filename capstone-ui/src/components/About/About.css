@@ -72,6 +72,8 @@
     width:50%;
   }
 
+  
+
 .image-container:hover .overlay-text {
     opacity: 1;
   }
@@ -157,9 +159,7 @@
 .about-summary{
     width:50%
 }
-.bio-important-words{
-    font-weight: bold;
-}
+
 .nya-mailto{
     margin-left:4vh;
 }

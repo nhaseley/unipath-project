@@ -28,12 +28,12 @@ export default function About() {
           their ideal colleges based on interests and academic achievements.
         </h2>
       </div>
-      <hr className="about-break"/>
+      <hr className="about-break" />
       <h1 className="team-header"> Our Team </h1>
       <div className="nya-bio">
         <div className="image-container">
           <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
-          <p className="overlay-text" style={{"font-weight": "bold"}}>
+          <p className="overlay-text" style={{ "font-weight": "bold" }}>
             Junior at Brown University studying Applied Mathematics and Computer
             Science
           </p>

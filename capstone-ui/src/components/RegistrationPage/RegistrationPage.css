@@ -13,7 +13,8 @@
 .student-registration,
 .registration-survey-page,
 .alumn-survey-page,
-.event-registration {
+.event-registration,
+.my-colleges-page {
   background-color: #f0f0f0;
   width: fit-content;
   height: fit-content;
@@ -58,7 +59,8 @@
 .registration-submit,
 .back-to-register-button,
 .event-registration-submit,
-.login-submit, .add-event-button {
+.login-submit,
+.add-event-button {
   text-decoration: none;
   color: black;
   background-color: transparent;
@@ -123,7 +125,7 @@ input:focus {
 .password-toggle {
   font-size: 1rem;
   width: 4.5vw;
-  background-color: rgb(179, 179, 179);
+  background-color: rgb(136, 136, 136);
   height: 3.95vh;
   border-radius: 0.2rem;
   right: 39vw;
@@ -162,13 +164,15 @@ input:focus {
 .select_minority_bar,
 .select_size_bar,
 .select_college_bar,
-.select_college_admin_bar, .college-search {
+.select_college_admin_bar,
+.college-search {
   width: 15vw;
   height: 4vh;
   border-color: white;
   border-radius: 0.3rem;
   font-size: 1rem;
   background-color: white;
+  color: black;
 }
 
 .select_college_bar {
