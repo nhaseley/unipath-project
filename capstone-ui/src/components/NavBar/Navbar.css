@@ -55,9 +55,10 @@
 
 .logo_picture {
   width: 28rem;
-  margin-top: 1.7vh;
+  margin-top: auto;
   height: fit-content;
   /* margin-right: 20vw; */
+  position: absolute;
 }
 
 .logo-container {
@@ -67,5 +68,5 @@
   margin-top: 0.7vh;
   height: 21vh;
   overflow: hidden;
-  margin-bottom: 13.5vh;
+  margin-bottom: 10vh;
 }

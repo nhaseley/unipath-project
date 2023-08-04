@@ -30,35 +30,89 @@ export default function About() {
       </div>
       <hr className="about-break" />
       <h1 className="team-header"> Our Team </h1>
-      <div className="nya-bio">
-        <div className="image-container">
-          <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
-          <p className="overlay-text" style={{ "font-weight": "bold" }}>
-            Junior at Brown University studying Applied Mathematics and Computer
-            Science
-          </p>
+
+      <div className="all_creators">
+        <div className="creator-bio">
+          <div className="image-container">
+            <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
+            <p className="overlay-text" style={{ "font-weight": "bold" }}>
+              Junior at Brown University studying Applied Mathematics and
+              Computer Science
+            </p>
+          </div>
+          <h2 className="bio_name">Ayomide Adetunji</h2>
+          <h3 className="nya-uni">University of Maryland, '25 </h3>
+          <h3 className="nya-major">Computer Science</h3>
+          <div className="nya-contact">
+            <h3 className="nya-subsection">
+              <div className="linkedin">
+                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
+                  LinkedIn
+                </Link>
+              </div>
+              <div className="nya-mailto">
+                <ButtonMailto
+                  label="Email"
+                  mailto={"mailto:nylevenya@hotmail.com"}
+                ></ButtonMailto>
+              </div>
+            </h3>{" "}
+          </div>
         </div>
-        <h2>Nya Haseley-Ayende</h2>
-        <h3 className="nya-subsection"> Brown University, '25 </h3>
-        <h3 className="nya-subsection">
-          Applied Mathematics and Computer Science
-        </h3>
-        <div className="nya-contact">
-          <h3 className="nya-subsection">
-            <div className="linkedin">
-              <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
-                LinkedIn
-              </Link>
-            </div>
-            <div className="nya-mailto">
-              <ButtonMailto
-                label="Email"
-                mailto={"mailto:nylevenya@hotmail.com"}
-              ></ButtonMailto>
-            </div>
-          </h3>{" "}
+        <div className="creator-bio">
+          <div className="image-container">
+            <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
+            <p className="overlay-text" style={{ "font-weight": "bold" }}>
+              Junior at Brown University studying Applied Mathematics and
+              Computer Science
+            </p>
+          </div>
+          <h2 className="bio_name">Nya Haseley-Ayende</h2>
+          <h3 className="nya-uni"> Brown University, '25 </h3>
+          <h3 className="nya-major">Applied Mathematics & Computer Science</h3>
+          <div className="nya-contact">
+            <h3 className="nya-subsection">
+              <div className="linkedin">
+                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
+                  LinkedIn
+                </Link>
+              </div>
+              <div className="nya-mailto">
+                <ButtonMailto
+                  label="Email"
+                  mailto={"mailto:nylevenya@hotmail.com"}
+                ></ButtonMailto>
+              </div>
+            </h3>{" "}
+          </div>
         </div>
-        <h4> </h4>
+        <div className="creator-bio">
+          <div className="image-container">
+            <img className="nya-headshot" src={nyaImage} alt="Nya Image" />
+            <p className="overlay-text" style={{ "font-weight": "bold" }}>
+              Junior at Brown University studying Applied Mathematics and
+              Computer Science
+            </p>
+          </div>
+          <h2 className="bio_name">Jordan Sarkodie</h2>
+          <h3 className="nya-uni"> Andrews University, '25 </h3>
+          <h3 className="nya-major">Computer Science</h3>
+          <div className="nya-contact">
+            <h3 className="nya-subsection">
+              <div className="linkedin">
+                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
+                  LinkedIn
+                </Link>
+              </div>
+              <div className="nya-mailto">
+                <ButtonMailto
+                  label="Email"
+                  mailto={"mailto:nylevenya@hotmail.com"}
+                ></ButtonMailto>
+              </div>
+            </h3>{" "}
+          </div>
+        </div>
       </div>
 
       {/* <img className="jordan-headshot" src={jordanImage} alt="Jordan Image" /> */}
