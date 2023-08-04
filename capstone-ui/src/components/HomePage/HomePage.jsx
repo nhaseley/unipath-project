@@ -19,12 +19,12 @@ export default function HomePage({ userLoggedIn, userType }) {
         "https://extension.harvard.edu/wp-content/uploads/sites/8/2020/12/aerial-harvard.jpg",
     },
     {
-      // name: "Stanford University",
-      name: "ItsA me, Mario",
+      name: "Stanford University",
+      // name: "ItsA me, Mario",
 
       imageSrc:
-        // "https://collegevine.imgix.net/2251e372-7844-417d-8f2a-91b2cf00813a.jpg",
-        "https://cloudinary.com/blog/wp-content/uploads/sites/12/2022/02/Mario_1.gif",
+        "https://collegevine.imgix.net/2251e372-7844-417d-8f2a-91b2cf00813a.jpg",
+      // "https://cloudinary.com/blog/wp-content/uploads/sites/12/2022/02/Mario_1.gif",
     },
     {
       name: "Andrews University",
@@ -120,7 +120,7 @@ export default function HomePage({ userLoggedIn, userType }) {
           </div>
         </div>
       </section>
-  
+
       <Biography />
 
       {/* make this a component, so it displays at bottom of all pages */}

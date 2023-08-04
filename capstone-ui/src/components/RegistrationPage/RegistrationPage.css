@@ -14,7 +14,7 @@
 .registration-survey-page,
 .alumn-survey-page,
 .event-registration,
-.my-colleges-page, .creator-bio {
+.my-colleges-page, .creator-bio, .review-for-alum {
   background-color: #f0f0f0;
   width: fit-content;
   height: fit-content;
@@ -60,7 +60,7 @@
 .back-to-register-button,
 .event-registration-submit,
 .login-submit,
-.add-event-button {
+.add-event-button, .review-submit {
   text-decoration: none;
   color: black;
   background-color: transparent;

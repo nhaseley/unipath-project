@@ -21,7 +21,6 @@
 }
 
 .login-form > .demo-button {
-
   margin-top: 7vh;
 }
 
@@ -51,7 +50,6 @@
   text-align: center;
 }
 
-
 .register_prompt {
   padding-top: 3vh;
   text-align: center;
@@ -71,11 +69,11 @@
   color: white;
 }
 .demo-button {
-  background-color: #92fcce;
+  background-color: rgb(0, 176, 0);
   border-radius: 0.4rem;
   font-size: 1.1rem;
   border: none;
-  color: black;
+  color: rgb(255, 255, 255);
   padding: 0.5vh;
   height: fit-content;
   margin-top: 1vh;
