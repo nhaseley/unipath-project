@@ -79,9 +79,11 @@ export default function EventsPage({
             </button>
           ) : null}
           {events.length != 0 ? (
-            events?.map((event, i) => (
+            <><h2> Events at {userLoginInfo.collegeName}: </h2>
+            {events?.map((event, i) => (
               <EventCard key={i} event={event} userType={userType}></EventCard>
-            ))
+            ))}
+            </>
           ) : (
             <>
               <input

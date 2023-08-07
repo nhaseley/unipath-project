@@ -3,22 +3,40 @@
     flex-direction: column;
     justify-content: center;
 }
+
+
+.seatsCollegeImg{
+    /* max-width: 30%; */
+    /* height: 50%; */
+    width: 100%;
+    height: 930px;
+    animation: fadeInRight 2s ease-in-out;
+}
+
+
+
+
 .parent-college-card{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 20px;
+    animation: fadeInRight 6s ease-in-out;
 }
 
 
 .average-earnings-bar-chart{
-    margin-left: 40px;
+    /* margin-left: 40px; */
+    margin: 3%;
+
 }
 .parent-info{
     display: flex;
     flex-direction: column;
     padding: 30px;
     max-width: 380px;
+    margin: 3%;
 }
 .student-college-name{
     font-size: 35px;
@@ -33,9 +51,32 @@
     flex-direction:column;
 }
 .parent-card-break{
-    background: green;
-    height: 3vh;
+    background: darkcyan;
+    height: 2vh;
     border: none;
     /* padding: 1%; */
     width: 100%;
 }
+
+.net-price-bar-chart{
+    /* margin: auto; */
+    margin: 3%;
+}
+.family-income-bar-chart{
+    /* margin: auto; */
+    margin: 3%;
+}
+
+
+
+/* Animation */
+@keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
