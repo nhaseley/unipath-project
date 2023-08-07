@@ -118,7 +118,7 @@ export default function AlumniHomePage({
           </h2>
 
           <div className="review-for-alum">
-            <h2>Write your Review Here</h2>
+            <h2>Write your Review Here:</h2>
             <form className="review-form">
               <div className="names">
                 <div className="first-name">
