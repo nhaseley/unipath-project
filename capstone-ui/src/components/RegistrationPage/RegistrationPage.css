@@ -14,7 +14,12 @@
 .registration-survey-page,
 .alumn-survey-page,
 .event-registration,
-.my-colleges-page, .creator-bio, .review-for-alum {
+.my-colleges-page,
+.creator-bio,
+.review-for-alum,
+.event-attendees-page,
+.alumReviews,
+.about-summary, .us {
   background-color: #f0f0f0;
   width: fit-content;
   height: fit-content;
@@ -60,7 +65,8 @@
 .back-to-register-button,
 .event-registration-submit,
 .login-submit,
-.add-event-button, .review-submit {
+.add-event-button,
+.review-submit {
   text-decoration: none;
   color: black;
   background-color: transparent;
@@ -165,7 +171,8 @@ input:focus {
 .select_size_bar,
 .select_college_bar,
 .select_college_admin_bar,
-.college-search {
+.college-search,
+.num-attendees-input {
   width: 15vw;
   height: 4vh;
   border-color: white;

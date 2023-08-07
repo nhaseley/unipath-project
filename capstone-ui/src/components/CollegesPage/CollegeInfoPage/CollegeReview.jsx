@@ -5,11 +5,17 @@ export default function CollegeReview({ review }) {
 
   return (
     <div className="college-review">
-      <h4 className="rating">
-        {review.first_name} {review.last_name}, Class of{" "}
-        {review.college_grad_year}
-        <div className="stars">
-        {" "}{starImageArray.map((_, i) => (
+      <span className="rating">
+        <div>
+          <b>
+            {review.first_name} {review.last_name}
+          </b>
+          , Class of {review.college_grad_year}
+        </div>
+      </span>
+      <div className="stars">
+        {" "}
+        {starImageArray.map((_, i) => (
           <img
             className="star-img"
             src={
@@ -19,10 +25,10 @@ export default function CollegeReview({ review }) {
             alt={`Star Rating Icon ${i + 1}`}
           />
         ))}
-        </div>
-      </h4>
-      <h4>Review: {review.review}</h4>
-      
+      </div>
+      <span style={{ paddingTop: "4vh" }}>
+        <b>Review:</b> {review.review}
+      </span>
     </div>
   );
 }

@@ -372,22 +372,22 @@ export default function CollegeInfoPage({
 
         {userType == "college-students-and-alumni" ? (
           <button className="add-more-reviews-button">
-            <Link to="/mycollege">Add more reviews!</Link>
+            <Link to="/mycollege">+ Add A Review</Link>
           </button>
         ) : null}
       </div>
       {reviews?.length != 0 ? (
-        <h2 className="alumReviews">
+        <div className="alumReviews">
           Past Reviews/Ratings:
           {reviews?.map((review, i) => (
             <CollegeReview key={i} review={review}></CollegeReview>
           ))}
-        </h2>
+        </div>
       ) : (
-        <h2 className="alumReviews">
+        <div className="alumReviews">
           {" "}
           No reviews posted for this college yet.{" "}
-        </h2>
+        </div>
       )}
     </div>
   );

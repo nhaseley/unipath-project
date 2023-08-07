@@ -101,7 +101,7 @@ export default function LoginPage({
           className="parent"
           value="parent"
           onClick={handleChangeUserType}
-          style={{ background: userType === "parent" ? "#gold" : "" }}
+          style={{ background: userType === "parent" ? "gold" : "" }}
         >
           Parent/Guardian of Student
         </button>

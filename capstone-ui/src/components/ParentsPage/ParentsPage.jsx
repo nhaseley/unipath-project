@@ -32,7 +32,7 @@ export default function ParentsPage({
       {(userType != "parent" && userType != "student") || !userLoggedIn ? (
         <div className="parent-please-log-in">
           <div className="invalid-user">
-            <h1>
+            <h1 className="unfortunate">
               Unfortunately, this page is for parents only. Please log in{" "}
             </h1>
             <button
@@ -42,7 +42,9 @@ export default function ParentsPage({
               <Link to={"/login"}> here. </Link>
             </button>
           </div>
+
           <img className="seatsCollegeImg" src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y29sbGVnZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60" />
+
         </div>
       ) : (
         <div className="parent-logged-in-page">

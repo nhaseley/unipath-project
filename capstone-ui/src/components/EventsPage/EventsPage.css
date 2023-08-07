@@ -17,7 +17,10 @@
 .events-search {
   width: 60%;
   font-size: 20px;
-  padding: 2%;
+  padding: 1.25vw;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.25rem;
 }
 .add-event-button {
   background: #213547;
@@ -107,6 +110,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+  margin-top: 10vh;
 }
 .event-registration-form {
   display: flex;
@@ -117,6 +122,10 @@
   margin-bottom: 10px;
   justify-content: center;
   height: 25px;
+}
+
+.num-attendees-input {
+  border: none;
 }
 
 .event-registration {
@@ -149,4 +158,8 @@
 
 .event-name {
   font-size: 3rem;
+}
+
+.event-register-buttons{
+  padding-top: 3vh;
 }

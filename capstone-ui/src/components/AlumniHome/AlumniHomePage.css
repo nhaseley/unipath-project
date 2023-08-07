@@ -26,21 +26,24 @@
 }
 .incorrect-user-type-button {
   font-size: 3.2em;
-  color: #26393b;
+  color: rgb(81, 53, 3);
   font-weight: bold;
   max-height: 7vh;
   margin-left: 0.5vh;
 }
 .incorrect-user-type-button:hover {
   transition: transform 0.3s ease;
-  transform: scale(1.2);
+  transform: scale(1.01);
 }
 .invalid-user {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: #b6cdd0;
+  background: #ffb700;
+  margin-top: 40vh;
+  font-size: 0.7rem;
+  width: 100vw;
 }
 
 .review-for-alum {
@@ -56,6 +59,8 @@
   padding-bottom: 4vh;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   border-radius: 0.4vh;
+  background-color: white;
+  color: black;
 }
 
 .event-desc-input {

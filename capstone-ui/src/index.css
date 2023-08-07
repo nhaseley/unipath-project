@@ -74,3 +74,12 @@ button {
 h3 {
   font-weight: normal;
 }
+
+.unfortunate {
+  font-weight: normal;
+}
+.incorrect-user-type-button {
+  font-weight: normal;
+  color: white;
+  padding: 0;
+}
