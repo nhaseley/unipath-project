@@ -158,7 +158,6 @@ describe("Alum register", () => {
           collegeGradYear: '2023',
         });
       } catch (err) {
-        // Assertion
         expect(err instanceof BadRequestError).toBeTruthy();
       }
     });
