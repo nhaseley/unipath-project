@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.bio_header {
+.bio_header, .creators_header {
   margin: 0;
   width: 60%;
   padding-left: 10vh;
@@ -16,7 +16,7 @@
   padding-bottom: 2vh;
 }
 
-.bio_spliter {
+.bio_spliter, .about_spliter {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

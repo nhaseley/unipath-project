@@ -50,8 +50,9 @@
   text-align: center;
 }
 
-.register_prompt {
-  padding-top: 3vh;
+.register_prompt,
+.event_reg_prompt {
+  padding-top: 1.5vh;
   text-align: center;
 }
 

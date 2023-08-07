@@ -32,7 +32,7 @@ export default function MyCollegesPage({
     <>
       {userType != "student" || !userLoggedIn ? (
         <div className="invalid-user">
-          <h1>Unfortunately, this page is for students only. Please log in </h1>
+          <h1 className="unfortunate">Unfortunately, this page is for students only. Please log in </h1>
           <button
             className="incorrect-user-type-button"
             onClick={() => setUserType("student")}

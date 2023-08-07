@@ -36,6 +36,7 @@ export default function HomePage({ userLoggedIn, userType }) {
       imageSrc: "https://oneclassblog.com/wp-content/uploads/2017/09/1-5.jpg",
     },
     {
+      //redo
       name: "Yale University",
       imageSrc: "https://s.hdnux.com/photos/01/32/65/06/23810464/5/1200x0.jpg",
     },
@@ -45,15 +46,22 @@ export default function HomePage({ userLoggedIn, userType }) {
         "https://images.adsttc.com/media/images/646e/88ad/42f1/0839/b6e5/f989/large_jpg/princeton-university-residential-colleges-tenberke_6.jpg?1684965666",
     },
     {
+      //redo
       name: "Columbia University",
       imageSrc:
         "https://www.columbia.edu/content/sites/default/files/styles/cu_crop/public/content/Campus%20Images/Low_Library_NYC_skyline_night_lights.jpg?h=df0fa240&itok=M4yELnWC",
     },
 
     {
+      //redo
       name: "Brown University",
       imageSrc:
         "https://www.brown.edu/sites/default/files/styles/wide_xlrg/public/2019-04/01_About.jpg?h=920929c4&itok=lgYUTHil",
+    },
+
+    {
+      name: "Florida International University",
+      imageSrc: "https://micefa.org/wp-content/uploads/2017/09/FIU.jpg",
     },
   ];
 
@@ -97,8 +105,9 @@ export default function HomePage({ userLoggedIn, userType }) {
           inventore veritatis et quasi architecto beatae vitae dicta sunt
           explicabo. Nemo enim. En headie one is de Best.
         </h2>
+
         <button className="get-started-button" onClick={getStarted}>
-          Get Started
+          {userLoggedIn ? "Jump Back In!" : "Get Started"}
         </button>
       </div>
       <section className="additional-section">
@@ -110,7 +119,7 @@ export default function HomePage({ userLoggedIn, userType }) {
                   {collegeNames[currentImageIndex].name}
                 </span>
                 <img
-                  style={{ opacity: "0.55" }}
+                  style={{ opacity: "0.5" }}
                   className="college-image"
                   src={collegeNames[currentImageIndex].imageSrc}
                   alt={collegeNames[currentImageIndex].name}
