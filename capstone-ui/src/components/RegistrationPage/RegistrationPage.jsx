@@ -41,7 +41,7 @@ export default function RegistrationPage({
           className="student"
           value="student"
           onClick={handleChangeUserType}
-          style={{ background: userType === "student" ? "lightblue" : "" }}
+          style={{ background: userType === "student" ? "gold" : "" }}
         >
           Student
         </button>
@@ -50,7 +50,7 @@ export default function RegistrationPage({
           className="parent"
           value="parent"
           onClick={handleChangeUserType}
-          style={{ background: userType === "parent" ? "lightblue" : "" }}
+          style={{ background: userType === "parent" ? "gold" : "" }}
         >
           Parent/Guardian of Student
         </button>
@@ -59,7 +59,7 @@ export default function RegistrationPage({
           className="college-admission-officer"
           value="college-admission-officer"
           onClick={handleChangeUserType}
-          style={{ background: userType === "college-admission-officer" ? "lightblue" : "" }}
+          style={{ background: userType === "college-admission-officer" ? "gold" : "" }}
         >
           College Admission Officer
         </button>
@@ -67,7 +67,7 @@ export default function RegistrationPage({
           className="college-students-and-alumni"
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
-          style={{ background: userType === "college-students-and-alumni" ? "lightblue" : "" }}
+          style={{ background: userType === "college-students-and-alumni" ? "gold" : "" }}
         >
           College Student/Alum
         </button>

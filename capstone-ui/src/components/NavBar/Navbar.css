@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   /* #354F52; */
-  background-color: whitesmoke;
+  background-color: white;
   width: 100vw;
-
+  justify-content: space-between;
   height: 7vh;
   flex-direction: row;
   color: #213547;
@@ -51,4 +51,24 @@
 
 .about_link {
   scroll-behavior: smooth;
+}
+
+.logo_picture {
+ width: 20rem;
+ margin-top: 0.5vh;
+ margin-left: 1vw
+  /* margin-top: auto; */
+  /* height: fit-content; */
+  /* margin-right: 20vw; */
+  /* position: absolute; */ 
+}
+
+.logo-container {
+  /* overflow: hidden;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 0.7vh;
+  height: 21vh;
+  overflow: hidden;
+  margin-bottom: 10vh; */
 }

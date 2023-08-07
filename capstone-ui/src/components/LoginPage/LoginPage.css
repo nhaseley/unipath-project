@@ -11,7 +11,7 @@
   border-radius: 0.7rem;
   font-size: 18px;
   border: none;
-  color: #354f52;
+  color: #000000;
   padding: 0.5vw;
   /* border: 2px solid #84A98C; */
 }
@@ -21,7 +21,6 @@
 }
 
 .login-form > .demo-button {
-
   margin-top: 7vh;
 }
 
@@ -51,7 +50,6 @@
   text-align: center;
 }
 
-
 .register_prompt {
   padding-top: 3vh;
   text-align: center;
@@ -62,7 +60,7 @@
   border-radius: 0.7rem;
   font-size: 18px;
   border: none;
-  color: #354f52;
+  color: #000000;
   padding: 10px;
   /* border: 2px solid #84A98C; */
 }
@@ -71,11 +69,11 @@
   color: white;
 }
 .demo-button {
-  background-color: #92fcce;
+  background-color: rgb(0, 176, 0);
   border-radius: 0.4rem;
   font-size: 1.1rem;
   border: none;
-  color: black;
+  color: rgb(255, 255, 255);
   padding: 0.5vh;
   height: fit-content;
   margin-top: 1vh;

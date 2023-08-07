@@ -97,7 +97,7 @@ export default function AlumniHomePage({
         <div className="alumni-logged-in-page">
           
           <div className="alumni-header">
-            <h1>
+            <h1 style={{fontWeight: "normal"}}>
               Welcome to {userLoginInfo.collegeName}, {userLoginInfo?.firstName}
               !
             </h1>
@@ -118,7 +118,7 @@ export default function AlumniHomePage({
           </h2>
 
           <div className="review-for-alum">
-            <h2>Write your Review Here:</h2>
+            <h2 style={{marginBottom: "0.5vh"}}>Write your Review Here</h2>
             <form className="review-form">
               <div className="names">
                 <div className="first-name">
@@ -199,8 +199,8 @@ export default function AlumniHomePage({
             </button>
             </div>
           </div>
-          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80">
-          </img>
+          {/* <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80">
+          </img> */}
         </div>
       )}
     </div>
