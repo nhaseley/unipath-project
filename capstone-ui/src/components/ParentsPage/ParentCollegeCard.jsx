@@ -10,6 +10,7 @@ export default function ParentCollegeCard({
   childCollege,
   setUserLoginInfo,
   customColors,
+  scrollToTop
 }) {
   const [college, setCollege] = useState();
 console.log(college)
@@ -42,6 +43,7 @@ console.log(college)
   function changeCollege() {
     setUserLoginInfo((u) => ({ ...u, collegeName: childCollege?.college_name }));    
     localStorage.setItem("selected-college", childCollege?.college_name);
+    scrollToTop();
   }
 
   return (
@@ -70,6 +72,8 @@ console.log(college)
             ? "$" + parseInt(college?.room_board_offcampus).toLocaleString()
             : "Unavailable"}
         </h3>
+        <button className="price-calc-button">
+          <Link to={college?.price_calculator.includes("http")?college?.price_calculator: "https://"+college?.price_calculator}> Price Calculator </Link> </button>
         <h3></h3>
       </div>
       {/* <div className="parent-data-visuals"> */}

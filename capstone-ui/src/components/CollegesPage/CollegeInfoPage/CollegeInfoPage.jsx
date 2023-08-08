@@ -12,7 +12,7 @@ import diverseImg from "../../../assets/diverseImg.png";
 import studyingImg from "../../../assets/studyingImg.png";
 import costImg from "../../../assets/costImg.png";
 import admittedImg from "../../../assets/admittedImg.png";
-import config from "../../../../../config.dev";
+// import config from "../../../../../config.dev";
 
 export default function CollegeInfoPage({
   userLoginInfo,
@@ -24,7 +24,6 @@ export default function CollegeInfoPage({
   const { id } = useParams();
   const [college, setCollege] = useState();
   const [averageSAT, setAverageSAT] = useState();
-  const [collegeImage, setCollegeImage] = useState("");
   const [collegeImages, setCollegeImages] = useState([]);
 
   console.log("college: ", college);
@@ -110,31 +109,63 @@ export default function CollegeInfoPage({
 
   function findMinorityServingValue(data) {
     // add to an array instead of returning
-    let res = "";
+    let res = [];
     if (data) {
       if (data.aanipi == 1) {
-        res += "aanipi-serving";
+        if (res.length == 0) {
+          res.push("aanipi-serving");
+        } else {
+          res.push(", aanipi-serving");
+        }
       }
       if (data.annh == 1) {
-        res += "annh-serving";
+        if (res.length == 0) {
+          res.push("annh-serving");
+        } else {
+          res.push(", annh-serving");
+        }
       }
       if (data.hispanic == 1) {
-        res += "hispanic-serving";
+        if (res.length == 0) {
+          res.push("hispanic-serving");
+        } else {
+          res.push(", hispanic-serving");
+        }
       }
       if (data.predominantly_black == 1) {
-        res += "predominantly-black";
+        if (res.length == 0) {
+          res.push("predominantly-black");
+        } else {
+          res.push(", predominantly-black");
+        }
       }
       if (data.historically_black == 1) {
-        res += "historically-black";
+        if (res.length == 0) {
+          res.push("historically-black");
+        } else {
+          res.push(", historically-black");
+        }
       }
       if (data.tribal == 1) {
-        res += "tribal-serving";
+        if (res.length == 0) {
+          res.push("tribal-serving");
+        } else {
+          res.push(", tribal-serving");
+        }
       }
       if (data.women_only == 1) {
-        res += "women-only";
+        if (res.length == 0) {
+          res.push("women-only");
+        } else {
+          res.push(", women-only");
+        }
       }
       if (data.men_only == 1) {
-        res += "men-only";
+        if (res.length == 0) {
+          res.push("men-only");
+        } else {
+          res.push(", men-only");
+        }
       }
       return res;
     }
@@ -211,32 +242,31 @@ export default function CollegeInfoPage({
             institution located in {college?.city}, {college?.state}.
           </h2>
           <div className="events-and-university">
-            <div className="see-events">
-              {userType == "student" ||
-              userType == "college-admission-officer" ? (
-                <button>
-                  <Link
-                    className="upcoming-events"
-                    to={"/events"}
-                    key={college?.id}
-                  >
-                    See Upcoming Events
-                  </Link>
-                </button>
-              ) : null}
-            </div>
-            <button>
+            {/* <div className="see-events"> */}
+            {userType == "student" ||
+            userType == "college-admission-officer" ? (
+              <button className="see-events">
+                <Link
+                  className="upcoming-events"
+                  to={"/events"}
+                  key={college?.id}
+                >
+                  See Upcoming Events
+                </Link>
+              </button>
+            ) : null}
+            <button className="college-site-link">
               <Link
-                to={"https://" + college?.school_url}
-                className="college-site-link"
+                to={
+                  college?.school_url.includes("https")
+                    ? college?.school_url
+                    : "https://" + college?.school_url
+                }
               >
                 {" "}
                 See University Site{" "}
               </Link>
             </button>
-            {/* <a href={"https://" + college?.school_url} className="college-site-link">
-          See University Site
-        </a> */}
           </div>
         </div>
         <div className="college-statistics">
@@ -259,6 +289,7 @@ export default function CollegeInfoPage({
               </div>
             </div>
           ) : null}
+          <hr className="college-info-break" />
           <div id="tests" className="standardized-tests">
             <div className="studying">
               <img className="studyingImg" src={studyingImg} alt="" />
@@ -286,6 +317,8 @@ export default function CollegeInfoPage({
               </div>
             ) : null}
           </div>
+          <hr className="college-info-break" />
+
           {college?.size ? (
             <div id="demographics" className="demographics">
               <h2 className="undergrad-enrollment">
@@ -311,6 +344,8 @@ export default function CollegeInfoPage({
               />
             </div>
           </div>
+          <hr className="college-info-break" />
+
           {college?.student_faculty_ratio ? (
             <div id="studentFaculty" className="student-faculty-ratio">
               <h2>
@@ -352,6 +387,9 @@ export default function CollegeInfoPage({
               {parseFloat(college?.retention_rate * 100).toFixed(1) + "%"}
             </h2>
           ) : null}
+
+          <hr className="college-info-break" />
+
           {college?.tuition_in_state || college?.tuition_out_of_state ? (
             <div id="costEverything" className="costOverall">
               <h2 className="costHeading">Cost Breakdown:</h2>
@@ -380,15 +418,18 @@ export default function CollegeInfoPage({
       </div>
       {reviews?.length != 0 ? (
         <div className="alumReviews">
-          Past Reviews/Ratings:
-          {reviews?.map((review, i) => (
-            <CollegeReview key={i} review={review}></CollegeReview>
-          ))}
+          <h2 className="review-header">Past Reviews/Ratings:</h2>
+          <div className="reviews-grid">
+            {reviews?.map((review, i) => (
+              <CollegeReview key={i} review={review}></CollegeReview>
+            ))}
+          </div>
         </div>
       ) : (
         <div className="alumReviews">
-          {" "}
-          No reviews posted for this college yet.{" "}
+          <div className="review-header">
+            No reviews posted for this college yet.
+          </div>
         </div>
       )}
     </div>

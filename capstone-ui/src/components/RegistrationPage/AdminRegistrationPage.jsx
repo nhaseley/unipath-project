@@ -58,11 +58,11 @@ export default function AdminRegistrationPage({
           password: userLoginInfo.password,
         }
       );
-      navigate("/login");
 
       if (result.data.status) {
         setError(result.data);
       } else {
+        navigate("/login");
         setError({});
         setUserLoginInfo({
           email: "",
@@ -122,10 +122,6 @@ export default function AdminRegistrationPage({
           </div>
 
           <div className="work-email">
-            {/* <img
-                src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
-                className="email-img"
-              ></img> */}
             <input
               className="email-input"
               type="email"
@@ -138,10 +134,6 @@ export default function AdminRegistrationPage({
           </div>
 
           <div className="password">
-            {/* <img
-                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-                className="password-img"
-              ></img> */}
             <input
               className="password-input"
               type={passwordDisplayed.password ? "text" : "password"}
@@ -166,11 +158,6 @@ export default function AdminRegistrationPage({
           </div>
 
           <div className="confirm-password">
-            {/* <img
-                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-                className="password-img"
-              ></img> */}
-
             <input
               name="confirm-password"
               type={passwordDisplayed.confirmPassword ? "text" : "password"}
@@ -201,7 +188,7 @@ export default function AdminRegistrationPage({
             {error.status ? "Registration Failed: " + error.message : null}
           </div>
           <div className="select_college_admin_container">
-            <p className="p_select_college">Select Your Institution</p>
+            <p className="p_select_college">Please Select Your Institution. You may search. </p>
             <select
               className="select_college_admin_bar"
               onChange={handleCollegeSelect}

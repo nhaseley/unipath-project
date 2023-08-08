@@ -6,7 +6,7 @@ export default function CollegeReview({ review }) {
   return (
     <div className="college-review">
       <span className="rating">
-        <div>
+        <div className="rating-info">
           <b>
             {review.first_name} {review.last_name}
           </b>
@@ -26,7 +26,7 @@ export default function CollegeReview({ review }) {
           />
         ))}
       </div>
-      <span style={{ paddingTop: "4vh" }}>
+      <span className="rating-desc">
         <b>Review:</b> {review.review}
       </span>
     </div>
