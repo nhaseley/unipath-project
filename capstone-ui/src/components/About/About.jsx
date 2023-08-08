@@ -5,7 +5,7 @@ import nyaImage from "./IMG_3249.jpg";
 import ayoImage from "./IMG_6683.jpg";
 import linkedIn from "./linkedIn.png";
 import emailIcon from "./mail.png";
-// import jordanImage from "INSERT HERE YOUR FILE"
+import jordanImage from "./jordanImg.png"
 
 import { Link } from "react-router-dom";
 import ButtonMailto from "../EventsPage/ButtonMailto";
@@ -73,9 +73,9 @@ export default function About() {
         </div>
         <div className="creator-bio">
           <div className="image-container">
-            <img className="headshot" src={nyaImage} alt="Jordan Image" />
+            <img className="headshot" src={jordanImage} alt="Jordan Image" />
             <p className="overlay-text" style={{ fontWeight: "bold" }}>
-              Junior at Brown University studying Applied Mathematics and
+              Junior at Andrews University studying
               Computer Science.
             </p>
           </div>
@@ -85,14 +85,14 @@ export default function About() {
           <div className="contact">
             <h3 className="subsection">
               <div className="linkedin">
-                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
+                <Link to="https://www.linkedin.com/in/jordan-sarkodie-95b474247">
                   <img className="linkedinLogo" src={linkedIn} />
                 </Link>
               </div>
               <div className="mailto">
                 <ButtonMailto
                   label={<img className="emailLogo" src={emailIcon} />}
-                  mailto={"mailto:nylevenya@hotmail.com"}
+                  mailto={"mailto:jordansarkodie13@gmail.com"}
                 ></ButtonMailto>
               </div>
             </h3>
@@ -103,7 +103,7 @@ export default function About() {
             <img className="headshot" src={nyaImage} alt="Nya Image" />
             <p className="overlay-text" style={{ fontWeight: "bold" }}>
               Junior at Brown University studying Applied Mathematics and
-              Computer Science.
+              Computer Science
             </p>
           </div>
           <h2 className="bio_name">Nya Haseley-Ayende</h2>

@@ -70,7 +70,7 @@
   padding: 1%;
   display: flex;
   justify-content: center;
-  width: 50%;
+  width: 70%;
 }
 
 .image-container:hover .overlay-text {
@@ -82,7 +82,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
   color: white;
   text-align: center;
   font-size: 18px;
@@ -90,8 +90,11 @@
   transition: opacity 0.3s;
   display: flex;
   font-size: 0.7rem;
+  pointer-events: none;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  margin-bottom:2vh;
 }
-
 .all_creators {
   display: flex;
   flex-direction: row;
@@ -110,7 +113,7 @@
   margin-top: 0.5vh;
   padding: 1vh;
   padding-top: 2vh;
-  max-width: 20vw;
+  max-width: 25vw;
   height: 50vh;
 }
 
