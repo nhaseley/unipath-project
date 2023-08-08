@@ -131,7 +131,7 @@ export default function StudentDemographicsPieChart({
         .attr("y", 220) // Adjust the y position as needed
         .style("font-size", "12px")
         .style("font-style", "italic")
-        .text("Wedges encompassing less than 2% were removed for stylistic reasons.");
+        .text("Wedges encompassing less than 2% were removed for style.");
   
     // Add chart title
     svg

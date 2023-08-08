@@ -85,13 +85,13 @@ console.log(college)
           ></NetPricePieChart>
         </div>
       ) :null}
-
+    {college?.earnings_1yr_after_completion && college?.earnings_4yr_after_completion ?
       <div className="average-earnings-bar-chart">
         <AverageEarningsBarChart
           averageEarningsData={averageEarningsData}
           customColors={customColors}
         ></AverageEarningsBarChart>
-      </div>
+      </div> : null}
 
       {college?.median_family_income && college?.avg_family_income ? (
         <div className="family-income-bar-chart">
@@ -101,7 +101,6 @@ console.log(college)
           ></FamilyIncomeBarChart>
         </div>
       ) : null}
-      {/* </div> */}
     </div>
   );
 }
