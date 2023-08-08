@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import HomePage from "./HomePage/HomePage";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "./NavBar/Navbar";
 import LoginPage from "./LoginPage/LoginPage";
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 import RegistrationSurveyPage from "./RegistrationPage/RegistrationSurveyPage";
@@ -19,6 +19,7 @@ import EventDetailsPage from "./EventsPage/EventDetailsPage";
 import EventAttendeesPage from "./EventsPage/EventAttendeesPage";
 
 export default function App() {
+  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -84,6 +85,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    scrollToTop()
     const selectedCollegeStored = localStorage.getItem("selected-college");
     const token = localStorage.getItem("token");
     if (!decodedToken) {

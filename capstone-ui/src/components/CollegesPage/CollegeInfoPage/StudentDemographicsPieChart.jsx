@@ -37,6 +37,17 @@ export default function StudentDemographicsPieChart({
         value: +value,
       })
     );
+
+    // Calculate the total value of all data points
+    const totalValue = data.reduce((sum, d) => sum + d.value, 0);
+
+    // Filter out data points with percentages below 2%
+    // In order to get rid of overlapping wedge labels
+    const filteredData = data.filter(
+      (d) => (d.value / totalValue) * 100 >= 2
+    );
+
+
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
 
     const width = 400;
@@ -54,7 +65,7 @@ export default function StudentDemographicsPieChart({
 
     const slices = g
       .selectAll(".slice")
-      .data(pie(data))
+      .data(pie(filteredData))
       .enter()
       .append("g")
       .attr("class", "slice");
@@ -62,7 +73,9 @@ export default function StudentDemographicsPieChart({
     slices
       .append("path")
       .attr("d", arc)
-      .attr("fill", (_, i) => colorScale(i));
+      .attr("fill", (_, i) => colorScale(i))
+      .attr("stroke", "white") // Add a white stroke around each wedge
+      .attr("stroke-width", 2); // Adjust the stroke width as needed
     slices
       .append("text")
       .attr("transform", (d) => `translate(${arc.centroid(d)})`)
@@ -110,6 +123,16 @@ export default function StudentDemographicsPieChart({
       .text((d) => d.label)
       .style("font-size", "14px");
 
+        // Add a legend message at the bottom
+        legend
+        .append("text")
+        .attr("class", "legend-message")
+        .attr("x", 0)
+        .attr("y", 220) // Adjust the y position as needed
+        .style("font-size", "12px")
+        .style("font-style", "italic")
+        .text("Wedges encompassing less than 2% were removed for stylistic reasons.");
+  
     // Add chart title
     svg
       .append("text")
@@ -119,6 +142,8 @@ export default function StudentDemographicsPieChart({
       .attr("text-anchor", "middle")
       .style("font-size", "20px")
       .text("Student Body Demographics");
+    
+
   }, [studentDemographicsData]);
 
   return <svg ref={chartRef} width="800" height="450" />;

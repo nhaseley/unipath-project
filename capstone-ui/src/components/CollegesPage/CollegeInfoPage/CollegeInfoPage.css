@@ -250,6 +250,10 @@
   padding-top: 4vh;
   font-size: 2vh;
 }
+.no-reviews{
+  margin-top:1vh;
+  margin-bottom:-0.5vh;
+}
 
 /* Animation */
 @keyframes fadeInRight {

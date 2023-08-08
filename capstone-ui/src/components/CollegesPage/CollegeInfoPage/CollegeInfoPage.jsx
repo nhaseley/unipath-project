@@ -427,7 +427,7 @@ export default function CollegeInfoPage({
         </div>
       ) : (
         <div className="alumReviews">
-          <div className="review-header">
+          <div className="no-reviews">
             No reviews posted for this college yet.
           </div>
         </div>
