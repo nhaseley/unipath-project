@@ -11,20 +11,87 @@ export default function HomePage({ userLoggedIn, userType }) {
     {
       name: "Massachusetts Institute of Technology",
       imageSrc:
-        "https://spectrum.mit.edu/wp-content/uploads/in-support-of-mits-campus-02-1260x840.png",
+        "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/201709/%2520Aerial-AboveSummit-Christopher%2520Harting_2.png?itok=dFHQI8zn",
     },
     {
-      name: "Harvard University",
+      name: "California State University Sacramento",
       imageSrc:
-        "https://extension.harvard.edu/wp-content/uploads/sites/8/2020/12/aerial-harvard.jpg",
+        "https://www.csus.edu/news/files/1_Campus_Spring_Flowers_Students_FB_20150330_0011.jpg",
     },
+    {
+      name: "CUNY Hunter College",
+      imageSrc:
+        "https://s29068.pcdn.co/wp-content/uploads/68th-street-campus-3.jpg",
+    },
+    {
+      name: "Howard University",
+      imageSrc:
+        "https://www.usnews.com/dims4/USNEWS/95badee/17177859217/resize/800x540%3E/quality/85/?url=https%3A%2F%2Fmedia.beam.usnews.com%2F82%2F7bbabaea5b47be61379d37af47e531%2FHowardUniversity-FoundersLibrary.jpg",
+    },
+    {
+      name: "University of Michigan",
+      imageSrc:
+        "https://collegerealitycheck.com/wp-content/uploads/umich-1228-1024x768.jpg",
+    },
+    {
+      name: "Morehouse College",
+      imageSrc:
+        "https://www.georgiaencyclopedia.org/wp-content/uploads/2021/02/morehouse-college_001.jpg",
+    },
+    {
+      name: "University of Texas at El Paso",
+      imageSrc: "https://www.utsystem.edu/sites/default/files/utep%20copy.jpg",
+    },
+    {
+      name: "Purdue University",
+      imageSrc:
+        "https://www.cappex.com/sites/default/files/styles/max_1200/public/images/hero/college/243780_hero.jpg?itok=1rwetRbF",
+    },
+    {
+      name: "Indiana University",
+      imageSrc:
+        "https://bloomington.iu.edu/images/social-media-photos/twitter-social-media.jpg",
+    },
+    {
+      name: "CUNY Baruch College",
+      imageSrc:
+        "https://newscenter.baruch.cuny.edu/wp-content/uploads/sites/24/2020/09/Baruch-College_NVC-Building810x500.jpg",
+    },
+    {
+      name: "University of California Santa Barbara",
+      imageSrc:
+        "https://upload.wikimedia.org/wikipedia/commons/b/b3/Ucsbuniversitycenterandstorketower.jpg",
+    },
+    {
+      name: "Minerva University",
+      imageSrc:
+        "https://prod-upp-image-read.ft.com/20b66472-c5e6-11e5-808f-8231cd71622e",
+    },
+    {
+      name: "University of Illinois Urbana-Champaign",
+      imageSrc:
+        "https://map.illinois.edu/webservices/images/map/header_map.jpg",
+    },
+    {
+      name: "Southern Illinois University Edwardsville",
+      imageSrc:
+        "https://www.siue.edu/_navigation/civil-engineering/img/Home-page-14194_042.jpg",
+    },
+    {
+      name: "Colby College",
+      imageSrc:
+        "https://media.beam.usnews.com/b7/d97ce88cb3a68f5e76417c9de75caa/Miller_point_in_the_sun__USNews.jpg",
+    },
+    {
+      name: "University Of Texas At Austin",
+      imageSrc:
+        "https://www.utexas.edu/sites/default/files/styles/utexas_hero_photo_image/public/tower_hero_v2.jpg",
+    },
+
     {
       name: "Stanford University",
-      // name: "ItsA me, Mario",
-
       imageSrc:
         "https://collegevine.imgix.net/2251e372-7844-417d-8f2a-91b2cf00813a.jpg",
-      // "https://cloudinary.com/blog/wp-content/uploads/sites/12/2022/02/Mario_1.gif",
     },
     {
       name: "Andrews University",
@@ -35,33 +102,33 @@ export default function HomePage({ userLoggedIn, userType }) {
       name: "University of Maryland",
       imageSrc: "https://oneclassblog.com/wp-content/uploads/2017/09/1-5.jpg",
     },
-    {
-      //redo
-      name: "Yale University",
-      imageSrc: "https://s.hdnux.com/photos/01/32/65/06/23810464/5/1200x0.jpg",
-    },
+
     {
       name: "Princeton University",
       imageSrc:
         "https://images.adsttc.com/media/images/646e/88ad/42f1/0839/b6e5/f989/large_jpg/princeton-university-residential-colleges-tenberke_6.jpg?1684965666",
     },
-    {
-      //redo
-      name: "Columbia University",
-      imageSrc:
-        "https://www.columbia.edu/content/sites/default/files/styles/cu_crop/public/content/Campus%20Images/Low_Library_NYC_skyline_night_lights.jpg?h=df0fa240&itok=M4yELnWC",
-    },
-
-    {
-      //redo
-      name: "Brown University",
-      imageSrc:
-        "https://www.brown.edu/sites/default/files/styles/wide_xlrg/public/2019-04/01_About.jpg?h=920929c4&itok=lgYUTHil",
-    },
 
     {
       name: "Florida International University",
-      imageSrc: "https://micefa.org/wp-content/uploads/2017/09/FIU.jpg",
+      imageSrc:
+        "https://www.fiu.edu/_assets/images/cover.jpg?id=2a56da8b0a73710b5d5807d6a3a4190d",
+    },
+
+    {
+      name: "Brown University",
+      imageSrc:
+        "https://www.usnews.com/dims4/USNEWS/e787cac/17177859217/resize/800x540%3E/quality/85/?url=https%3A%2F%2Fmedia.beam.usnews.com%2Fd1%2Ffe377768fbb26f45239bd82b4b41d0%2F20191020_COMM_coheamarketing121.png",
+    },
+    {
+      name: "Wesleyan University",
+      imageSrc:
+        "https://lh3.googleusercontent.com/p/AF1QipOrjTM1s_udub3X5CWMQs3whWX0vbzrxWJeN8Du=s1360-w1360-h1020",
+    },
+    {
+      name: "Penn State",
+      imageSrc:
+        "https://sc-api.psu.edu/s3/files/styles/4_3_1500w/public/IMG_5147.JPG?h=71976bb4&itok=ckYEM2KU",
     },
   ];
 

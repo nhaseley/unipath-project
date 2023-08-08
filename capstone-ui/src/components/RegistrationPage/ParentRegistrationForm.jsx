@@ -79,7 +79,7 @@ export default function ParentRegistrationForm({
           <input
             className="email-input"
             type="email"
-            placeholder="Parent Email"
+            placeholder="Parent/Guardian Email"
             value={userLoginInfo.email}
             onChange={(e) =>
               setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
