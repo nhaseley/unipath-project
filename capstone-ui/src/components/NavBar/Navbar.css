@@ -37,6 +37,12 @@
   font-size: 1.3rem;
 }
 
+.navItems li:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.03);
+  color: rgb(177, 135, 26);
+}
+
 .navButton {
   background-color: transparent;
   font-size: 20px;
@@ -54,13 +60,13 @@
 }
 
 .logo_picture {
- width: 20rem;
- margin-top: 0.5vh;
- margin-left: 1vw
+  width: 20rem;
+  margin-top: 0.5vh;
+  margin-left: 1vw;
   /* margin-top: auto; */
   /* height: fit-content; */
   /* margin-right: 20vw; */
-  /* position: absolute; */ 
+  /* position: absolute; */
 }
 
 .logo-container {

@@ -111,7 +111,7 @@
   height: 3.75vh;
   width: 25vw;
   background-color: white;
-  border: none;
+  border: rgb(186, 186, 186) 0.1vw solid;
   color: black;
   border-radius: 0.2rem;
   font-size: 1rem;
@@ -175,7 +175,7 @@ input:focus {
 .num-attendees-input {
   width: 15vw;
   height: 4vh;
-  border-color: white;
+  border: rgb(186, 186, 186) 0.1vw solid;
   border-radius: 0.3rem;
   font-size: 1rem;
   background-color: white;

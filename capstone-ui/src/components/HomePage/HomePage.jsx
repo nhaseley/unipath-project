@@ -14,6 +14,11 @@ export default function HomePage({ userLoggedIn, userType }) {
         "https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/201709/%2520Aerial-AboveSummit-Christopher%2520Harting_2.png?itok=dFHQI8zn",
     },
     {
+      name: "Princeton University",
+      imageSrc:
+        "https://images.adsttc.com/media/images/646e/88ad/42f1/0839/b6e5/f989/large_jpg/princeton-university-residential-colleges-tenberke_6.jpg?1684965666",
+    },
+    {
       name: "California State University Sacramento",
       imageSrc:
         "https://www.csus.edu/news/files/1_Campus_Spring_Flowers_Students_FB_20150330_0011.jpg",
@@ -102,13 +107,6 @@ export default function HomePage({ userLoggedIn, userType }) {
       name: "University of Maryland",
       imageSrc: "https://oneclassblog.com/wp-content/uploads/2017/09/1-5.jpg",
     },
-
-    {
-      name: "Princeton University",
-      imageSrc:
-        "https://images.adsttc.com/media/images/646e/88ad/42f1/0839/b6e5/f989/large_jpg/princeton-university-residential-colleges-tenberke_6.jpg?1684965666",
-    },
-
     {
       name: "Florida International University",
       imageSrc:
@@ -119,22 +117,6 @@ export default function HomePage({ userLoggedIn, userType }) {
       imageSrc:
         "https://tile.loc.gov/storage-services/service/pnp/highsm/62000/62099v.jpg",
     },
-
-    // {
-    //   name: "Brown University",
-    //   imageSrc:
-    //     "https://www.usnews.com/dims4/USNEWS/e787cac/17177859217/resize/800x540%3E/quality/85/?url=https%3A%2F%2Fmedia.beam.usnews.com%2Fd1%2Ffe377768fbb26f45239bd82b4b41d0%2F20191020_COMM_coheamarketing121.png",
-    // },
-    // {
-    //   name: "Wesleyan University",
-    //   imageSrc:
-    //     "https://lh3.googleusercontent.com/p/AF1QipOrjTM1s_udub3X5CWMQs3whWX0vbzrxWJeN8Du=s1360-w1360-h1020",
-    // },
-    // {
-    //   name: "Penn State",
-    //   imageSrc:
-    //     "https://sc-api.psu.edu/s3/files/styles/4_3_1500w/public/IMG_5147.JPG?h=71976bb4&itok=ckYEM2KU",
-    // },
   ];
 
   // const [loopArray, setLoopArray] = useState([]);
@@ -187,7 +169,7 @@ export default function HomePage({ userLoggedIn, userType }) {
           <div className="college-list">
             <div className="college-item">
               <div className="college-content">
-                <span className="college-name">
+                <span className="college-name" style={{backgroundColor: "black"}}>
                   {collegeNames[currentImageIndex].name}
                 </span>
                 <img
