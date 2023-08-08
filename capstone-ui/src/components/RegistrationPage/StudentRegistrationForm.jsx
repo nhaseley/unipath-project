@@ -28,9 +28,7 @@ export default function StudentRegistrationForm({
 
   function handleNext() {
     // set useState to true, so it goes to next page.
-    console.log(nextRegistrationPage);
     setNextRegistrationPage(!nextRegistrationPage);
-    console.log(nextRegistrationPage);
   }
 
   return (
@@ -69,10 +67,6 @@ export default function StudentRegistrationForm({
           </div>
         </div>
         <div className="email">
-          {/* <img
-            src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
-            className="email-img"
-          ></img> */}
           <input
             className="email-input"
             type="email"
@@ -87,7 +81,7 @@ export default function StudentRegistrationForm({
           <input
             className="parent-phone-input"
             type="text"
-            placeholder="Parent Phone Number"
+            placeholder="Parent/Guardian Phone Number"
             value={userLoginInfo.parentPhone}
             onChange={(e) =>
               setUserLoginInfo((u) => ({
@@ -110,10 +104,6 @@ export default function StudentRegistrationForm({
         </div>
 
         <div className="password">
-          {/* <img
-            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-            className="password-img"
-          ></img> */}
           <input
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
@@ -137,11 +127,6 @@ export default function StudentRegistrationForm({
           </button>
         </div>
         <div className="confirm-password">
-          {/* <img
-            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-            className="password-img"
-          ></img> */}
-
           <input
             name="confirm-password"
             type={passwordDisplayed.confirmPassword ? "text" : "password"}

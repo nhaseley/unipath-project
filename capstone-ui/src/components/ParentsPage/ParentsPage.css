@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left:2vh;
 }
 
 
@@ -12,24 +13,16 @@
     height: 930px;
     animation: fadeInRight 2s ease-in-out;
 }
-
-
-
-
 .parent-college-card{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 20px;
-    animation: fadeInRight 6s ease-in-out;
+    animation: fadeInRight 1.5s ease-in-out;
 }
-
-
 .average-earnings-bar-chart{
-    /* margin-left: 40px; */
     margin: 3%;
-
 }
 .parent-info{
     display: flex;
@@ -38,10 +31,21 @@
     max-width: 380px;
     margin: 3%;
 }
+.price-calc-button{
+    color: #213547;
+    background: lightyellow;
+    font-size: 1.2em;
+    border-radius: 0.25rem;
+    padding: 0.5vh;
+    width:80%
+}
 .student-college-name{
     font-size: 35px;
 }
-
+.price-calc-button:hover, .student-college-name:hover{
+    transition: transform 0.3s ease;
+    transform: scale(1.2);
+}
 .parents-parent{
     display: flex;
     flex-direction: column;
@@ -54,16 +58,15 @@
     background: darkcyan;
     height: 2vh;
     border: none;
-    /* padding: 1%; */
     width: 100%;
+    width: 101.3%;
+    margin-left: -2vh;
 }
 
 .net-price-bar-chart{
-    /* margin: auto; */
     margin: 3%;
 }
 .family-income-bar-chart{
-    /* margin: auto; */
     margin: 3%;
 }
 

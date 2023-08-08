@@ -67,19 +67,15 @@ export default function ParentRegistrationForm({
         Create a Parent/Guardian account:
       </h2>
       <p className="parent_prompt">
-        Your phone number must match the phone number exactly listed on your
+        Your phone number must match the parent/guardian phone number exactly listed on your
         scholar's account!
       </p>
       <form className="registration-form">
         <div className="email">
-          {/* <img
-            src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
-            className="email-img"
-          ></img> */}
           <input
             className="email-input"
             type="email"
-            placeholder="Parent Email"
+            placeholder="Parent/Guardian Email"
             value={userLoginInfo.email}
             onChange={(e) =>
               setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
@@ -121,7 +117,7 @@ export default function ParentRegistrationForm({
           <input
             className="parent-phone-input"
             type="text"
-            placeholder="Phone Number"
+            placeholder="Parent/Guardian Phone Number"
             value={userLoginInfo.parentPhone}
             onChange={(e) =>
               setUserLoginInfo((u) => ({
@@ -133,10 +129,6 @@ export default function ParentRegistrationForm({
         </div>
 
         <div className="password">
-          {/* <img
-            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-            className="password-img"
-          ></img> */}
           <input
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
@@ -160,11 +152,6 @@ export default function ParentRegistrationForm({
           </button>
         </div>
         <div className="confirm-password">
-          {/* <img
-            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-            className="password-img"
-          ></img> */}
-
           <input
             name="confirm-password"
             type={passwordDisplayed.confirmPassword ? "text" : "password"}

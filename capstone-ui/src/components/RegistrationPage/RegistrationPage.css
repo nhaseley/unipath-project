@@ -224,6 +224,7 @@ input:focus {
 
 .yes_no_container {
   margin-left: 2vw;
+  /* margin-bottom:2vh; */
 }
 
 .parent_prompt {

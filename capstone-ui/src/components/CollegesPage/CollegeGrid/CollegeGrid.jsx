@@ -12,7 +12,8 @@ export default function CollegeGrid({
   collegesToDisplay,
   setCollegesToDisplay,
   setUserLoginInfo,
-  convertCollegeSAT
+  convertCollegeSAT,
+  scrollToTop
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [allColleges, setAllColleges] = useState([]);
@@ -68,14 +69,6 @@ export default function CollegeGrid({
     setCollegeArrayPointer(collegeArrayPointer - 20);
     scrollToTop();
   }
-
-
-  function scrollToTop () {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // This creates a smooth scrolling effect
-    });
-  };
 
   // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =

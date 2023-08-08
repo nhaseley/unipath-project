@@ -21,7 +21,7 @@
   width: 30%;
   margin-left: 4vh;
 }
-.nya-headshot {
+.headshot {
   max-width: 100%;
   outline: darkblue solid 2px;
   border-radius: 4%;
@@ -29,7 +29,7 @@
   transition: filter 0.3s;
 }
 
-.nya-headshot:hover {
+.headshot:hover {
   opacity: 0.4; /* Adjust the opacity as needed */
   /* background-color: black; */
   filter: brightness(
@@ -37,7 +37,7 @@
   ); /* Adjust the brightness value to control how dark the image becomes */
 }
 
-.nya-headshot::before {
+.headshot::before {
   content: "";
   position: absolute;
   top: 0;
@@ -58,7 +58,7 @@
   pointer-events: none; /* This prevents the pseudo-element from blocking hover interactions with the image */
 }
 
-.nya-headshot:hover::before {
+.headshot:hover::before {
   opacity: 1;
   background-color: black;
 }
@@ -74,7 +74,8 @@
 }
 
 .image-container:hover .overlay-text {
-  opacity: 1;
+  opacity: 1; 
+  /* TODO: FIX OVERLAY WITH TEXT  */
 }
 
 .overlay-text {
@@ -90,40 +91,17 @@
   display: flex;
   font-size: 0.7rem;
 }
-/* .about-break {
-  background: green;
-  height: 5px;
-  border: none;
-  padding: 1%;
-  width: 100%;
-  margin-top: 4vh;
-} */
 
 .all_creators {
   display: flex;
   flex-direction: row;
   gap: 1.5vw;
 }
-
-/* &:before {
-    content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-image: linear-gradient(to top right,#324F17,#CFDBC5);
-	opacity: 2.6; 
-  } */
-/* .nya-headshot .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 1); 
-    z-index: 1;
-  } */
+.creators-header-flex{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
 .creator-bio {
   display: flex;
   flex-direction: column;
@@ -134,7 +112,6 @@
   padding-top: 2vh;
   max-width: 25vw;
   height: 50vh;
-
 }
 
 .bio_name {
@@ -143,21 +120,21 @@
   margin-bottom: 3vh;
 }
 
-.nya-contact {
+.contact {
   display: flex;
   flex-direction: row;
   margin-top: 2vh;
 }
 
-.nya-subsection,
-.nya-uni,
-.nya-major {
+.subsection,
+.uni,
+.major {
   margin-top: 0;
   margin-bottom: 0.5vh;
   display: flex;
 }
 
-.nya-major {
+.major {
   font-size: 1rem;
 }
 
@@ -169,28 +146,9 @@ margin-bottom: 10vh;
 font-size: 1.25rem;
 }
 
-.nya-mailto {
+.mailto {
   margin-left: 4vh;
 }
-
-/* #header1 {
-    background: url("./IMG_3249.jpg");
-    background-size: cover;
-    width: 40%;
-    height:100%;
-    outline: darkblue solid 2px;
-    border-radius: 4%;
-    position:relative
-}
-.hi{
-    width:100%;
-
-}
-.hi:hover {
-    color: white;
-    background-color: rgba(0, 0, 0, 2);
-    width:100%;
-} */
 
 .meet_creators,
 .team-header {
@@ -201,12 +159,23 @@ font-size: 1.25rem;
   background-color: white;
   padding: 1.5vh;
   border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.creators_header {
+.creators-header {
+  margin: 0;
+  padding-top: 5vh;
+  font-size: 5rem;
   font-weight: 300;
+  padding-bottom: 2vh;
 }
 
 .us_leftside{
   margin-left: 3vw;
+}
+.us-photo:hover{
+  transition: transform 0.5s ease;
+  transform: scale(1.1);
 }

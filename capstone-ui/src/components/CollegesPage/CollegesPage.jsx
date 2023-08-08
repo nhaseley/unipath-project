@@ -15,7 +15,8 @@ export default function CollegesPage({
   setCollegeArrayPointer,
   userType,
   setUserType,
-  convertCollegeSAT
+  convertCollegeSAT,
+  scrollToTop
 }) {
   const [collegesToDisplay, setCollegesToDisplay] = useState(collegeList);
 
@@ -49,6 +50,7 @@ export default function CollegesPage({
             collegesToDisplay={collegesToDisplay}
             setCollegesToDisplay={setCollegesToDisplay}
             convertCollegeSAT={convertCollegeSAT}
+            scrollToTop={scrollToTop}
           ></CollegeGrid>
         </>
       )}

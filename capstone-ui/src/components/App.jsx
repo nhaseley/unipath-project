@@ -76,6 +76,13 @@ export default function App() {
     }
   }
 
+  function scrollToTop () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // This creates a smooth scrolling effect
+    });
+  };
+
   useEffect(() => {
     const selectedCollegeStored = localStorage.getItem("selected-college");
     const token = localStorage.getItem("token");
@@ -273,6 +280,7 @@ export default function App() {
                   userType={userType}
                   setUserType={setUserType}
                   convertCollegeSAT={convertCollegeSAT}
+                  scrollToTop={scrollToTop}
                 ></CollegesPage>
               }
             ></Route>
@@ -286,6 +294,7 @@ export default function App() {
                   setUserType={setUserType}
                   setUserLoginInfo={setUserLoginInfo}
                   customColors={customColors}
+                  scrollToTop={scrollToTop}
                 />
               }
             ></Route>

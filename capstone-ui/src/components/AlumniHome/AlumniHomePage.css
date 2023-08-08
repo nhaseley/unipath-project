@@ -22,7 +22,7 @@
 }
 .alumni-college-button:hover {
   transition: transform 0.3s ease;
-  transform: scale(1.01);
+  transform: scale(1.05);
 }
 .incorrect-user-type-button {
   font-size: 3.2em;

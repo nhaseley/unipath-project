@@ -1,6 +1,5 @@
 import * as React from "react";
 import "./RegistrationPage.css";
-import jwtDecode from "jwt-decode";
 import StudentRegistrationForm from "./StudentRegistrationForm";
 import ParentRegistrationForm from "./ParentRegistrationForm";
 import AlumnRegistrationPage from "./AlumnRegistrationPage";

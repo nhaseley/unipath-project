@@ -67,12 +67,14 @@ export default function AlumnSurveyPage({
           collegeGradYear: userLoginInfo.collegeGradYear,
         }
       );
-
-      navigate("/login");
+      console.log("alum on register: ", result.data)
 
       if (result.data.status) {
         setError(result.data);
+        handleAlumnBack()
+        navigate("/register"); 
       } else {
+        navigate("/login");
         setError({});
         setUserLoginInfo({
           email: "",
@@ -91,14 +93,14 @@ export default function AlumnSurveyPage({
       }
     }
   }
-  console.log(selectedButton);
+
   return (
     <div className="alumn-survey-page">
       <h2 className="create_alum_header">
         Create an Alumn/College Student account:
       </h2>
       <div className="first-question-input">
-        Are you a high school graduate?
+        <div style={{marginBottom: "1vh"}}> Are you a high school graduate?</div>
         <div className="yes_no_container">
           <button
             className="yes_button"
@@ -106,7 +108,7 @@ export default function AlumnSurveyPage({
               setSelectedButton({ ...selectedButton, highsch: "Yes" })
             }
             style={{
-              background: selectedButton.highsch === "Yes" ? "lightBlue" : "",
+              background: selectedButton.highsch === "Yes" ? "lightBlue" : ""
             }}
           >
             Yes
@@ -117,7 +119,7 @@ export default function AlumnSurveyPage({
               setSelectedButton({ ...selectedButton, highsch: "No" })
             }
             style={{
-              background: selectedButton.highsch === "No" ? "lightBlue" : "",
+              background: selectedButton.highsch === "No" ? "lightBlue" : ""
             }}
           >
             No
@@ -125,8 +127,10 @@ export default function AlumnSurveyPage({
         </div>
         {selectedButton.highsch == "Yes" ? (
           <div className="studentsAndAlumniInfo">
-            <div className="whatCollege">
-              What college are you affiliated with?
+            <div className="whatCollege" style={{marginBottom: "2vh"}}>
+              <div style={{marginBottom: "1vh"}}>
+                What college are you affiliated with? You may search.
+              </div>
               <div>
                 <select
                   className="select_college_bar"
@@ -145,7 +149,7 @@ export default function AlumnSurveyPage({
               </div>
             </div>
             <div className="AreYouCollegeGrad">
-              Are you a college graduate?
+              <div style={{marginBottom: "1vh"}}> Are you a college graduate?</div>
               <div className="yes_no_container">
                 <button
                   className="yes_button"
@@ -155,6 +159,7 @@ export default function AlumnSurveyPage({
                   style={{
                     background:
                       selectedButton.collegeUni === "Yes" ? "lightBlue" : "",
+                      marginBottom: "2vh"
                   }}
                 >
                   Yes
@@ -176,7 +181,7 @@ export default function AlumnSurveyPage({
             </div>
             {selectedButton.collegeUni == "Yes" ? (
               <div className="yearOfCollegeGrad">
-                What year did you graduate college ?
+                What year did you graduate college?
                 <Select
                   options={collegeYearOptions}
                   onChange={handleCollegeYearSelect}
