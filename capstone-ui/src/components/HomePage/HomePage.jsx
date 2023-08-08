@@ -114,22 +114,27 @@ export default function HomePage({ userLoggedIn, userType }) {
       imageSrc:
         "https://www.fiu.edu/_assets/images/cover.jpg?id=2a56da8b0a73710b5d5807d6a3a4190d",
     },
+    {
+      name: "Florida A&M University",
+      imageSrc:
+        "https://tile.loc.gov/storage-services/service/pnp/highsm/62000/62099v.jpg",
+    },
 
-    {
-      name: "Brown University",
-      imageSrc:
-        "https://www.usnews.com/dims4/USNEWS/e787cac/17177859217/resize/800x540%3E/quality/85/?url=https%3A%2F%2Fmedia.beam.usnews.com%2Fd1%2Ffe377768fbb26f45239bd82b4b41d0%2F20191020_COMM_coheamarketing121.png",
-    },
-    {
-      name: "Wesleyan University",
-      imageSrc:
-        "https://lh3.googleusercontent.com/p/AF1QipOrjTM1s_udub3X5CWMQs3whWX0vbzrxWJeN8Du=s1360-w1360-h1020",
-    },
-    {
-      name: "Penn State",
-      imageSrc:
-        "https://sc-api.psu.edu/s3/files/styles/4_3_1500w/public/IMG_5147.JPG?h=71976bb4&itok=ckYEM2KU",
-    },
+    // {
+    //   name: "Brown University",
+    //   imageSrc:
+    //     "https://www.usnews.com/dims4/USNEWS/e787cac/17177859217/resize/800x540%3E/quality/85/?url=https%3A%2F%2Fmedia.beam.usnews.com%2Fd1%2Ffe377768fbb26f45239bd82b4b41d0%2F20191020_COMM_coheamarketing121.png",
+    // },
+    // {
+    //   name: "Wesleyan University",
+    //   imageSrc:
+    //     "https://lh3.googleusercontent.com/p/AF1QipOrjTM1s_udub3X5CWMQs3whWX0vbzrxWJeN8Du=s1360-w1360-h1020",
+    // },
+    // {
+    //   name: "Penn State",
+    //   imageSrc:
+    //     "https://sc-api.psu.edu/s3/files/styles/4_3_1500w/public/IMG_5147.JPG?h=71976bb4&itok=ckYEM2KU",
+    // },
   ];
 
   // const [loopArray, setLoopArray] = useState([]);
