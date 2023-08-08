@@ -149,7 +149,6 @@ describe("Alum register", () => {
   
 
     test("should throw BadRequestError if email or password is missing", async function () {
-      // Call the register function with missing email and password
       try {
         await Alum.register({
           firstName: 'Alum',

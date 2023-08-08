@@ -206,7 +206,7 @@ export default function CollegeInfoPage({
   return (
     <div className="college-info-page">
       <div className="title">
-        <h1> Welcome to {college?.name}</h1>
+        <h1 className="uniName_header"> Welcome to {college?.name}</h1>
         {userType == "student" ? (
           <Link
             to={"/like"}
@@ -410,7 +410,9 @@ export default function CollegeInfoPage({
 
         {userType == "college-students-and-alumni" ? (
           <button className="add-more-reviews-button">
-            <Link to="/mycollege">+ Add A Review</Link>
+            <Link className="addAReviewButton" to="/mycollege">
+              + Add A Review
+            </Link>
           </button>
         ) : null}
       </div>

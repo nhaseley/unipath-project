@@ -90,12 +90,13 @@
   background-color: #ebf2e5;
   width: 140px;
   height: 60px;
-  border-radius: 0.7rem;
+  border-radius: 0.5rem;
   animation: fadeInRight 2s ease-out;
   font-size: 18px;
   border: none;
   color: #000000;
   position: absolute;
+  font-weight: 500;
 }
 
 .get-started-button:hover {

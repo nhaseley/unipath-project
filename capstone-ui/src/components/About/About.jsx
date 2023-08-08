@@ -3,6 +3,8 @@ import "./About.css";
 import usImage from "./IMG_4577.jpg";
 import nyaImage from "./IMG_3249.jpg";
 import ayoImage from "./IMG_6683.jpg";
+import linkedIn from "./linkedIn.png";
+import emailIcon from "./mail.png";
 // import jordanImage from "INSERT HERE YOUR FILE"
 
 import { Link } from "react-router-dom";
@@ -57,12 +59,12 @@ export default function About() {
             <h3 className="subsection">
               <div className="linkedin">
                 <Link to="https://www.linkedin.com/mwlite/in/ayomide-adetunji-7b87091ba">
-                  LinkedIn
+                  <img className="linkedinLogo" src={linkedIn} />
                 </Link>
               </div>
               <div className="mailto">
                 <ButtonMailto
-                  label="Email"
+                  label={<img className="emailLogo" src={emailIcon} />}
                   mailto={"mailto:ayomide0528@gmail.com"}
                 ></ButtonMailto>
               </div>
@@ -83,13 +85,13 @@ export default function About() {
           <div className="contact">
             <h3 className="subsection">
               <div className="linkedin">
-                <Link to="https://www.linkedin.com/in/haseley-ayende">
-                  LinkedIn
+                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
+                  <img className="linkedinLogo" src={linkedIn} />
                 </Link>
               </div>
               <div className="mailto">
                 <ButtonMailto
-                  label="Email"
+                  label={<img className="emailLogo" src={emailIcon} />}
                   mailto={"mailto:nylevenya@hotmail.com"}
                 ></ButtonMailto>
               </div>
@@ -110,13 +112,13 @@ export default function About() {
           <div className="contact">
             <h3 className="subsection">
               <div className="linkedin">
-                <Link to="https://www.linkedin.com/in/haseley-ayende">
-                  LinkedIn
+                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
+                  <img className="linkedinLogo" src={linkedIn} />
                 </Link>
               </div>
               <div className="mailto">
                 <ButtonMailto
-                  label="Email"
+                  label={<img className="emailLogo" src={emailIcon} />}
                   mailto={"mailto:nylevenya@hotmail.com"}
                 ></ButtonMailto>
               </div>
