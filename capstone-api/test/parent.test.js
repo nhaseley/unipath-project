@@ -132,7 +132,6 @@ describe('authenticate', () => {
 describe("Parent register", () => {
     // Add any other necessary setup before the tests
   
-    // Mock bcrypt.hash
     bcrypt.hash = jest.fn().mockResolvedValue('dummy-hashed-password'); // Replace with the correct hashed password
     const db = require('../db.js')
     test('should register a new parent successfully', async () => {
