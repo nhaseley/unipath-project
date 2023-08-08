@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
-
 export default function AdmissionRatePieChart({ admissionRate }) {
   const chartRef = useRef(null);
 
@@ -44,20 +43,11 @@ export default function AdmissionRatePieChart({ admissionRate }) {
     // Data labels
     slices
       .append("text")
-      .attr("transform", function (d) {
-        const [x, y] = arc.centroid(d);
-        const angle = (d.startAngle + d.endAngle) / 2;
-        const isLabelInside = angle > Math.PI; // Check if slice is on the left half
-        const labelRadius = isLabelInside ? radius * 0.65 : radius * 1.1; // Adjust label radius
-        return `translate(${labelRadius * Math.sin(angle)}, ${
-          -labelRadius * Math.cos(angle)
-        })`;
-      })
+      .attr("transform", (d) => `translate(${arc.centroid(d)})`)
       .attr("text-anchor", "middle")
       .style("font-size", "14px")
       .style("fill", "white")
       .text((d) => `${d.data.value.toFixed(1)}%`);
-      
     // Legend
     const legend = g
       .selectAll(".legend")

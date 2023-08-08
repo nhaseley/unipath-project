@@ -294,6 +294,8 @@ export default function CollegeInfoPage({
             <div className="studying">
               <img className="studyingImg" src={studyingImg} alt="" />
             </div>
+            <div className="scores">
+            <div>
             {!isNaN(averageSAT) ? (
               <div className="median SAT">
                 <h2>Average SAT: {averageSAT}</h2>
@@ -305,6 +307,8 @@ export default function CollegeInfoPage({
                 ) : null}
               </div>
             ) : null}
+            </div>
+            <div>
             {college?.act_score ? (
               <div className="avg-ACT">
                 <h2>Average ACT: {parseInt(college?.act_score)}</h2>
@@ -316,6 +320,8 @@ export default function CollegeInfoPage({
                 ) : null}
               </div>
             ) : null}
+            </div>
+            </div>
           </div>
           <hr className="college-info-break" />
 
