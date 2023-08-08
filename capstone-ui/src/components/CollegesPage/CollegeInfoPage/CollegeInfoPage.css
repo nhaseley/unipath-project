@@ -190,7 +190,7 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  margin-top: 8vh ;
+  margin-top: 8vh;
 }
 .college-review {
   display: flex;
@@ -215,7 +215,7 @@
   align-items: center;
 }
 
-.add-more-reviews-button{
+.add-more-reviews-button {
   background-color: #213547;
   padding: 1vw;
   border-radius: 0.5rem;
@@ -242,4 +242,12 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.addAReviewButton {
+  color: white;
+}
+
+.uniName_header{
+  font-weight: normal;
 }

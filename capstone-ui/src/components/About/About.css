@@ -23,7 +23,7 @@
 }
 .nya-headshot {
   max-width: 100%;
-  outline: darkblue solid 2px;
+  outline: rgb(181, 181, 181) solid 2px;
   border-radius: 4%;
   position: relative;
   transition: filter 0.3s;
@@ -56,11 +56,6 @@
   opacity: 0;
   transition: opacity 0.1s;
   pointer-events: none; /* This prevents the pseudo-element from blocking hover interactions with the image */
-}
-
-.nya-headshot:hover::before {
-  opacity: 1;
-  background-color: black;
 }
 
 .image-container {
@@ -132,7 +127,7 @@
   margin-top: 0.5vh;
   padding: 1vh;
   padding-top: 2vh;
-  max-width: 25vw;
+  max-width: 20vw;
   height: 50vh;
 
 }
@@ -140,7 +135,7 @@
 .bio_name {
   font-size: 2rem;
   margin: 0;
-  margin-bottom: 3vh;
+  margin-bottom: 1.5vh;
 }
 
 .nya-contact {
@@ -209,4 +204,8 @@ font-size: 1.25rem;
 
 .us_leftside{
   margin-left: 3vw;
+}
+
+.linkedinLogo, .emailLogo{
+  width: 3vh;
 }
