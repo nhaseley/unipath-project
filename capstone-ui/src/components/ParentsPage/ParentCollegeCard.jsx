@@ -13,9 +13,11 @@ export default function ParentCollegeCard({
   scrollToTop
 }) {
   const [college, setCollege] = useState();
+
   BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
 console.log(college)
+
   useEffect(() => {
     axios
       .post(BASE_URL+"/info/" + `${childCollege?.college_name}`, {
@@ -36,6 +38,7 @@ console.log(college)
     earnings_1yr_after_completion: college?.earnings_1yr_after_completion,
     earnings_4yr_after_completion: college?.earnings_4yr_after_completion,
   };
+  console.log("EARNINGS DATA:", averageEarningsData)
 
   const incomeData = {
     median_family_income: parseFloat(college?.median_family_income),

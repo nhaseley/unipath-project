@@ -117,11 +117,15 @@
   /* background: #213547; */
   background: #213547;
   color: white;
-  width: 30%;
+  width: 100%;
   margin-top: 4%;
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+.attendees {
+  width:30%;
+  margin-bottom:10vh;
 }
 .event-attendees-page {
   display: flex;
@@ -144,11 +148,12 @@
 
 .num-attendees-input {
   border: none;
+  width: 25vw;
 }
 
 .event-registration {
   margin: auto;
-  margin-top: 5vh;
+  margin-bottom:2vh;
 }
 
 .post_new_event_header {

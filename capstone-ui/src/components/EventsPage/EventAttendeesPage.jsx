@@ -15,7 +15,7 @@ export default function EventAttendeesPage({
   const [eventRegistrationInfo, setEventRegistrationInfo] = useState({
     firstName: "",
     lastName: "",
-    numAttendees: 0,
+    numAttendees: "",
   });
 
   BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
@@ -94,95 +94,100 @@ export default function EventAttendeesPage({
     <div className="event-attendees-page">
       {userType == "student" ? (
         <>
-          <h2 className="register-title"> Register here! </h2>
-          <form className="event-registration-form">
-            <div className="first-name">
-              <input
-                className="first-name-input"
-                type="text"
-                placeholder="First Name"
-                value={eventRegistrationInfo.firstName}
-                onChange={(e) =>
-                  setEventRegistrationInfo((u) => ({
-                    ...u,
-                    firstName: e.target.value,
-                  }))
-                }
-              />
-            </div>
+          <div className="event-registration">
+            <h2 className="register-title"> Register here! </h2>
+            <form className="event-registration-form">
+              <div className="first-name">
+                <input
+                  className="first-name-input"
+                  type="text"
+                  placeholder="First Name"
+                  value={eventRegistrationInfo.firstName}
+                  onChange={(e) =>
+                    setEventRegistrationInfo((u) => ({
+                      ...u,
+                      firstName: e.target.value,
+                    }))
+                  }
+                />
+              </div>
 
-            <div className="last-name">
-              <input
-                className="last-name-input"
-                type="text"
-                placeholder="Last Name"
-                value={eventRegistrationInfo.lastName}
-                onChange={(e) =>
-                  setEventRegistrationInfo((u) => ({
-                    ...u,
-                    lastName: e.target.value,
-                  }))
-                }
-              />
+              <div className="last-name">
+                <input
+                  className="last-name-input"
+                  type="text"
+                  placeholder="Last Name"
+                  value={eventRegistrationInfo.lastName}
+                  onChange={(e) =>
+                    setEventRegistrationInfo((u) => ({
+                      ...u,
+                      lastName: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+              <div className="num-attendees">
+                <input
+                  className="num-attendees-input"
+                  type="number"
+                  placeholder="Number of Attendees"
+                  // defaultValue="Number of Attendees"
+                  min={1}
+                  value={eventRegistrationInfo.numAttendees}
+                  onChange={(e) =>
+                    setEventRegistrationInfo((u) => ({
+                      ...u,
+                      numAttendees: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+            </form>
+            <div className="error" style={{ color: "#cc0000" }}>
+              {error.status
+                ? "Event Registration Failed: " + error.message
+                : null}
             </div>
+            <button className="demo-button" onClick={handleDemo}>
+              Demo Event Registration
+            </button>
+            <div className="event-register-buttons">
+              <button
+                className="student-event-registration-button"
+                onClick={handleEventRegistration}
+              >
+                Register
+              </button>
 
+              <button onClick={handleRemoveEventRegistration}>
+                Can't make it? Cancel Registration
+              </button>
+            </div>
+          </div>
+          </>
+          ) : null}
+          <h2 className="attendees">
+            Event Attendees:
             {eventAttendees.length == 0 ? (
               <p className="event_reg_prompt">
-                {" "}
                 Please register for the event to view attendees.{" "}
               </p>
             ) : (
               eventAttendees.map((attendee) => (
                 <div className="event-attendee-card">
-                  <h2 className="attendee-name">
+                  <h3 className="attendee-name">
                     {(attendee.first_name + " " + attendee.last_name).replace(
                       /\b\w/g,
                       (match) => match.toUpperCase()
                     )}
-                  </h2>
-                  <h2 className="attendees-num">
+                  </h3>
+                  <h3 className="attendees-num">
                     Party Size: {attendee.num_attendees}
-                  </h2>
+                  </h3>
                 </div>
               ))
             )}
-            <div className="num-attendees">
-              <input
-                className="num-attendees-input"
-                type="number"
-                placeholder="Number of Attendees"
-                value={eventRegistrationInfo.numAttendees}
-                onChange={(e) =>
-                  setEventRegistrationInfo((u) => ({
-                    ...u,
-                    numAttendees: e.target.value,
-                  }))
-                }
-              />
-            </div>
-          </form>
-          <div className="error" style={{ color: "#cc0000" }}>
-            {error.status
-              ? "Event Registration Failed: " + error.message
-              : null}
-          </div>
-          <button className="demo-button" onClick={handleDemo}>
-            Demo Event Registration
-          </button>
-          <div className="event-register-buttons">
-            <button
-              className="student-event-registration-button"
-              onClick={handleEventRegistration}
-            >
-              Register
-            </button>
-
-            <button onClick={handleRemoveEventRegistration}>
-              Can't make it? Cancel Registration
-            </button>
-          </div>
-        </>
-      ) : null}
+          </h2>
     </div>
   );
 }

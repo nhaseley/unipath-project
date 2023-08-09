@@ -3,18 +3,8 @@ import "./Navbar.css";
 import { Outlet, Link } from "react-router-dom";
 import mainLogo from "./Untitled_Artwork.png";
 
-export default function Navbar({ userLoggedIn, logoutUser }) {
-  const [isSelected, setIsSelected] = useState("");
+export default function Navbar({ userLoggedIn, logoutUser, handleItemClick, getListItemStyle }) {
 
-  const handleItemClick = (item) => {
-    setIsSelected(item);
-  };
-
-  const getListItemStyle = (item) => ({
-    border: isSelected === item ? "0.2vw solid #213547" : "",
-    borderRadius: "2vh",
-    padding: "1vh",
-  });
 
   return (
     <>
@@ -51,13 +41,13 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
           ) : (
             <>
               <li>
-                <Link to={"/about"}>About Us</Link>
+                <Link to={"/about"} onClick={() => handleItemClick("about")} style={getListItemStyle("about")}>About Us</Link>
               </li>
               <li>
-                <Link to={"/register"}>Register</Link>
+                <Link to={"/register"} onClick={() => handleItemClick("register")} style={getListItemStyle("register")}>Register</Link>
               </li>
               <li>
-                <Link to={"/login"}>Login</Link>
+                <Link to={"/login"} onClick={() => handleItemClick("login")} style={getListItemStyle("login")} >Login</Link>
               </li>
             </>
           )}
