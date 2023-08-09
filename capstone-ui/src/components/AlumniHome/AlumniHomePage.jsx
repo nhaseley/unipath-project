@@ -54,11 +54,13 @@ export default function AlumniHomePage({
       additionalReview: event.target.value,
     });
   }
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   async function handleReviewSubmit(event) {
     event.preventDefault();
 
-    let result = await axios.post("http://localhost:3010/postCollegeReview", {
+
+    let result = await axios.post(BASE_URL+ "/postCollegeReview", {
       alumId: userLoginInfo.id,
       alumFirstName: userLoginInfo.firstName,
       alumLastName: userLoginInfo.lastName,

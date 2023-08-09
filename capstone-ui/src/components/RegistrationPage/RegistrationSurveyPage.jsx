@@ -26,13 +26,15 @@ export default function RegistrationSurveyPage({
     label: (i + 1).toString(),
   }));
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   async function handleRegistration(event) {
     event.preventDefault();
 
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
-      let result = await axios.post("http://localhost:3010/auth/register", {
+      let result = await axios.post(BASE_URL+"/auth/register", {
         email: userLoginInfo.email,
         firstName: userLoginInfo.firstName,
         lastName: userLoginInfo.lastName,
@@ -45,7 +47,6 @@ export default function RegistrationSurveyPage({
         college: userLoginInfo.college,
         collegeGradYear: userLoginInfo.collegeGradYear,
       });
-
       if (result.data.status) {
         setError(result.data);
       } else {
@@ -105,13 +106,13 @@ export default function RegistrationSurveyPage({
     <div className="registration-survey-page">
       <h2 className="create_student_header"> Create a student account: </h2>
       <div className="sat-input">
-        Have you taken the SAT?
+       Have you taken the SAT?
         <div className="yes_no_container">
           <button
             className="yes_button"
             onClick={() => setSelectedButton({ ...selectedButton, sat: "Yes" })}
             style={{
-              background: selectedButton.sat === "Yes" ? "lightBlue" : "",
+              background: selectedButton.sat === "Yes" ? "lightBlue" : ""
             }}
           >
             Yes
@@ -120,7 +121,7 @@ export default function RegistrationSurveyPage({
             className="no_button"
             onClick={() => setSelectedButton({ ...selectedButton, sat: "No" })}
             style={{
-              background: selectedButton.sat === "No" ? "lightBlue" : "",
+              background: selectedButton.sat === "No" ? "lightBlue" : ""
             }}
           >
             No
@@ -138,13 +139,13 @@ export default function RegistrationSurveyPage({
         ) : null}
       </div>
       <div className="act-input">
-        Have you take the ACT?
+        Have you taken the ACT?
         <div className="yes_no_container">
           <button
             className="yes_button"
             onClick={() => setSelectedButton({ ...selectedButton, act: "Yes" })}
             style={{
-              background: selectedButton.act === "Yes" ? "lightBlue" : "",
+              background: selectedButton.act === "Yes" ? "lightBlue" : ""
             }}
           >
             Yes
@@ -172,7 +173,7 @@ export default function RegistrationSurveyPage({
         ) : null}
       </div>
       <div className="enrollment-input">
-        Prospective school size? Please select one.
+        <div  style={{marginBottom: "1vh"}}> Prospective school size? <b> Please select one.</b> </div>
         <select className="select_size_bar" onChange={handleEnrollmentSelect}>
           <option value="None"></option>
           <option value="5000"> Less than 5,000</option>
@@ -181,8 +182,7 @@ export default function RegistrationSurveyPage({
         </select>
       </div>
       <div className="school-type">
-        Any of these minority serving institutions that you expect to attend?
-        Please select one.
+        <div style={{marginBottom: "1vh"}}> Any of these minority serving institutions that you expect to attend? <b>Please select one.</b></div>
         <select
           className="select_minority_bar"
           onChange={handleSchoolTypeSelect}

@@ -8,10 +8,12 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
   const [eventInfo, setEventInfo] = useState({});
   const navigate = useNavigate();
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   async function handleEventSubmit(event) {
     // axios call to store events info in database
     event.preventDefault();
-    let result = await axios.post("http://localhost:3010/postEvent", {
+    let result = await axios.post(BASE_URL+"/postEvent", {
       name: eventInfo.name,
       desc: eventInfo.desc,
       email: eventInfo.email,
@@ -65,7 +67,7 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
             <div>
               <input
                 type="text"
-                // placeHolder="Event Name"
+                placeHolder="Event Name"
                 className="event-name-input"
                 value={eventInfo.name}
                 onChange={(e) =>
@@ -84,7 +86,7 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
             <div>
               <input
                 type="email"
-                // placeHolder="Email"
+                placeHolder="Email"
                 className="email-input"
                 value={eventInfo.email}
                 onChange={(e) =>
@@ -121,7 +123,6 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
                 htmlFor="event-speaker-label"
                 className="event-speaker-label"
               >
-                {" "}
                 Speaker(s):
               </label>
             </div>
@@ -159,7 +160,6 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
                 htmlFor="event-max-registrants-label"
                 className="event-max-registrants-label"
               >
-                {" "}
                 Max Registrants:{" "}
               </label>
             </div>

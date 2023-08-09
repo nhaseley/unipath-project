@@ -17,19 +17,21 @@ export default function EventsPage({
   const [eventSearchInput, setEventSearchInput] = useState("");
   const [searchedEvents, setSearchedEvents] = useState([]);
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   function handleAddNewEvent() {
     navigate("/eventDetails");
   }
 
   async function getAllEvents() {
     await axios
-      .post("http://localhost:3010/getAllEvents")
+      .post( BASE_URL+"/getAllEvents")
       .then((response) => setAllEvents(response.data));
   }
 
   async function getCollegeEvents() {
     await axios
-      .post("http://localhost:3010/getCollegeEvents", {
+      .post(BASE_URL+"/getCollegeEvents", {
         collegeName: userLoginInfo.collegeName,
       })
       .then((response) => {
@@ -72,6 +74,7 @@ export default function EventsPage({
       ) : (
         <div className="events-page" >
           <h1 style={{fontWeight: "normal"}}>Welcome to the events page, {userLoginInfo?.firstName}!</h1>
+          <h2 className="events-page-description">On this page, you can view all events posted at {userType == "college-admission-officer"? "your institution and post upcoming events." : "selected colleges."} For more information, click on the college name.</h2>
 
           {userType == "college-admission-officer" ? (
             <button className="add-event-button" onClick={handleAddNewEvent}>
@@ -79,7 +82,8 @@ export default function EventsPage({
             </button>
           ) : null}
           {events.length != 0 ? (
-            <><h2> Events at {userLoginInfo.collegeName}: </h2>
+            <>
+            <h2 className="events-header"> Events at {userLoginInfo.collegeName}: </h2>
             {events?.map((event, i) => (
               <EventCard key={i} event={event} userType={userType}></EventCard>
             ))}
@@ -96,7 +100,7 @@ export default function EventsPage({
               <div className="events-grid">
                 {eventSearchInput != "" ? (
                   searchedEvents.length == 0 ? (
-                    <h2 className="no-events">
+                    <h2 className="events-header">
                       No college events found. Please adjust your search.
                     </h2>
                   ) : (
@@ -106,7 +110,7 @@ export default function EventsPage({
                   )
                 ) : (
                   <>
-                    <h2>
+                    <h2 className="events-header">
                       No events for this college have been posted yet. All
                       Events:
                     </h2>

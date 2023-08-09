@@ -72,8 +72,7 @@ static async register(creds) {
     "firstName",
     "lastName",
     "password",
-    "collegeName",
-    "collegeGradYear"
+    "collegeName"
   ];
   try {
     validateFields({

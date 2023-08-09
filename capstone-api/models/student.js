@@ -172,7 +172,6 @@ class Student {
     );
 
     const student = result.rows[0];
-    console.log("student: ", student);
     return student;
   }
 

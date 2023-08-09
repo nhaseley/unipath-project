@@ -154,10 +154,8 @@ export default function HomePage({ userLoggedIn, userType }) {
       <div className="hellotxt">
         <h1 className="hero-heading">Your Search Starts Here.</h1>
         <h2 className="hero-subheading">
-          Sayme es tion wayne wif Central Sea as well es skepta init accusantium
-          doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-          inventore veritatis et quasi architecto beatae vitae dicta sunt
-          explicabo. Nemo enim. En headie one is de Best.
+        Embark on a journey to discover your perfect college fit. 
+        Uncover opportunities where you'll forge lifelong friendships, explore passions, and create cherished memories.
         </h2>
 
         <button className="get-started-button" onClick={getStarted}>

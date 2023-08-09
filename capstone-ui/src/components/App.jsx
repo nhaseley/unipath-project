@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import HomePage from "./HomePage/HomePage";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "./NavBar/Navbar";
 import LoginPage from "./LoginPage/LoginPage";
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 import RegistrationSurveyPage from "./RegistrationPage/RegistrationSurveyPage";
@@ -60,28 +60,53 @@ export default function App() {
     "#3F4B3B",
   ];
 
-  const [nextRegistrationPage, setNextRegistrationPage] = useState(true); 
-  // boolean for if we're on the next page (used for both students and alumni)
-  const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] = useState(true);
+const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
+  const [nextRegistrationPage, setNextRegistrationPage] = useState(true);
+  // boolean for if we're on the next page (used for both students and alumni)
+
+  const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] = useState(true);
+  const [isSelected, setIsSelected] = useState("");
+
+
+  const handleItemClick = (item) => {
+    setIsSelected(item);
+  };
+
+  const getListItemStyle = (item) => ({
+    border: isSelected === item ? "0.2vw solid #213547" : "",
+    borderRadius: "2vh",
+    padding: "1vh",
+  });
+  
   console.log("user info: ", userLoginInfo);
 
   async function convertCollegeSAT(oldCollegeSAT) {
     if (oldCollegeSAT) {
-      let response = await axios
-        .post("http://localhost:3010/getUpdatedSATScore", {
+      let response = await axios.post(
+        BASE_URL + "/getUpdatedSATScore",
+        {
           oldCollegeSAT: oldCollegeSAT,
-        })
-        return parseInt(response.data)
+        }
+      );
+      return parseInt(response.data);
     }
   }
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // This creates a smooth scrolling effect
+    });
+  }
+
   useEffect(() => {
+    scrollToTop();
     const selectedCollegeStored = localStorage.getItem("selected-college");
     const token = localStorage.getItem("token");
     if (!decodedToken) {
       axios
-        .post("http://localhost:3010/auth/decodedtoken", {
+        .post(BASE_URL+"/auth/decodedtoken", {
           token: token,
         })
         .then((response) => {
@@ -173,11 +198,10 @@ export default function App() {
     <>
       <BrowserRouter>
         <Routes>
-
           <Route
             path=""
             element={
-              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
+              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} handleItemClick={handleItemClick} getListItemStyle={getListItemStyle} />
             }
           >
             <Route
@@ -273,6 +297,7 @@ export default function App() {
                   userType={userType}
                   setUserType={setUserType}
                   convertCollegeSAT={convertCollegeSAT}
+                  scrollToTop={scrollToTop}
                 ></CollegesPage>
               }
             ></Route>
@@ -286,13 +311,19 @@ export default function App() {
                   setUserType={setUserType}
                   setUserLoginInfo={setUserLoginInfo}
                   customColors={customColors}
+                  scrollToTop={scrollToTop}
                 />
               }
             ></Route>
             <Route
               path="/events"
               element={
-                <EventsPage userType={userType} userLoginInfo={userLoginInfo} userLoggedIn={userLoggedIn} setUserType={setUserType}/>
+                <EventsPage
+                  userType={userType}
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                  setUserType={setUserType}
+                />
               }
             ></Route>
 

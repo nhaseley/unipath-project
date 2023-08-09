@@ -12,17 +12,20 @@ export default function CollegeGrid({
   collegesToDisplay,
   setCollegesToDisplay,
   setUserLoginInfo,
-  convertCollegeSAT
+  convertCollegeSAT,
+  scrollToTop
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [allColleges, setAllColleges] = useState([]);
   const [searchedColleges, setSearchedColleges] = useState([]);
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   // Function to display colleges on the grid
   async function getCollegeGrid() {
     {
       axios
-        .post("http://localhost:3010/colleges", {
+        .post( BASE_URL+"/colleges", {
           satScore: userLoginInfo.satScore,
           actScore: userLoginInfo.actScore,
           enrollment: userLoginInfo.enrollment,
@@ -69,21 +72,13 @@ export default function CollegeGrid({
     scrollToTop();
   }
 
-
-  function scrollToTop () {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // This creates a smooth scrolling effect
-    });
-  };
-
   // TODO: fix pagination logic for filtered - reverting to default
   let first20Colleges =
       searchInput != ""
         ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
         : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20)
 
-        console.log(first20Colleges);
+        // console.log(first20Colleges);
 
   return (
     <div className="college-grid">

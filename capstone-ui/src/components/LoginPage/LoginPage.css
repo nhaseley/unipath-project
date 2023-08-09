@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
 }
-
 .user-types > button {
   background-color: #ebf2e5;
 
@@ -13,7 +12,6 @@
   border: none;
   color: #000000;
   padding: 0.5vw;
-  /* border: 2px solid #84A98C; */
 }
 .user-types > button:hover {
   background-color: goldenrod;
@@ -63,7 +61,6 @@
   border: none;
   color: #000000;
   padding: 10px;
-  /* border: 2px solid #84A98C; */
 }
 .register-button:hover {
   background-color: goldenrod;

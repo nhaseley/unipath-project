@@ -10,12 +10,17 @@ export default function ParentCollegeCard({
   childCollege,
   setUserLoginInfo,
   customColors,
+  scrollToTop
 }) {
   const [college, setCollege] = useState();
+
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
 console.log(college)
+
   useEffect(() => {
     axios
-      .post("http://localhost:3010/info/" + `${childCollege?.college_name}`, {
+      .post(BASE_URL+"/info/" + `${childCollege?.college_name}`, {
         id: childCollege?.college_name,
       })
       .then((response) => {
@@ -33,6 +38,7 @@ console.log(college)
     earnings_1yr_after_completion: college?.earnings_1yr_after_completion,
     earnings_4yr_after_completion: college?.earnings_4yr_after_completion,
   };
+  console.log("EARNINGS DATA:", averageEarningsData)
 
   const incomeData = {
     median_family_income: parseFloat(college?.median_family_income),
@@ -42,6 +48,7 @@ console.log(college)
   function changeCollege() {
     setUserLoginInfo((u) => ({ ...u, collegeName: childCollege?.college_name }));    
     localStorage.setItem("selected-college", childCollege?.college_name);
+    scrollToTop();
   }
 
   return (
@@ -70,6 +77,8 @@ console.log(college)
             ? "$" + parseInt(college?.room_board_offcampus).toLocaleString()
             : "Unavailable"}
         </h3>
+        <button className="price-calc-button">
+          <Link to={college?.price_calculator.includes("http")?college?.price_calculator: "https://"+college?.price_calculator}> Price Calculator </Link> </button>
         <h3></h3>
       </div>
       {/* <div className="parent-data-visuals"> */}
@@ -81,13 +90,13 @@ console.log(college)
           ></NetPricePieChart>
         </div>
       ) :null}
-
+    {college?.earnings_1yr_after_completion && college?.earnings_4yr_after_completion ?
       <div className="average-earnings-bar-chart">
         <AverageEarningsBarChart
           averageEarningsData={averageEarningsData}
           customColors={customColors}
         ></AverageEarningsBarChart>
-      </div>
+      </div> : null}
 
       {college?.median_family_income && college?.avg_family_income ? (
         <div className="family-income-bar-chart">
@@ -97,7 +106,6 @@ console.log(college)
           ></FamilyIncomeBarChart>
         </div>
       ) : null}
-      {/* </div> */}
     </div>
   );
 }

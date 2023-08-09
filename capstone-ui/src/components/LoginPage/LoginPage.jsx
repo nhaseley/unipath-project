@@ -17,6 +17,8 @@ export default function LoginPage({
 }) {
   const navigate = useNavigate();
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   function handleChangeUserType(event) {
     setUserType(event.target.value);
   }
@@ -44,7 +46,7 @@ export default function LoginPage({
     event.preventDefault();
 
     let result = await axios.post(
-      "http://localhost:3010/auth/login" + `/${userType}`,
+      BASE_URL+"/auth/login" + `/${userType}`,
       {
         email: userLoginInfo.email,
         password: userLoginInfo.password,
@@ -92,7 +94,7 @@ export default function LoginPage({
           className="student"
           value="student"
           onClick={handleChangeUserType}
-          style={{ background: userType === "student" ? "gold" : "" }}
+          style={{ color: userType === "student" ? "black" : "" , background: userType==="student"? "gold":""}}
         >
           Student
         </button>
@@ -101,7 +103,7 @@ export default function LoginPage({
           className="parent"
           value="parent"
           onClick={handleChangeUserType}
-          style={{ background: userType === "parent" ? "gold" : "" }}
+          style={{ color: userType === "parent" ? "black" : "" , background: userType==="parent"? "gold":""}}
         >
           Parent/Guardian of Student
         </button>
@@ -111,8 +113,8 @@ export default function LoginPage({
           value="college-admission-officer"
           onClick={handleChangeUserType}
           style={{
-            background:
-              userType === "college-admission-officer" ? "gold" : "",
+            color:
+              userType === "college-admission-officer" ? "black" : "", background: userType==="college-admission-officer"? "gold":""
           }}
         >
           College Admission Officer
@@ -122,8 +124,8 @@ export default function LoginPage({
           value="college-students-and-alumni"
           onClick={handleChangeUserType}
           style={{
-            background:
-              userType === "college-students-and-alumni" ? "gold" : "",
+            color:
+              userType === "college-students-and-alumni" ? "black" : "", background: userType==="college-students-and-alumni"? "gold":""
           }}
         >
           College Student/Alum
@@ -135,10 +137,6 @@ export default function LoginPage({
           <h2 className="login_header">Login</h2>
           <form className="login-form">
             <div className="email">
-              {/* <img
-                src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
-                className="email-img"
-              ></img> */}
               <input
                 className="email-input"
                 type="email"
@@ -148,10 +146,6 @@ export default function LoginPage({
               ></input>
             </div>
             <div className="password">
-              {/* <img
-                src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-                className="password-img"
-              ></img> */}
               <input
                 className="password-input"
                 type={passwordDisplayed.password ? "text" : "password"}

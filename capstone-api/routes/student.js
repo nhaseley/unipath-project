@@ -8,10 +8,15 @@ router.post("/like", async function (req, res, next) {
   try {
     if (typeof req.body.collegeName == "string") {
       // only add to liked colleges if we pass one in (handles refresh)
-      await Student.likeCollege(
-        req.body.studentId,
-        req.body.collegeName
-      );
+      // and if the user hasn't already liked it in the past
+      console.log("id: ", req.body.studentId)
+      const userHasLiked = await Student.userHasLiked(req.body.studentId, req.body.collegeName)
+      if (!userHasLiked){
+        await Student.likeCollege(
+          req.body.studentId,
+          req.body.collegeName
+        );
+      }
     }
     const colleges = await Student.getLikedColleges(req.body.studentId);
     return res.status(201).json(colleges);
@@ -23,9 +28,9 @@ router.post("/like", async function (req, res, next) {
 
 router.post("/colleges", async function (req, res, next) {
   try {
-    console.log("PASSING INTO COLLEGE FEED", req.body.satScore)
+    // console.log("PASSING INTO COLLEGE FEED", req.body.satScore)
     oldSATScore = await Student. getOldSATScore(req.body.satScore)
-    console.log("AFTER CONVERTING", oldSATScore)
+    // console.log("AFTER CONVERTING", oldSATScore)
     const collegesToDisplay = await Student.getCollegeFeed(
       oldSATScore,
       // req.body.satScore,

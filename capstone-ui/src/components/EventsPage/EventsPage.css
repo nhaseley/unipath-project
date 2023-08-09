@@ -3,8 +3,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 5vh;
 }
-
+.events-page-description{
+  margin-top: -2vh;
+  margin-bottom: 6vh;
+}
+.events-header{
+  margin-bottom: -3vh;
+}
 .event-card {
   padding: 2%;
   width: 75%;
@@ -13,7 +20,6 @@
   color: white;
   border-radius: 1em;
 }
-
 .events-search {
   width: 60%;
   font-size: 20px;
@@ -27,6 +33,10 @@
   color: white;
   font-size: 1.5em;
   border: none;
+}
+.add-event-button:hover{
+  transition: transform 0.3s ease;
+  transform: scale(1.15);
 }
 
 .event-college {
@@ -42,12 +52,20 @@
   border-radius: 0.25rem;
   padding: 1vh;
 }
+.event-college-button:hover{
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
+}
 .event-register-button {
   color: #213547;
   background: lightyellow;
   font-size: 1.4rem;
   border-radius: 0.25rem;
   padding: 1vh;
+}
+.event-register-button:hover{
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
 }
 .contact-organizer {
   display: flex;
@@ -61,7 +79,10 @@
   border-radius: 0.25rem;
   padding: 0.5vh;
 }
-
+.mailto-button:hover{
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
+}
 .intro {
   display: flex;
   flex-direction: row;
@@ -92,18 +113,19 @@
   width: 100%;
   align-items: center;
 }
-.no-events {
-  margin-bottom: -2%;
-}
 .event-attendee-card {
   /* background: #213547; */
   background: #213547;
   color: white;
-  width: 30%;
+  width: 100%;
   margin-top: 4%;
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+.attendees {
+  width:30%;
+  margin-bottom:10vh;
 }
 .event-attendees-page {
   display: flex;
@@ -126,11 +148,12 @@
 
 .num-attendees-input {
   border: none;
+  width: 25vw;
 }
 
 .event-registration {
   margin: auto;
-  margin-top: 5vh;
+  margin-bottom:2vh;
 }
 
 .post_new_event_header {

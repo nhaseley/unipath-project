@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function Biography() {
   return (
     <div id="biography" className="biography">
-      <h1 className="bio_header">
+      <h1 className="bio-header" style={{marginLeft: "2vh"}}>
         Simplifying College Search For Pre-College Scholars.
       </h1>
 
@@ -15,10 +15,7 @@ export default function Biography() {
         </div>
         <div className="rightside">
           <span className="rightside_text">
-            Sayme es tion wayne wif central sea ez wail es skepta init
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim. En headie one is de besth.
+            We are a passionate team of technology enthusiasts dedicated to helping high school seniors embark on their journey to higher education. Our mission is to provide a personalized and seamless experience for students as they explore and discover the perfect colleges that align with their unique interests, aspirations, and academic accomplishments.
             <div>
               <button className="creators_button">
                 <Link to={"/about"}> About the Creators</Link>
