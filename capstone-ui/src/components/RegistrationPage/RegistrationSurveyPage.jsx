@@ -30,6 +30,7 @@ export default function RegistrationSurveyPage({
 
   async function handleRegistration(event) {
     event.preventDefault();
+    console.log('theyuh', userLoginInfo)
 
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
