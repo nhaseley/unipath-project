@@ -5,6 +5,9 @@ import nyaImage from "./IMG_3249.jpg";
 import ayoImage from "./IMG_6683.jpg";
 import linkedIn from "./linkedIn.png";
 import emailIcon from "./mail.png";
+import umdLogo from "./Maryland-Terrapins-Logo.png";
+import brownLogo from "./brown-uni.png";
+import andrewsLogo from "./andrewsLogo.png";
 import jordanImage from "./jordanImg.png"
 
 import { Link } from "react-router-dom";
@@ -22,6 +25,7 @@ export default function About() {
             <img className="us-photo" src={usImage} alt="Us Image" />
           </div>
           <div className="rightside">
+            <h2 className="our_mission">Our Mission</h2>
             <span className="rightside_text">
               We are a passionate team of 3 college students dedicated to
               <b className="bio-important-words">
@@ -53,6 +57,8 @@ export default function About() {
             </p>
           </div>
           <h2 className="bio_name">Ayomide Adetunji</h2>
+          <img className="umdLogo" src={umdLogo} />
+ 
           <h3 className="uni">University of Maryland, '25 </h3>
           <h3 className="major">Computer Science</h3>
           <div className="contact">
@@ -75,11 +81,13 @@ export default function About() {
           <div className="image-container">
             <img className="headshot" src={jordanImage} alt="Jordan Image" />
             <p className="overlay-text" style={{ fontWeight: "bold" }}>
+
               Junior at Andrews University studying
               Computer Science.
             </p>
           </div>
           <h2 className="bio_name">Jordan Sarkodie</h2>
+ <img className="andrewsLogo" src={andrewsLogo}/>
           <h3 className="uni"> Andrews University, '25 </h3>
           <h3 className="major">Computer Science</h3>
           <div className="contact">
@@ -107,6 +115,8 @@ export default function About() {
             </p>
           </div>
           <h2 className="bio_name">Nya Haseley-Ayende</h2>
+          <img className="brownLogo" src={brownLogo}/>
+
           <h3 className="uni"> Brown University, '25 </h3>
           <h3 className="major">Applied Mathematics & Computer Science</h3>
           <div className="contact">

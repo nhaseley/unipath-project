@@ -24,7 +24,7 @@ export default function Navbar({ userLoggedIn, logoutUser, handleItemClick, getL
                 <Link to={"/like"}>Liked Colleges</Link>
               </li>
               <li onClick={() => handleItemClick("parents")} style={getListItemStyle("parents")}>
-                <Link to={"/child-feed"}>Parents</Link>
+                <Link to={"/child-feed"}>Parents/Guardians</Link>
               </li>
               <li onClick={() => handleItemClick("events")} style={getListItemStyle("events")}>
                 <Link to={"/events"}>View Events</Link>
