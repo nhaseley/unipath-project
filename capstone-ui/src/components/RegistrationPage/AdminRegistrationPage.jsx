@@ -16,9 +16,11 @@ export default function AdminRegistrationPage({
   const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   useEffect(() => {
     {
-      axios.post("http://localhost:3010/collegeList").then((response) => {
+      axios.post(BASE_URL+"/collegeList").then((response) => {
         setCollegeOptions(response.data);
       });
     }
@@ -49,7 +51,7 @@ export default function AdminRegistrationPage({
       setError({ message: "Passwords do not match", status: 422 });
     } else {
       let result = await axios.post(
-        "http://localhost:3010/auth/register/college-admission-officer",
+        BASE_URL+"/auth/register/college-admission-officer",
         {
           email: userLoginInfo.email,
           firstName: userLoginInfo.firstName,

@@ -17,6 +17,8 @@ export default function LoginPage({
 }) {
   const navigate = useNavigate();
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   function handleChangeUserType(event) {
     setUserType(event.target.value);
   }
@@ -44,7 +46,7 @@ export default function LoginPage({
     event.preventDefault();
 
     let result = await axios.post(
-      "http://localhost:3010/auth/login" + `/${userType}`,
+      BASE_URL+"/auth/login" + `/${userType}`,
       {
         email: userLoginInfo.email,
         password: userLoginInfo.password,

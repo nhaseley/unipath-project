@@ -19,11 +19,13 @@ export default function CollegeGrid({
   const [allColleges, setAllColleges] = useState([]);
   const [searchedColleges, setSearchedColleges] = useState([]);
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   // Function to display colleges on the grid
   async function getCollegeGrid() {
     {
       axios
-        .post("http://localhost:3010/colleges", {
+        .post( BASE_URL+"/colleges", {
           satScore: userLoginInfo.satScore,
           actScore: userLoginInfo.actScore,
           enrollment: userLoginInfo.enrollment,

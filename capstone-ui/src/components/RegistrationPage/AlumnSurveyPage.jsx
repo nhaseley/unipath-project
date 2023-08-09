@@ -18,6 +18,8 @@ export default function AlumnSurveyPage({
   const [graduationYear, setGraduationYear] = useState();
   const [collegeOptions, setCollegeOptions] = useState([]);
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   const collegeYearOptions = Array.from({ length: 44 }, (_, i) => ({
     value: 2023 - i,
     label: 2023 - i.toLocaleString(),
@@ -25,7 +27,7 @@ export default function AlumnSurveyPage({
 
   useEffect(() => {
     {
-      axios.post("http://localhost:3010/collegeList").then((response) => {
+      axios.post(BASE_URL+"/collegeList").then((response) => {
         setCollegeOptions(response.data);
       });
     }
@@ -57,7 +59,7 @@ export default function AlumnSurveyPage({
       setError({ message: "Passwords do not match", status: 422 });
     } else {
       let result = await axios.post(
-        "http://localhost:3010/auth/register/college-students-and-alumni",
+        BASE_URL+"/auth/register/college-students-and-alumni",
         {
           email: userLoginInfo.email,
           firstName: userLoginInfo.firstName,

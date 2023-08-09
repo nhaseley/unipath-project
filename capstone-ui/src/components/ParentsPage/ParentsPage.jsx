@@ -16,10 +16,12 @@ export default function ParentsPage({
 }) {
   const [childsColleges, setChildsColleges] = useState([]);
 
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   useEffect(() => {
     if (userLoginInfo.parentPhone != "") {
       axios
-        .post("http://localhost:3010/getChildList", {
+        .post(BASE_URL+"/getChildList", {
           parentPhone: userLoginInfo.parentPhone,
         })
         .then((response) => {

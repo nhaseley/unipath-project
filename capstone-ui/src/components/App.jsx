@@ -19,7 +19,6 @@ import EventDetailsPage from "./EventsPage/EventDetailsPage";
 import EventAttendeesPage from "./EventsPage/EventAttendeesPage";
 
 export default function App() {
-  
   //------------------ States ---------------------//
 
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -61,10 +60,14 @@ export default function App() {
     "#3F4B3B",
   ];
 
-  const [nextRegistrationPage, setNextRegistrationPage] = useState(true); 
+const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
+  const [nextRegistrationPage, setNextRegistrationPage] = useState(true);
   // boolean for if we're on the next page (used for both students and alumni)
+
   const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] = useState(true);
   const [isSelected, setIsSelected] = useState("");
+
 
   const handleItemClick = (item) => {
     setIsSelected(item);
@@ -77,31 +80,34 @@ export default function App() {
   });
   
   console.log("user info: ", userLoginInfo);
+  console.log("nnode env", BASE_URL);
 
   async function convertCollegeSAT(oldCollegeSAT) {
     if (oldCollegeSAT) {
-      let response = await axios
-        .post("http://localhost:3010/getUpdatedSATScore", {
+      let response = await axios.post(
+        BASE_URL + "/getUpdatedSATScore",
+        {
           oldCollegeSAT: oldCollegeSAT,
-        })
-        return parseInt(response.data)
+        }
+      );
+      return parseInt(response.data);
     }
   }
 
-  function scrollToTop () {
+  function scrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // This creates a smooth scrolling effect
+      behavior: "smooth", // This creates a smooth scrolling effect
     });
-  };
+  }
 
   useEffect(() => {
-    scrollToTop()
+    scrollToTop();
     const selectedCollegeStored = localStorage.getItem("selected-college");
     const token = localStorage.getItem("token");
     if (!decodedToken) {
       axios
-        .post("http://localhost:3010/auth/decodedtoken", {
+        .post(BASE_URL+"/auth/decodedtoken", {
           token: token,
         })
         .then((response) => {
@@ -193,7 +199,6 @@ export default function App() {
     <>
       <BrowserRouter>
         <Routes>
-
           <Route
             path=""
             element={
@@ -314,7 +319,12 @@ export default function App() {
             <Route
               path="/events"
               element={
-                <EventsPage userType={userType} userLoginInfo={userLoginInfo} userLoggedIn={userLoggedIn} setUserType={setUserType}/>
+                <EventsPage
+                  userType={userType}
+                  userLoginInfo={userLoginInfo}
+                  userLoggedIn={userLoggedIn}
+                  setUserType={setUserType}
+                />
               }
             ></Route>
 
