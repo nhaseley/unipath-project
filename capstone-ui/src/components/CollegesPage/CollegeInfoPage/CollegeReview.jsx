@@ -9,8 +9,9 @@ export default function CollegeReview({ review }) {
         <div className="rating-info">
           <b>
             {review.first_name} {review.last_name}
-          </b>
-          , Class of {review.college_grad_year}
+          </b> 
+          {review.college_grad_year?
+          ", Class of " + review.college_grad_year: null}
         </div>
       </span>
       <div className="stars">

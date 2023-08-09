@@ -78,7 +78,7 @@ export default function CollegeGrid({
         ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
         : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20)
 
-        console.log(first20Colleges);
+        // console.log(first20Colleges);
 
   return (
     <div className="college-grid">

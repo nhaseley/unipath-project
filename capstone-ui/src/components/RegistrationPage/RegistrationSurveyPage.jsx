@@ -30,12 +30,10 @@ export default function RegistrationSurveyPage({
 
   async function handleRegistration(event) {
     event.preventDefault();
-    console.log('theyuh', userLoginInfo)
 
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
-      console.log("about to register")
       let result = await axios.post(BASE_URL+"/auth/register", {
         email: userLoginInfo.email,
         firstName: userLoginInfo.firstName,
@@ -49,13 +47,9 @@ export default function RegistrationSurveyPage({
         college: userLoginInfo.college,
         collegeGradYear: userLoginInfo.collegeGradYear,
       });
-
-      console.log('the results of this', result.data)
       if (result.data.status) {
-        console.log('error')
         setError(result.data);
       } else {
-        console.log('yuh', userLoginInfo)
         navigate("/login");
         setError({});
         setUserLoginInfo({
