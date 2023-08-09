@@ -8,7 +8,7 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
   const [eventInfo, setEventInfo] = useState({});
   const navigate = useNavigate();
 
-  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   async function handleEventSubmit(event) {
     // axios call to store events info in database

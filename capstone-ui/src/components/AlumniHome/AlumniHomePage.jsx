@@ -54,7 +54,7 @@ export default function AlumniHomePage({
       additionalReview: event.target.value,
     });
   }
-  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   async function handleReviewSubmit(event) {
     event.preventDefault();

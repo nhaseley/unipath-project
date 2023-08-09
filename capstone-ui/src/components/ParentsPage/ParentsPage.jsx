@@ -16,7 +16,7 @@ export default function ParentsPage({
 }) {
   const [childsColleges, setChildsColleges] = useState([]);
 
-  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   useEffect(() => {
     if (userLoginInfo.parentPhone != "") {

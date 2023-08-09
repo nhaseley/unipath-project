@@ -18,7 +18,7 @@ export default function AlumnSurveyPage({
   const [graduationYear, setGraduationYear] = useState();
   const [collegeOptions, setCollegeOptions] = useState([]);
 
-  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   const collegeYearOptions = Array.from({ length: 44 }, (_, i) => ({
     value: 2023 - i,
