@@ -12,13 +12,15 @@ export default function MyCollegesPage({
 }) {
   const [likedColleges, setLikedColleges] = useState([]);
 
+  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   useEffect(() => {
     if (
       // unnecessary once we require login for this page
       userLoginInfo.firstName != ""
     ) {
       axios
-        .post("http://localhost:3010/like", {
+        .post(BASE_URL+"/like", {
           studentId: userLoginInfo.id,
           collegeName: selectedCollege,
         })

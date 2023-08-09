@@ -13,6 +13,8 @@ export default function ParentRegistrationForm({
 }) {
   const navigate = useNavigate();
 
+  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   function handleDemo() {
     setUserLoginInfo({
       email: "nylevenya@hotmail.com",
@@ -30,7 +32,7 @@ export default function ParentRegistrationForm({
       setError({ message: "Passwords do not match", status: 422 });
     } else {
       let result = await axios.post(
-        "http://localhost:3010/auth/register/parent",
+        BASE_URL+"/auth/register/parent",
         {
           email: userLoginInfo.email,
           firstName: userLoginInfo.firstName,

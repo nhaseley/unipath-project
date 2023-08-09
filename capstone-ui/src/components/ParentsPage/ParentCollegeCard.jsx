@@ -13,10 +13,14 @@ export default function ParentCollegeCard({
   scrollToTop
 }) {
   const [college, setCollege] = useState();
-console.log("COLLEGE: ", college)
+
+  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
+console.log(college)
+
   useEffect(() => {
     axios
-      .post("http://localhost:3010/info/" + `${childCollege?.college_name}`, {
+      .post(BASE_URL+"/info/" + `${childCollege?.college_name}`, {
         id: childCollege?.college_name,
       })
       .then((response) => {

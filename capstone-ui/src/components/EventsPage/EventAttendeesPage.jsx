@@ -18,6 +18,8 @@ export default function EventAttendeesPage({
     numAttendees: "",
   });
 
+  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   function handleDemo() {
     setEventRegistrationInfo({
       firstName: "John",
@@ -29,7 +31,7 @@ export default function EventAttendeesPage({
   async function getEventAttendees() {
     // axios call to get the attendees for this event from the database
     await axios
-      .post("http://localhost:3010/getEventAttendees", {
+      .post(BASE_URL+"/getEventAttendees", {
         eventId: id,
       })
       .then((response) => {
@@ -41,7 +43,7 @@ export default function EventAttendeesPage({
 
   async function handleRemoveEventRegistration() {
     await axios
-      .delete("http://localhost:3010/removeEventRegistration", {
+      .delete(BASE_URL+"/removeEventRegistration", {
         data: { studentId: userLoginInfo.id, eventId: parseInt(id) },
       })
       .then((response) => {
@@ -60,7 +62,7 @@ export default function EventAttendeesPage({
       eventRegistrationInfo.numAttendees != 0
     ) {
       await axios
-        .post("http://localhost:3010/register/event", {
+        .post(BASE_URL+"/register/event", {
           studentId: userLoginInfo.id,
           firstName: eventRegistrationInfo.firstName,
           lastName: eventRegistrationInfo.lastName,
