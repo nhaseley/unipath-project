@@ -72,7 +72,7 @@ export default function EventsPage({
       ) : (
         <div className="events-page" >
           <h1 style={{fontWeight: "normal"}}>Welcome to the events page, {userLoginInfo?.firstName}!</h1>
-          <h2 className="events-page-description">On this page, you can view all events posted at {userLoggedIn == "college-admission-officer"? "your institution and post upcoming events." : "selected colleges."} For more information, click on the college name.</h2>
+          <h2 className="events-page-description">On this page, you can view all events posted at {userType == "college-admission-officer"? "your institution and post upcoming events." : "selected colleges."} For more information, click on the college name.</h2>
 
           {userType == "college-admission-officer" ? (
             <button className="add-event-button" onClick={handleAddNewEvent}>
