@@ -49,7 +49,9 @@ export default function RegistrationSurveyPage({
         collegeGradYear: userLoginInfo.collegeGradYear,
       });
 
+      console.log('the results of this', result.data)
       if (result.data.status) {
+        console.log('error')
         setError(result.data);
       } else {
         console.log('yuh', userLoginInfo)
