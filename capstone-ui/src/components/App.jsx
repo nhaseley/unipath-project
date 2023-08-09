@@ -80,7 +80,7 @@ const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010
   });
   
   console.log("user info: ", userLoginInfo);
-  console.log("nnode env", process.env.NODE_ENV);
+  console.log("nnode env", BASE_URL);
 
   async function convertCollegeSAT(oldCollegeSAT) {
     if (oldCollegeSAT) {

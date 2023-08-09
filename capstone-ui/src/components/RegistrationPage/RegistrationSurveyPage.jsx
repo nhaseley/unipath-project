@@ -35,6 +35,7 @@ export default function RegistrationSurveyPage({
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
+      console.log("about to register")
       let result = await axios.post(BASE_URL+"/auth/register", {
         email: userLoginInfo.email,
         firstName: userLoginInfo.firstName,
