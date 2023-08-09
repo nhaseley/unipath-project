@@ -24,7 +24,7 @@ export default function Navbar({ userLoggedIn, logoutUser }) {
               <Link to={"/like"}>Liked Colleges</Link>
             </li>
             <li>
-              <Link to={"/child-feed"}>Parents</Link>
+              <Link to={"/child-feed"}>Parents/Guardians</Link>
             </li>
 
             <li>

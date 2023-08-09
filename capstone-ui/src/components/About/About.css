@@ -100,6 +100,10 @@
   gap: 1.5vw;
 }
 
+.our_mission {
+  margin-top: 0;
+}
+
 /* &:before {
     content: '';
 	position: absolute;
@@ -129,7 +133,6 @@
   padding-top: 2vh;
   max-width: 20vw;
   height: 50vh;
-
 }
 
 .bio_name {
@@ -158,10 +161,10 @@
 
 .about-summary {
   width: 60vw;
-margin-top: 3vh;
-padding: 3vh;
-margin-bottom: 10vh;
-font-size: 1.25rem;
+  margin-top: 3vh;
+  padding: 3vh;
+  margin-bottom: 10vh;
+  font-size: 1.25rem;
 }
 
 .nya-mailto {
@@ -192,7 +195,7 @@ font-size: 1.25rem;
   font-weight: normal;
 }
 
-.about_spliter{
+.about_spliter {
   background-color: white;
   padding: 1.5vh;
   border-radius: 0.5rem;
@@ -202,10 +205,23 @@ font-size: 1.25rem;
   font-weight: 300;
 }
 
-.us_leftside{
+.us_leftside {
   margin-left: 3vw;
 }
 
-.linkedinLogo, .emailLogo{
+.linkedinLogo,
+.emailLogo {
   width: 3vh;
+}
+
+.umdLogo {
+  width: 6vw;
+}
+
+.brownLogo {
+  width: 7.5vw;
+}
+
+.andrewsLogo {
+  width: 2.5vw;
 }

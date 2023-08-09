@@ -19,7 +19,8 @@
 .review-for-alum,
 .event-attendees-page,
 .alumReviews,
-.about-summary, .us {
+.about-summary,
+.us {
   background-color: #f0f0f0;
   width: fit-content;
   height: fit-content;
@@ -115,6 +116,13 @@
   color: black;
   border-radius: 0.2rem;
   font-size: 1rem;
+}
+
+.sat-input,
+.act-input,
+.enrollment-input,
+.school-type {
+  border: none;
 }
 
 .event-desc-input {
