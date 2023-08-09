@@ -12,7 +12,7 @@ export default function MyCollegesPage({
 }) {
   const [likedColleges, setLikedColleges] = useState([]);
 
-  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   useEffect(() => {
     if (

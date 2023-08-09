@@ -17,7 +17,7 @@ export default function LoginPage({
 }) {
   const navigate = useNavigate();
 
-  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   function handleChangeUserType(event) {
     setUserType(event.target.value);

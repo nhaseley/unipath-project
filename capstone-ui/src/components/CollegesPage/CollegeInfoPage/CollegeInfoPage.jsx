@@ -71,7 +71,7 @@ export default function CollegeInfoPage({
     length: parseInt(college?.student_faculty_ratio),
   });
 
-  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+  const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   // get info for particular college for this user
   async function getCollege() {

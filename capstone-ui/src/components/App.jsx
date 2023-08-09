@@ -60,7 +60,7 @@ export default function App() {
     "#3F4B3B",
   ];
 
-BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
 
   const [nextRegistrationPage, setNextRegistrationPage] = useState(true);
   // boolean for if we're on the next page (used for both students and alumni)
