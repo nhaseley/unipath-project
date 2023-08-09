@@ -13,7 +13,7 @@ export default function ParentCollegeCard({
   scrollToTop
 }) {
   const [college, setCollege] = useState();
-console.log(college)
+console.log("COLLEGE: ", college)
   useEffect(() => {
     axios
       .post("http://localhost:3010/info/" + `${childCollege?.college_name}`, {
@@ -34,6 +34,7 @@ console.log(college)
     earnings_1yr_after_completion: college?.earnings_1yr_after_completion,
     earnings_4yr_after_completion: college?.earnings_4yr_after_completion,
   };
+  console.log("EARNINGS DATA:", averageEarningsData)
 
   const incomeData = {
     median_family_income: parseFloat(college?.median_family_income),

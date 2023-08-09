@@ -64,7 +64,18 @@ export default function App() {
   const [nextRegistrationPage, setNextRegistrationPage] = useState(true); 
   // boolean for if we're on the next page (used for both students and alumni)
   const [nextAlumnRegistrationPage, setNextAlumnRegistrationPage] = useState(true);
+  const [isSelected, setIsSelected] = useState("");
 
+  const handleItemClick = (item) => {
+    setIsSelected(item);
+  };
+
+  const getListItemStyle = (item) => ({
+    border: isSelected === item ? "0.2vw solid #213547" : "",
+    borderRadius: "2vh",
+    padding: "1vh",
+  });
+  
   console.log("user info: ", userLoginInfo);
 
   async function convertCollegeSAT(oldCollegeSAT) {
@@ -186,7 +197,7 @@ export default function App() {
           <Route
             path=""
             element={
-              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} />
+              <Navbar userLoggedIn={userLoggedIn} logoutUser={logoutUser} handleItemClick={handleItemClick} getListItemStyle={getListItemStyle} />
             }
           >
             <Route
