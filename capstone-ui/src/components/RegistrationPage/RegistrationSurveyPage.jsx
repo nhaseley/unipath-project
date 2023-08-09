@@ -52,6 +52,7 @@ export default function RegistrationSurveyPage({
       if (result.data.status) {
         setError(result.data);
       } else {
+        console.log('yuh', userLoginInfo)
         navigate("/login");
         setError({});
         setUserLoginInfo({
