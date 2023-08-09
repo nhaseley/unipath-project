@@ -26,13 +26,15 @@ export default function RegistrationSurveyPage({
     label: (i + 1).toString(),
   }));
 
+  BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010" : "https://unipath-backend.onrender.com"
+
   async function handleRegistration(event) {
     event.preventDefault();
 
     if (userLoginInfo.confirmPassword !== userLoginInfo.password) {
       setError({ message: "Passwords do not match", status: 422 });
     } else {
-      let result = await axios.post("http://localhost:3010/auth/register", {
+      let result = await axios.post(BASE_URL+"/auth/register", {
         email: userLoginInfo.email,
         firstName: userLoginInfo.firstName,
         lastName: userLoginInfo.lastName,
