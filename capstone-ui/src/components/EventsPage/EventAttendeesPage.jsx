@@ -143,7 +143,7 @@ export default function EventAttendeesPage({
                 />
               </div>
             </form>
-            <div className="error" style={{ color: "#cc0000" }}>
+            <div className="error" style={{ color: "#cc0000", width: "30vh", marginLeft: "2vh" }}>
               {error.status
                 ? "Event Registration Failed: " + error.message
                 : null}

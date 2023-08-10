@@ -44,12 +44,12 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
 
   function handleDemo() {
     setEventInfo({
-      name: "nya haseley-ayende",
-      desc: "This is a really cool event!!",
+      name: "CS Information Session",
+      desc: "Come chat with our lovely panelist to learn about all things computer science!",
       email: "nylevenya@brown.edu",
-      speaker: "nya",
-      dept: "Mathematics",
-      maxRegistrants: 100,
+      speaker: "Professor Pedro",
+      dept: "Computer Science",
+      maxRegistrants: 50,
     });
   }
 

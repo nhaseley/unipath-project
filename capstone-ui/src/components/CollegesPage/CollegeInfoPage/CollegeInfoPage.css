@@ -193,6 +193,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .student-imgs-grid {
   display: flex;

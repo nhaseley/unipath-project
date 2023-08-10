@@ -28,12 +28,11 @@ export default function EventCard({ event, userType }) {
       <div className="intro">
         <h2 className="event-name">{event.name}</h2>
         <div className="event-college">
-          <button className="event-college-button">
-            <Link to={"/info/" + event.college} key={event.college}>
-              {" "}
+          {/* <button className="event-college-button"> */}
+            <Link className="event-college-button" to={"/info/" + event.college} key={event.college}>
               {event.college}
             </Link>
-          </button>
+          {/* </button> */}
         </div>
       </div>
 
