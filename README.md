@@ -19,7 +19,7 @@ Project Code Repository Links
 
 Add a quick summary of what your project theme and objectives are.
 
-Deployment Website: "https://unipath-frontend.onrender.com/"
+Deployment Website: https://unipath-frontend.onrender.com/
 
 ### Open-source libraries used
 
