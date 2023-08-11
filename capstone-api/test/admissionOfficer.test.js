@@ -139,7 +139,6 @@ describe("Admin register", () => {
       college_name: 'Test-College',
     };
 
-    // db.query.mockResolvedValue({ rows: [expectedRow] });
     
     db.query = jest.fn().mockResolvedValue({rows: [expectedRow]});
 
@@ -151,11 +150,7 @@ describe("Admin register", () => {
       collegeName: 'Test-College',
       password: 'test-password'
     };
-
-
-    // Call the register function with valid credentials
     const result = await AdmissionOfficer.register( creds);
-
     expect(result).toEqual({
       id: 1,
       work_email: 'testing@email.com',
@@ -214,6 +209,42 @@ describe("Admin register", () => {
   });
 });
 
+
+
+describe('getCollegeEvents', () => {
+
+  test('should return events for a specific college', async () => {
+    // Set up mocks and data
+    const college = 'Sample University';
+    const mockQueryResult = {
+      rows: [
+        { id: 1, name: 'Event 1', description: 'Description 1', organizer_email: 'organizer@example.edu', college: college },
+        { id: 2, name: 'Event 2', description: 'Description 2', organizer_email: 'organizer@example.edu', college: college },
+      ]
+    };
+    db.query.mockResolvedValue(mockQueryResult);
+    const result = await AdmissionOfficer.getCollegeEvents(college);
+    expect(result).toEqual(mockQueryResult.rows);
+  });
+});
+
+
+
+describe('getEventAttendees', () => {
+  test('should return attendees for a specific event', async () => {
+    // Set up mocks and data
+    const eventId = 1;
+    const mockQueryResult = {
+      rows: [
+        { id: 1, student_id: 123, first_name: 'John', last_name: 'Doe', event_id: 1, numOfAttendees: 2  },
+        { id: 2, student_id: 456, first_name: 'Jane', last_name: 'Smith', event_id: 1, numOfAttendees: 3 },
+      ]
+    };
+    db.query.mockResolvedValue(mockQueryResult);
+    const result = await AdmissionOfficer.getEventAttendees(eventId);
+    expect(result).toEqual(mockQueryResult.rows);
+  });
+});
 
 
 
