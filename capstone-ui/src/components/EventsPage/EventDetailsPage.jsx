@@ -44,12 +44,12 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
 
   function handleDemo() {
     setEventInfo({
-      name: "CS Information Session",
-      desc: "Come chat with our lovely panelist to learn about all things computer science!",
+      name: "Campus Tour #1",
+      desc: "Come along with our tour guides to see and learn about Brown's beautiful campus!",
       email: "nylevenya@brown.edu",
-      speaker: "Professor Pedro",
-      dept: "Computer Science",
-      maxRegistrants: 50,
+      speaker: "Jane Doe",
+      dept: "Admissions",
+      maxRegistrants: 30,
     });
   }
 
