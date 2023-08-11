@@ -5,7 +5,10 @@ import nyaImage from "./IMG_3249.jpg";
 import ayoImage from "./IMG_6683.jpg";
 import linkedIn from "./linkedIn.png";
 import emailIcon from "./mail.png";
-import jordanImage from "./jordanImg.png"
+import umdLogo from "./Maryland-Terrapins-Logo.png";
+import brownLogo from "./brown-uni.png";
+import andrewsLogo from "./andrewsLogo.png";
+import jordanImage from "./jordanImg.png";
 
 import { Link } from "react-router-dom";
 import ButtonMailto from "../EventsPage/ButtonMailto";
@@ -22,6 +25,7 @@ export default function About() {
             <img className="us-photo" src={usImage} alt="Us Image" />
           </div>
           <div className="rightside">
+            <h2 className="our_mission">Our Mission</h2>
             <span className="rightside_text">
               We are a passionate team of 3 college students dedicated to
               <b className="bio-important-words">
@@ -41,45 +45,50 @@ export default function About() {
           </div>
         </div>
       </div>
-     
+
       <h1 className="team-header"> Our Team </h1>
 
       <div className="all_creators">
         <div className="creator-bio">
           <div className="image-container">
-            <img className="headshot" src={ayoImage} alt="Ayo Image" />
+            <img className="headshot" src={nyaImage} alt="Nya Image" />
             <p className="overlay-text" style={{ fontWeight: "bold" }}>
-              Junior at University of Maryland studying Computer Science.
+              Originally from Pelham, NY, I bring my technical experience and
+              sympathy as a recent high school senior to help simplify the
+              college application experience.
             </p>
           </div>
-          <h2 className="bio_name">Ayomide Adetunji</h2>
-          <h3 className="uni">University of Maryland, '25 </h3>
-          <h3 className="major">Computer Science</h3>
+          <h2 className="bio_name">Nya Haseley-Ayende</h2>
+          <img className="brownLogo" src={brownLogo} />
+
+          <h3 className="uni"> Brown University, '25 </h3>
+          <h3 className="major">Applied Mathematics & Computer Science</h3>
           <div className="contact">
             <h3 className="subsection">
               <div className="linkedin">
-                <Link to="https://www.linkedin.com/mwlite/in/ayomide-adetunji-7b87091ba">
+                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
                   <img className="linkedinLogo" src={linkedIn} />
                 </Link>
               </div>
               <div className="mailto">
                 <ButtonMailto
                   label={<img className="emailLogo" src={emailIcon} />}
-                  mailto={"mailto:ayomide0528@gmail.com"}
+                  mailto={"mailto:nylevenya@hotmail.com"}
                 ></ButtonMailto>
               </div>
             </h3>
           </div>
         </div>
+
         <div className="creator-bio">
-          <div className="image-container">
+          <div className="jordan-image-container">
             <img className="headshot" src={jordanImage} alt="Jordan Image" />
             <p className="overlay-text" style={{ fontWeight: "bold" }}>
-              Junior at Andrews University studying
-              Computer Science.
+              Junior at Andrews University studying Computer Science.
             </p>
           </div>
           <h2 className="bio_name">Jordan Sarkodie</h2>
+          <img className="andrewsLogo" src={andrewsLogo} />
           <h3 className="uni"> Andrews University, '25 </h3>
           <h3 className="major">Computer Science</h3>
           <div className="contact">
@@ -100,26 +109,27 @@ export default function About() {
         </div>
         <div className="creator-bio">
           <div className="image-container">
-            <img className="headshot" src={nyaImage} alt="Nya Image" />
+            <img className="headshot" src={ayoImage} alt="Ayo Image" />
             <p className="overlay-text" style={{ fontWeight: "bold" }}>
-              Junior at Brown University studying Applied Mathematics and
-              Computer Science
+              Junior at University of Maryland studying Computer Science.
             </p>
           </div>
-          <h2 className="bio_name">Nya Haseley-Ayende</h2>
-          <h3 className="uni"> Brown University, '25 </h3>
-          <h3 className="major">Applied Mathematics & Computer Science</h3>
+          <h2 className="bio_name">Ayomide Adetunji</h2>
+          <img className="umdLogo" src={umdLogo} />
+
+          <h3 className="uni">University of Maryland, '25 </h3>
+          <h3 className="major">Computer Science</h3>
           <div className="contact">
             <h3 className="subsection">
               <div className="linkedin">
-                <Link to="https://www.linkedin.com/in/nya-haseley-ayende">
+                <Link to="https://www.linkedin.com/mwlite/in/ayomide-adetunji-7b87091ba">
                   <img className="linkedinLogo" src={linkedIn} />
                 </Link>
               </div>
               <div className="mailto">
                 <ButtonMailto
                   label={<img className="emailLogo" src={emailIcon} />}
-                  mailto={"mailto:nylevenya@hotmail.com"}
+                  mailto={"mailto:ayomide0528@gmail.com"}
                 ></ButtonMailto>
               </div>
             </h3>

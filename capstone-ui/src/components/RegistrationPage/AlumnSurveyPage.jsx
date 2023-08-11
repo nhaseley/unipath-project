@@ -69,7 +69,6 @@ export default function AlumnSurveyPage({
           collegeGradYear: userLoginInfo.collegeGradYear,
         }
       );
-      console.log("alum on register: ", result.data)
 
       if (result.data.status) {
         setError(result.data);

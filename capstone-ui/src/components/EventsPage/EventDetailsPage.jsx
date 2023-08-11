@@ -44,12 +44,12 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
 
   function handleDemo() {
     setEventInfo({
-      name: "nya haseley-ayende",
-      desc: "This is a really cool event!!",
+      name: "Campus Tour #1",
+      desc: "Come along with our tour guides to see and learn about Brown's beautiful campus!",
       email: "nylevenya@brown.edu",
-      speaker: "nya",
-      dept: "Mathematics",
-      maxRegistrants: 100,
+      speaker: "Jane Doe",
+      dept: "Admissions",
+      maxRegistrants: 30,
     });
   }
 

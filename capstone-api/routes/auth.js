@@ -135,7 +135,6 @@ router.post("/decodedtoken", async (req, res, next) => {
 
   try {
     if (decodedToken) {
-      // console.log("user with token: ", decodedToken)
       // Returning the decoded token with the user logged in
       return res.status(200).json( decodedToken );
     }
