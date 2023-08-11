@@ -27,7 +27,7 @@ export default function AlumnRegistrationPage({
   return (
     <div className="student-registration">
       <h2 className="create_alum_header">
-        Create an Alumn/College Student account:
+        Create an College Student/Alum account:
       </h2>
       <form className="alumn-form">
         <div className="names">
