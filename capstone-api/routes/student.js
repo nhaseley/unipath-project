@@ -9,7 +9,6 @@ router.post("/like", async function (req, res, next) {
     if (typeof req.body.collegeName == "string") {
       // only add to liked colleges if we pass one in (handles refresh)
       // and if the user hasn't already liked it in the past
-      console.log("id: ", req.body.studentId)
       const userHasLiked = await Student.userHasLiked(req.body.studentId, req.body.collegeName)
       if (!userHasLiked){
         await Student.likeCollege(
@@ -100,30 +99,11 @@ router.delete("/removeEventRegistration", async function (req, res, next) {
 router.post("/getUpdatedSATScore", async function (req, res, next) {
   try {
     const updatedScore = await Student.getNewCollegeSATScore(req.body.oldCollegeSAT);
-    // console.log("updated to new score: ", updatedScore)
     return res.status(201).json(updatedScore);
   } catch (err) {
     res.send(err);
     next(err);
   }
 });
-
-
-// router.get('/zipcodeapi', async (req, res) => {
-//   try {
-//     const apiKey = 'https://www.zipcodeapi.com/rest';
-//     // const { fromZipcode, toZipcode } = req.query;
-
-//     const response = await axios.get(
-//       `https://www.zipcodeapi.com/rest/${apiKey}/distance.json/10803/10469/mile`
-//     );
-//     console.log("response in backend: ",response)
-//     res.json(response.data);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch data from the API' });
-//   }
-// });
-
-
 
 module.exports = router;

@@ -21,7 +21,6 @@ class User {
     };
 
     const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
-    // console.log("payload: ", payload);
     return token;
   }
 

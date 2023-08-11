@@ -242,7 +242,6 @@ class Student {
    * @return colleges in the database for a given user
    */
   static async getCollegeFeed(sat_score, act_score, school_type, enrollment) {
-    // console.log(typeof enrollment);
     const safeSatScore =
       sat_score !== "" && Number.isFinite(Number(sat_score))
         ? Number(sat_score)
@@ -275,7 +274,6 @@ class Student {
         ? `CAST(COALESCE(size::NUMERIC,0)AS NUMERIC) < 10000 AND CAST(COALESCE(size::NUMERIC,0)AS NUMERIC) > 5000`
         : enrollment == 10000
         ? `size::NUMERIC >= 10000`
-        // console.log("hi")
         : "TRUE"; // Return all colleges if enrollment is 0
 
     const schoolTypeCondition =
@@ -483,15 +481,12 @@ class Student {
    * @returns student
    */
     static async getNewCollegeSATScore(oldSAT) {
-      // console.log("CONVERTING THIS TO NEW: ", oldSAT)
       const result = await db.query(
         `SELECT newSAT FROM sat_conversion_old_to_new
             WHERE oldSAT = $1`,
         [`${Math.round(parseInt(oldSAT) / 10) * 10}`]
       );
-      
-      // console.log("NEW SAT IN HERE ", result.rows[0].newsat)
-      // if (result.rows[0]){
+
       return result.rows[0].newsat
 
     }
