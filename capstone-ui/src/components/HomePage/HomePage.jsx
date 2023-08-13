@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
-import { animateScroll as scroll } from "react-scroll";
 import Biography from "../Biography/Biography";
 export default function HomePage({ userLoggedIn, userType }) {
   const navigate = useNavigate();
