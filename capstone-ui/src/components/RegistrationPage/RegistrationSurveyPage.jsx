@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./RegistrationPage.css";
+import "./RegistrationSurveyPage.css"
 import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
@@ -105,7 +106,7 @@ export default function RegistrationSurveyPage({
   return (
     <div className="registration-survey-page">
       <h2 className="create_student_header"> Create a student account: </h2>
-      <div className="sat-input">
+      <div className="sat-input" style={{height: selectedButton.sat === "Yes" ? "50%":"50%"}}>
        Have you taken the SAT?
         <div className="yes_no_container">
           <button
@@ -138,7 +139,7 @@ export default function RegistrationSurveyPage({
           />
         ) : null}
       </div>
-      <div className="act-input">
+      <div className="act-input" style={{height: selectedButton.act === "Yes" ? "50%":"50%"}}>
         Have you taken the ACT?
         <div className="yes_no_container">
           <button

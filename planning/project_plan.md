@@ -8,9 +8,8 @@ High school seniors are often faced with the daunting task of trying to find col
 
 Our project offers a robust search engine that allows high school senior looking to apply to colleges to filter and search for colleges based on various criteria, such as location, majors offered, campus culture, school values, tuition fees, and admission requirements. Students can view detailed profiles and personalize their accounts through a login/registration.
 
-TODO: ^edit these
-
 ## User Roles and Personas
+
 1. High school senior
 
 Sarah is an 18-year old American high school senior who is looking to apply to colleges this Fall. She is enthusiastic and motivated to pursue higher education, eager to explore new opportunities and broaden her horizons, seeks a supportive and inclusive campus community, and is interested in a college experience that offers a balance between academics, extracurricular activities, and social life. However, she is overwhelmed by the vast amount of information available and the complexity of the college search process, uncertain about the factors to consider when selecting a college, lacks exposure to different colleges and limited guidance from family members or school counselors, and finding it difficult to assess campus culture without visiting each college.
@@ -52,79 +51,112 @@ Alex (23yo) is a recent college graduate who pursued a Bachelor's degree in Comp
 Students: This table stores all data for the user with type "student" upon registration and login
 
 | column name           | type          | description
-| :-------------------- | :-----------: | --------------------------------------: |
-| id                    | INT           | PRIMARY KEY                             |
-| first_name            | TEXT          | student first name                      |
-| last_name             | TEXT          | student last name                       |
-| email                 | TEXT          | student email                           |
-| zipcode               | INT           | student zip code                        |
-| parent_phone          | INT           | phone number of user's parent/guardian  |
-| password              | TEXT          | student password                        |
-| list                  | LIST          | list of personalized colleges           |
+| :-------------------- | :-----------: | ------------------------------------------: |
+| id                    | INT           | PRIMARY KEY                                 |
+| first_name            | TEXT          | student first name                          |
+| last_name             | TEXT          | student last name                           |
+| email                 | TEXT          | student email                               |
+| zipcode               | INT           | student zip code                            |
+| parent_phone          | INT           | phone number of user's parent/guardian      |
+| password              | TEXT          | student password                            |
+| sat_score             | TEXT          | input sat score (optional)                  |
+| act_score             | TEXT          | input act score (optional)                  |
+| enrollment            | INT           | enrollment size interest (optional)         |
+| school_type           | TEXT          | minority serving inst. interest (optional)  |
 
-Colleges: This table stores all data for list of colleges personalized for given user
+Liked Colleges: This table stores all colleges favorited by a given user
 
 | column name           | type          | description
-| :-------------------- | :-----------: | --------------------------------------: |
-| user_id               | INT           | id of the given user                    |
-| info                  | OBJECT        | {"latest" object extracted from api}    |
+| :-------------------- | :-----------: | -----------------------: |
+| id                    | INT           | PRIMARY KEY              |
+| user_id               | INT           | id of the given user     |
+| college_name          | TEXT          | name of college          |
 
 Parents: This table stores all data for the user with type "parent" upon registration and login
 
 | column name           | type          | description
-| :-------------------- | :-----------: | --------------------------------------: |
-| first_name            | TEXT          | parent/guardian first name              | 
-| last_name             | TEXT          | parent/guardian last name               | 
-| phone                 | INT           | parent/guardian phone number            | 
-| email                 | TEXT          | parent/guardian email                   | 
-| password              | TEXT          | parent/guardian password                | 
+| :-------------------- | :-----------: | -------------------------------: |
+| id                    | INT           | PRIMARY KEY                      |
+| first_name            | TEXT          | parent/guardian first name       | 
+| last_name             | TEXT          | parent/guardian last name        | 
+| phone                 | INT           | parent/guardian phone number     | 
+| email                 | TEXT          | parent/guardian email            | 
+| password              | TEXT          | parent/guardian password         | 
 
 College Students/Alumni: This table stores all data for the user with type "college student/alumni" upon registration and login
 
 | column name           | type          | description
 | :-------------------- | :-----------: | -------------------------------------------------:  |
+| id                    | INT           | PRIMARY KEY                                         |
 | first_name            | TEXT          | college student/alumni first name                   |
 | last_name             | TEXT          | college student/alumni last name                    |
 | email                 | TEXT          | college student/alumni email                        |
 | password              | TEXT          | college student/alumni password                     |
-| college               | TEXT          | college student/alumni college                      |
+| college_name          | TEXT     | college student/alumni college name                      |
 | college_grad_year     | INT           | college student/alumni college graduation year      |
 
 Admission Officer: This table stores all data for the user with type "admission officer" upon |registration and login
 
 | column name           | type          | description
 | :-------------------- | :-----------: | --------------------------------------: |
+| id                    | INT           | PRIMARY KEY                             |
 | first_name            | TEXT          | admission officer first name            | 
 | last_name             | TEXT          | admission officer last name             | 
 | work_email            | TEXT          | admission officer work email            | 
+| college_name          | TEXT          | admission officer college               |
 | password              | TEXT          | admission officer password              | 
 
 Events: This table stores all data for the list of events posted by college admissions officers across the country
 
 | column name           | type          | description   
-| :-------------------- | :-----------: | --------------------------------------: |
-| id                    | INT           | PRIMARY KEY                             | 
-| name                  | TEXT          | event name                              | 
-| description           | TEXT          | event description                       | 
-| organizer_email       | TEXT          | email of event organizer                | 
+| :-------------------- | :-----------: | ----------------------------: |
+| id                    | INT           | PRIMARY KEY                   | 
+| name                  | TEXT          | event name                    | 
+| description           | TEXT          | event description             | 
+| organizer_email       | TEXT          | email of event organizer      |
+| speaker               | TEXT          | event speaker                 | 
+| date_time             | TEXT          | event date/time               | 
+| dept                  | TEXT          | event department              | 
+| max_registrants       | TEXT          | event registration limit      | 
+| college               | TEXT          | college hosting event         | 
 
 Event Attendees: This table stores all data for all attendees for a given event
 
 | column name           | type          | description
 | :-------------------- | :-----------: | ----------------------------------------: |
+| id                    | INT           | PRIMARY KEY                               | 
+| user_id               | INT           | id of       attendee                      | 
 | first_name            | TEXT          | attendee first name                       | 
 | last_name             | TEXT          | attendee last name                        | 
-| parent email          | TEXT          | email of attendee's parent/guardian       | 
+| event_id              | INT           | email of attendee's parent/guardian       | 
 | num_attendees         | INT           | number of total attendees for this person | 
 
 Reviews: This table stores all data for the reviews for a given college and user  
 
 | column name           | type          | description
-| :-------------------- | :-----------: | --------------------------------------: |
-| id                    | INT           | PRIMARY KEY                             |
-| college_id            | INT           | id of the given college                 |
-| user_id               | INT           | id of the given user                    |
-| review                | TEXT          | written review from user                |
+| :-------------------- | :-----------: | ---------------------------------------: |
+| id                    | INT           | PRIMARY KEY                              |
+| user_id               | INT           | id of the given college student/alum     | 
+| first_name            | INT           | first name of given college student/alum | 
+| last_name             | INT           | last name of given college student/alum  | 
+| college_name          | INT           | name of college student/alum's college   |
+| college_grad_year     | INT           | graduation year for college student/alum | 
+| rating                | INT           | written rating from college student/alum |
+| review                | TEXT          | written review from college student/alum |
+
+SAT Conversion New to Old: This table stores all SAT score conversions (1600 scale to 2400 sclae)
+
+| column name           | type          | description
+| :-------------------- | :-----------: | ----------------------------------------: |
+| newSAT                | INT           | score in the new scale (out of 1600)      | 
+| oldSAT                | INT           | score in the old scale (out of 2400)      | 
+
+SAT Conversion Old to New: This table stores all SAT score conversions (2400 scale to 1600 sclae)
+
+| column name           | type          | description
+| :-------------------- | :-----------: | ----------------------------------------: |
+| oldSAT                | INT           | score in the old scale (out of 2400)      | 
+| newSAT                | INT           | score in the new scale (out of 1600)      | 
 
 ## Endpoints
 
@@ -142,15 +174,19 @@ Reviews: This table stores all data for the reviews for a given college and user
 | Get    | GET         | get all reviews for input college           | 3             |
 | Create | POST        | create a new admission officer account      | 6             |
 | Read   | POST        | login the admission officer                 | 6             |
+| Get    | GET         | add event to events list for input college  | 6             |
 | Get    | GET         | fetch the events list for input college     | 6             |
+| Get    | GET         | fetch the updated SAT Score in new scale    | 1-6           |
+| Get    | GET         | fetch all colleges from database            | 1-6           |
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
+[Github Milestones Board](https://github.com/nhaseley/ftl-capstone-project/projects)
 
 ## Sprint Breakdown
 1. 
   * Connect database to backend, backend to frontend
   * Frontend layout of browser router and main pages
-  * Implement Registration and Login
+  * Implement Registration and Login for students
   * College Grid rendering from API
   * Incorporate 1 filter feature
 
@@ -160,14 +196,16 @@ Reviews: This table stores all data for the reviews for a given college and user
   * Individual College Page
 
 3. 
-  * Other User Types (start with alumni)
+  * Registration/Login/JWTs for all Other User Types
+  * Add Reviews/Ratings to College Info Page (college student/alumni posts, student views)
   * Start building events page (admission officer posts, student views)
 
 4. 
   * Finish Events Page (admission officer posts, student views)
-  * Parents Page (financials)
+  * Parents Page (financial breakdown information)
   * Implement any last minute stretch features
+  * Polish CSS for all pages
 
 5. 
-  * Finish up and polish everything
+  * Deploy using render
   * Presentation prep

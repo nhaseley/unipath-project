@@ -174,9 +174,10 @@ export default function LoginPage({
             </div>
           </form>
           <div className="bottom_buttons">
+            {process.env.NODE_ENV === "development" ?
             <button className="demo-button" onClick={handleDemo}>
               Demo Login
-            </button>
+            </button>: null}
             <button className="login-submit" onClick={handleLogin}>
               Submit
             </button>

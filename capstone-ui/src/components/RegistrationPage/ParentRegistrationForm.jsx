@@ -68,6 +68,7 @@ export default function ParentRegistrationForm({
       <h2 className="create_parent_header">
         Create a Parent/Guardian account:
       </h2>
+      <div className="asterisk-message"> Inputs with an asterisk are required. </div>
       <p className="parent_prompt">
         Your phone number must match the parent/guardian phone number exactly listed on your
         scholar's account!
@@ -77,7 +78,7 @@ export default function ParentRegistrationForm({
           <input
             className="email-input"
             type="email"
-            placeholder="Parent/Guardian Email"
+            placeholder="Parent/Guardian Email *"
             value={userLoginInfo.email}
             onChange={(e) =>
               setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
@@ -89,7 +90,7 @@ export default function ParentRegistrationForm({
             <input
               className="first-name-input"
               type="text"
-              placeholder="First Name"
+              placeholder="First Name *"
               value={userLoginInfo.firstName}
               onChange={(e) =>
                 setUserLoginInfo((u) => ({
@@ -104,7 +105,7 @@ export default function ParentRegistrationForm({
             <input
               className="last-name-input"
               type="text"
-              placeholder="Last Name"
+              placeholder="Last Name *"
               value={userLoginInfo.lastName}
               onChange={(e) =>
                 setUserLoginInfo((u) => ({
@@ -119,7 +120,7 @@ export default function ParentRegistrationForm({
           <input
             className="parent-phone-input"
             type="text"
-            placeholder="Parent/Guardian Phone Number"
+            placeholder="Parent/Guardian Phone Number *"
             value={userLoginInfo.parentPhone}
             onChange={(e) =>
               setUserLoginInfo((u) => ({
@@ -134,7 +135,7 @@ export default function ParentRegistrationForm({
           <input
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
-            placeholder="Password"
+            placeholder="Password *"
             value={userLoginInfo.password}
             onChange={(e) =>
               setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
@@ -157,7 +158,7 @@ export default function ParentRegistrationForm({
           <input
             name="confirm-password"
             type={passwordDisplayed.confirmPassword ? "text" : "password"}
-            placeholder="Confirm Password"
+            placeholder="Confirm Password *"
             className="confirm-password-input"
             value={userLoginInfo.confirmPassword}
             onChange={(e) =>
@@ -185,9 +186,10 @@ export default function ParentRegistrationForm({
         </div>
       </form>
       <div className="bottom_buttons">
+        {process.env.NODE_ENV === "development" ?
         <button className="demo-button" onClick={handleDemo}>
           Demo Registration
-        </button>
+        </button>: null}
         <button
           className="registration-submit"
           onClick={handleParentRegistration}

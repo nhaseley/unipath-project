@@ -98,10 +98,11 @@ export default function AlumnSurveyPage({
   return (
     <div className="alumn-survey-page">
       <h2 className="create_alum_header">
-        Create an Alumn/College Student account:
+        Create an College Student/Alum account:
       </h2>
+      <div className="asterisk-message"> Inputs with an asterisk are required. </div>
       <div className="first-question-input">
-        <div style={{marginBottom: "1vh"}}> Are you a high school graduate?</div>
+        <div style={{marginBottom: "1vh"}}> Are you a high school graduate? *</div>
         <div className="yes_no_container">
           <button
             className="yes_button"
@@ -130,7 +131,7 @@ export default function AlumnSurveyPage({
           <div className="studentsAndAlumniInfo">
             <div className="whatCollege" style={{marginBottom: "2vh"}}>
               <div style={{marginBottom: "1vh"}}>
-                What college are you affiliated with? You may search.
+                What college are you affiliated with? You may search. *
               </div>
               <div>
                 <select
@@ -150,7 +151,7 @@ export default function AlumnSurveyPage({
               </div>
             </div>
             <div className="AreYouCollegeGrad">
-              <div style={{marginBottom: "1vh"}}> Are you a college graduate?</div>
+              <div style={{marginBottom: "1vh"}}> Are you a college graduate? * </div>
               <div className="yes_no_container">
                 <button
                   className="yes_button"
