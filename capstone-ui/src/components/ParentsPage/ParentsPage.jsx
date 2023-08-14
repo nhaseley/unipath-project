@@ -49,7 +49,7 @@ export default function ParentsPage({
       ) : (
         <div className="parent-logged-in-page">
           {userType == "parent" || userType == "student" ? (
-            <h1 style={{fontWeight: "normal"}}> Welcome, {userLoginInfo?.firstName} to the parents page! </h1>
+            <h1 style={{fontWeight: "normal"}}> Welcome, {userLoginInfo?.firstName} to the parents/guardians page! </h1>
           ) : null}
           <h2>
             On this page, you can view financial breakdown information for your {userType == "parent" ? "child's" : null} liked colleges. For more information, click on the college name.

@@ -17,7 +17,6 @@ jest.clearAllMocks())
 
 // TEST FOR THE FETCHBYEMAIL FUNCTION
 describe("fetch by Email", () => {
-    // const db = require('../db.js')
 
     test('should return the alum object for a valid email', async () => {
         // Mock the db.query() response
@@ -234,8 +233,7 @@ describe("Alum register", () => {
       const result = await Alum.addCollegeReview(
         123, 'John', 'Doe', 'Test College', 2022, 5, 'Great college!'
       );
-      // Assertions
-      expect(result).toEqual(mockResult.rows); // Check if the returned review matches the expected result
+      expect(result).toEqual(mockResult.rows); 
     });
   });
 
@@ -243,7 +241,6 @@ describe("Alum register", () => {
 
   describe("College getCollegeReviews", () => {
     test('should return the reviews for a college', async () => {
-      // Mock the db.query method to return dummy reviews
       const mockResult = {
         rows: [
           {
@@ -269,13 +266,9 @@ describe("Alum register", () => {
         ],
       };
       db.query = jest.fn().mockResolvedValue(mockResult);
-  
-      // Call the getCollegeReviews function with a mock college name
       const college = 'Test College';
       const result = await Alum.getCollegeReviews(college);
-  
-      // Assertions
-      expect(result).toEqual(mockResult.rows); // Check if the returned reviews match the expected result
+      expect(result).toEqual(mockResult.rows); 
     });
   });
 

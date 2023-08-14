@@ -98,7 +98,7 @@ export default function AlumnSurveyPage({
   return (
     <div className="alumn-survey-page">
       <h2 className="create_alum_header">
-        Create an Alumn/College Student account:
+        Create an College Student/Alum account:
       </h2>
       <div className="asterisk-message"> Inputs with an asterisk are required. </div>
       <div className="first-question-input">

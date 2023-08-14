@@ -7,6 +7,7 @@ jest.mock('bcrypt')
 jest.mock('../utils/validate.js')
 jest.mock('jsonwebtoken')
 
+const db = require('../db.js')
 
 
 
@@ -27,7 +28,7 @@ describe("fetch by Email", () => {
             zipcode: '93117',
             password: 'test-password',
             sat_score: '1440',
-            act_score: "31",
+            act_score: '31',
             enrollment: 350,
             school_type: 'test-school_type'
             
@@ -47,12 +48,8 @@ describe("fetch by Email", () => {
 // TEST FOR THE AUTHENTICATE FUNCTION
 describe("the authenticate/ login", () => {
     const expectedPassword = 'test-password';
-    // Mock bcrypt.hash
     bcrypt.hash.mockImplementation(async (password) => password);
-    // Mock bcrypt.compare
     bcrypt.compare.mockImplementation(async (plainTextPassword, hashedPassword) => plainTextPassword === expectedPassword);
-
-
     
     test('authenticate should return the user if email and password exists and match in the db', async () => {
         const result = await Student.authenticate({email:'test-email@test.com', password: 'test-password' })
@@ -223,7 +220,7 @@ describe("the register function test",  () =>  {
 
 
 describe('LikedFunctions', () => {
-    const db = require('../db.js')
+
     beforeEach(() => {
         db.query.mockReset();
       });
@@ -252,7 +249,7 @@ describe('LikedFunctions', () => {
 
 
 describe('getLikedColleges', () => {
-    const db = require('../db.js')
+
     beforeEach(() => {
         db.query.mockReset();
       });
@@ -274,13 +271,12 @@ describe('getLikedColleges', () => {
       })
 
       test('should throw an error if the database query fails', async () => {
-        const student_id = 3; // Replace with the desired student_id for testing
+        const student_id = 3;
         // Mock the query function to throw an error
         db.query.mockRejectedValue(new Error('Database query failed'));
         try {
           await Student.getLikedColleges(student_id);
         } catch (error) {
-          // Expect that an error is thrown
           expect(error).toBeInstanceOf(Error);
           expect(error.message).toBe('Database query failed');
         }
@@ -291,7 +287,7 @@ describe('getLikedColleges', () => {
 
 
 describe("getCollegeFeed", () => {
-    const db = require('../db.js')
+
     beforeEach(() => {
         db.query.mockReset();
       });
@@ -307,18 +303,11 @@ describe("getCollegeFeed", () => {
     expect(result).toEqual(mockData.rows);
     })
 
-    // test('should throw BadRequestError if sat_score is not provided', async () => {
-    //     const invalidSatScore = undefined; // No sat_score provided
-    //     // Call the function and expect it to throw a BadRequestError
-    //     await expect(Student.getCollegeFeed(invalidSatScore)).rejects.toThrow(BadRequestError);
-    //   });
 
       test('should return an empty array if no colleges are found within the specified range', async () => {
         const validSatScore = 1500; 
-        // Mock db.query to return an empty result
         const mockData = { rows: [] };
         db.query.mockResolvedValue(mockData);
-        // Call the function and expect an empty array
         const result = await Student.getCollegeFeed(validSatScore);
         expect(result).toEqual([]);
       });
@@ -329,7 +318,7 @@ describe("getCollegeFeed", () => {
 
 
 describe('getCollege', ()=> {
-    const db = require('../db.js')
+
     test('should return colleges liked by user in the past', async function () {
         const validCollegeName = 'Testing University'
         const mockInfo = {rows: [
@@ -351,3 +340,132 @@ describe('getCollege', ()=> {
 
 
 })
+
+
+describe('getSumRegistrants', () => {
+
+    test('should return 0 if no attendees', async  function () {
+      // Mock the result of db.query for when no attendees are found
+      db.query.mockResolvedValueOnce({ rows: [{ sum: null }] });
+      const eventId = 123;
+      const result = await Student.getSumRegistrants(eventId);
+      expect(result).toBe(0);
+    });
+  
+    test('should return the sum of attendees', async function  () {
+      // Mock the result of db.query for when there are attendees
+      db.query.mockResolvedValueOnce({ rows: [{ sum: '5' }] });
+      const eventId = 456; 
+      const result = await Student.getSumRegistrants(eventId);
+      expect(result).toBe(5); // Converted to integer
+    });
+  });
+
+
+
+
+
+  describe('getMaxRegistrants', () => {
+    
+    test('should return the max number of possible registrants', async function () {
+        db.query.mockResolvedValue({ rows: [{ max_registrants: 100 }]})
+        const eventId = 2;
+        const result = await Student.getMaxNumRegistrants(eventId)
+        expect(result).toBe(100)
+    })
+  })
+
+
+
+  describe('getAllEvents', () => {
+
+    test('should return all events', async function () {
+      // Set up mocks and data
+      const mockEvents = [
+        { id: 1, name: 'Event 1', description: 'Description 1' },
+        { id: 2, name: 'Event 2', description: 'Description 2' },
+      ];
+      db.query.mockResolvedValue({ rows: mockEvents });
+      const result = await Student.getAllEvents();
+      expect(result).toEqual(mockEvents);
+    });
+
+  });
+
+
+
+
+
+  describe('fetchEventAttendeeById', () => {
+  
+    test('should return the attendee if studentId and eventId match', async function () {
+      // Set up mocks and data
+      const mockStudent = {
+        id: 1,
+        student_id: 123,
+        event_id: 456,
+        first_name: 'test-event-first-name',
+        last_name: 'test-event-last-name',
+        num_attendees: 3
+      };
+      db.query.mockResolvedValue({ rows: [mockStudent] });
+      const result = await Student.fetchEventAttendeeById(123, 456);
+      expect(result).toEqual(mockStudent);
+    });
+});
+
+
+describe('removeEventRegistration', () => {
+    test('should return true if registration is successfully removed', async () => {
+      // Set up mocks and data
+      const mockResult = { rowCount: 1 };
+      db.query.mockResolvedValue(mockResult);
+      const result = await Student.removeEventRegistration(123, 456);
+      expect(result).toBe(true);
+    });
+});
+
+
+describe('getOldSATScore', () => {  
+    test('should return the old SAT score if a matching new SAT score is found', async () => {
+      // Set up mocks and data
+      const mockResult = { rows: [{ oldsat: 1500 }] };
+      db.query.mockResolvedValue(mockResult);
+      const result = await Student.getOldSATScore(1600);
+      expect(result).toBe(1500);
+    });
+});
+
+
+describe('getNewCollegeSATScore', () => {
+    test('should return the new SAT score if a matching old SAT score is found', async () => {
+      // Set up mocks and data
+      const mockResult = { rows: [{ newsat: 1550 }] };
+      db.query.mockResolvedValue(mockResult);
+      const result = await Student.getNewCollegeSATScore(1600);
+      expect(result).toBe(1550);
+    });
+});
+
+
+
+
+
+describe('registerForEvent', () => {
+        test('should register for event if there are available spots', async () => {
+        // Set up mocks and data
+        const studentId = 1;
+        const firstName = 'John';
+        const lastName = 'Doe';
+        const numAttendees = 1;
+        const eventId = 123;
+        
+        Student.fetchEventAttendeeById = jest.fn().mockResolvedValue(undefined); // No existing registration
+        Student.getMaxNumRegistrants = jest.fn().mockResolvedValue(50)
+        Student.getSumRegistrants = jest.fn().mockResolvedValue(30) // 20 spots left
+      const mockInsertResult = { rows: [{ id: 1234 }] };
+      db.query.mockResolvedValue(mockInsertResult);
+      const result = await Student.registerForEvent(studentId, firstName, lastName, numAttendees, eventId);
+      expect(result).toEqual({ id: 1234 });
+    });
+});  
