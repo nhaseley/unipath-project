@@ -101,7 +101,8 @@
   opacity: 0;
   transition: opacity 0.3s;
   display: flex;
-  font-size: 1rem;
+  /* font-size: 1rem; */
+  font-size: 0.6rem;
   pointer-events: none;
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
