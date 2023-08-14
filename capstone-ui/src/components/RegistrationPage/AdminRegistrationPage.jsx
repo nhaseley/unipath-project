@@ -90,13 +90,14 @@ export default function AdminRegistrationPage({
         <h2 className="create_admin_header">
           Create a College Admission Officer account:
         </h2>
+        <div className="asterisk-message"> Inputs with an asterisk are required. </div>
         <form className="registration-form">
           <div className="names">
             <div className="first-name">
               <input
                 className="first-name-input"
                 type="text"
-                placeholder="First Name"
+                placeholder="First Name *"
                 value={userLoginInfo.firstName}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({
@@ -111,7 +112,7 @@ export default function AdminRegistrationPage({
               <input
                 className="last-name-input"
                 type="text"
-                placeholder="Last Name"
+                placeholder="Last Name *"
                 value={userLoginInfo.lastName}
                 onChange={(e) =>
                   setUserLoginInfo((u) => ({
@@ -127,7 +128,7 @@ export default function AdminRegistrationPage({
             <input
               className="email-input"
               type="email"
-              placeholder="Work/Institution Email"
+              placeholder="Work/Institution Email *"
               value={userLoginInfo.email}
               onChange={(e) =>
                 setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
@@ -139,7 +140,7 @@ export default function AdminRegistrationPage({
             <input
               className="password-input"
               type={passwordDisplayed.password ? "text" : "password"}
-              placeholder="Password"
+              placeholder="Password *"
               value={userLoginInfo.password}
               onChange={(e) =>
                 setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
@@ -163,7 +164,7 @@ export default function AdminRegistrationPage({
             <input
               name="confirm-password"
               type={passwordDisplayed.confirmPassword ? "text" : "password"}
-              placeholder="Confirm Password"
+              placeholder="Confirm Password *"
               className="confirm-password-input"
               value={userLoginInfo.confirmPassword}
               onChange={(e) =>
@@ -190,7 +191,7 @@ export default function AdminRegistrationPage({
             {error.status ? "Registration Failed: " + error.message : null}
           </div>
           <div className="select_college_admin_container">
-            <p className="p_select_college">Please Select Your Institution. You may search. </p>
+            <p className="p_select_college">Please Select Your Institution. You may search. * </p>
             <select
               className="select_college_admin_bar"
               onChange={handleCollegeSelect}
@@ -209,9 +210,10 @@ export default function AdminRegistrationPage({
           </div>
         </form>
         <div className="bottom_buttons">
+          {process.env.NODE_ENV === "development" ?
           <button className="demo-button" onClick={handleDemo}>
             Demo Registration
-          </button>
+          </button>: null}
           <button
             className="registration-submit"
             onClick={handleAdminRegistration}

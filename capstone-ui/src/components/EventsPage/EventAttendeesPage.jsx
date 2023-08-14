@@ -148,9 +148,10 @@ export default function EventAttendeesPage({
                 ? "Event Registration Failed: " + error.message
                 : null}
             </div>
+            {process.env.NODE_ENV === "development" ?
             <button className="demo-button" onClick={handleDemo}>
               Demo Event Registration
-            </button>
+            </button>: null}
             <div className="event-register-buttons">
               <button
                 className="student-event-registration-button"

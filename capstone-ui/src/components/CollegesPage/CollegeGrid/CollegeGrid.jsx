@@ -77,7 +77,6 @@ export default function CollegeGrid({
       searchInput != ""
         ? searchedColleges.slice(collegeArrayPointer, collegeArrayPointer + 20)
         : collegesToDisplay.slice(collegeArrayPointer, collegeArrayPointer + 20)
-
         // console.log(first20Colleges);
 
   return (

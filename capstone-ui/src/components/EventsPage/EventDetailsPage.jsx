@@ -196,9 +196,10 @@ export default function EventDetailsPage({ setError, userLoginInfo }) {
           </div>
         </form>
         <div className="bottom_buttons">
+          {process.env.NODE_ENV === "development" ?
           <button className="demo-button" onClick={handleDemo}>
             Demo Post Event
-          </button>
+          </button> : null}
 
           <button
             className="event-registration-submit"

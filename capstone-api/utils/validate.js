@@ -17,6 +17,9 @@ const validateFields = ({ required, obj, location }) => {
       if (item === "parentPhone" && obj[item].length != 10){
         throw new UnprocessableEntityError(`Parent phone number is not valid`);
       }
+      if (item === "email"  && obj["collegeName"] && !obj[item].includes(".edu")){ // user is an alum
+        throw new UnprocessableEntityError(`Please provide your school email`)
+      }
     }
 
     if (isNull(obj[item])) {
