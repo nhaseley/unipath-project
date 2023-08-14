@@ -17,38 +17,28 @@ Include at least at least 1, but no more than 3, user roles
 ## User Personas
 Sarah is an 18-year old American high school senior who is looking to apply to colleges this Fall. She is enthusiastic and motivated to pursue higher education, eager to explore new opportunities and broaden her horizons, seeks a supportive and inclusive campus community, and is interested in a college experience that offers a balance between academics, extracurricular activities, and social life. However, she is overwhelmed by the vast amount of information available and the complexity of the college search process, uncertain about the factors to consider when selecting a college, lacks exposure to different colleges and limited guidance from family members or school counselors, and finding it difficult to assess campus culture without visiting each college.
 
-Chris (40yo) and Lisa(40yo) are Sarah's parents. Support their daughter Sarah in finding the best college that meets her academic and personal needs while considering financial aspects. However, they are overwhelmed by the complex and ever-changing landscape of college admissions, and are concerned about the affordability of college and finding financial aid opportunities.
+Chris (40yo) and Lisa (40yo) are Sarah's parents. Support their daughter Sarah in finding the best college that meets her academic and personal needs while considering financial aspects. However, they are overwhelmed by the complex and ever-changing landscape of college admissions, and are concerned about the affordability of college and finding financial aid opportunities.
 
 Olivia (32yo) is a college admissions officer at a reputable university with a Master's degree in Higher Education Administration, seeking to evaluate and select qualified applicants who align with the university's values and academic standards. However, turnout for college admission events have recently been low and unsucessful, so Olivia wants to be able to promote these events to attract and engage prospective students.
 
 Alex (23yo) is a recent college graduate who pursued a Bachelor's degree in Computer Science at a reputable university who now works part-time at a tech company. However, they did not have much information about their Alma Mater before they attended, and would like to share their college experiences, reviews, and ratings to help prospective students.
-
  
 ## User Stories
 
 Include at least 10 user stories.
 1. As a high school senior, I want to view a page of colleges personalized for me, so that I can apply to the colleges that fit the most to my interests, background, and future goals.
 
-2. As a parent of a high school senior, I want to be able to log into the platform to view a list of colleges that fit my child, so that I can help them coordinate college tours and information sessions for schools that they are interested in.
+2. As a high school senior, I want to view admissions statistics, including acceptance rates, average test scores, GPA requirements, and demographic information for colleges I am interested in, so that I can gauge my chances of acceptance based on historical data and evaluate my fit with different colleges.
 
-3. As a parent of a high school senior, I want to view college tuition of various schools on my personalized college feed, so that I can anticipate the financial factors in my child's college search.
+3. As a high schol senior, I want to be able to view review and ratings submitted by current and former college students, so that I can learn firsthand insights into the college experience about the colleges of my interest.
 
-4. As a high schol senior, I want to be able to view review and ratings submitted by current and former college students, so that I can learn firsthand insights into the college experience about the colleges of my interest.
+4. As a parent/guardian of a high school senior, I want to be able to log into the platform to view financial breakdown information for list of colleges that my child is interested in., so that I can anticipate the financial factors in my child's college search.
 
 5. As a current college student or alumn, I want to be able to leave reviews on the college I attend(ed) so that I can help current high school seniors learn more about the colleges they are interested in.
 
-6. As a high school senior, I want to view admissions statistics, including acceptance rates, average test scores, GPA requirements, and demographic information for colleges I am interested in, so that I can gauge my chances of acceptance based on historical data and evaluate my fit with different colleges.
+6. As a college admissions officer, I want to be able to post admission events like information sessions or campus tours, so that I can showcase my institution to prospective students.
 
-7. As a high school senior, I want to view a personalized college application checklist and receive reminders for important deadlines, so that I can stay on top of the required matierals and structure my college application search.
-
-8. As a college admissions officer, I want to be able to provide information, answer questions, and share updates about admission events or virtual campus tours, so that I can showcase my institution to prospective students.
-
-9. As a person with impaired vision, I want to be able use the app comfortably without worrying about seeing things clearly, so that I can browse for college information comfortably.
-
-10. As a high school teacher, I want to access a feature that allows me to see college majors to help me guide my students for college applications.
-
-
-
+7. As a person with impaired vision, I want to be able use the app comfortably without worrying about seeing things clearly, so that I can browse for college information comfortably.
 
 Testing:
 - Given that the user is not registered with the platform, when they view the homepage, then they should receive a message saying to log in and should not be able to access the detailed pages for personalized colleges (they should display the top _ colleges in the country)
@@ -60,4 +50,6 @@ Testing:
 
 ## Wireframe (Bonus)
 
-Insert link or image to your group's wireframe. 
+<a href="https://www.loom.com/share/99e67ee86fd342fb8c11f66cd9e306e6">
+    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/99e67ee86fd342fb8c11f66cd9e306e6-with-play.gif">
+</a>

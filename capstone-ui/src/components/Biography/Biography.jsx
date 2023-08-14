@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 export default function Biography() {
   return (
     <div id="biography" className="biography">
-      <h1 className="bio-header" style={{marginLeft: "2vh"}}>
+      <h1 className="bio-header" style={{marginLeft: "2vh", fontWeight: "normal"}}>
         Simplifying College Search For Pre-College Scholars.
       </h1>
 

@@ -107,6 +107,10 @@
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
   margin-bottom:2vh;
+  /* added these: */
+  /* TODO: FIX WIDTH/HEIGHT FOR TEXT */
+  /* width: 70%; */
+  height: 80%;
 }
 .all_creators {
   display: flex;

@@ -193,9 +193,11 @@ export default function AlumniHomePage({
               </div>
             </form>
             <div className="review-buttons">
+            {process.env.NODE_ENV === "development" ? 
             <button className="demo-button" onClick={handleDemo}>
               Demo Post Review
-            </button>
+            </button> : null}
+            
             <button className="review-submit" onClick={handleReviewSubmit}>
                 Submit
             </button>

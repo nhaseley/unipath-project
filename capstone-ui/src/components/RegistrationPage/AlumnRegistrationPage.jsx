@@ -27,15 +27,16 @@ export default function AlumnRegistrationPage({
   return (
     <div className="student-registration">
       <h2 className="create_alum_header">
-        Create an Alumn/College Student account:
+        Create an College Student/Alum account:
       </h2>
+      <div className="asterisk-message"> Inputs with an asterisk are required. </div>
       <form className="alumn-form">
         <div className="names">
           <div className="first-name">
             <input
               className="first-name-input"
               type="text"
-              placeholder="First Name"
+              placeholder="First Name *"
               value={userLoginInfo.firstName}
               onChange={(e) =>
                 setUserLoginInfo((u) => ({
@@ -50,7 +51,7 @@ export default function AlumnRegistrationPage({
             <input
               className="last-name-input"
               type="text"
-              placeholder="Last Name"
+              placeholder="Last Name *"
               value={userLoginInfo.lastName}
               onChange={(e) =>
                 setUserLoginInfo((u) => ({
@@ -63,14 +64,10 @@ export default function AlumnRegistrationPage({
         </div>
 
         <div className="email">
-          {/* <img
-            src="https://www.transparentpng.com/download/send-email-button/DyZNCL-send-email-button-free-download-transparent.png"
-            className="email-img"
-          ></img> */}
           <input
             className="email-input"
             type="email"
-            placeholder="Email"
+            placeholder="Email *"
             value={userLoginInfo.email}
             onChange={(e) =>
               setUserLoginInfo((u) => ({ ...u, email: e.target.value }))
@@ -79,14 +76,10 @@ export default function AlumnRegistrationPage({
         </div>
 
         <div className="password">
-          {/* <img
-            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-            className="password-img"
-          ></img> */}
           <input
             className="password-input"
             type={passwordDisplayed.password ? "text" : "password"}
-            placeholder="Password"
+            placeholder="Password *"
             value={userLoginInfo.password}
             onChange={(e) =>
               setUserLoginInfo((u) => ({ ...u, password: e.target.value }))
@@ -107,15 +100,10 @@ export default function AlumnRegistrationPage({
         </div>
 
         <div className="confirm-password">
-          {/* <img
-            src="https://www.pngitem.com/pimgs/m/140-1407340_lock-icon-clipart-png-download-white-login-password.png"
-            className="password-img"
-          ></img> */}
-
           <input
             name="confirm-password"
             type={passwordDisplayed.confirmPassword ? "text" : "password"}
-            placeholder="Confirm Password"
+            placeholder="Confirm Password *"
             className="confirm-password-input"
             value={userLoginInfo.confirmPassword}
             onChange={(e) =>
@@ -143,9 +131,10 @@ export default function AlumnRegistrationPage({
         </div>
       </form>
       <div className="bottom_buttons">
+        {process.env.NODE_ENV === "development" ?
         <button className="demo-button" onClick={handleDemo}>
           Demo Registration
-        </button>
+        </button>: null}
         <button className="next-page" onClick={handleNextAlumn}>
           Next
         </button>
@@ -153,8 +142,7 @@ export default function AlumnRegistrationPage({
       <div className="login_prompt">
         Already have an account?
         <Link style={{ color: "#a57548" }} to={"/login"}>
-          {" "}
-          Login{" "}
+          Login
         </Link>
       </div>
     </div>

@@ -48,9 +48,7 @@ describe("fetch by Email", () => {
 // TEST FOR THE AUTHENTICATE FUNCTION
 describe("the authenticate/ login", () => {
     const expectedPassword = 'test-password';
-    // Mock bcrypt.hash
     bcrypt.hash.mockImplementation(async (password) => password);
-    // Mock bcrypt.compare
     bcrypt.compare.mockImplementation(async (plainTextPassword, hashedPassword) => plainTextPassword === expectedPassword);
     
     test('authenticate should return the user if email and password exists and match in the db', async () => {
@@ -273,13 +271,12 @@ describe('getLikedColleges', () => {
       })
 
       test('should throw an error if the database query fails', async () => {
-        const student_id = 3; // Replace with the desired student_id for testing
+        const student_id = 3;
         // Mock the query function to throw an error
         db.query.mockRejectedValue(new Error('Database query failed'));
         try {
           await Student.getLikedColleges(student_id);
         } catch (error) {
-          // Expect that an error is thrown
           expect(error).toBeInstanceOf(Error);
           expect(error.message).toBe('Database query failed');
         }
@@ -306,18 +303,11 @@ describe("getCollegeFeed", () => {
     expect(result).toEqual(mockData.rows);
     })
 
-    // test('should throw BadRequestError if sat_score is not provided', async () => {
-    //     const invalidSatScore = undefined; // No sat_score provided
-    //     // Call the function and expect it to throw a BadRequestError
-    //     await expect(Student.getCollegeFeed(invalidSatScore)).rejects.toThrow(BadRequestError);
-    //   });
 
       test('should return an empty array if no colleges are found within the specified range', async () => {
         const validSatScore = 1500; 
-        // Mock db.query to return an empty result
         const mockData = { rows: [] };
         db.query.mockResolvedValue(mockData);
-        // Call the function and expect an empty array
         const result = await Student.getCollegeFeed(validSatScore);
         expect(result).toEqual([]);
       });
@@ -462,45 +452,20 @@ describe('getNewCollegeSATScore', () => {
 
 
 describe('registerForEvent', () => {
-    const mockDbQuery = jest.fn();
-    const mockFetchEventAttendeeById = jest.fn();
-    const mockGetMaxNumRegistrants = jest.fn();
-    const mockGetSumRegistrants = jest.fn();
-  
-    beforeEach(() => {
-      mockDbQuery.mockReset();
-      mockFetchEventAttendeeById.mockReset();
-      mockGetMaxNumRegistrants.mockReset();
-      mockGetSumRegistrants.mockReset();
-      Student.db.query = mockDbQuery;
-      Student.fetchEventAttendeeById = mockFetchEventAttendeeById;
-      Student.getMaxNumRegistrants = mockGetMaxNumRegistrants;
-      Student.getSumRegistrants = mockGetSumRegistrants;
-    });
-  
-    test('should register for event if there are available spots', async () => {
-      // Set up mocks and data
-      const studentId = 1;
-      const firstName = 'John';
-      const lastName = 'Doe';
-      const numAttendees = 1;
-      const eventId = 123;
-      
-      mockFetchEventAttendeeById.mockResolvedValue(undefined); // No existing registration
-      mockGetMaxNumRegistrants.mockResolvedValue(50);
-      mockGetSumRegistrants.mockResolvedValue(40); // 10 spots left
+        test('should register for event if there are available spots', async () => {
+        // Set up mocks and data
+        const studentId = 1;
+        const firstName = 'John';
+        const lastName = 'Doe';
+        const numAttendees = 1;
+        const eventId = 123;
+        
+        Student.fetchEventAttendeeById = jest.fn().mockResolvedValue(undefined); // No existing registration
+        Student.getMaxNumRegistrants = jest.fn().mockResolvedValue(50)
+        Student.getSumRegistrants = jest.fn().mockResolvedValue(30) // 20 spots left
       const mockInsertResult = { rows: [{ id: 1234 }] };
-      mockDbQuery.mockResolvedValue(mockInsertResult);
-  
-      // Call the function
+      db.query.mockResolvedValue(mockInsertResult);
       const result = await Student.registerForEvent(studentId, firstName, lastName, numAttendees, eventId);
-  
-      // Expectations
       expect(result).toEqual({ id: 1234 });
-    //   expect(mockFetchEventAttendeeById).toHaveBeenCalledWith(studentId, eventId);
-    //   expect(mockGetMaxNumRegistrants).toHaveBeenCalledWith(eventId);
-    //   expect(mockGetSumRegistrants).toHaveBeenCalledWith(eventId);
-    //   expect(mockDbQuery).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO event_attendees'));
-    //   expect(mockDbQuery).toHaveBeenCalledWith(expect.arrayContaining([studentId, firstName.toLowerCase(), lastName.toLowerCase(), numAttendees, eventId]));
     });
 });  
