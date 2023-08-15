@@ -149,7 +149,7 @@ export default function HomePage({ userLoggedIn, userType }) {
   }, []);
 
   return (
-    <>
+    <div className="homepage">
       <div className="hellotxt">
         <h1 className="hero-heading">Your Search Starts Here.</h1>
         <h2 className="hero-subheading">
@@ -185,6 +185,6 @@ export default function HomePage({ userLoggedIn, userType }) {
 
       {/* make this a component, so it displays at bottom of all pages */}
       <div className="footer"></div>
-    </>
+    </div>
   );
 }
