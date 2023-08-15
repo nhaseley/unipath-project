@@ -385,6 +385,7 @@ const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3010
                   userType={userType}
                   setUserType={setUserType}
                   userLoggedIn={userLoggedIn}
+                  setUserLoginInfo={setUserLoginInfo}
                 />
               }
             ></Route>

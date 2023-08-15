@@ -9,6 +9,7 @@ export default function MyCollegesPage({
   selectedCollege,
   setUserType,
   userLoggedIn,
+  setUserLoginInfo
 }) {
   const [likedColleges, setLikedColleges] = useState([]);
 
@@ -29,7 +30,11 @@ export default function MyCollegesPage({
         });
     }
   }, [userLoginInfo]);
-
+  function changeCollege(college) {
+    setUserLoginInfo((u) => ({ ...u, collegeName: college.college_name }));    
+    localStorage.setItem("selected-college", college.college_name);
+    scrollToTop();
+  }
   return (
     <>
       {userType != "student" || !userLoggedIn ? (
@@ -60,6 +65,7 @@ export default function MyCollegesPage({
                   <Link
                     to={"/info/" + college.college_name}
                     key={college.college_name}
+                    onClick={() => changeCollege(college)}
                   >
                     &#x2022; {college.college_name}
                   </Link>
