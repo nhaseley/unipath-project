@@ -7,7 +7,8 @@
     "start": "nodemon --ignore 'db/*' server.js",
     "dev-win": "set NODE_ENV=dev && nodemon --ignore 'db/*' server.js",
     "dev": "NODE_ENV=dev nodemon --ignore 'db/*' server.js",
-    "test": "jest"
+    "test": "jest",
+    "import-colleges": "nodemon get-colleges-helper"
   },
   "dependencies": {
     "@mui/material-next": "^6.0.0-alpha.92",

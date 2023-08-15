@@ -38,6 +38,9 @@ run npm i react-select
 run npm i react-slider
 run npm i sass
 
+Run **npm run import-colleges** to save all colleges from api onto database. 
+This process should be run only once and may take up to 2 hours.
+
 - https://www.npmjs.com/package/jsonwebtoken
 - https://www.npmjs.com/package/axios
 - https://www.npmjs.com/package/d3
