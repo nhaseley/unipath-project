@@ -60,8 +60,8 @@ being run in the console.
 
 2. Install all open-source libraries in their respective directories
 
-3. Import all variables in your .env file, following the .env-template
+3. Import all variables in your **.env** file, following the **.env-template**
 
-4. Run npm run dev on capstone-api directory to run the backend
+4. Run **npm run dev** on capstone-api directory to run the backend
 
-5. Run npm run dev on capstone-ui directory to run the frontend
+5. Run **npm run dev** on capstone-ui directory to run the frontend
