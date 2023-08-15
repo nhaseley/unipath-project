@@ -2,7 +2,7 @@ const axios = require("axios");
 const db = require("./db");
 
 const apiKey = process.env.API_KEY;
-const ORIGINAL_COLLEGE_API_URL = process.env.ORIGINAL_COLLEGE_API_URL;
+const ORIGINAL_COLLEGE_API_URL = "https://api.data.gov/ed/collegescorecard/v1/schools";
 
 async function callStoreResultWithDelay() {
   for (let pageID = 0; pageID < 6543; pageID++) {
