@@ -1,8 +1,9 @@
 /* General styles */
-
-.biography {
-  height: 95vh;
+.homepage{
   background-color: whitesmoke;
+  height: 20%;
+}
+.biography {
   overflow: hidden;
 }
 

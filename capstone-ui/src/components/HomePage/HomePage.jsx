@@ -184,7 +184,7 @@ export default function HomePage({ userLoggedIn, userType }) {
       <Biography />
 
       {/* make this a component, so it displays at bottom of all pages */}
-      {/* <div className="footer"></div> */}
+      <div className="footer"></div>
     </div>
   );
 }
