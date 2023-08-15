@@ -3,9 +3,9 @@ const db = require("./db");
 
 const apiKey = process.env.API_KEY;
 const ORIGINAL_COLLEGE_API_URL = "https://api.data.gov/ed/collegescorecard/v1/schools";
-
+// total 6543 colleges, and 20 colleges per page, so iterate 328 pages
 async function callStoreResultWithDelay() {
-  for (let pageID = 0; pageID < 6543; pageID++) {
+  for (let pageID = 0; pageID < 328; pageID++) {
     const createEndpointUrl = (pageID) =>
       `${ORIGINAL_COLLEGE_API_URL}?page=${pageID}&api_key=${apiKey}`;
 

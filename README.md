@@ -54,9 +54,9 @@ run npm i sass in capstone-ui and capstone-api directory
 ### How to run this application
 
 1. Run **npm run import-colleges** to save all colleges from api onto database. 
-This process should be run only once and may take up to 2 hours. You can stop
-the program once the page number exceeds 328. You can view the current page 
-being run in the console.
+This process should be run only once and may take up to 2 hours. 
+<!-- You can stop the program once the page number exceeds 328. You can view the current page 
+being run in the console. -->
 
 2. Install all open-source libraries in their respective directories
 
