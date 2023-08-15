@@ -25,21 +25,18 @@ Additionally, we implemented 3 additional user roles as strecth features: **pare
 Deployment Website: https://unipath-frontend.onrender.com/
 
 ### Open-source libraries used
-run npm i jsonwebtoken
-run npm i axios
-run npm i d3
-run npm i esbuild
-run npm i jwt-decode
-run npm i nodemon
-run npm i react
-run npm i react-dom
-run npm i react-router-dom
-run npm i react-select
-run npm i react-slider
-run npm i sass
-
-Run **npm run import-colleges** to save all colleges from api onto database. 
-This process should be run only once and may take up to 2 hours.
+run npm i jsonwebtoken in capstone-api directory
+run npm i axios in capstone-api directory
+run npm i d3 in capstone-ui directory
+run npm i esbuild in capstone-ui directory
+run npm i jwt-decode in capstone-api directory
+run npm i nodemon in capstone-api directory
+run npm i react in capstone-ui directory
+run npm i react-dom in capstone-ui directory
+run npm i react-router-dom in capstone-ui directory
+run npm i react-select in capstone-ui directory
+run npm i react-slider in capstone-ui directory
+run npm i sass in capstone-ui and capstone-api directory
 
 - https://www.npmjs.com/package/jsonwebtoken
 - https://www.npmjs.com/package/axios
@@ -53,3 +50,18 @@ This process should be run only once and may take up to 2 hours.
 - https://www.npmjs.com/package/react-select
 - https://www.npmjs.com/package/react-slider
 - https://www.npmjs.com/package/sass
+
+### How to run this application
+
+1. Run **npm run import-colleges** to save all colleges from api onto database. 
+This process should be run only once and may take up to 2 hours. You can stop
+the program once the page number exceeds 328. You can view the current page 
+being run in the console.
+
+2. Install all open-source libraries in their respective directories
+
+3. Import all variables in your .env file, following the .env-template
+
+4. Run npm run dev on capstone-api directory to run the backend
+
+5. Run npm run dev on capstone-ui directory to run the frontend
