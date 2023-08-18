@@ -25,18 +25,18 @@ Additionally, we implemented 3 additional user roles as strecth features: **pare
 Deployment Website: https://unipath-frontend.onrender.com/
 
 ### Open-source libraries used
-- run npm i jsonwebtoken in capstone-api directory [Documentation](https://www.npmjs.com/package/jsonwebtoken)
-- run npm i axios in capstone-api directory [axios](https://www.npmjs.com/package/axios)
-- run npm i d3 in capstone-ui directory [d3.js](https://www.npmjs.com/package/d3)
-- run npm i esbuild in capstone-ui directory [esbuild](https://www.npmjs.com/package/esbuild)
-- run npm i jwt-decode in capstone-api directory [jwt-decode](https://www.npmjs.com/package/jwt-decode)
-- run npm i nodemon in capstone-api directory [nodemon](https://www.npmjs.com/package/nodemon)
-- run npm i react in capstone-ui directory [react](https://www.npmjs.com/package/react)
-- run npm i react-dom in capstone-ui directory [react-dom](https://www.npmjs.com/package/react-dom)
-- run npm i react-router-dom in capstone-ui directory [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- run npm i react-select in capstone-ui directory [react-select](https://www.npmjs.com/package/react-select)
-- run npm i react-slider in capstone-ui directory [react-slider](https://www.npmjs.com/package/react-slider)
-- run npm i sass in capstone-ui and capstone-api directory [sass](https://www.npmjs.com/package/sass)
+- run npm i jsonwebtoken in capstone-api directory [jsonwebtoken Documentation](https://www.npmjs.com/package/jsonwebtoken)
+- run npm i axios in capstone-api directory [axios Documentation](https://www.npmjs.com/package/axios)
+- run npm i d3 in capstone-ui directory [d3.js Documentation](https://www.npmjs.com/package/d3)
+- run npm i esbuild in capstone-ui directory [esbuild Documentation](https://www.npmjs.com/package/esbuild)
+- run npm i jwt-decode in capstone-api directory [jwt-decode Documentation](https://www.npmjs.com/package/jwt-decode)
+- run npm i nodemon in capstone-api directory [nodemon Documentation](https://www.npmjs.com/package/nodemon)
+- run npm i react in capstone-ui directory [react Documentation](https://www.npmjs.com/package/react)
+- run npm i react-dom in capstone-ui directory [react-dom Documentation](https://www.npmjs.com/package/react-dom)
+- run npm i react-router-dom in capstone-ui directory [react-router-dom Documentation](https://www.npmjs.com/package/react-router-dom)
+- run npm i react-select in capstone-ui directory [react-select Documentation](https://www.npmjs.com/package/react-select)
+- run npm i react-slider in capstone-ui directory [react-slider Documentation](https://www.npmjs.com/package/react-slider)
+- run npm i sass in capstone-ui and capstone-api directory [sass Documentation](https://www.npmjs.com/package/sass)
 
 ### How to run this application
 
