@@ -25,18 +25,18 @@ Additionally, we implemented 3 additional user roles as strecth features: **pare
 Deployment Website: https://unipath-frontend.onrender.com/
 
 ### Open-source libraries used
-run npm i jsonwebtoken in capstone-api directory
-run npm i axios in capstone-api directory
-run npm i d3 in capstone-ui directory
-run npm i esbuild in capstone-ui directory
-run npm i jwt-decode in capstone-api directory
-run npm i nodemon in capstone-api directory
-run npm i react in capstone-ui directory
-run npm i react-dom in capstone-ui directory
-run npm i react-router-dom in capstone-ui directory
-run npm i react-select in capstone-ui directory
-run npm i react-slider in capstone-ui directory
-run npm i sass in capstone-ui and capstone-api directory
+- run npm i jsonwebtoken in capstone-api directory
+- run npm i axios in capstone-api directory
+- run npm i d3 in capstone-ui directory
+- run npm i esbuild in capstone-ui directory
+- run npm i jwt-decode in capstone-api directory
+- run npm i nodemon in capstone-api directory
+- run npm i react in capstone-ui directory
+- run npm i react-dom in capstone-ui directory
+- run npm i react-router-dom in capstone-ui directory
+- run npm i react-select in capstone-ui directory
+- run npm i react-slider in capstone-ui directory
+- run npm i sass in capstone-ui and capstone-api directory
 
 - https://www.npmjs.com/package/jsonwebtoken
 - https://www.npmjs.com/package/axios
